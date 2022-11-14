@@ -84,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
               iconSize: 26,
+              currentIndex: 1,
               selectedItemColor: Colors.amber[600],
             ),
           ),
@@ -107,44 +108,58 @@ class _HomeDrawer extends StatelessWidget {
             child: DrawerHeader(
               padding: EdgeInsets.zero,
               margin: EdgeInsets.zero,
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                child: const Image(
-                  image: AssetImage(
-                    'assets/images/logo_drawer.png'
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    child: const Image(
+                      image: AssetImage(
+                        'assets/images/logo_drawer.png'
+                      ),
+                      height: 70,
+                    ),
                   ),
-                  height: 70,
-                ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20, left: 8),
+                    child: const Text(
+                        'メニュー',
+                        style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.black54
+                      ),
+                    ),
+                  )
+                ],
               )
             ),
           ),
           ListTile(
-            leading: SvgPicture.asset(
-              'assets/icons/human.svg',
-              color: Colors.brown,
+            leading: const Icon(
+                LineIcons.user,
+                color: Colors.brown,
             ),
             title: const Text('マイページ'),
             onTap: () => false,
           ),
           ListTile(
-            leading: SvgPicture.asset(
-              'assets/icons/invite.svg',
+            leading: const Icon(
+              LineIcons.envelope,
               color: Colors.brown,
             ),
             title: const Text('ご意見箱'),
             onTap: () => false,
           ),
           ListTile(
-            leading: SvgPicture.asset(
-              'assets/icons/chat_help.svg',
+            leading: const Icon(
+              LineIcons.book,
               color: Colors.brown,
             ),
             title: const Text('利用規約'),
             onTap: () => false,
           ),
           ListTile(
-            leading: SvgPicture.asset(
-              'assets/icons/chat_help.svg',
+            leading: const Icon(
+              LineIcons.key,
               color: Colors.brown,
             ),
             title: const Text('プライバシーポリシー'),
