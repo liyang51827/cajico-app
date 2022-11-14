@@ -2,6 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:line_icons/line_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,6 +64,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   'You have pushed the button this many tim',
                 ),
               ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            height: 60,
+            child: BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(LineIcons.gift),
+                  label: 'ごほうび',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(LineIcons.campground),
+                  label: '家事',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(LineIcons.history),
+                  label: '履歴',
+                ),
+              ],
+              iconSize: 26,
+              selectedItemColor: Colors.amber[600],
             ),
           ),
         )
