@@ -1,4 +1,6 @@
+import 'package:cajico_app/constant/app_size.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:line_icons/line_icons.dart';
@@ -59,10 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           drawer: const _HomeDrawer(),
           body: Container(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Container(
+                  padding: const EdgeInsets.only(bottom: 16),
                   alignment: Alignment.centerLeft,
                   child: const Text(
                     'ジャンルから選ぶ',
@@ -72,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
+                const _CategoryCards(),
                 Container(
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(top: 24),
@@ -86,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          bottomNavigationBar: Container(
+          bottomNavigationBar: SizedBox(
             height: 60,
             child: BottomNavigationBar(
               items: const [
@@ -199,6 +203,87 @@ class _NotificationAction extends StatelessWidget {
       child: Icon(
           LineIcons.bell,
           size: 30,
+      ),
+    );
+  }
+}
+
+class _CategoryCards extends StatelessWidget {
+  const _CategoryCards();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            _CategoryCard(categoryName: '料理', imageUrl: 'assets/images/cooking.png'),
+            horizontalSpaceSmall,
+            _CategoryCard(categoryName: '買い物', imageUrl: 'assets/images/shopping.png'),
+            horizontalSpaceSmall,
+            _CategoryCard(categoryName: '洗濯', imageUrl: 'assets/images/washing.png'),
+          ],
+        ),
+        verticalSpaceSmall,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            _CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
+          horizontalSpaceSmall,
+            _CategoryCard(categoryName: 'お迎え', imageUrl: 'assets/images/pick_up.png'),
+          horizontalSpaceSmall,
+            _CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
+          ],
+        ),
+        verticalSpaceSmall,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            _CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
+            horizontalSpaceSmall,
+            _CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
+            horizontalSpaceSmall,
+            _CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _CategoryCard extends StatelessWidget {
+  const _CategoryCard({
+    required this.categoryName,
+    required this.imageUrl,
+  });
+
+  final String categoryName;
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(2.0),
+      width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black26),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Text(
+            categoryName,
+            style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black87
+            ),
+          ),
+          Image(
+            image: AssetImage(imageUrl),
+            height: 70,
+          ),
+        ],
       ),
     );
   }
