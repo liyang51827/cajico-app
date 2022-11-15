@@ -3,6 +3,7 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/category_card.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
+import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -79,6 +80,7 @@ class _HouseWorkState extends State<HouseWork> {
                 ),
                 const _CategoryCards(),
                 Container(
+                  padding: const EdgeInsets.only(bottom: 16),
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(top: 24),
                   child: const Text(
@@ -88,6 +90,17 @@ class _HouseWorkState extends State<HouseWork> {
                         fontSize: 16
                     ),
                   ),
+                ),
+                const HouseWorkCard(
+                  categoryName: 'リビングの掃除',
+                  imageUrl: 'assets/images/cleaning.png',
+                  point: 80,
+                ),
+                verticalSpaceSmall,
+                const HouseWorkCard(
+                  categoryName: '晩ごはん作り',
+                  imageUrl: 'assets/images/cooking.png',
+                  point: 80,
                 ),
               ],
             ),
