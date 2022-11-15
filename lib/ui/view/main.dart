@@ -3,9 +3,9 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/category_card.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
+import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:line_icons/line_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,8 +57,8 @@ class _HouseWorkState extends State<HouseWork> {
                 color: gray2,
                 fontSize: 22
             ),
-            actions: [
-              _NotificationAction(),
+            actions: const [
+              NotificationAction(),
             ],
           ),
           drawer: const HomeDrawer(),
@@ -95,19 +95,6 @@ class _HouseWorkState extends State<HouseWork> {
           bottomNavigationBar: const Footer(),
         )
       ],
-    );
-  }
-}
-
-class _NotificationAction extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Icon(
-          LineIcons.bell,
-          size: 30,
-      ),
     );
   }
 }
