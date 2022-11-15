@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -56,12 +55,30 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           drawer: const _HomeDrawer(),
-          body: Center(
+          body: Container(
+            padding: const EdgeInsets.all(24),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                Text(
-                  'You have pushed the button this many tim',
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    'ジャンルから選ぶ',
+                    style: TextStyle(
+                      color: gray2,
+                      fontSize: 16
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(top: 24),
+                  child: const Text(
+                    '最近の家事から選ぶ',
+                    style: TextStyle(
+                        color: gray2,
+                        fontSize: 16
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -136,7 +153,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
                 LineIcons.user,
-                color: Colors.brown,
+                color: Colors.orange,
             ),
             title: const Text('マイページ'),
             onTap: () => false,
@@ -144,7 +161,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.envelope,
-              color: Colors.brown,
+              color: Colors.orange,
             ),
             title: const Text('ご意見箱'),
             onTap: () => false,
@@ -152,7 +169,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.book,
-              color: Colors.brown,
+              color: Colors.orange,
             ),
             title: const Text('利用規約'),
             onTap: () => false,
@@ -160,7 +177,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.key,
-              color: Colors.brown,
+              color: Colors.orange,
             ),
             title: const Text('プライバシーポリシー'),
             onTap: () => false,
