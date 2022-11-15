@@ -1,6 +1,7 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/category_card.dart';
+import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -91,28 +92,7 @@ class _HouseWorkState extends State<HouseWork> {
               ],
             ),
           ),
-          bottomNavigationBar: SizedBox(
-            height: 60,
-            child: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(LineIcons.gift),
-                  label: 'ごほうび',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(LineIcons.campground),
-                  label: '家事',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(LineIcons.history),
-                  label: '履歴',
-                ),
-              ],
-              iconSize: 26,
-              currentIndex: 1,
-              selectedItemColor: Colors.amber[600],
-            ),
-          ),
+          bottomNavigationBar: const Footer(),
         )
       ],
     );
