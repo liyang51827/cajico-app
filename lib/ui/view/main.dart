@@ -53,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: gray2,
                 fontSize: 22
             ),
+            actions: [
+              _NotificationAction(),
+            ],
           ),
           drawer: const _HomeDrawer(),
           body: Container(
@@ -153,7 +156,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
                 LineIcons.user,
-                color: Colors.orange,
+                color: Colors.brown,
             ),
             title: const Text('マイページ'),
             onTap: () => false,
@@ -161,7 +164,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.envelope,
-              color: Colors.orange,
+              color: Colors.brown,
             ),
             title: const Text('ご意見箱'),
             onTap: () => false,
@@ -169,7 +172,7 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.book,
-              color: Colors.orange,
+              color: Colors.brown,
             ),
             title: const Text('利用規約'),
             onTap: () => false,
@@ -177,12 +180,25 @@ class _HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.key,
-              color: Colors.orange,
+              color: Colors.brown,
             ),
             title: const Text('プライバシーポリシー'),
             onTap: () => false,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _NotificationAction extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      child: Icon(
+          LineIcons.bell,
+          size: 30,
       ),
     );
   }
