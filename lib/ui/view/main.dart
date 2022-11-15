@@ -65,44 +65,36 @@ class _HouseWorkState extends State<HouseWork> {
           drawer: const HomeDrawer(),
           body: Container(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'ジャンルから選ぶ',
-                    style: TextStyle(
-                      color: gray2,
-                      fontSize: 16
+            child: SingleChildScrollView (
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      'ジャンルから選ぶ',
+                      style: TextStyle(
+                          color: gray2,
+                          fontSize: 16
+                      ),
                     ),
                   ),
-                ),
-                const _CategoryCards(),
-                Container(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.only(top: 24),
-                  child: const Text(
-                    '最近の家事から選ぶ',
-                    style: TextStyle(
-                        color: gray2,
-                        fontSize: 16
+                  const _CategoryCards(),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.only(top: 24),
+                    child: const Text(
+                      '最近の家事から選ぶ',
+                      style: TextStyle(
+                          color: gray2,
+                          fontSize: 16
+                      ),
                     ),
                   ),
-                ),
-                const HouseWorkCard(
-                  categoryName: 'リビングの掃除',
-                  imageUrl: 'assets/images/cleaning.png',
-                  point: 80,
-                ),
-                verticalSpaceSmall,
-                const HouseWorkCard(
-                  categoryName: '晩ごはん作り',
-                  imageUrl: 'assets/images/cooking.png',
-                  point: 80,
-                ),
-              ],
+                  const _ResentHouseWorks()
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: const Footer(),
@@ -150,6 +142,41 @@ class _CategoryCards extends StatelessWidget {
             horizontalSpaceSmall,
             CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class _ResentHouseWorks extends StatelessWidget {
+  const _ResentHouseWorks();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        HouseWorkCard(
+          categoryName: 'リビングの掃除',
+          imageUrl: 'assets/images/cleaning.png',
+          point: 50,
+        ),
+        verticalSpaceSmall,
+        HouseWorkCard(
+          categoryName: '晩ごはん作り',
+          imageUrl: 'assets/images/cooking.png',
+          point: 100,
+        ),
+        verticalSpaceSmall,
+        HouseWorkCard(
+          categoryName: '洗濯干し作業',
+          imageUrl: 'assets/images/washing.png',
+          point: 30,
+        ),
+        verticalSpaceSmall,
+        HouseWorkCard(
+          categoryName: '資源ごみ出し',
+          imageUrl: 'assets/images/trash.png',
+          point: 50,
         ),
       ],
     );
