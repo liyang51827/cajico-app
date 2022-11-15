@@ -1,6 +1,7 @@
-import 'package:cajico_app/constant/app_size.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/widget/category_card.dart';
+import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:line_icons/line_icons.dart';
@@ -17,19 +18,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       title: 'CAJICO',
-      home: MyHomePage(),
+      home: HouseWork(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class HouseWork extends StatefulWidget {
+  const HouseWork({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HouseWork> createState() => _HouseWorkState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HouseWorkState extends State<HouseWork> {
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _NotificationAction(),
             ],
           ),
-          drawer: const _HomeDrawer(),
+          drawer: const HomeDrawer(),
           body: Container(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -118,83 +119,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class _HomeDrawer extends StatelessWidget {
-  const _HomeDrawer();
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          SizedBox(
-            height: 120,
-            child: DrawerHeader(
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.zero,
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/images/logo_drawer.png'
-                      ),
-                      height: 70,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 20, left: 8),
-                    child: const Text(
-                        'メニュー',
-                        style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.black54
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ),
-          ),
-          ListTile(
-            leading: const Icon(
-                LineIcons.user,
-                color: Colors.brown,
-            ),
-            title: const Text('マイページ'),
-            onTap: () => false,
-          ),
-          ListTile(
-            leading: const Icon(
-              LineIcons.envelope,
-              color: Colors.brown,
-            ),
-            title: const Text('ご意見箱'),
-            onTap: () => false,
-          ),
-          ListTile(
-            leading: const Icon(
-              LineIcons.book,
-              color: Colors.brown,
-            ),
-            title: const Text('利用規約'),
-            onTap: () => false,
-          ),
-          ListTile(
-            leading: const Icon(
-              LineIcons.key,
-              color: Colors.brown,
-            ),
-            title: const Text('プライバシーポリシー'),
-            onTap: () => false,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _NotificationAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -218,73 +142,36 @@ class _CategoryCards extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            _CategoryCard(categoryName: '料理', imageUrl: 'assets/images/cooking.png'),
+            CategoryCard(categoryName: '料理', imageUrl: 'assets/images/cooking.png'),
             horizontalSpaceSmall,
-            _CategoryCard(categoryName: '買い物', imageUrl: 'assets/images/shopping.png'),
+            CategoryCard(categoryName: '買い物', imageUrl: 'assets/images/shopping.png'),
             horizontalSpaceSmall,
-            _CategoryCard(categoryName: '洗濯', imageUrl: 'assets/images/washing.png'),
+            CategoryCard(categoryName: '洗濯', imageUrl: 'assets/images/washing.png'),
           ],
         ),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            _CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
+            CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
           horizontalSpaceSmall,
-            _CategoryCard(categoryName: 'お迎え', imageUrl: 'assets/images/pick_up.png'),
+            CategoryCard(categoryName: 'お迎え', imageUrl: 'assets/images/pick_up.png'),
           horizontalSpaceSmall,
-            _CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
+            CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
           ],
         ),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            _CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
+            CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
             horizontalSpaceSmall,
-            _CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
+            CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
             horizontalSpaceSmall,
-            _CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
+            CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
           ],
         ),
       ],
-    );
-  }
-}
-
-class _CategoryCard extends StatelessWidget {
-  const _CategoryCard({
-    required this.categoryName,
-    required this.imageUrl,
-  });
-
-  final String categoryName;
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(2.0),
-      width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Text(
-            categoryName,
-            style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black87
-            ),
-          ),
-          Image(
-            image: AssetImage(imageUrl),
-            height: 70,
-          ),
-        ],
-      ),
     );
   }
 }
