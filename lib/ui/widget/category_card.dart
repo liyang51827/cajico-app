@@ -13,7 +13,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black26),
