@@ -22,7 +22,7 @@ class RewardView extends StatelessWidget {
               children: const [
                 Image(
                   image: AssetImage(
-                    'assets/images/logo.png',
+                    'assets/images/logo_reward.png',
                   ),
                   height: 55,
                 ),

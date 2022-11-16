@@ -22,7 +22,7 @@ class HistoryView extends StatelessWidget {
               children: const [
                 Image(
                   image: AssetImage(
-                    'assets/images/logo.png',
+                    'assets/images/logo_history.png',
                   ),
                   height: 55,
                 ),
