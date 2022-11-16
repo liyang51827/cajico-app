@@ -6,7 +6,6 @@ import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class RewardView extends StatelessWidget {
   const RewardView({super.key});

@@ -6,33 +6,9 @@ import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      title: 'CAJICO',
-      home: HouseWork(),
-    );
-  }
-}
-
-class HouseWork extends StatefulWidget {
-  const HouseWork({super.key});
-
-  @override
-  State<HouseWork> createState() => _HouseWorkState();
-}
-
-class _HouseWorkState extends State<HouseWork> {
+class HistoryView extends StatelessWidget {
+  const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +26,7 @@ class _HouseWorkState extends State<HouseWork> {
                   ),
                   height: 55,
                 ),
-                Text('家事をする'),
+                Text('家事履歴'),
               ]
             ),
             backgroundColor: Colors.white,

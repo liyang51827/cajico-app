@@ -36,7 +36,3 @@ Countries _$CountriesFromJson(Map<String, dynamic> json) => $checkedCreate(
       },
       fieldKeyMap: const {'name': 'Name'},
     );
-
-Map<String, dynamic> _$CountriesToJson(Countries instance) => <String, dynamic>{
-      'Name': instance.name,
-    };
