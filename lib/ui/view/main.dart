@@ -64,12 +64,12 @@ class _HouseWorkState extends State<HouseWork> {
           ),
           drawer: const HomeDrawer(),
           body: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SingleChildScrollView (
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(bottom: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     alignment: Alignment.centerLeft,
                     child: const Text(
                       'ジャンルから選ぶ',
@@ -92,7 +92,8 @@ class _HouseWorkState extends State<HouseWork> {
                       ),
                     ),
                   ),
-                  const _ResentHouseWorks()
+                  const _ResentHouseWorks(),
+                  verticalSpaceSmall
                 ],
               ),
             ),
