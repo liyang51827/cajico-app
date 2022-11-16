@@ -3,6 +3,8 @@ import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
+import '../common/ui_helper.dart';
+import '../widget/reward_category_card.dart';
 
 class RewardView extends StatelessWidget {
   const RewardView({super.key});
@@ -50,12 +52,25 @@ class RewardView extends StatelessWidget {
           ),
         ),
         drawer: const HomeDrawer(),
-        body: const TabBarView(
+        body: TabBarView(
           children: <Widget>[
-            Center(
-              child: Text('かつのり', style: TextStyle(fontSize: 32.0)),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SingleChildScrollView (
+                child: Column(
+                  children: const [
+                    verticalSpaceSmall,
+                    RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/afternoon_tea.png'),
+                    verticalSpaceSmall,
+                    RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/present.png'),
+                    verticalSpaceSmall,
+                    RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/dinner.png'),
+                    verticalSpaceSmall,
+                  ],
+                ),
+              ),
             ),
-            Center(
+            const Center(
               child: Text('えりか', style: TextStyle(fontSize: 32.0)),
             ),
           ],
