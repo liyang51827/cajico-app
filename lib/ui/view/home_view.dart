@@ -63,9 +63,9 @@ class _HouseWorkState extends State<HouseWork> {
             ],
           ),
           drawer: const HomeDrawer(),
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SingleChildScrollView (
+          body: SingleChildScrollView (
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
                   Container(
