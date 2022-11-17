@@ -64,7 +64,7 @@ class RewardView extends StatelessWidget {
                     verticalSpaceSmall,
                     RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/present.png'),
                     verticalSpaceSmall,
-                    RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/dinner.png'),
+                    RewardCategoryCard(categoryName: '料理', imageUrl: 'assets/images/propose.png'),
                     verticalSpaceSmall,
                   ],
                 ),
