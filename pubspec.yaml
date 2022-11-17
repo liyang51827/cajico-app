@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.5
   flutter_svg: ^1.1.6
   line_icons: ^2.0.1
+  speech_balloon: ^0.0.4
 
 dev_dependencies:
   flutter_test:
