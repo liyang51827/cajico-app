@@ -37,16 +37,36 @@ class RewardView extends StatelessWidget {
           actions: const [
             NotificationAction(),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             labelColor: gray2,
             indicatorColor: Colors.orange,
-            labelStyle: TextStyle(fontSize: 16),
+            labelStyle: const TextStyle(fontSize: 16),
             tabs: <Widget>[
               Tab(
-                  text: 'かつのり'
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: AssetImage('assets/app/icon.png'),
+                    ),
+                    horizontalSpaceSmall,
+                    Text('かつのり'),
+                  ],
+                ),
               ),
               Tab(
-                  text: 'えりか'
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: AssetImage('assets/app/icon.png'),
+                    ),
+                    horizontalSpaceSmall,
+                    Text('えりか'),
+                  ],
+                ),
               ),
             ],
           ),
