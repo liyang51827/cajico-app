@@ -21,7 +21,7 @@ class HouseWorkCard extends StatelessWidget {
         onPressed: (){},
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
-          elevation: 2,
+          elevation: 3,
           onPrimary: Colors.grey,
           primary: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -59,7 +59,7 @@ class HouseWorkCard extends StatelessWidget {
                         point.toString(),
                         style: const TextStyle(
                             fontSize: 22,
-                            color: Colors.black87
+                            color: Colors.orange
                         ),
                       ),
                       const Text(

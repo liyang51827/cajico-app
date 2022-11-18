@@ -17,24 +17,25 @@ class Footer extends StatelessWidget {
           currentIndex: controller.tabIndex.value,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(LineIcons.gift),
-              label: 'ごほうび',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(LineIcons.home),
               activeIcon: Icon(LineIcons.home),
               label: '家事',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LineIcons.gift),
+              label: 'ごほうび',
             ),
             BottomNavigationBarItem(
               icon: Icon(LineIcons.history),
               label: '履歴',
             ),
           ],
-          iconSize: 31,
-          selectedItemColor: Colors.amber[600],
           backgroundColor: Colors.white,
+          iconSize: 25,
           unselectedFontSize: 12,
+          selectedIconTheme: const IconThemeData(size: 31),
           selectedFontSize: 12,
+          selectedItemColor: Colors.amber[600],
         ),
       ),
     );

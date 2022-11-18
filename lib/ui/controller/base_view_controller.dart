@@ -18,10 +18,10 @@ class BaseViewController extends GetxController {
   void onTapBottomNavigation(int index) {
     if (index == 0) {
       tabIndex.value = 0;
-      Get.to(const RewardView());
+      Get.to(const HouseWork());
     } else if (index == 1) {
       tabIndex.value = 1;
-      Get.to(const HouseWork());
+      Get.to(const RewardView());
     } else if (index == 2) {
       tabIndex.value = 2;
       Get.to(const HistoryView());

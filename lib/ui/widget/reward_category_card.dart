@@ -85,7 +85,7 @@ class RewardCategoryCard extends StatelessWidget {
                 height: 60, // マルなので同じheightとwidth
                 width: 60,
                 borderRadius: 40,
-                offset: const Offset(1,0),
+                offset: const Offset(20,0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -112,7 +112,7 @@ class RewardCategoryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             child: LinearProgressIndicator(
               value: rating,
-              color: Colors.amber[600],
+              color: Colors.amber[300],
               backgroundColor: Colors.white,
               minHeight: 8,
             ),
