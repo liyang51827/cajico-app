@@ -30,9 +30,11 @@ class Footer extends StatelessWidget {
               label: '履歴',
             ),
           ],
-          iconSize: 26,
+          iconSize: 31,
           selectedItemColor: Colors.amber[600],
-          backgroundColor: Colors.white
+          backgroundColor: Colors.white,
+          unselectedFontSize: 12,
+          selectedFontSize: 12,
         ),
       ),
     );
