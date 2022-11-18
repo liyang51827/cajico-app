@@ -1,24 +1,23 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/common/ui_helper.dart';
-import 'package:cajico_app/ui/widget/category_card.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
-import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
+import '../common/ui_helper.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black54),
-            centerTitle: true,
-            title: Row(
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.black54),
+          centerTitle: true,
+          title: Row(
               children: const [
                 Image(
                   image: AssetImage(
@@ -28,132 +27,117 @@ class HistoryView extends StatelessWidget {
                 ),
                 Text('家事履歴'),
               ]
-            ),
-            backgroundColor: Colors.white,
-            titleTextStyle: const TextStyle(
-                color: gray2,
-                fontSize: 22
-            ),
-            actions: const [
-              NotificationAction(),
+          ),
+          backgroundColor: Colors.white,
+          titleTextStyle: const TextStyle(
+              color: gray2,
+              fontSize: 22
+          ),
+          actions: const [
+            NotificationAction(),
+          ],
+          bottom: const TabBar(
+            labelColor: Colors.black87,
+            indicatorColor: Colors.orange,
+            labelStyle: TextStyle(fontSize: 16),
+            tabs: <Widget>[
+              Tab(
+                  text: '全て'
+              ),
+              Tab(
+                  text: 'かつのり'
+              ),
+              Tab(
+                  text: 'えりか'
+              ),
             ],
           ),
-          drawer: const HomeDrawer(),
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SingleChildScrollView (
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      'ジャンルから選ぶ',
-                      style: TextStyle(
-                          color: gray2,
-                          fontSize: 16
-                      ),
-                    ),
-                  ),
-                  const _CategoryCards(),
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.only(top: 24),
-                    child: const Text(
-                      '最近の家事から選ぶ',
-                      style: TextStyle(
-                          color: gray2,
-                          fontSize: 16
-                      ),
-                    ),
-                  ),
-                  const _ResentHouseWorks(),
-                  verticalSpaceSmall
-                ],
+        ),
+        drawer: const HomeDrawer(),
+        body: TabBarView(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SingleChildScrollView (
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                  ],
+                ),
               ),
             ),
-          ),
-          bottomNavigationBar: const Footer(),
-        )
-      ],
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SingleChildScrollView (
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SingleChildScrollView (
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: const Footer(),
+      ),
     );
   }
 }
 
-class _CategoryCards extends StatelessWidget {
-  const _CategoryCards();
+class _PointSummaries extends StatelessWidget {
+  const _PointSummaries();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SizedBox(
+      height: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: const [
+          _PointSummary(title: "今日", point: 470),
+          _PointSummary(title: "累計", point: 5800),
+        ],
+      ),
+    );
+  }
+}
+
+class _PointSummary extends StatelessWidget {
+  const _PointSummary({
+    required this.title,
+    required this.point,
+  });
+  final String title;
+  final int point;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CategoryCard(categoryName: '料理', imageUrl: 'assets/images/cooking.png'),
-            horizontalSpaceSmall,
-            CategoryCard(categoryName: '買い物', imageUrl: 'assets/images/shopping.png'),
-            horizontalSpaceSmall,
-            CategoryCard(categoryName: '洗濯', imageUrl: 'assets/images/washing.png'),
-          ],
+        Text(
+          title,
+          style: const TextStyle(
+              fontSize: 18,
+              color: Colors.black87
+          ),
         ),
-        verticalSpaceSmall,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
-          horizontalSpaceSmall,
-            CategoryCard(categoryName: 'お迎え', imageUrl: 'assets/images/pick_up.png'),
-          horizontalSpaceSmall,
-            CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
-          ],
-        ),
-        verticalSpaceSmall,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
-            horizontalSpaceSmall,
-            CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
-            horizontalSpaceSmall,
-            CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _ResentHouseWorks extends StatelessWidget {
-  const _ResentHouseWorks();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        HouseWorkCard(
-          categoryName: 'リビングの掃除',
-          imageUrl: 'assets/images/cleaning.png',
-          point: 50,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          categoryName: '晩ごはん作り',
-          imageUrl: 'assets/images/cooking.png',
-          point: 100,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          categoryName: '洗濯干し作業',
-          imageUrl: 'assets/images/washing.png',
-          point: 30,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          categoryName: '資源ごみ出し',
-          imageUrl: 'assets/images/trash.png',
-          point: 50,
+        horizontalSpaceSmall,
+        Text(
+          '${point}P',
+          style: const TextStyle(
+              fontSize: 30,
+              color: Colors.black87
+          ),
         ),
       ],
     );

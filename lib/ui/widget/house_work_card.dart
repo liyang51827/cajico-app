@@ -22,8 +22,8 @@ class HouseWorkCard extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 3,
-          onPrimary: Colors.grey,
-          primary: Colors.white,
+          foregroundColor: Colors.grey,
+          backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

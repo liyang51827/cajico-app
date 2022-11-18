@@ -19,19 +19,13 @@ class CategoryCard extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 3,
-          onPrimary: Colors.grey,
-          primary: Colors.white,
+          foregroundColor: Colors.grey,
+          backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        // padding: const EdgeInsets.symmetric(vertical: 5),
-        // width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
-        // decoration: BoxDecoration(
-        //   border: Border.all(color: Colors.black26),
-        //   borderRadius: BorderRadius.circular(10),
-        // ),
         child: Column(
           children: [
             Text(
