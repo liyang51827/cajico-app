@@ -12,7 +12,7 @@ import '../view/reward_view.dart';
 import '../widget/common_dialog.dart';
 
 class BaseViewController extends GetxController {
-  final RxInt tabIndex = 1.obs;
+  final RxInt tabIndex = 0.obs;
   Rx<LoadingState> loadingState = Rx<LoadingState>(LoadingSuccess());
 
   void onTapBottomNavigation(int index) {
