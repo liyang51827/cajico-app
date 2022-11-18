@@ -2,6 +2,8 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_balloon/speech_balloon.dart';
 
+import '../common/app_color.dart';
+
 class RewardCategoryCard extends StatelessWidget {
   const RewardCategoryCard({
     super.key,
@@ -93,13 +95,13 @@ class RewardCategoryCard extends StatelessWidget {
                       width: 35,
                       child: Text(
                         'あと',
-                        style: TextStyle(color: Colors.black87, fontSize: 10),
+                        style: TextStyle(color: gray2, fontSize: 10),
                         textAlign: TextAlign.left,
                       ),
                     ),
                     Text(
                       "${differencePoint}P",
-                      style: const TextStyle(color: Colors.black87),
+                      style: const TextStyle(color: gray2),
                     ),
                   ],
                 ),

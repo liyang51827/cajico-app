@@ -38,7 +38,7 @@ class RewardView extends StatelessWidget {
             NotificationAction(),
           ],
           bottom: const TabBar(
-            labelColor: Colors.black87,
+            labelColor: gray2,
             indicatorColor: Colors.orange,
             labelStyle: TextStyle(fontSize: 16),
             tabs: <Widget>[

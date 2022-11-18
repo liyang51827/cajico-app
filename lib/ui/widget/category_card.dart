@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../common/app_color.dart';
+
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
     super.key,
@@ -32,7 +34,7 @@ class CategoryCard extends StatelessWidget {
               categoryName,
               style: const TextStyle(
                   fontSize: 14,
-                  color: Colors.black87
+                  color: gray2
               ),
             ),
             Image(

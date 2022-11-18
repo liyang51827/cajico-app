@@ -1,6 +1,8 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 
+import '../common/app_color.dart';
+
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
     super.key,
@@ -46,7 +48,7 @@ class HouseWorkCard extends StatelessWidget {
                         categoryName,
                         style: const TextStyle(
                             fontSize: 18,
-                            color: Colors.black87
+                            color: gray2
                         ),
                       ),
                     ],
@@ -66,7 +68,7 @@ class HouseWorkCard extends StatelessWidget {
                         " ポイント",
                         style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black87
+                            color: gray2
                         ),
                       ),
                     ],
