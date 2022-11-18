@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -13,12 +12,13 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       child: ElevatedButton(
         onPressed: (){},
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
+          elevation: 2,
           onPrimary: Colors.grey,
           primary: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),

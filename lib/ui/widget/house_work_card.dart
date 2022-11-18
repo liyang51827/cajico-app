@@ -15,59 +15,67 @@ class HouseWorkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+    return SizedBox(
       width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          Image(
-            image: AssetImage(imageUrl),
-            height: 70,
+      child: ElevatedButton(
+        onPressed: (){},
+        style: ElevatedButton.styleFrom(
+          splashFactory: InkRipple.splashFactory,
+          elevation: 2,
+          onPrimary: Colors.grey,
+          primary: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.55,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      categoryName,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black87
-                      ),
-                    ),
-                  ],
-                ),
-                verticalSpaceSmall,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      point.toString(),
-                      style: const TextStyle(
-                          fontSize: 22,
-                          color: Colors.black87
-                      ),
-                    ),
-                    const Text(
-                      " ポイント",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black87
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+        ),
+        child: Row(
+          children: [
+            Image(
+              image: AssetImage(imageUrl),
+              height: 70,
             ),
-          )
-        ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.55,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        categoryName,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black87
+                        ),
+                      ),
+                    ],
+                  ),
+                  verticalSpaceSmall,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        point.toString(),
+                        style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.black87
+                        ),
+                      ),
+                      const Text(
+                        " ポイント",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black87
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
