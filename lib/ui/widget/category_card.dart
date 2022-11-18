@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -13,26 +14,39 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Text(
-            categoryName,
-            style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black87
+      child: ElevatedButton(
+        onPressed: (){},
+        style: ElevatedButton.styleFrom(
+          splashFactory: InkRipple.splashFactory,
+          onPrimary: Colors.grey,
+          primary: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        // padding: const EdgeInsets.symmetric(vertical: 5),
+        // width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
+        // decoration: BoxDecoration(
+        //   border: Border.all(color: Colors.black26),
+        //   borderRadius: BorderRadius.circular(10),
+        // ),
+        child: Column(
+          children: [
+            Text(
+              categoryName,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87
+              ),
             ),
-          ),
-          Image(
-            image: AssetImage(imageUrl),
-            height: 70,
-          ),
-        ],
+            Image(
+              image: AssetImage(imageUrl),
+              height: 70,
+            ),
+          ],
+        ),
       ),
     );
   }

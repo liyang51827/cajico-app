@@ -21,7 +21,8 @@ class Footer extends StatelessWidget {
               label: 'ごほうび',
             ),
             BottomNavigationBarItem(
-              icon: Icon(LineIcons.campground),
+              icon: Icon(LineIcons.home),
+              activeIcon: Icon(LineIcons.home),
               label: '家事',
             ),
             BottomNavigationBarItem(
@@ -31,6 +32,7 @@ class Footer extends StatelessWidget {
           ],
           iconSize: 26,
           selectedItemColor: Colors.amber[600],
+          backgroundColor: Colors.white
         ),
       ),
     );
