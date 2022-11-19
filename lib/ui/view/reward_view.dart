@@ -48,7 +48,7 @@ class RewardView extends StatelessWidget {
                   children: const [
                     CircleAvatar(
                       radius: 12,
-                      backgroundImage: AssetImage('assets/app/icon.png'),
+                      backgroundImage: AssetImage('assets/images/man.png'),
                     ),
                     horizontalSpaceSmall,
                     Text('かつのり'),
@@ -61,7 +61,7 @@ class RewardView extends StatelessWidget {
                   children: const [
                     CircleAvatar(
                       radius: 12,
-                      backgroundImage: AssetImage('assets/app/icon.png'),
+                      backgroundImage: AssetImage('assets/images/woman.png'),
                     ),
                     horizontalSpaceSmall,
                     Text('えりか'),
