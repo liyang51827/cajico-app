@@ -39,6 +39,7 @@ class HistoryView extends StatelessWidget {
           bottom: TabBar(
             labelColor: gray2,
             indicatorColor: Colors.orange,
+            indicatorWeight: 3,
             labelStyle: const TextStyle(fontSize: 16),
             tabs: <Widget>[
               const Tab(text: '全て'),
