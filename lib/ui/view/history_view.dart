@@ -37,6 +37,7 @@ class HistoryView extends StatelessWidget {
             NotificationAction(),
           ],
           bottom: TabBar(
+            isScrollable: true,
             labelColor: gray2,
             indicatorColor: Colors.orange,
             indicatorWeight: 3,
@@ -48,7 +49,7 @@ class HistoryView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     CircleAvatar(
-                      radius: 13,
+                      radius: 15,
                       backgroundImage: AssetImage('assets/images/man.png'),
                     ),
                     horizontalSpaceSmall,
@@ -61,7 +62,7 @@ class HistoryView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     CircleAvatar(
-                      radius: 13,
+                      radius: 15,
                       backgroundImage: AssetImage('assets/images/woman.png'),
                     ),
                     horizontalSpaceSmall,

@@ -23,7 +23,7 @@ class HouseWorkCard extends StatelessWidget {
         onPressed: (){},
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
-          elevation: 3,
+          elevation: 2,
           foregroundColor: Colors.grey,
           backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),

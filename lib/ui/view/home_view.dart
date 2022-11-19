@@ -39,6 +39,7 @@ class _HouseWorkState extends State<HouseWork> {
     return Stack(
       children: [
         Scaffold(
+          backgroundColor: gray7,
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
