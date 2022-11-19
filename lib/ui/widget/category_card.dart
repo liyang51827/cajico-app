@@ -30,11 +30,15 @@ class CategoryCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(
-              categoryName,
-              style: const TextStyle(
-                  fontSize: 14,
-                  color: gray2
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                categoryName,
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: gray2,
+                    fontWeight: FontWeight.bold
+                ),
               ),
             ),
             Image(
