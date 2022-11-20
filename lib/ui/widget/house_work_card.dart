@@ -19,6 +19,7 @@ class HouseWorkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
+      height: 100,
       child: ElevatedButton(
         onPressed: (){},
         style: ElevatedButton.styleFrom(
@@ -33,13 +34,17 @@ class HouseWorkCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image(
-              image: AssetImage(imageUrl),
-              height: 70,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Image(
+                image: AssetImage(imageUrl),
+                height: 70,
+              ),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.55,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
