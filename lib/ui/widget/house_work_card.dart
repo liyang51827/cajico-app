@@ -7,12 +7,12 @@ import 'house_work_complete_dialog.dart';
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
     super.key,
-    required this.categoryName,
+    required this.houseWorkName,
     required this.imageUrl,
     required this.point,
   });
 
-  final String categoryName;
+  final String houseWorkName;
   final String imageUrl;
   final int point;
 
@@ -26,7 +26,7 @@ class HouseWorkCard extends StatelessWidget {
           showDialog<void>(
               context: context,
               builder: (_) {
-                return const HouseWorkCompleteDialog();
+                return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point,);
               });
         },
         style: ElevatedButton.styleFrom(
@@ -57,7 +57,7 @@ class HouseWorkCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        categoryName,
+                        houseWorkName,
                         style: const TextStyle(
                             fontSize: 18,
                             color: gray2

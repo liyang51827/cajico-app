@@ -167,25 +167,25 @@ class _ResentHouseWorks extends StatelessWidget {
     return Column(
       children: const [
         HouseWorkCard(
-          categoryName: 'リビングの掃除',
+          houseWorkName: 'リビングの掃除',
           imageUrl: 'assets/images/cleaning.png',
           point: 50,
         ),
         verticalSpaceSmall,
         HouseWorkCard(
-          categoryName: '晩ごはん作り',
+          houseWorkName: '晩ごはん作り',
           imageUrl: 'assets/images/cooking.png',
           point: 100,
         ),
         verticalSpaceSmall,
         HouseWorkCard(
-          categoryName: '洗濯干し作業',
+          houseWorkName: '洗濯干し作業',
           imageUrl: 'assets/images/washing.png',
           point: 30,
         ),
         verticalSpaceSmall,
         HouseWorkCard(
-          categoryName: '資源ごみ出し',
+          houseWorkName: '資源ごみ出し',
           imageUrl: 'assets/images/trash.png',
           point: 50,
         ),

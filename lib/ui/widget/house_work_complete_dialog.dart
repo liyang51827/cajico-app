@@ -3,20 +3,27 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 class HouseWorkCompleteDialog extends StatelessWidget {
-  const HouseWorkCompleteDialog({Key? key}) : super(key: key);
+  const HouseWorkCompleteDialog({
+    super.key,
+    required this.houseWorkName,
+    required this.point,
+  });
+
+  final String houseWorkName;
+  final int point;
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
       title: Column(
         children: [
-          const Text('朝ごはん準備', style: TextStyle(fontWeight: FontWeight.bold, color: gray2)),
+          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold, color: gray2)),
           verticalSpaceSmall,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('80', style: TextStyle(color: primaryColor)),
-              Text('ポイント', style: TextStyle(fontSize: 16, color: gray2))
+            children: [
+              Text(point.toString(), style: const TextStyle(color: primaryColor)),
+              const Text('ポイント', style: TextStyle(fontSize: 16, color: gray2))
             ],
           ),
           verticalSpaceMedium,

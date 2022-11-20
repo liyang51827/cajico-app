@@ -1,5 +1,4 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -41,61 +40,61 @@ class HouseWorkView extends StatelessWidget {
               children: [
                 verticalSpaceMedium,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事A',
+                  houseWorkName: 'サンプル家事A',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事B',
+                  houseWorkName: 'サンプル家事B',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事C',
+                  houseWorkName: 'サンプル家事C',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事D',
+                  houseWorkName: 'サンプル家事D',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事E',
+                  houseWorkName: 'サンプル家事E',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事F',
+                  houseWorkName: 'サンプル家事F',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事G',
+                  houseWorkName: 'サンプル家事G',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事H',
+                  houseWorkName: 'サンプル家事H',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事I',
+                  houseWorkName: 'サンプル家事I',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
                 verticalSpaceSmall,
                 HouseWorkCard(
-                  categoryName: 'サンプル家事J',
+                  houseWorkName: 'サンプル家事J',
                   imageUrl: imageUrl,
                   point: 50,
                 ),
