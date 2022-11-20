@@ -2,6 +2,7 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../common/app_color.dart';
+import 'house_work_complete_dialog.dart';
 
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
@@ -21,7 +22,13 @@ class HouseWorkCard extends StatelessWidget {
       width: double.infinity,
       height: 100,
       child: ElevatedButton(
-        onPressed: (){},
+        onPressed: (){
+          showDialog<void>(
+              context: context,
+              builder: (_) {
+                return const HouseWorkCompleteDialog();
+              });
+        },
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
@@ -66,7 +73,7 @@ class HouseWorkCard extends StatelessWidget {
                         point.toString(),
                         style: const TextStyle(
                             fontSize: 22,
-                            color: Colors.orange
+                            color: primaryColor
                         ),
                       ),
                       const Text(

@@ -39,7 +39,7 @@ class HistoryView extends StatelessWidget {
           bottom: TabBar(
             isScrollable: true,
             labelColor: gray2,
-            indicatorColor: Colors.orange,
+            indicatorColor: primaryColor,
             indicatorWeight: 3,
             labelStyle: const TextStyle(fontSize: 16),
             tabs: <Widget>[

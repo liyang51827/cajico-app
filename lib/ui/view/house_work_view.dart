@@ -106,7 +106,7 @@ class HouseWorkView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          backgroundColor: Colors.orange,
+          backgroundColor: primaryColor,
           child: const Icon(Icons.add),
         ),
       ),

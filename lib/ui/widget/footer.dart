@@ -1,3 +1,4 @@
+import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/base_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class Footer extends StatelessWidget {
           unselectedFontSize: 12,
           selectedIconTheme: const IconThemeData(size: 31),
           selectedFontSize: 12,
-          selectedItemColor: Colors.amber[600],
+          selectedItemColor: primaryColor,
         ),
       ),
     );

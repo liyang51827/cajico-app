@@ -12,7 +12,7 @@ class HouseWorkButton extends StatelessWidget {
       margin: const EdgeInsets.only(top: 100),
       child: FloatingActionButton(
         elevation: 0.0,
-        backgroundColor: Colors.orange,
+        backgroundColor: primaryColor,
         onPressed: () {},
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
