@@ -1,7 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../common/ui_helper.dart';
 import '../widget/house_work_card.dart';
 
@@ -114,7 +113,7 @@ class HouseWorkView extends StatelessWidget {
 }
 
 class _Option extends StatelessWidget {
-  const _Option({super.key});
+  const _Option();
 
   @override
   Widget build(BuildContext context) {

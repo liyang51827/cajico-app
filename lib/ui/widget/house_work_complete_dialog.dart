@@ -1,5 +1,7 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/widget/primary_small_button.dart';
+import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
 class HouseWorkCompleteDialog extends StatelessWidget {
@@ -32,44 +34,13 @@ class HouseWorkCompleteDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.circular(20)
-            ),
-            child: const Text(
-              'はい！',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18
-              ),
-              textAlign: TextAlign.center,
-            )
-          ),
+          child: const PrimarySmallButton(text: 'はい！'),
           onPressed: () {
             Navigator.pop(context, '1が選択されました');
           },
         ),
         SimpleDialogOption(
-          child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: primaryColor),
-                  borderRadius: BorderRadius.circular(20)
-              ),
-              child: const Text(
-                'いいえ',
-                style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 18
-                ),
-                textAlign: TextAlign.center,
-              )
-          ),
+          child: const PrimarySmallOutlineButton(text: 'いいえ'),
           onPressed: () {
             Navigator.pop(context, '2が選択されました');
           },
