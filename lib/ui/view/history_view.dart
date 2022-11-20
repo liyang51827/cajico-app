@@ -14,6 +14,7 @@ class HistoryView extends StatelessWidget {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
+        backgroundColor: gray7,
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black54),
           centerTitle: true,
@@ -177,7 +178,7 @@ class _PointSummary extends StatelessWidget {
           '${point}P',
           style: const TextStyle(
               fontSize: 30,
-              color: gray2
+              color: primaryColor
           ),
         ),
       ],
@@ -213,6 +214,7 @@ class _HouseWorkDetail extends StatelessWidget {
             width: 1, //枠線の太さ
           ),
         ),
+        color: Colors.white
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -228,15 +230,17 @@ class _HouseWorkDetail extends StatelessWidget {
                   Text(
                     categoryName,
                     style: const TextStyle(
-                        fontSize: 12,
-                        color: gray2
+                      fontSize: 12,
+                      color: gray2
                     ),
                   ),
+                  verticalSpaceTiny,
                   Text(
                     houseWorkName,
                     style: const TextStyle(
-                        fontSize: 16,
-                        color: gray2
+                      fontSize: 14,
+                      color: gray2,
+                      fontWeight: FontWeight.bold
                     ),
                   )
                 ],
@@ -264,7 +268,7 @@ class _HouseWorkDetail extends StatelessWidget {
                     "${point}P",
                     style: const TextStyle(
                         fontSize: 20,
-                        color: gray2
+                        color: primaryColor
                     ),
                   )
                 ],

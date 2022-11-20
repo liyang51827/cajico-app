@@ -19,6 +19,7 @@ class HouseWorkView extends StatelessWidget {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
+        backgroundColor: gray7,
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black54),
           centerTitle: true,
