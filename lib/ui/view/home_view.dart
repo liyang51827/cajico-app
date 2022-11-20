@@ -6,6 +6,7 @@ import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -21,6 +22,14 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'CAJICO',
       home: HouseWork(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale("ja", "JP"),
+      ],
     );
   }
 }
