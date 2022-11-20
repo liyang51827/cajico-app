@@ -1,4 +1,6 @@
+import 'package:cajico_app/ui/view/house_work_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../common/app_color.dart';
 
@@ -17,7 +19,7 @@ class CategoryCard extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       child: ElevatedButton(
-        onPressed: (){},
+        onPressed: () => Get.to(HouseWorkView(categoryName: categoryName)),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
