@@ -1,9 +1,11 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
+import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
+import '../widget/house_work_complete_dialog.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
@@ -204,78 +206,87 @@ class _HouseWorkDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Colors.black12, //枠線の色
-            width: 1, //枠線の太さ
-          ),
+    return InkWell(
+      onTap: () {
+        showDialog<void>(
+            context: context,
+            builder: (_) {
+              return HouseWorkHistoryDeleteDialog(houseWorkName: houseWorkName, categoryName: categoryName,);
+            });
+      },
+      child: Container(
+        height: 70,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Colors.black12, //枠線の色
+                width: 1, //枠線の太さ
+              ),
+            ),
+            color: Colors.white
         ),
-        color: Colors.white
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image(image: AssetImage(categoryImageUrl)),
-              horizontalSpaceTiny,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    categoryName,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: gray2
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image(image: AssetImage(categoryImageUrl)),
+                horizontalSpaceTiny,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      categoryName,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: gray2
+                      ),
                     ),
-                  ),
-                  verticalSpaceTiny,
-                  Text(
-                    houseWorkName,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: gray2,
-                      fontWeight: FontWeight.bold
+                    verticalSpaceTiny,
+                    Text(
+                      houseWorkName,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: gray2,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 15,
+                  backgroundImage: AssetImage(userIconImageUrl),
+                ),
+                horizontalSpaceSmall,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      time,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: gray2
+                      ),
                     ),
-                  )
-                ],
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 15,
-                backgroundImage: AssetImage(userIconImageUrl),
-              ),
-              horizontalSpaceSmall,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    time,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: gray2
-                    ),
-                  ),
-                  Text(
-                    "${point}P",
-                    style: const TextStyle(
-                        fontSize: 20,
-                        color: primaryColor
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+                    Text(
+                      "${point}P",
+                      style: const TextStyle(
+                          fontSize: 20,
+                          color: primaryColor
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
