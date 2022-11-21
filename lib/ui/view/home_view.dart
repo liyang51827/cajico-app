@@ -138,18 +138,18 @@ class _CategoryCards extends StatelessWidget {
           children: const [
             CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
           horizontalSpaceSmall,
-            CategoryCard(categoryName: '送り迎え', imageUrl: 'assets/images/pick_up.png'),
+            CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
           horizontalSpaceSmall,
-            CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
+            CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
           ],
         ),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CategoryCard(categoryName: 'ゴミ出し', imageUrl: 'assets/images/trash.png'),
+            CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
+            CategoryCard(categoryName: '送り迎え', imageUrl: 'assets/images/pick_up.png'),
             horizontalSpaceSmall,
             CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
           ],
