@@ -5,7 +5,6 @@ import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
-import '../widget/house_work_complete_dialog.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
