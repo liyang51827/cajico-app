@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/app_strings.dart';
 import '../common/ui_helper.dart';
-import 'cajico_button.dart';
+import 'primary_button.dart';
 
 class DefaultAlertDialog extends StatelessWidget {
   const DefaultAlertDialog({

@@ -14,12 +14,9 @@ class PrimaryButton extends StatelessWidget {
   });
 
   final String label;
-
   final double width;
   final double height;
-
   final VoidCallback? onPressed;
-
   final bool isValid;
 
   @override
@@ -29,8 +26,10 @@ class PrimaryButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Get.theme.primaryColor,
-          foregroundColor: Colors.white,
+          backgroundColor: primaryColor,
+          foregroundColor: primaryColor,
+          disabledBackgroundColor: primaryColor,
+          disabledForegroundColor: Colors.white,
           shape: const StadiumBorder(),
           elevation: 0,
         ),

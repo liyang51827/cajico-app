@@ -3,6 +3,7 @@ import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
+import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import '../common/ui_helper.dart';
@@ -65,7 +66,13 @@ class RewardDetailView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView (
-                child: _Detail(rewardName: rewardName, text: text, point: point, rank: rank)
+                child: Column(
+                  children: [
+                    _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
+                    verticalSpaceMedium,
+                    const PrimaryButton(label: 'ねぎらってもらう！')
+                  ],
+                )
               ),
             ),
             Container(
