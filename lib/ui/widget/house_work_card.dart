@@ -56,13 +56,7 @@ class HouseWorkCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        houseWorkName,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            color: gray2
-                        ),
-                      ),
+                      Text(houseWorkName, style: const TextStyle(fontSize: 18)),
                     ],
                   ),
                   verticalSpaceSmall,
@@ -76,13 +70,7 @@ class HouseWorkCard extends StatelessWidget {
                             color: primaryColor
                         ),
                       ),
-                      const Text(
-                        " ポイント",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: gray2
-                        ),
-                      ),
+                      const Text(" ポイント", style: TextStyle(fontSize: 18)),
                     ],
                   ),
                 ],

@@ -31,10 +31,7 @@ class HistoryView extends StatelessWidget {
               ]
           ),
           backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(
-              color: gray2,
-              fontSize: 22
-          ),
+          titleTextStyle: const TextStyle(fontSize: 22),
           actions: const [
             NotificationAction(),
           ],
@@ -167,13 +164,7 @@ class _PointSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-              fontSize: 18,
-              color: gray2
-          ),
-        ),
+        Text(title, style: const TextStyle(fontSize: 18)),
         horizontalSpaceSmall,
         Text(
           '${point}P',
@@ -236,19 +227,12 @@ class _HouseWorkDetail extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      categoryName,
-                      style: const TextStyle(
-                          fontSize: 12,
-                          color: gray2
-                      ),
-                    ),
+                    Text(categoryName, style: const TextStyle(fontSize: 12)),
                     verticalSpaceTiny,
                     Text(
                       houseWorkName,
                       style: const TextStyle(
                           fontSize: 14,
-                          color: gray2,
                           fontWeight: FontWeight.bold
                       ),
                     )
@@ -266,13 +250,7 @@ class _HouseWorkDetail extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      time,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: gray2
-                      ),
-                    ),
+                    Text(time, style: const TextStyle(fontSize: 16)),
                     Text(
                       "${point}P",
                       style: const TextStyle(

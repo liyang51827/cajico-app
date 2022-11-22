@@ -81,10 +81,16 @@ class RewardDetailView extends StatelessWidget {
                 )
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView (
-                child: _Detail(rewardName: rewardName, text: text, point: point, rank: rank)
+            SingleChildScrollView (
+              child: Column(
+                children: const [
+                  _RewardHistoryDetail(),
+                  _RewardHistoryDetail(),
+                  _RewardHistoryDetail(),
+                  _RewardHistoryDetail(),
+                  _RewardHistoryDetail(),
+                  _RewardHistoryDetail(),
+                ],
               ),
             ),
           ]
@@ -137,19 +143,8 @@ class _Detail extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "ごほうび",
-                style: TextStyle(
-                    fontSize: 16,
-                    color: gray2
-                ),
-              ),
-              Text(
-                "「$rank」",
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: gray2
-                ),
+              const Text("ごほうび", style: TextStyle(fontSize: 16)),
+              Text("「$rank」", style: const TextStyle(fontSize: 20),
               ),
             ],
           ),
@@ -158,8 +153,7 @@ class _Detail extends StatelessWidget {
             rewardName,
             style: const TextStyle(
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: gray2
+                fontWeight: FontWeight.bold
             ),
           ),
           verticalSpaceLarge,
@@ -178,8 +172,7 @@ class _Detail extends StatelessWidget {
                 ' ポイント',
                 style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: gray2
+                    fontWeight: FontWeight.bold
                 ),
               ),
             ],
@@ -190,6 +183,69 @@ class _Detail extends StatelessWidget {
           const Image(
             image: AssetImage('assets/images/other_child_care.png'),
             height: 130,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _RewardHistoryDetail extends StatelessWidget {
+  const _RewardHistoryDetail();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 120,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Colors.black12, //枠線の色
+              width: 1, //枠線の太さ
+            ),
+          ),
+          color: Colors.white
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                'お菓子プレゼント',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text('2022年10月11日')
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 20,
+                    backgroundImage: AssetImage('assets/images/woman.png'),
+                  ),
+                  horizontalSpaceSmall,
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: const Text(
+                      'いつも家事をしてくれてありがとう！\nほんのお礼です',
+                      style: TextStyle(
+                          fontSize: 13
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text('300P')
+            ],
           )
         ],
       ),

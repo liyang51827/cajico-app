@@ -103,10 +103,7 @@ class RewardCategoryCard extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                      Text(
-                        "${differencePoint}P",
-                        style: const TextStyle(color: gray2),
-                      ),
+                      Text("${differencePoint}P"),
                     ],
                   ),
                 )

@@ -21,11 +21,11 @@ class HouseWorkHistoryDeleteDialog extends StatelessWidget {
       ),
       title: Column(
         children: [
-          Text(categoryName, style: const TextStyle(color: gray2, fontSize: 18)),
+          Text(categoryName, style: const TextStyle(fontSize: 18)),
           verticalSpaceSmall,
-          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold, color: gray2)),
+          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold)),
           verticalSpaceMedium,
-          const Text('を取り消しますか？', style: TextStyle(fontSize: 16, color: gray2))
+          const Text('を取り消しますか？', style: TextStyle(fontSize: 16))
         ],
       ),
       children: [

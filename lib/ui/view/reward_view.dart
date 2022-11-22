@@ -31,10 +31,7 @@ class RewardView extends StatelessWidget {
               ]
           ),
           backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(
-              color: gray2,
-              fontSize: 22
-          ),
+          titleTextStyle: const TextStyle(fontSize: 22),
           actions: const [
             NotificationAction(),
           ],

@@ -22,17 +22,17 @@ class RewardRequestDialog extends StatelessWidget {
       ),
       title: Column(
         children: [
-          Text(rewardName, style: const TextStyle(fontWeight: FontWeight.bold, color: gray2)),
+          Text(rewardName, style: const TextStyle(fontWeight: FontWeight.bold)),
           verticalSpaceSmall,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
-              const Text(' ポイントを使って', style: TextStyle(fontSize: 16, color: gray2))
+              const Text(' ポイントを使って', style: TextStyle(fontSize: 16))
             ],
           ),
           verticalSpaceMedium,
-          const Text('ねぎらってもらいますか？', style: TextStyle(fontSize: 16, color: gray2))
+          const Text('ねぎらってもらいますか？', style: TextStyle(fontSize: 16))
         ],
       ),
       children: [

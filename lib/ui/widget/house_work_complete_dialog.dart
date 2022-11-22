@@ -22,17 +22,17 @@ class HouseWorkCompleteDialog extends StatelessWidget {
       ),
       title: Column(
         children: [
-          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold, color: gray2)),
+          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold)),
           verticalSpaceSmall,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
-              const Text(' ポイント', style: TextStyle(fontSize: 16, color: gray2))
+              const Text(' ポイント', style: TextStyle(fontSize: 16))
             ],
           ),
           verticalSpaceMedium,
-          const Text('この家事をクリアした？', style: TextStyle(fontSize: 16, color: gray2))
+          const Text('この家事をクリアした？', style: TextStyle(fontSize: 16))
         ],
       ),
       children: [

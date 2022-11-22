@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'CAJICO',
       home: HouseWork(),
       localizationsDelegates: [
@@ -30,6 +30,12 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale("ja", "JP"),
       ],
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: gray2),
+          bodyText2: TextStyle(color: gray2)
+        )
+      ),
     );
   }
 }
@@ -64,10 +70,7 @@ class _HouseWorkState extends State<HouseWork> {
               ]
             ),
             backgroundColor: Colors.white,
-            titleTextStyle: const TextStyle(
-                color: gray2,
-                fontSize: 22
-            ),
+            titleTextStyle: const TextStyle(fontSize: 22),
             actions: const [
               NotificationAction(),
             ],
@@ -81,26 +84,14 @@ class _HouseWorkState extends State<HouseWork> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     alignment: Alignment.centerLeft,
-                    child: const Text(
-                      'ジャンルから選ぶ',
-                      style: TextStyle(
-                          color: gray2,
-                          fontSize: 16
-                      ),
-                    ),
+                    child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
                   ),
                   const _CategoryCards(),
                   Container(
                     padding: const EdgeInsets.only(bottom: 16),
                     alignment: Alignment.centerLeft,
                     margin: const EdgeInsets.only(top: 24),
-                    child: const Text(
-                      '最近の家事から選ぶ',
-                      style: TextStyle(
-                          color: gray2,
-                          fontSize: 16
-                      ),
-                    ),
+                    child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
                   ),
                   const _ResentHouseWorks(),
                   verticalSpaceSmall
