@@ -22,12 +22,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'CAJICO',
       home: HouseWork(),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale("ja", "JP"),
       ],
       theme: ThemeData(

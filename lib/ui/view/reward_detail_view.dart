@@ -83,13 +83,14 @@ class RewardDetailView extends StatelessWidget {
             ),
             SingleChildScrollView (
               child: Column(
-                children: const [
-                  _RewardHistoryDetail(),
-                  _RewardHistoryDetail(),
-                  _RewardHistoryDetail(),
-                  _RewardHistoryDetail(),
-                  _RewardHistoryDetail(),
-                  _RewardHistoryDetail(),
+                children: [
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
                 ],
               ),
             ),
@@ -191,7 +192,18 @@ class _Detail extends StatelessWidget {
 }
 
 class _RewardHistoryDetail extends StatelessWidget {
-  const _RewardHistoryDetail();
+  const _RewardHistoryDetail({
+    required this.rewardName,
+    required this.message,
+    required this.userImageUrl,
+    required this.date,
+    required this.point
+});
+  final String rewardName;
+  final String message;
+  final String userImageUrl;
+  final String date;
+  final int point;
 
   @override
   Widget build(BuildContext context) {
@@ -209,20 +221,22 @@ class _RewardHistoryDetail extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
-                'お菓子プレゼント',
-                style: TextStyle(
+                rewardName,
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold
                 ),
               ),
-              Text('2022年10月11日')
+              Text(date)
             ],
           ),
+          verticalSpaceSmall,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -234,17 +248,12 @@ class _RewardHistoryDetail extends StatelessWidget {
                   ),
                   horizontalSpaceSmall,
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: const Text(
-                      'いつも家事をしてくれてありがとう！\nほんのお礼です',
-                      style: TextStyle(
-                          fontSize: 13
-                      ),
-                    ),
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(message, style: const TextStyle(fontSize: 13)),
                   ),
                 ],
               ),
-              Text('300P')
+              Text('${point}P', style: const TextStyle(fontSize: 24, color: primaryColor)),
             ],
           )
         ],
