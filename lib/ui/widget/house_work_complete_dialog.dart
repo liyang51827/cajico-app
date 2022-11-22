@@ -27,8 +27,8 @@ class HouseWorkCompleteDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(point.toString(), style: const TextStyle(color: primaryColor)),
-              const Text('ポイント', style: TextStyle(fontSize: 16, color: gray2))
+              Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
+              const Text(' ポイント', style: TextStyle(fontSize: 16, color: gray2))
             ],
           ),
           verticalSpaceMedium,
