@@ -83,7 +83,7 @@ class RewardView extends StatelessWidget {
                     verticalSpaceSmall,
                     RewardCategoryCard(
                       rank: "ライト",
-                      rewardName: 'お菓子・スイーツ',
+                      rewardName: 'コンビニのお菓子',
                       imageUrl: 'assets/images/afternoon_tea.png',
                       rating: 1.0,
                       ownedPoint: 1000,
@@ -123,7 +123,7 @@ class RewardView extends StatelessWidget {
                     verticalSpaceSmall,
                     RewardCategoryCard(
                       rank: "ライト",
-                      rewardName: 'お菓子・スイーツ',
+                      rewardName: 'コンビニのお菓子',
                       imageUrl: 'assets/images/afternoon_tea.png',
                       rating: 1.0,
                       ownedPoint: 1000,
