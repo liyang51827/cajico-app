@@ -27,9 +27,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
-          foregroundColor: primaryColor,
-          disabledBackgroundColor: primaryColor,
-          disabledForegroundColor: Colors.white,
+          foregroundColor: Colors.white,
           shape: const StadiumBorder(),
           elevation: 0,
         ),

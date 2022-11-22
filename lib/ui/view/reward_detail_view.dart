@@ -1,13 +1,10 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
-import 'package:cajico_app/ui/widget/footer.dart';
-import 'package:cajico_app/ui/widget/home_drawer.dart';
-import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import '../common/ui_helper.dart';
-import '../widget/reward_category_card.dart';
+import '../widget/reward_request_dialog.dart';
 
 class RewardDetailView extends StatelessWidget {
   const RewardDetailView({
@@ -70,7 +67,16 @@ class RewardDetailView extends StatelessWidget {
                   children: [
                     _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
                     verticalSpaceMedium,
-                    const PrimaryButton(label: 'ねぎらってもらう！')
+                    PrimaryButton(
+                      label: 'ねぎらってもらう！',
+                      onPressed: () {
+                        showDialog<void>(
+                            context: context,
+                            builder: (_) {
+                              return RewardRequestDialog(rewardName: rewardName, point: point);
+                            });
+                      },
+                    )
                   ],
                 )
               ),
