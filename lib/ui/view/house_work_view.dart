@@ -23,7 +23,7 @@ class HouseWorkView extends StatelessWidget {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black54),
           centerTitle: true,
-          title: Text(categoryName),
+          title: Text(categoryName, style: const TextStyle(color: gray2)),
           backgroundColor: Colors.white,
           titleTextStyle: const TextStyle(fontSize: 22),
           actions: const [

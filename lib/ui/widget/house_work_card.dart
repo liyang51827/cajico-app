@@ -32,7 +32,7 @@ class HouseWorkCard extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
-          foregroundColor: Colors.grey,
+          foregroundColor: gray2,
           backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),
           shape: RoundedRectangleBorder(
@@ -56,7 +56,7 @@ class HouseWorkCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(houseWorkName, style: const TextStyle(fontSize: 18)),
+                      Text(houseWorkName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   verticalSpaceSmall,
@@ -70,7 +70,7 @@ class HouseWorkCard extends StatelessWidget {
                             color: primaryColor
                         ),
                       ),
-                      const Text(" ポイント", style: TextStyle(fontSize: 18)),
+                      const Text(" ポイント", style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ],

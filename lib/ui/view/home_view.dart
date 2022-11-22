@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'CAJICO',
-      home: HouseWork(),
+      home: const HouseWork(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -66,7 +66,7 @@ class _HouseWorkState extends State<HouseWork> {
                   ),
                   height: 55,
                 ),
-                Text('家事をする'),
+                Text('家事をする', style: TextStyle(color: gray2)),
               ]
             ),
             backgroundColor: Colors.white,

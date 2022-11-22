@@ -27,7 +27,8 @@ class RewardView extends StatelessWidget {
                   ),
                   height: 55,
                 ),
-                Text('ごほうび'),
+                horizontalSpaceSmall,
+                Text('ごほうび', style: TextStyle(color: gray2)),
               ]
           ),
           backgroundColor: Colors.white,

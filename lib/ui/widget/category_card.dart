@@ -23,7 +23,7 @@ class CategoryCard extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
-          foregroundColor: Colors.grey,
+          foregroundColor: gray2,
           backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 5),
           shape: RoundedRectangleBorder(

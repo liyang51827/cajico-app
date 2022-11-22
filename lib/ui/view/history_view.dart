@@ -27,7 +27,7 @@ class HistoryView extends StatelessWidget {
                   ),
                   height: 55,
                 ),
-                Text('家事履歴'),
+                Text('家事履歴', style: TextStyle(color: gray2)),
               ]
           ),
           backgroundColor: Colors.white,
