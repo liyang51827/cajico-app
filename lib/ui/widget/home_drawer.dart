@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import '../view/inquiry_view.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -54,7 +56,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('ご意見箱'),
-            onTap: () => false,
+            onTap: () => Get.to(const InquiryView()),
           ),
           ListTile(
             leading: const Icon(

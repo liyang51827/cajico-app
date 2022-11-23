@@ -247,7 +247,7 @@ class _RewardHistoryDetail extends StatelessWidget {
                     backgroundImage: AssetImage('assets/images/woman.png'),
                   ),
                   horizontalSpaceSmall,
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(message, style: const TextStyle(fontSize: 13)),
                   ),

@@ -1,4 +1,3 @@
-import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';

@@ -1,8 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import '../common/ui_helper.dart';
-import '../widget/house_work_card.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
@@ -69,7 +67,7 @@ class _NotificationDetail extends StatelessWidget {
         children: [
           Text(date),
           verticalSpaceTiny,
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Text(message)
           )
