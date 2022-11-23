@@ -35,7 +35,9 @@ class InquiryView extends StatelessWidget {
             TextField(
               cursorColor: primaryColor,
               decoration: InputDecoration(
-                hintText: 'タイトル',
+                  labelText: 'タイトル',
+                labelStyle: const TextStyle(color: gray3),
+                alignLabelWithHint: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: gray6)),
@@ -45,12 +47,15 @@ class InquiryView extends StatelessWidget {
               ),
             ),
             verticalSpaceMedium,
-            TextField(
+            TextFormField(
               cursorColor: primaryColor,
               keyboardType: TextInputType.multiline,
-              maxLines: null,
+              minLines: 10,
+              maxLines: 10,
               decoration: InputDecoration(
-                  hintText: 'ご意見 / 改善点など',
+                  labelText: 'ご意見 / 改善点など',
+                  labelStyle: const TextStyle(color: gray3),
+                  alignLabelWithHint: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: gray6)),
@@ -59,7 +64,7 @@ class InquiryView extends StatelessWidget {
                       borderSide: const BorderSide(color: primaryColor))
               ),
             ),
-            verticalSpaceMedium,
+            verticalSpaceLarge,
             PrimaryButton(
               label: '送信する',
               onPressed: () {

@@ -20,10 +20,7 @@ class NormalDialog extends StatelessWidget {
       ),
       title: Text(
         message,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold
-        )
+        textAlign: TextAlign.center
       ),
       children: [
         SimpleDialogOption(
