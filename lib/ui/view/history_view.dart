@@ -35,42 +35,48 @@ class HistoryView extends StatelessWidget {
           actions: const [
             NotificationAction(),
           ],
-          bottom: TabBar(
-            isScrollable: true,
-            labelColor: primaryColor,
-            unselectedLabelColor: gray4,
-            indicatorColor: primaryColor,
-            indicatorWeight: 3,
-            labelStyle: const TextStyle(fontSize: 16),
-            tabs: <Widget>[
-              const Tab(text: '全て'),
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircleAvatar(
-                      radius: 15,
-                      backgroundImage: AssetImage('assets/images/man.png'),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TabBar(
+                isScrollable: true,
+                labelColor: primaryColor,
+                unselectedLabelColor: gray4,
+                indicatorColor: primaryColor,
+                indicatorWeight: 3,
+                labelStyle: const TextStyle(fontSize: 16),
+                tabs: <Widget>[
+                  const Tab(text: '全て'),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: AssetImage('assets/images/man.png'),
+                        ),
+                        horizontalSpaceSmall,
+                        Text('かつのり'),
+                      ],
                     ),
-                    horizontalSpaceSmall,
-                    Text('かつのり'),
-                  ],
-                ),
-              ),
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircleAvatar(
-                      radius: 15,
-                      backgroundImage: AssetImage('assets/images/woman.png'),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: AssetImage('assets/images/woman.png'),
+                        ),
+                        horizontalSpaceSmall,
+                        Text('えりか'),
+                      ],
                     ),
-                    horizontalSpaceSmall,
-                    Text('えりか'),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
         drawer: const HomeDrawer(),
