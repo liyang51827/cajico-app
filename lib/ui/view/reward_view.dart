@@ -38,7 +38,8 @@ class RewardView extends StatelessWidget {
           ],
           bottom: TabBar(
             isScrollable: true,
-            labelColor: gray2,
+            labelColor: primaryColor,
+            unselectedLabelColor: gray4,
             indicatorColor: primaryColor,
             indicatorWeight: 3,
             labelStyle: const TextStyle(fontSize: 16),
