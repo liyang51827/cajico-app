@@ -8,10 +8,12 @@ import '../../constant/app_strings.dart';
 import '../../model/app_config.dart';
 import '../../model/app_flavor.dart';
 import '../../model/loading_state.dart';
+import '../../service/api_service.dart';
 import '../view/reward_view.dart';
 import '../widget/common_dialog.dart';
 
 class BaseViewController extends GetxController {
+  final api = Get.find<ApiService>();
   final RxInt tabIndex = 0.obs;
   Rx<LoadingState> loadingState = Rx<LoadingState>(LoadingSuccess());
 

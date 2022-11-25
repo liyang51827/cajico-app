@@ -1,5 +1,7 @@
+import 'package:cajico_app/service/api_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/controller/home_view_controller.dart';
 import 'package:cajico_app/ui/widget/category_card.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 void main() {
+  Get .lazyPut(ApiService.new);
   runApp(const MyApp());
 }
 
@@ -150,7 +153,7 @@ class _CategoryCards extends StatelessWidget {
   }
 }
 
-class _ResentHouseWorks extends StatelessWidget {
+class _ResentHouseWorks extends GetView<HomeViewController> {
   const _ResentHouseWorks();
 
   @override

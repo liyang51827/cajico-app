@@ -1,10 +1,39 @@
 import 'package:get/get.dart';
-import '../model/covid_api_model.dart';
+import '../model/house_works.dart';
 
 class ApiService extends GetConnect {
-  // Get request
-  Future<Response<CovidApiModel>> getAddress() => get(
-    'https://api.covid19api.com/',
-    decoder: CovidApiModel.fromJson,
-  );
+  Future<List<HouseWorks>> getHouseWorksList() async {
+    return [
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+      HouseWorks(
+          categoryImageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+          name: '家事サンプルA',
+          point: 100
+      ),
+    ];
+  }
 }

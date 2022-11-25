@@ -20,6 +20,7 @@ dependencies:
   line_icons: ^2.0.1
   speech_balloon: ^0.0.4
   cached_network_image: ^3.2.2
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
