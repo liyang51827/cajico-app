@@ -2,7 +2,6 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import '../common/ui_helper.dart';
 import '../widget/reward_request_dialog.dart';
 

@@ -2,9 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/normal_dialog.dart';
 import 'package:flutter/material.dart';
-
 import '../widget/primary_button.dart';
-import '../widget/reward_request_dialog.dart';
 
 class InquiryView extends StatelessWidget {
   const InquiryView({super.key});
@@ -24,9 +22,9 @@ class InquiryView extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Container(
+            const SizedBox(
               width: double.infinity,
-              child: const Text(
+              child: Text(
                 '追加してほしい機能や\n改善して欲しい箇所がありましたら\nお気軽にご連絡ください。\nできる限りご希望に添えるよう改善いたします。',
                 textAlign: TextAlign.center,
               ),
