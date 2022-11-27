@@ -26,9 +26,16 @@ class HouseWorkView extends StatelessWidget {
           title: Text(categoryName, style: const TextStyle(color: gray2)),
           backgroundColor: Colors.white,
           titleTextStyle: const TextStyle(fontSize: 22),
-          actions: const [
-            _Option(),
-          ],
+          actions: <Widget>[
+            PopupMenuButton(
+              offset: const Offset(0, 50),
+              itemBuilder: (BuildContext context) {
+                return [
+                  const PopupMenuItem(child: Text('編集する')),
+                ];
+              }
+            )
+          ]
         ),
         body: SingleChildScrollView (
           child: Container(
@@ -105,21 +112,6 @@ class HouseWorkView extends StatelessWidget {
           backgroundColor: primaryColor,
           child: const Icon(Icons.add),
         ),
-      ),
-    );
-  }
-}
-
-class _Option extends StatelessWidget {
-  const _Option();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Icon(
-        LineIcons.horizontalEllipsis,
-        size: 30,
       ),
     );
   }
