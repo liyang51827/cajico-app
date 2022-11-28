@@ -143,7 +143,7 @@ class _CategoryCards extends StatelessWidget {
           children: const [
             CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png'),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: '送り迎え', imageUrl: 'assets/images/pick_up.png'),
+            CategoryCard(categoryName: '教育', imageUrl: 'assets/images/education.png'),
             horizontalSpaceSmall,
             CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png'),
           ],
