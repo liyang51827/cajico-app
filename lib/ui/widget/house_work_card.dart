@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../common/app_color.dart';
 import 'house_work_complete_dialog.dart';
+import 'house_work_completed_dialog.dart';
 
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
@@ -23,11 +24,15 @@ class HouseWorkCard extends StatelessWidget {
       height: 100,
       child: ElevatedButton(
         onPressed: (){
-          showDialog<void>(
-              context: context,
-              builder: (_) {
-                return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point,);
-              });
+          showDialog(
+                context: context,
+                builder: (_) {
+                  return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point,);
+                }).then((value) {
+                  if (value == true) {
+                    return showDialog(context: context,builder: (context) => HouseWorkCompletedDialog(point: point,));
+                  }
+            });
         },
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,

@@ -2,26 +2,18 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
 import '../widget/house_work_card.dart';
-import '../widget/house_work_completed_dialog.dart';
 
 class HouseWorkView extends StatelessWidget {
   const HouseWorkView({
     super.key,
     required this.categoryName,
     required this.imageUrl,
-    this.isSuccess = false,
   });
   final String categoryName;
   final String imageUrl;
-  final bool isSuccess;
 
   @override
   Widget build(BuildContext context) {
-    if (isSuccess == true) {
-      Future.delayed(Duration.zero, () => showDialog(context: context,
-        builder: (context) => const HouseWorkCompletedDialog()
-      ));
-    }
     return DefaultTabController(
       initialIndex: 0,
       length: 3,
