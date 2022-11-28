@@ -36,13 +36,12 @@ class HouseWorkCompletedDialog extends StatelessWidget {
       actions: [
         Container(
           padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-          child: SimpleDialogOption(
-            child: const PrimarySmallButton(text: '戻る'),
-            onPressed: () {
-              Navigator.pop(context, true);
-              Get.to(const HouseWork());
-            },
-          ),
+          child: TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+                Get.to(const HouseWork());
+              },
+              child: const PrimarySmallButton(text: '戻る'))
         ),
       ],
     );
