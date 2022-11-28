@@ -29,7 +29,7 @@ class HouseWorkCard extends StatelessWidget {
                 builder: (_) {
                   return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point);
                 }).then((value) {
-                  if (value == true) {
+                  if (value) {
                     return showDialog(context: context,builder: (context) => HouseWorkCompletedDialog(point: point));
                   }
             });

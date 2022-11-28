@@ -17,6 +17,7 @@ class NormalDialog extends StatelessWidget {
       ),
       title: Text(
         message,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center
       ),
       children: [

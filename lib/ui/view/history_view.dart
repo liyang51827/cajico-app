@@ -2,6 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
+import 'package:cajico_app/ui/widget/normal_dialog.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
@@ -205,10 +206,14 @@ class _HouseWorkDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showDialog<void>(
+        showDialog(
             context: context,
             builder: (_) {
               return HouseWorkHistoryDeleteDialog(houseWorkName: houseWorkName, categoryName: categoryName,);
+            }).then((value) {
+              if (value) {
+                return showDialog(context: context,builder: (context) => const NormalDialog(message: '家事を取り消しました'));
+              }
             });
       },
       child: Container(

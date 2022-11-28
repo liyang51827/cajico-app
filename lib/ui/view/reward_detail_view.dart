@@ -84,7 +84,7 @@ class RewardDetailView extends StatelessWidget {
                             builder: (_) {
                               return RewardRequestDialog(rewardName: rewardName, point: point);
                             }).then((value) {
-                              if (value == true) {
+                              if (value) {
                                 return showDialog(context: context,builder: (context) => const RewardRequestCompletedDialog());
                               }
                             });
