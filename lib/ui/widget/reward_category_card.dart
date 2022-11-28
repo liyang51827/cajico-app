@@ -28,7 +28,7 @@ class RewardCategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:  () => Get.to(RewardDetailView(imageUrl: imageUrl, rewardName: rewardName, rank: rank, point: requiredPoint, text: 'コンビニで手軽なスナック菓子を買ってもらえる！',)),
+      onTap:  () => Get.to(() => RewardDetailView(imageUrl: imageUrl, rewardName: rewardName, rank: rank, point: requiredPoint, text: 'コンビニで手軽なスナック菓子を買ってもらえる！',)),
       child: Container(
         width: double.infinity,
         height: 170,

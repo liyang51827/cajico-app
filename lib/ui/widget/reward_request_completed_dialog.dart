@@ -32,7 +32,7 @@ class RewardRequestCompletedDialog extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
           child: TextButton(
             onPressed: () {
-              Get.to(const RewardView());
+              Get.to(() => const RewardView());
             },
             child: const PrimarySmallButton(text: '戻る'))
         ),
