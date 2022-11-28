@@ -3,6 +3,7 @@ import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
+import '../widget/reward_request_completed_dialog.dart';
 import '../widget/reward_request_dialog.dart';
 
 class RewardDetailView extends StatelessWidget {
@@ -78,12 +79,16 @@ class RewardDetailView extends StatelessWidget {
                     PrimaryButton(
                       label: 'ねぎらってもらう！',
                       onPressed: () {
-                        showDialog<void>(
+                        showDialog(
                             context: context,
                             builder: (_) {
                               return RewardRequestDialog(rewardName: rewardName, point: point);
+                            }).then((value) {
+                              if (value == true) {
+                                return showDialog(context: context,builder: (context) => const RewardRequestCompletedDialog());
+                              }
                             });
-                      },
+                        },
                     )
                   ],
                 )

@@ -39,13 +39,13 @@ class RewardRequestDialog extends StatelessWidget {
         SimpleDialogOption(
           child: const PrimarySmallButton(text: 'はい！'),
           onPressed: () {
-            Navigator.pop(context, '1が選択されました');
+            Navigator.pop(context, true);
           },
         ),
         SimpleDialogOption(
           child: const PrimarySmallOutlineButton(text: 'いいえ'),
           onPressed: () {
-            Navigator.pop(context, '2が選択されました');
+            Navigator.pop(context, false);
           },
         )
       ],
