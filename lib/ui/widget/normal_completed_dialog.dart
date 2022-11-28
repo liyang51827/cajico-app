@@ -1,9 +1,8 @@
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
-import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
-class NormalDialog extends StatelessWidget {
-  const NormalDialog({
+class NormalCompletedDialog extends StatelessWidget {
+  const NormalCompletedDialog({
     super.key,
     required this.message
   });
@@ -23,15 +22,9 @@ class NormalDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
-          child: const PrimarySmallButton(text: 'はい！'),
+          child: const PrimarySmallButton(text: 'OK'),
           onPressed: () {
-            Navigator.pop(context, true);
-          },
-        ),
-        SimpleDialogOption(
-          child: const PrimarySmallOutlineButton(text: 'いいえ'),
-          onPressed: () {
-            Navigator.pop(context, false);
+            Navigator.pop(context);
           },
         )
       ],

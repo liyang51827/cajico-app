@@ -1,7 +1,8 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
-import 'package:cajico_app/ui/widget/normal_dialog.dart';
+import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:flutter/material.dart';
+import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
 class InquiryView extends StatelessWidget {
@@ -66,10 +67,14 @@ class InquiryView extends StatelessWidget {
             PrimaryButton(
               label: '送信する',
               onPressed: () {
-                showDialog<void>(
+                showDialog(
                     context: context,
                     builder: (_) {
-                      return const NormalDialog(message: '送信されました');
+                      return const NormalDialog(message: '送信しますか？');
+                    }).then((value) {
+                      if (value) {
+                        return showDialog(context: context,builder: (context) => const NormalCompletedDialog(message: '送信されました'));
+                      }
                     });
               },
             )
