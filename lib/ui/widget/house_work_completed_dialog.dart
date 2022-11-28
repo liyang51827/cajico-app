@@ -2,6 +2,8 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../view/home_view.dart';
 
 class HouseWorkCompletedDialog extends StatelessWidget {
   const HouseWorkCompletedDialog({
@@ -34,11 +36,13 @@ class HouseWorkCompletedDialog extends StatelessWidget {
       actions: [
         Container(
           padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-          child: TextButton(
+          child: SimpleDialogOption(
+            child: const PrimarySmallButton(text: '戻る'),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(context, true);
+              Get.to(const HouseWork());
             },
-            child: const PrimarySmallButton(text: '戻る'))
+          ),
         ),
       ],
     );

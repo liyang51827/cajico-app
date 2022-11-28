@@ -29,7 +29,7 @@ class HouseWorkHistoryDeleteDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
-          child: const PrimarySmallButton(text: 'はい！'),
+          child: const PrimarySmallButton(text: 'はい'),
           onPressed: () {
             Navigator.pop(context, '1が選択されました');
           },

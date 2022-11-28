@@ -1,6 +1,8 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/view/reward_view.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RewardRequestCompletedDialog extends StatelessWidget {
   const RewardRequestCompletedDialog({super.key});
@@ -30,7 +32,7 @@ class RewardRequestCompletedDialog extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
           child: TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.to(const RewardView());
             },
             child: const PrimarySmallButton(text: '戻る'))
         ),
