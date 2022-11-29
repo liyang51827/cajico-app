@@ -3,9 +3,6 @@ import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:line_icons/line_icon.dart';
-
 import '../common/app_color.dart';
 
 class TopView extends StatelessWidget {
@@ -19,36 +16,45 @@ class TopView extends StatelessWidget {
         height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CarouselSlider(
-              items: const [
-                _CarouselCard(
-                    title: 'CAJICO',
-                    subtitle: 'カジコは家族の家事を「見える化」する\n家事管理アプリです',
-                    imageUrl: 'assets/images/introduction_1.png'),
-                _CarouselCard(
-                    title: '家事ポイント',
-                    subtitle: '家事をクリアして\nポイントをゲット！',
-                    imageUrl: 'assets/images/introduction_2.png'),
-                _CarouselCard(
-                    title: 'ごほうび',
-                    subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
-                    imageUrl: 'assets/images/introduction_3.png'),
-              ],
-              options: CarouselOptions(
-                height: 450,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 1000),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                viewportFraction: 1,
-              ),
-            ),
-            const _AuthSection(),
+          children: const [
+            _CarouselSection(),
+            _AuthSection(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _CarouselSection extends StatelessWidget {
+  const _CarouselSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      items: const [
+        _CarouselCard(
+            title: 'CAJICO',
+            subtitle: 'カジコは家族の家事を「見える化」する\n家事管理アプリです',
+            imageUrl: 'assets/images/introduction_1.png'),
+        _CarouselCard(
+            title: '家事ポイント',
+            subtitle: '家事をクリアして\nポイントをゲット！',
+            imageUrl: 'assets/images/introduction_2.png'),
+        _CarouselCard(
+            title: 'ごほうび',
+            subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
+            imageUrl: 'assets/images/introduction_3.png'),
+      ],
+      options: CarouselOptions(
+        height: 450,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        viewportFraction: 1,
       ),
     );
   }
