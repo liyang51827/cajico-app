@@ -49,7 +49,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
             ],
             carouselController: _controller,
             options: CarouselOptions(
-                aspectRatio: 0.95,
+                aspectRatio: 0.85,
                 initialPage: 0,
                 enableInfiniteScroll: true,
                 autoPlay: true,
@@ -71,7 +71,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
                 child: Container(
                   width: 8.0,
                   height: 6.0,
-                  margin: EdgeInsets.symmetric(horizontal: 4.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: (Theme.of(context).brightness == Brightness.dark
@@ -185,7 +185,7 @@ class _AuthSection extends StatelessWidget {
               ),
             ),
           ),
-          verticalSpaceLarge,
+          verticalSpaceMediumLarge,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -198,7 +198,8 @@ class _AuthSection extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
               ),
             ],
-          )
+          ),
+          verticalSpaceSmall,
         ],
       ),
     );
