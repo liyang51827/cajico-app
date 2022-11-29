@@ -5,56 +5,85 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
 
-class TopView extends StatelessWidget {
+final List<String> imgList = [
+  'assets/images/introduction_1.png',
+  'assets/images/introduction_2.png',
+  'assets/images/introduction_3.png',
+];
+class TopView extends StatefulWidget {
   const TopView({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CarouselWithIndicatorState();
+  }
+}
+
+class _CarouselWithIndicatorState extends State<TopView> {
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            _CarouselSection(),
-            _AuthSection(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CarouselSection extends StatelessWidget {
-  const _CarouselSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: const [
-        _CarouselCard(
-            title: 'CAJICO',
-            subtitle: 'カジコは家族の家事を「見える化」する\n家事管理アプリです',
-            imageUrl: 'assets/images/introduction_1.png'),
-        _CarouselCard(
-            title: '家事ポイント',
-            subtitle: '家事をクリアして\nポイントをゲット！',
-            imageUrl: 'assets/images/introduction_2.png'),
-        _CarouselCard(
-            title: 'ごほうび',
-            subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
-            imageUrl: 'assets/images/introduction_3.png'),
-      ],
-      options: CarouselOptions(
-        aspectRatio: 0.95,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 3),
-        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-        autoPlayCurve: Curves.fastOutSlowIn,
-        viewportFraction: 1,
+          children: [
+          CarouselSlider(
+            items: const [
+              _CarouselCard(
+                  title: 'CAJICO',
+                  subtitle: 'カジコは家族の家事を「見える化」する\n家事管理アプリです',
+                  imageUrl: 'assets/images/introduction_1.png'),
+              _CarouselCard(
+                  title: '家事ポイント',
+                  subtitle: '家事をクリアして\nポイントをゲット！',
+                  imageUrl: 'assets/images/introduction_2.png'),
+              _CarouselCard(
+                  title: 'ごほうび',
+                  subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
+                  imageUrl: 'assets/images/introduction_3.png'),
+            ],
+            carouselController: _controller,
+            options: CarouselOptions(
+                aspectRatio: 0.95,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                viewportFraction: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                }),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: imgList.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => _controller.animateToPage(entry.key),
+                child: Container(
+                  width: 8.0,
+                  height: 6.0,
+                  margin: EdgeInsets.symmetric(horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
+              );
+            }).toList(),
+          ),
+          const _AuthSection(),
+        ]),
       ),
     );
   }
