@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../view/inquiry_view.dart';
+import '../view/top_view.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -67,6 +68,14 @@ class HomeDrawer extends StatelessWidget {
             ),
             title: const Text('プライバシーポリシー'),
             onTap: () => false,
+          ),
+          ListTile(
+            leading: const Icon(
+              LineIcons.envelope,
+              color: Colors.brown,
+            ),
+            title: const Text('トップ画面'),
+            onTap: () => Get.to(() => const TopView()),
           ),
         ],
       ),
