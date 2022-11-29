@@ -10,32 +10,24 @@ class RewardRequestCompletedDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: const [
-          Text(
-            'ねぎらいリクエストを\n送りました！',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18
-            ),
-            textAlign: TextAlign.center
-          ),
+          Text('ねぎらいリクエストを\n送りました！',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center),
           verticalSpaceMedium,
           Image(image: AssetImage('assets/images/other_child_care.png'), width: 200)
         ],
       ),
       actions: [
         Container(
-          padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-          child: TextButton(
-            onPressed: () {
-              Get.to(() => const RewardView());
-            },
-            child: const PrimarySmallButton(text: '戻る'))
-        ),
+            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+            child: TextButton(
+                onPressed: () {
+                  Get.to(() => const RewardView());
+                },
+                child: const PrimarySmallButton(text: '戻る'))),
       ],
     );
   }

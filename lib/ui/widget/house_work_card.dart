@@ -23,16 +23,17 @@ class HouseWorkCard extends StatelessWidget {
       width: double.infinity,
       height: 100,
       child: ElevatedButton(
-        onPressed: (){
+        onPressed: () {
           showDialog(
-                context: context,
-                builder: (_) {
-                  return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point);
-                }).then((value) {
-                  if (value) {
-                    return showDialog(context: context,builder: (context) => HouseWorkCompletedDialog(point: point));
-                  }
-            });
+              context: context,
+              builder: (_) {
+                return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point);
+              }).then((value) {
+            if (value) {
+              return showDialog(
+                  context: context, builder: (context) => HouseWorkCompletedDialog(point: point));
+            }
+          });
         },
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
@@ -61,7 +62,8 @@ class HouseWorkCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(houseWorkName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text(houseWorkName,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   verticalSpaceSmall,
@@ -70,10 +72,7 @@ class HouseWorkCard extends StatelessWidget {
                     children: [
                       Text(
                         point.toString(),
-                        style: const TextStyle(
-                            fontSize: 22,
-                            color: primaryColor
-                        ),
+                        style: const TextStyle(fontSize: 22, color: primaryColor),
                       ),
                       const Text(" ポイント", style: TextStyle(fontSize: 16)),
                     ],

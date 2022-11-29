@@ -19,18 +19,16 @@ class RewardView extends StatelessWidget {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black54),
           centerTitle: true,
-          title: Row(
-              children: const [
-                Image(
-                  image: AssetImage(
-                    'assets/images/logo_reward.png',
-                  ),
-                  height: 55,
-                ),
-                horizontalSpaceSmall,
-                Text('ごほうび', style: TextStyle(color: gray2)),
-              ]
-          ),
+          title: Row(children: const [
+            Image(
+              image: AssetImage(
+                'assets/images/logo_reward.png',
+              ),
+              height: 55,
+            ),
+            horizontalSpaceSmall,
+            Text('ごほうび', style: TextStyle(color: gray2)),
+          ]),
           backgroundColor: Colors.white,
           titleTextStyle: const TextStyle(fontSize: 22),
           actions: const [
@@ -84,7 +82,7 @@ class RewardView extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: SingleChildScrollView (
+              child: SingleChildScrollView(
                 child: Column(
                   children: const [
                     verticalSpaceSmall,
@@ -124,7 +122,7 @@ class RewardView extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: SingleChildScrollView (
+              child: SingleChildScrollView(
                 child: Column(
                   children: const [
                     verticalSpaceSmall,

@@ -19,7 +19,8 @@ class CategoryCard extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       child: ElevatedButton(
-        onPressed: () => Get.to(() => HouseWorkView(categoryName: categoryName, imageUrl: imageUrl)),
+        onPressed: () =>
+            Get.to(() => HouseWorkView(categoryName: categoryName, imageUrl: imageUrl)),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
@@ -36,10 +37,7 @@ class CategoryCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 2),
               child: Text(
                 categoryName,
-                style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold
-                ),
+                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
             ),
             Image(

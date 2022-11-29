@@ -13,12 +13,11 @@ class InquiryView extends StatelessWidget {
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black54),
-        centerTitle: true,
-        title: const Text('ご意見箱', style: TextStyle(color: gray2)),
-        backgroundColor: Colors.white,
-        titleTextStyle: const TextStyle(fontSize: 22)
-      ),
+          iconTheme: const IconThemeData(color: Colors.black54),
+          centerTitle: true,
+          title: const Text('ご意見箱', style: TextStyle(color: gray2)),
+          backgroundColor: Colors.white,
+          titleTextStyle: const TextStyle(fontSize: 22)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -35,15 +34,14 @@ class InquiryView extends StatelessWidget {
               cursorColor: primaryColor,
               decoration: InputDecoration(
                   labelText: 'タイトル',
-                labelStyle: const TextStyle(color: gray3),
-                alignLabelWithHint: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: gray6)),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: primaryColor))
-              ),
+                  labelStyle: const TextStyle(color: gray3),
+                  alignLabelWithHint: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: gray6)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: primaryColor))),
             ),
             verticalSpaceMedium,
             TextFormField(
@@ -60,8 +58,7 @@ class InquiryView extends StatelessWidget {
                       borderSide: const BorderSide(color: gray6)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: primaryColor))
-              ),
+                      borderSide: const BorderSide(color: primaryColor))),
             ),
             verticalSpaceLarge,
             PrimaryButton(
@@ -72,10 +69,12 @@ class InquiryView extends StatelessWidget {
                     builder: (_) {
                       return const NormalDialog(message: '送信しますか？');
                     }).then((value) {
-                      if (value) {
-                        return showDialog(context: context,builder: (context) => const NormalCompletedDialog(message: '送信されました'));
-                      }
-                    });
+                  if (value) {
+                    return showDialog(
+                        context: context,
+                        builder: (context) => const NormalCompletedDialog(message: '送信されました'));
+                  }
+                });
               },
             )
           ],

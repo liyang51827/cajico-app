@@ -19,9 +19,7 @@ class HouseWorkGrayButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(LineIcons.home),
-            Text(
-                '家事'
-            ),
+            Text('家事'),
           ],
         ),
       ),

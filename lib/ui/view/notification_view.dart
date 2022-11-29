@@ -10,12 +10,11 @@ class NotificationView extends StatelessWidget {
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black54),
-        centerTitle: true,
-        title: const Text('お知らせ', style: TextStyle(color: gray2)),
-        backgroundColor: Colors.white,
-        titleTextStyle: const TextStyle(fontSize: 22)
-      ),
+          iconTheme: const IconThemeData(color: Colors.black54),
+          centerTitle: true,
+          title: const Text('お知らせ', style: TextStyle(color: gray2)),
+          backgroundColor: Colors.white,
+          titleTextStyle: const TextStyle(fontSize: 22)),
       body: SingleChildScrollView(
         child: Column(
           children: const [
@@ -43,36 +42,32 @@ class _NotificationDetail extends StatelessWidget {
     required this.date,
     required this.message,
   });
+
   final String date;
   final String message;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.black12, //枠線の色
-              width: 1, //枠線の太さ
+        height: 120,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black12, //枠線の色
+                width: 1, //枠線の太さ
+              ),
             ),
-          ),
-          color: Colors.white
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(date),
-          verticalSpaceTiny,
-          SizedBox(
-            width: double.infinity,
-            child: Text(message)
-          )
-        ],
-      )
-    );
+            color: Colors.white),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(date),
+            verticalSpaceTiny,
+            SizedBox(width: double.infinity, child: Text(message))
+          ],
+        ));
   }
 }

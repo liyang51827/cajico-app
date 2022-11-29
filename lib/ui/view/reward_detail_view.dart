@@ -15,6 +15,7 @@ class RewardDetailView extends StatelessWidget {
     required this.point,
     required this.text,
   });
+
   final String imageUrl;
   final String rank;
   final String rewardName;
@@ -27,89 +28,116 @@ class RewardDetailView extends StatelessWidget {
       initialIndex: 0,
       length: 2,
       child: Scaffold(
-        backgroundColor: gray7,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(200.0),
+          backgroundColor: gray7,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(200.0),
             child: AppBar(
-              iconTheme: const IconThemeData(color: gray2),
-              elevation: 0.0,
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(imageUrl),
-                    fit: BoxFit.fitWidth
-                  )
+                iconTheme: const IconThemeData(color: gray2),
+                elevation: 0.0,
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
                 ),
-              ),
-              actions: <Widget>[
-                PopupMenuButton(
-                    offset: const Offset(0, 50),
-                    itemBuilder: (BuildContext context) {
-                      return [
-                        const PopupMenuItem(child: Text('編集する')),
-                      ];
-                    }
-                )
-              ],
-              bottom: const ColoredTabBar(
-                color: Colors.white,
-                tabBar: TabBar(
-                  labelColor: primaryColor,
-                  unselectedLabelColor: gray4,
-                  indicatorColor: primaryColor,
-                  indicatorWeight: 3,
-                  labelStyle: TextStyle(fontSize: 16),
-                  tabs: <Widget>[
-                    Tab(child: Text('ごほうび情報')),
-                    Tab(child: Text('履歴')),
-                  ],
-                ),
-              )
-            ),
+                actions: <Widget>[
+                  PopupMenuButton(
+                      offset: const Offset(0, 50),
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          const PopupMenuItem(child: Text('編集する')),
+                        ];
+                      })
+                ],
+                bottom: const ColoredTabBar(
+                  color: Colors.white,
+                  tabBar: TabBar(
+                    labelColor: primaryColor,
+                    unselectedLabelColor: gray4,
+                    indicatorColor: primaryColor,
+                    indicatorWeight: 3,
+                    labelStyle: TextStyle(fontSize: 16),
+                    tabs: <Widget>[
+                      Tab(child: Text('ごほうび情報')),
+                      Tab(child: Text('履歴')),
+                    ],
+                  ),
+                )),
           ),
-        body: TabBarView(
-          children: [
+          body: TabBarView(children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView (
-                child: Column(
-                  children: [
-                    _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
-                    verticalSpaceMedium,
-                    PrimaryButton(
-                      label: 'ねぎらってもらう！',
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return RewardRequestDialog(rewardName: rewardName, point: point);
-                            }).then((value) {
-                              if (value) {
-                                return showDialog(context: context,builder: (context) => const RewardRequestCompletedDialog());
-                              }
-                            });
-                        },
-                    )
-                  ],
-                )
-              ),
+              child: SingleChildScrollView(
+                  child: Column(
+                children: [
+                  _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
+                  verticalSpaceMedium,
+                  PrimaryButton(
+                    label: 'ねぎらってもらう！',
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return RewardRequestDialog(rewardName: rewardName, point: point);
+                          }).then((value) {
+                        if (value) {
+                          return showDialog(
+                              context: context,
+                              builder: (context) => const RewardRequestCompletedDialog());
+                        }
+                      });
+                    },
+                  )
+                ],
+              )),
             ),
-            SingleChildScrollView (
+            SingleChildScrollView(
               child: Column(
                 children: [
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
-                  _RewardHistoryDetail(rewardName: rewardName, date: '2022年10月11日', userImageUrl: 'assets/images/woman.png', message: 'いつも家事をしてくれてありがとう！ほんのお礼です', point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
+                  _RewardHistoryDetail(
+                      rewardName: rewardName,
+                      date: '2022年10月11日',
+                      userImageUrl: 'assets/images/woman.png',
+                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
+                      point: point),
                 ],
               ),
             ),
-          ]
-        )
-      ),
+          ])),
     );
   }
 }
@@ -121,6 +149,7 @@ class _Detail extends StatelessWidget {
     required this.point,
     required this.text,
   });
+
   final String rank;
   final String rewardName;
   final int point;
@@ -143,17 +172,16 @@ class _Detail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("ごほうび", style: TextStyle(fontSize: 16)),
-              Text("「$rank」", style: const TextStyle(fontSize: 20),
+              Text(
+                "「$rank」",
+                style: const TextStyle(fontSize: 20),
               ),
             ],
           ),
           verticalSpaceSmall,
           Text(
             rewardName,
-            style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold
-            ),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           verticalSpaceLarge,
           Row(
@@ -161,18 +189,12 @@ class _Detail extends StatelessWidget {
             children: [
               Text(
                 point.toString(),
-                style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: primaryColor
-                ),
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: primaryColor),
               ),
               const Text(
                 ' ポイント',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -190,13 +212,13 @@ class _Detail extends StatelessWidget {
 }
 
 class _RewardHistoryDetail extends StatelessWidget {
-  const _RewardHistoryDetail({
-    required this.rewardName,
-    required this.message,
-    required this.userImageUrl,
-    required this.date,
-    required this.point
-});
+  const _RewardHistoryDetail(
+      {required this.rewardName,
+      required this.message,
+      required this.userImageUrl,
+      required this.date,
+      required this.point});
+
   final String rewardName;
   final String message;
   final String userImageUrl;
@@ -215,8 +237,7 @@ class _RewardHistoryDetail extends StatelessWidget {
               width: 1, //枠線の太さ
             ),
           ),
-          color: Colors.white
-      ),
+          color: Colors.white),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -226,10 +247,7 @@ class _RewardHistoryDetail extends StatelessWidget {
             children: [
               Text(
                 rewardName,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                ),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(date)
             ],

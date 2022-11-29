@@ -12,7 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 void main() {
-  Get .lazyPut(ApiService.new);
+  Get.lazyPut(ApiService.new);
   runApp(const MyApp());
 }
 
@@ -34,11 +34,8 @@ class MyApp extends StatelessWidget {
         Locale("ja", "JP"),
       ],
       theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyText1: TextStyle(color: gray2),
-          bodyText2: TextStyle(color: gray2)
-        )
-      ),
+          textTheme: const TextTheme(
+              bodyText1: TextStyle(color: gray2), bodyText2: TextStyle(color: gray2))),
     );
   }
 }
@@ -51,7 +48,6 @@ class HouseWork extends StatefulWidget {
 }
 
 class _HouseWorkState extends State<HouseWork> {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -61,17 +57,15 @@ class _HouseWorkState extends State<HouseWork> {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
-            title: Row(
-              children: const [
-                Image(
-                  image: AssetImage(
-                    'assets/images/logo.png',
-                  ),
-                  height: 55,
+            title: Row(children: const [
+              Image(
+                image: AssetImage(
+                  'assets/images/logo.png',
                 ),
-                Text('家事をする', style: TextStyle(color: gray2)),
-              ]
-            ),
+                height: 55,
+              ),
+              Text('家事をする', style: TextStyle(color: gray2)),
+            ]),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
             actions: const [
@@ -79,7 +73,7 @@ class _HouseWorkState extends State<HouseWork> {
             ],
           ),
           drawer: const HomeDrawer(),
-          body: SingleChildScrollView (
+          body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -131,9 +125,9 @@ class _CategoryCards extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png'),
-          horizontalSpaceSmall,
+            horizontalSpaceSmall,
             CategoryCard(categoryName: 'ペット', imageUrl: 'assets/images/pet.png'),
-          horizontalSpaceSmall,
+            horizontalSpaceSmall,
             CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png'),
           ],
         ),

@@ -10,7 +10,9 @@ class NotificationAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: IconButton(onPressed: () => Get.to(() => const NotificationView()), icon: const Icon(LineIcons.bell, size: 30)),
+      child: IconButton(
+          onPressed: () => Get.to(() => const NotificationView()),
+          icon: const Icon(LineIcons.bell, size: 30)),
     );
   }
 }

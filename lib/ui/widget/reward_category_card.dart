@@ -6,16 +6,15 @@ import '../common/app_color.dart';
 import '../view/reward_detail_view.dart';
 
 class RewardCategoryCard extends StatelessWidget {
-  const RewardCategoryCard({
-    super.key,
-    required this.rank,
-    required this.rewardName,
-    required this.rating,
-    required this.ownedPoint,
-    required this.requiredPoint,
-    required this.differencePoint,
-    required this.imageUrl
-  });
+  const RewardCategoryCard(
+      {super.key,
+      required this.rank,
+      required this.rewardName,
+      required this.rating,
+      required this.ownedPoint,
+      required this.requiredPoint,
+      required this.differencePoint,
+      required this.imageUrl});
 
   final String rank;
   final String rewardName;
@@ -28,7 +27,13 @@ class RewardCategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:  () => Get.to(() => RewardDetailView(imageUrl: imageUrl, rewardName: rewardName, rank: rank, point: requiredPoint, text: 'コンビニで手軽なスナック菓子を買ってもらえる！',)),
+      onTap: () => Get.to(() => RewardDetailView(
+            imageUrl: imageUrl,
+            rewardName: rewardName,
+            rank: rank,
+            point: requiredPoint,
+            text: 'コンビニで手軽なスナック菓子を買ってもらえる！',
+          )),
       child: Container(
         width: double.infinity,
         height: 170,
@@ -42,8 +47,7 @@ class RewardCategoryCard extends StatelessWidget {
                 Colors.black26,
                 BlendMode.srcATop,
               ), //
-            )
-        ),
+            )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -57,17 +61,11 @@ class RewardCategoryCard extends StatelessWidget {
                       children: [
                         const Text(
                           "ごほうび",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 12, color: Colors.white),
                         ),
                         Text(
                           "「$rank」",
-                          style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.white
-                          ),
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ],
                     ),
@@ -77,10 +75,7 @@ class RewardCategoryCard extends StatelessWidget {
                         Text(
                           rewardName,
                           style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -88,10 +83,11 @@ class RewardCategoryCard extends StatelessWidget {
                 ),
                 SpeechBalloon(
                   nipLocation: NipLocation.left,
-                  height: 60, // マルなので同じheightとwidth
+                  height: 60,
+                  // マルなので同じheightとwidth
                   width: 60,
                   borderRadius: 40,
-                  offset: const Offset(20,0),
+                  offset: const Offset(20, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -128,17 +124,11 @@ class RewardCategoryCard extends StatelessWidget {
                   children: [
                     const Text(
                       "保有ポイント",
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.white
-                      ),
+                      style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                     Text(
                       "${ownedPoint}P",
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white
-                      ),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ],
                 ),
@@ -146,17 +136,11 @@ class RewardCategoryCard extends StatelessWidget {
                   children: [
                     const Text(
                       "必要ポイント",
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.white
-                      ),
+                      style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                     Text(
                       "${requiredPoint}P",
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white
-                      ),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ],
                 ),

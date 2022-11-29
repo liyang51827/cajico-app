@@ -9,6 +9,7 @@ class HouseWorkView extends StatelessWidget {
     required this.categoryName,
     required this.imageUrl,
   });
+
   final String categoryName;
   final String imageUrl;
 
@@ -20,23 +21,21 @@ class HouseWorkView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: gray7,
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
-          centerTitle: true,
-          title: Text(categoryName, style: const TextStyle(color: gray2)),
-          backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(fontSize: 22),
-          actions: <Widget>[
-            PopupMenuButton(
-              offset: const Offset(0, 50),
-              itemBuilder: (BuildContext context) {
-                return [
-                  const PopupMenuItem(child: Text('編集する')),
-                ];
-              }
-            )
-          ]
-        ),
-        body: SingleChildScrollView (
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: Text(categoryName, style: const TextStyle(color: gray2)),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22),
+            actions: <Widget>[
+              PopupMenuButton(
+                  offset: const Offset(0, 50),
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      const PopupMenuItem(child: Text('編集する')),
+                    ];
+                  })
+            ]),
+        body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(

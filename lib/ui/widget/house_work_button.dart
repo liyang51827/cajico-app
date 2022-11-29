@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';import '../common/app_color.dart';
+import 'package:line_icons/line_icons.dart';
+import '../common/app_color.dart';
 
 class HouseWorkButton extends StatelessWidget {
   const HouseWorkButton({super.key});
@@ -18,9 +19,7 @@ class HouseWorkButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(LineIcons.home),
-            Text(
-                '家事'
-            ),
+            Text('家事'),
           ],
         ),
       ),

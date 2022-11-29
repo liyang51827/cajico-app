@@ -9,15 +9,14 @@ class HouseWorkHistoryDeleteDialog extends StatelessWidget {
     required this.categoryName,
     required this.houseWorkName,
   });
+
   final String categoryName;
   final String houseWorkName;
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: [
           Text(categoryName, style: const TextStyle(fontSize: 18)),

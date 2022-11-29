@@ -22,9 +22,7 @@ class HomeDrawer extends StatelessWidget {
                     Container(
                       alignment: Alignment.bottomLeft,
                       child: const Image(
-                        image: AssetImage(
-                            'assets/images/logo_drawer.png'
-                        ),
+                        image: AssetImage('assets/images/logo_drawer.png'),
                         height: 70,
                       ),
                     ),
@@ -32,15 +30,11 @@ class HomeDrawer extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20, left: 8),
                       child: const Text(
                         'メニュー',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black54
-                        ),
+                        style: TextStyle(fontSize: 24, color: Colors.black54),
                       ),
                     )
                   ],
-                )
-            ),
+                )),
           ),
           ListTile(
             leading: const Icon(

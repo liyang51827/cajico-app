@@ -10,14 +10,13 @@ class HouseWorkCompletedDialog extends StatelessWidget {
     super.key,
     required this.point,
   });
+
   final int point;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: [
           const Text('お疲れさまです！', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -35,14 +34,13 @@ class HouseWorkCompletedDialog extends StatelessWidget {
       ),
       actions: [
         Container(
-          padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-          child: TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-                Get.to(() => const HouseWork());
-              },
-              child: const PrimarySmallButton(text: '戻る'))
-        ),
+            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+            child: TextButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                  Get.to(() => const HouseWork());
+                },
+                child: const PrimarySmallButton(text: '戻る'))),
       ],
     );
   }

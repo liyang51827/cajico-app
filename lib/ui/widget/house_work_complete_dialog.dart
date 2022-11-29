@@ -17,9 +17,7 @@ class HouseWorkCompleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: [
           Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold)),

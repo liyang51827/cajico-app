@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import '../common/app_color.dart';
 
 class PrimarySmallOutlineButton extends StatelessWidget {
-  const PrimarySmallOutlineButton({
-    super.key,
-    required this.text
-  });
+  const PrimarySmallOutlineButton({super.key, required this.text});
 
   final String text;
 
@@ -17,16 +14,11 @@ class PrimarySmallOutlineButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: primaryColor),
-            borderRadius: BorderRadius.circular(20)
-        ),
+            borderRadius: BorderRadius.circular(20)),
         child: Text(
           text,
-          style: const TextStyle(
-              color: primaryColor,
-              fontSize: 18
-          ),
+          style: const TextStyle(color: primaryColor, fontSize: 18),
           textAlign: TextAlign.center,
-        )
-    );
+        ));
   }
 }
