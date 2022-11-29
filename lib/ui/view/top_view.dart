@@ -47,7 +47,7 @@ class _CarouselSection extends StatelessWidget {
             imageUrl: 'assets/images/introduction_3.png'),
       ],
       options: CarouselOptions(
-        height: 450,
+        aspectRatio: 0.95,
         initialPage: 0,
         enableInfiniteScroll: true,
         autoPlay: true,
