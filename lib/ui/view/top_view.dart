@@ -196,7 +196,7 @@ class _AuthSection extends StatelessWidget {
               InkWell(
                 child: const Text(
                   'こちら',
-                  style: TextStyle(color: primaryColor),
+                  style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
                 ),
                 onTap: () => Get.to(() => LoginView()),
               ),
