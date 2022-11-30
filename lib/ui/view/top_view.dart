@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
+import 'package:cajico_app/ui/view/login_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -187,14 +188,17 @@ class _AuthSection extends StatelessWidget {
           verticalSpaceMediumLarge,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'カジコをご利用中の方は',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(
-                'こちら',
-                style: TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
+              InkWell(
+                child: const Text(
+                  'こちら',
+                  style: TextStyle(color: primaryColor),
+                ),
+                onTap: () => Get.to(() => const LoginView()),
               ),
             ],
           ),
