@@ -130,7 +130,7 @@ class _AuthSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
           SizedBox(
