@@ -10,6 +10,7 @@ final List<String> imgList = [
   'assets/images/introduction_2.png',
   'assets/images/introduction_3.png',
 ];
+
 class TopView extends StatefulWidget {
   const TopView({super.key});
 
@@ -29,14 +30,12 @@ class _CarouselWithIndicatorState extends State<TopView> {
       backgroundColor: Colors.white,
       body: SizedBox(
         height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           CarouselSlider(
             items: const [
               _CarouselCard(
                   title: 'CAJICO',
-                  subtitle: 'カジコは家族の家事を「見える化」する\n家事管理アプリです',
+                  subtitle: 'カジコは家族の家事を「見える化」する\n家事共有アプリです',
                   imageUrl: 'assets/images/introduction_1.png'),
               _CarouselCard(
                   title: '家事ポイント',
@@ -75,8 +74,8 @@ class _CarouselWithIndicatorState extends State<TopView> {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
+                              ? Colors.white
+                              : Colors.black)
                           .withOpacity(_current == entry.key ? 0.9 : 0.4)),
                 ),
               );
