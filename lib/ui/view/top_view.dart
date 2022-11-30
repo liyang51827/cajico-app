@@ -198,7 +198,7 @@ class _AuthSection extends StatelessWidget {
                   'こちら',
                   style: TextStyle(color: primaryColor),
                 ),
-                onTap: () => Get.to(() => const LoginView()),
+                onTap: () => Get.to(() => LoginView()),
               ),
             ],
           ),
