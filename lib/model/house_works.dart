@@ -11,7 +11,7 @@ class HouseWork {
 
   static HouseWork fromJson(Map<String, dynamic> json) {
     return HouseWork(
-      categoryImageUrl: json['id'],
+      categoryImageUrl: json['name'],
       name: json['name'],
       point: json['point'],
     );

@@ -4,7 +4,6 @@ import 'base_view_controller.dart';
 
 class HomeViewController extends BaseViewController {
 
-  final houseWork = Rxn<HouseWork>();
   final RxList<HouseWork> houseWorks = <HouseWork>[].obs;
 
   @override

@@ -12,7 +12,7 @@ class ApiService extends GetConnect {
 
   Uri _makeUri(String path, {Map<String, String?>? queryParams}) {
     final apiPath = "/api$path";
-    return Uri.https('https://cajico.herokuapp.com', apiPath, queryParams);
+    return Uri.https('cajico.herokuapp.com', apiPath, queryParams);
   }
 
   bool _checkStatusCode(http.Response response) {

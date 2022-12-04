@@ -152,32 +152,29 @@ class _ResentHouseWorks extends GetView<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        HouseWorkCard(
-          houseWorkName: 'リビングの掃除',
-          imageUrl: 'assets/images/cleaning.png',
-          point: 50,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          houseWorkName: '晩ごはん作り',
-          imageUrl: 'assets/images/cooking.png',
-          point: 100,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          houseWorkName: '洗濯干し作業',
-          imageUrl: 'assets/images/washing.png',
-          point: 30,
-        ),
-        verticalSpaceSmall,
-        HouseWorkCard(
-          houseWorkName: '資源ごみ出し',
-          imageUrl: 'assets/images/trash.png',
-          point: 50,
-        ),
-      ],
-    );
+    return Obx(() {
+      final controller = Get.put(HomeViewController());
+
+      return Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.houseWorks.value.length,
+            itemBuilder: (context, index) {
+              final item = controller.houseWorks.elementAt(index);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: HouseWorkCard(
+                  houseWorkName: item.name,
+                  imageUrl: 'assets/images/cleaning.png',
+                  point: item.point,
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    });
   }
 }
