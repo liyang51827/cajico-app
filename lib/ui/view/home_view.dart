@@ -40,14 +40,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HouseWork extends StatefulWidget {
+class HouseWork extends GetView<HomeViewController> {
   const HouseWork({super.key});
 
-  @override
-  State<HouseWork> createState() => _HouseWorkState();
-}
-
-class _HouseWorkState extends State<HouseWork> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -73,26 +68,30 @@ class _HouseWorkState extends State<HouseWork> {
             ],
           ),
           drawer: const HomeDrawer(),
-          body: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    alignment: Alignment.centerLeft,
-                    child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
-                  ),
-                  const _CategoryCards(),
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.only(top: 24),
-                    child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
-                  ),
-                  const _ResentHouseWorks(),
-                  verticalSpaceSmall
-                ],
+          body: RefreshIndicator(
+            color: primaryColor,
+            onRefresh: controller.fetchData,
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      alignment: Alignment.centerLeft,
+                      child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
+                    ),
+                    const _CategoryCards(),
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      alignment: Alignment.centerLeft,
+                      margin: const EdgeInsets.only(top: 24),
+                      child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
+                    ),
+                    const _ResentHouseWorks(),
+                    verticalSpaceSmall
+                  ],
+                ),
               ),
             ),
           ),
