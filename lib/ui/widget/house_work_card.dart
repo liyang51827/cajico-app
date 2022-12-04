@@ -52,6 +52,9 @@ class HouseWorkCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(color: primaryColor),
+                ),
               ),
             ),
             SizedBox(

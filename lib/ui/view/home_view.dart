@@ -45,6 +45,7 @@ class HouseWork extends GetView<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeViewController());
     return Stack(
       children: [
         Scaffold(
@@ -166,7 +167,7 @@ class _ResentHouseWorks extends GetView<HomeViewController> {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: HouseWorkCard(
                   houseWorkName: item.name,
-                  imageUrl: item.categoryImageUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
+                  imageUrl: item.categoryImageUrl,
                   point: item.point,
                 ),
               );
