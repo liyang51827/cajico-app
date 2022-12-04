@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -49,9 +50,8 @@ class HouseWorkCard extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image(
-                image: AssetImage(imageUrl),
-                height: 70,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
               ),
             ),
             SizedBox(

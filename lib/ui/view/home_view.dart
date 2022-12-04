@@ -167,7 +167,7 @@ class _ResentHouseWorks extends GetView<HomeViewController> {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: HouseWorkCard(
                   houseWorkName: item.name,
-                  imageUrl: 'assets/images/cleaning.png',
+                  imageUrl: item.categoryImageUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/housework_image/1_cooking.png',
                   point: item.point,
                 ),
               );
