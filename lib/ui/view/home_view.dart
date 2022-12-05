@@ -6,6 +6,7 @@ import 'package:cajico_app/ui/widget/category_card.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
+import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -69,29 +70,31 @@ class HouseWork extends GetView<HomeViewController> {
             ],
           ),
           drawer: const HomeDrawer(),
-          body: RefreshIndicator(
-            color: primaryColor,
-            onRefresh: controller.fetchData,
-            child: SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      alignment: Alignment.centerLeft,
-                      child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
-                    ),
-                    const _CategoryCards(),
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      alignment: Alignment.centerLeft,
-                      margin: const EdgeInsets.only(top: 24),
-                      child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
-                    ),
-                    const _ResentHouseWorks(),
-                    verticalSpaceSmall
-                  ],
+          body: GetLoadingStack<HomeViewController>(
+            child: RefreshIndicator(
+              color: primaryColor,
+              onRefresh: controller.fetchData,
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        alignment: Alignment.centerLeft,
+                        child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
+                      ),
+                      const _CategoryCards(),
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        alignment: Alignment.centerLeft,
+                        margin: const EdgeInsets.only(top: 24),
+                        child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
+                      ),
+                      const _ResentHouseWorks(),
+                      verticalSpaceSmall
+                    ],
+                  ),
                 ),
               ),
             ),

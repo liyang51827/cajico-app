@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/house_work_view_controller.dart';
 import '../widget/house_work_card.dart';
+import '../widget/loading_stack.dart';
 
 class HouseWorkView extends StatelessWidget {
   const HouseWorkView({
@@ -16,6 +17,7 @@ class HouseWorkView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
@@ -33,7 +35,9 @@ class HouseWorkView extends StatelessWidget {
                   ];
                 })
           ]),
-      body: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId),
+      body: GetLoadingStack<HouseWorkViewController>(
+        child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: primaryColor,
