@@ -160,7 +160,7 @@ class _ResentHouseWorks extends GetView<HomeViewController> {
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: controller.houseWorks.value.length,
+            itemCount: controller.houseWorks().length,
             itemBuilder: (context, index) {
               final item = controller.houseWorks.elementAt(index);
               return Padding(
