@@ -46,44 +46,49 @@ class HouseWorkCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(color: primaryColor),
+        child: Container(
+          padding: const EdgeInsets.only(right: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 16),
+                width: 100,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(color: primaryColor),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.55,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(houseWorkName,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  verticalSpaceSmall,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        point.toString(),
-                        style: const TextStyle(fontSize: 22, color: primaryColor),
-                      ),
-                      const Text(" ポイント", style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.55,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(houseWorkName,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    verticalSpaceSmall,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          point.toString(),
+                          style: const TextStyle(fontSize: 22, color: primaryColor),
+                        ),
+                        const Text(" ポイント", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
