@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'base_view_controller.dart';
 
 class HouseWorkViewController extends BaseViewController {
+  HouseWorkViewController({required this.houseWorkCategoryId});
 
+  final int houseWorkCategoryId;
   final RxList<HouseWork> houseWorks = <HouseWork>[].obs;
 
   @override
@@ -14,7 +16,7 @@ class HouseWorkViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      houseWorks.value = await api.getHouseWorksList(houseWorkCategoryId: 1);
+      houseWorks.value = await api.getHouseWorksList(houseWorkCategoryId: houseWorkCategoryId);
     });
   }
 }

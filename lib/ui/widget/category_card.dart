@@ -9,10 +9,12 @@ class CategoryCard extends StatelessWidget {
     super.key,
     required this.categoryName,
     required this.imageUrl,
+    required this.houseWorkCategoryId,
   });
 
   final String categoryName;
   final String imageUrl;
+  final int houseWorkCategoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CategoryCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       child: ElevatedButton(
         onPressed: () =>
-            Get.to(() => HouseWorkView(categoryName: categoryName, imageUrl: imageUrl)),
+            Get.to(() => HouseWorkView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId)),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,

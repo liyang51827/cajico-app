@@ -1,9 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import '../common/ui_helper.dart';
 import '../controller/house_work_view_controller.dart';
 import '../widget/house_work_card.dart';
 
@@ -11,11 +8,11 @@ class HouseWorkView extends StatelessWidget {
   const HouseWorkView({
     super.key,
     required this.categoryName,
-    required this.imageUrl,
+    required this.houseWorkCategoryId,
   });
 
   final String categoryName;
-  final String imageUrl;
+  final int houseWorkCategoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,7 @@ class HouseWorkView extends StatelessWidget {
                   ];
                 })
           ]),
-      body: const _HouseWorks(),
+      body: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: primaryColor,
@@ -47,16 +44,19 @@ class HouseWorkView extends StatelessWidget {
 }
 
 class _HouseWorks extends GetView<HouseWorkViewController> {
-  const _HouseWorks();
+  const _HouseWorks({
+    required this.houseWorkCategoryId
+  });
+  final int houseWorkCategoryId;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final controller = Get.put(HouseWorkViewController());
+      final controller = Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
 
       return SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             children: [
               ListView.builder(
