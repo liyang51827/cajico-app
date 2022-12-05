@@ -14,7 +14,7 @@ class HomeViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-        houseWorks.value = await api.getHouseWorksList();
+        houseWorks.value = await api.getRecentHouseWorksList();
     });
   }
 }

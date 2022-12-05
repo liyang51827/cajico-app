@@ -5,7 +5,6 @@ import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService extends GetConnect {
-
   static const _commonHeaders = {
     'content-type': 'application/json',
   };
@@ -50,9 +49,21 @@ class ApiService extends GetConnect {
       ..addAll(await makeAuthorizationBearerHeader());
   }
 
-  Future<List<HouseWork>> getHouseWorksList() async {
+  // 最近の家事取得API
+  Future<List<HouseWork>> getRecentHouseWorksList() async {
     final res = await http.get(
       _makeUri('/house-works-recently'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => HouseWork.fromJson(json)).toList();
+  }
+
+  // カテゴリ毎の家事一覧取得API
+  Future<List<HouseWork>> getHouseWorksList({required int houseWorkCategoryId}) async {
+    final res = await http.get(
+      _makeUri('/house-works',
+          queryParams: {'houseWorkCategoryId': houseWorkCategoryId.toString()}),
       headers: await _makeAuthenticatedHeader(),
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
@@ -62,5 +73,6 @@ class ApiService extends GetConnect {
 
 class ApiException implements Exception {
   String message;
+
   ApiException(this.message);
 }
