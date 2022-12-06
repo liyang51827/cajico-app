@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../view/inquiry_view.dart';
 import '../view/top_view.dart';
+import '../view/web_view_view.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -59,7 +60,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('利用規約'),
-            onTap: () => false,
+            onTap: () => Get.to(const WebViewView(initialPath: 'term.html', title: '利用規約')),
           ),
           ListTile(
             leading: const Icon(
@@ -67,7 +68,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('プライバシーポリシー'),
-            onTap: () => false,
+            onTap: () => Get.to(const WebViewView(initialPath: 'privacy_policy.html', title: 'プライバシーポリシー')),
           ),
           ListTile(
             leading: const Icon(
