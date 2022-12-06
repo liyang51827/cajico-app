@@ -14,7 +14,7 @@ class NotificationView extends StatelessWidget {
       final controller = Get.put(NotificationViewController());
 
       return Scaffold(
-        backgroundColor: gray7,
+        backgroundColor: Colors.white,
         appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
