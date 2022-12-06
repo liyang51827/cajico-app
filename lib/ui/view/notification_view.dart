@@ -1,39 +1,45 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../controller/notification_view_controller.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: gray7,
-      appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
-          centerTitle: true,
-          title: const Text('お知らせ', style: TextStyle(color: gray2)),
-          backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(fontSize: 22)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-            _NotificationDetail(date: '2022年10月11日 18:00', message: 'かつのりさんが家事「晩ごはん準備」をクリアしました！'),
-          ],
+    return Obx(() {
+      final controller = Get.put(NotificationViewController());
+
+      return Scaffold(
+        backgroundColor: gray7,
+        appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: const Text('お知らせ', style: TextStyle(color: gray2)),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22)),
+        body: GetLoadingStack<NotificationViewController>(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.notices().length,
+                  itemBuilder: (context, index) {
+                    final item = controller.notices.elementAt(index);
+                    return _NotificationDetail(date: item.date, message: item.message);
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

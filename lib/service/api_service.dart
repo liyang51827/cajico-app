@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/notice.dart';
+
 class ApiService extends GetConnect {
   static const _commonHeaders = {
     'content-type': 'application/json',
@@ -68,6 +70,16 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => HouseWork.fromJson(json)).toList();
+  }
+
+// お知らせ一覧API
+  Future<List<Notice>> getNoticesList() async {
+    final res = await http.get(
+      _makeUri('/notices'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => Notice.fromJson(json)).toList();
   }
 }
 
