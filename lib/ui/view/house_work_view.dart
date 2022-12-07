@@ -17,7 +17,7 @@ class HouseWorkView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
+    Get.replace(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
