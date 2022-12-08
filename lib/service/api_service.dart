@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
-
 import '../model/notice.dart';
+import '../model/family_reward.dart';
 
 class ApiService extends GetConnect {
   static const _commonHeaders = {
@@ -72,7 +71,7 @@ class ApiService extends GetConnect {
     return data.map((json) => HouseWork.fromJson(json)).toList();
   }
 
-// お知らせ一覧API
+  // お知らせ一覧API
   Future<List<Notice>> getNoticesList() async {
     final res = await http.get(
       _makeUri('/notices'),
@@ -80,6 +79,16 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => Notice.fromJson(json)).toList();
+  }
+
+  // ごほうび一覧API
+  Future<List<FamilyReward>> getFamilyRewardList() async {
+    final res = await http.get(
+      _makeUri('/rewards'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => FamilyReward.fromJson(json)).toList();
   }
 }
 
