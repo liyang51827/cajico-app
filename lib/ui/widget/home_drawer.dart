@@ -72,10 +72,10 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
-              LineIcons.envelope,
+              LineIcons.alternateSignOut,
               color: Colors.brown,
             ),
-            title: const Text('トップ画面'),
+            title: const Text('ログアウト'),
             onTap: () => Get.to(() => const TopView()),
           ),
         ],
