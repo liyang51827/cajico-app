@@ -8,14 +8,18 @@ import 'package:intl/intl.dart';
 
 class RewardCategoryCard extends StatelessWidget {
   const RewardCategoryCard(
-      {super.key,
-      required this.rank,
-      required this.rewardName,
-      required this.rating,
-      required this.ownedPoint,
-      required this.requiredPoint,
-      required this.differencePoint,
-      required this.imageUrl});
+      {
+        super.key,
+        required this.rank,
+        required this.rewardName,
+        required this.rating,
+        required this.ownedPoint,
+        required this.requiredPoint,
+        required this.differencePoint,
+        required this.imageUrl,
+        required this.isRequesting,
+        required this.note
+      });
 
   final String rank;
   final String rewardName;
@@ -24,6 +28,8 @@ class RewardCategoryCard extends StatelessWidget {
   final int requiredPoint;
   final int differencePoint;
   final String imageUrl;
+  final bool isRequesting;
+  final String note;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class RewardCategoryCard extends StatelessWidget {
             rewardName: rewardName,
             rank: rank,
             point: requiredPoint,
-            text: 'コンビニで手軽なスナック菓子を買ってもらえる！',
+            text: note,
           )),
       child: Container(
         width: double.infinity,
@@ -60,14 +66,17 @@ class RewardCategoryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Text(
-                          "ごほうび",
-                          style: TextStyle(fontSize: 12, color: Colors.white),
-                        ),
                         Text(
-                          "「$rank」",
-                          style: const TextStyle(fontSize: 16, color: Colors.white),
+                          rank,
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        horizontalSpaceTiny,
+                        const Text(
+                          "プラン",
+                          style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -83,28 +92,78 @@ class RewardCategoryCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SpeechBalloon(
-                  nipLocation: NipLocation.left,
-                  height: 60,
-                  // マルなので同じheightとwidth
-                  width: 60,
-                  borderRadius: 40,
-                  offset: const Offset(20, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 35,
-                        child: Text(
-                          'あと',
-                          style: TextStyle(color: gray2, fontSize: 10),
-                          textAlign: TextAlign.left,
-                        ),
+                (() {
+                  if (isRequesting) {
+                    return SpeechBalloon(
+                      nipLocation: NipLocation.left,
+                      color: secondaryColor,
+                      height: 60,
+                      width: 60,
+                      borderRadius: 40,
+                      offset: const Offset(20, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          SizedBox(
+                            width: 35,
+                            child: Text(
+                              '申請中',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 11.6, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text("${formatter.format(differencePoint)}P"),
-                    ],
-                  ),
-                )
+                    );
+                  } else if (differencePoint > 0) {
+                    return SpeechBalloon(
+                      nipLocation: NipLocation.left,
+                      height: 60,
+                      // マルなので同じheightとwidth
+                      width: 60,
+                      borderRadius: 40,
+                      offset: const Offset(20, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 35,
+                            child: Text(
+                              'あと',
+                              style: TextStyle(color: gray2, fontSize: 10),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Text("${formatter.format(differencePoint)}P"),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return SpeechBalloon(
+                      nipLocation: NipLocation.left,
+                      color: primaryColor,
+                      height: 60,
+                      width: 60,
+                      borderRadius: 40,
+                      offset: const Offset(20, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          SizedBox(
+                            width: 35,
+                            child: Text(
+                              '達成',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                })(),
               ],
             ),
             verticalSpaceMedium,
@@ -113,7 +172,7 @@ class RewardCategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: LinearProgressIndicator(
                 value: rating,
-                color: Colors.yellow[600],
+                color: secondaryColor,
                 backgroundColor: Colors.white,
                 minHeight: 8,
               ),

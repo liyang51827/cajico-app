@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
 import '../widget/reward_request_completed_dialog.dart';
 import '../widget/reward_request_dialog.dart';
+import 'package:intl/intl.dart';
 
 class RewardDetailView extends StatelessWidget {
   const RewardDetailView({
@@ -157,6 +158,7 @@ class _Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###");
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 36),
       margin: const EdgeInsets.only(top: 16),
@@ -188,7 +190,7 @@ class _Detail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                point.toString(),
+                formatter.format(point),
                 style:
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: primaryColor),
               ),
