@@ -15,8 +15,7 @@ class NotificationAction extends StatelessWidget {
       child: IconButton(
         onPressed: () => Get.to(() => const NotificationView()),
         icon: Badge(
-          position: const BadgePosition(start: 15, top: -5),
-          badgeContent: const Text('3', style: TextStyle(color: Colors.white)),
+          position: const BadgePosition(start: 15, top: 5),
           elevation: 0,
           badgeColor: secondaryColor,
           child: const Icon(LineIcons.bell, size: 30),

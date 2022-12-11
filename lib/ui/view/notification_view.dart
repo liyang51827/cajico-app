@@ -31,7 +31,7 @@ class NotificationView extends StatelessWidget {
                   itemCount: controller.notices().length,
                   itemBuilder: (context, index) {
                     final item = controller.notices.elementAt(index);
-                    return _NotificationDetail(date: item.date, message: item.message);
+                    return _NotificationDetail(date: item.date, message: item.message, isRead: item.isRead);
                   },
                 ),
               ],
@@ -47,10 +47,12 @@ class _NotificationDetail extends StatelessWidget {
   const _NotificationDetail({
     required this.date,
     required this.message,
+    required this.isRead,
   });
 
   final String date;
   final String message;
+  final bool isRead;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +72,9 @@ class _NotificationDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(date),
+            isRead ? Text(date) : Text(date, style: const TextStyle(fontWeight: FontWeight.bold)),
             verticalSpaceTiny,
-            SizedBox(width: double.infinity, child: Text(message))
+            SizedBox(width: double.infinity, child: isRead ? Text(message) : Text(message, style: const TextStyle(fontWeight: FontWeight.bold)))
           ],
         ));
   }
