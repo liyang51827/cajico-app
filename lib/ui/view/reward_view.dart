@@ -73,17 +73,18 @@ class RewardView extends GetView<RewardViewController> {
                             horizontalSpaceSmall,
                             Text(familyReward.userName),
                             horizontalSpaceTiny,
-                            familyReward.requestingCount > 0 ?
-                                Container(
-                                  width: 20,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle, color: secondaryColor),
-                                  child: Text(
-                                    familyReward.requestingCount.toString(),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ) : const SizedBox()
+                            familyReward.requestingCount > 0
+                                ? Container(
+                                    width: 20,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle, color: secondaryColor),
+                                    child: Text(
+                                      familyReward.requestingCount.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                : const SizedBox()
                           ],
                         ),
                       )

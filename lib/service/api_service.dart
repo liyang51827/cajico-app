@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import '../model/point_history.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
 import '../model/notice.dart';
@@ -89,6 +90,16 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => FamilyReward.fromJson(json)).toList();
+  }
+
+  // 家事履歴一覧API
+  Future<List<PointHistory>> getPointHistoryList() async {
+    final res = await http.get(
+      _makeUri('/point-histories'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => PointHistory.fromJson(json)).toList();
   }
 }
 

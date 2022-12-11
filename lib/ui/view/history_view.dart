@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
@@ -5,318 +6,321 @@ import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../controller/history_view_controller.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 3,
-      child: Scaffold(
-        backgroundColor: gray7,
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
-          centerTitle: true,
-          title: Row(children: const [
-            Image(
-              image: AssetImage(
-                'assets/images/logo_history.png',
+    return Obx(() {
+      final controller = Get.put(HistoryViewController());
+
+      return DefaultTabController(
+        initialIndex: 0,
+        length: controller.pointHistories().length + 1,
+        child: Scaffold(
+          backgroundColor: gray7,
+          appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: Row(children: const [
+              Image(
+                image: AssetImage(
+                  'assets/images/logo_history.png',
+                ),
+                height: 55,
               ),
-              height: 55,
-            ),
-            Text('家事履歴', style: TextStyle(color: gray2)),
-          ]),
-          backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(fontSize: 22),
-          actions: const [
-            NotificationAction(),
-          ],
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TabBar(
-                isScrollable: true,
-                labelColor: primaryColor,
-                unselectedLabelColor: gray4,
-                indicatorColor: primaryColor,
-                indicatorWeight: 3,
-                labelStyle: const TextStyle(fontSize: 16),
-                tabs: <Widget>[
-                  const Tab(text: '全て'),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
-                          radius: 15,
-                          backgroundImage: AssetImage('assets/images/man.png'),
+              Text('家事履歴', style: TextStyle(color: gray2)),
+            ]),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22),
+            actions: const [
+              NotificationAction(),
+            ],
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(50),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TabBar(
+                  isScrollable: true,
+                  labelColor: primaryColor,
+                  unselectedLabelColor: gray4,
+                  indicatorColor: primaryColor,
+                  indicatorWeight: 3,
+                  labelStyle: const TextStyle(fontSize: 16),
+                  tabs: <Widget>[
+                    const Tab(text: '全て'),
+                    for (var pointHistory in controller.pointHistories()) ...{
+                      Tab(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: pointHistory.iconUrl,
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(color: primaryColor),
+                              ),
+                              imageBuilder: (context, imageProvider) {
+                                return CircleAvatar(
+                                  radius: 15,
+                                  backgroundImage: imageProvider,
+                                );
+                              },
+                            ),
+                            horizontalSpaceSmall,
+                            Text(pointHistory.userName)
+                          ],
                         ),
-                        horizontalSpaceSmall,
-                        Text('かつのり'),
-                      ],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
-                          radius: 15,
-                          backgroundImage: AssetImage('assets/images/woman.png'),
-                        ),
-                        horizontalSpaceSmall,
-                        Text('えりか'),
-                      ],
-                    ),
-                  ),
-                ],
+                      )
+                    },
+                  ],
+                ),
               ),
             ),
           ),
+          drawer: const HomeDrawer(),
+          body: TabBarView(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    _PointSummaries(),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cooking.png",
+                        categoryName: "料理",
+                        houseWorkName: "晩ごはん支度",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/shopping.png",
+                        categoryName: "買い物",
+                        houseWorkName: "晩ごはん材料買い出し",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "16:00",
+                        point: 100),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/washing.png",
+                        categoryName: "洗濯",
+                        houseWorkName: "洗濯物を棚にしまう",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/cleaning.png",
+                        categoryName: "掃除",
+                        houseWorkName: "リビングと部屋の掃除",
+                        userIconImageUrl: 'assets/images/man.png',
+                        time: "18:00",
+                        point: 150),
+                    _HouseWorkDetail(
+                        categoryImageUrl: "assets/images/trash.png",
+                        categoryName: "ゴミ出し",
+                        houseWorkName: "粗大ごみだし",
+                        userIconImageUrl: 'assets/images/woman.png',
+                        time: "18:00",
+                        point: 150),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          bottomNavigationBar: const Footer(),
         ),
-        drawer: const HomeDrawer(),
-        body: TabBarView(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: const [
-                  _PointSummaries(),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: const [
-                  _PointSummaries(),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: const [
-                  _PointSummaries(),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cooking.png",
-                      categoryName: "料理",
-                      houseWorkName: "晩ごはん支度",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/shopping.png",
-                      categoryName: "買い物",
-                      houseWorkName: "晩ごはん材料買い出し",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "16:00",
-                      point: 100),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/washing.png",
-                      categoryName: "洗濯",
-                      houseWorkName: "洗濯物を棚にしまう",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/cleaning.png",
-                      categoryName: "掃除",
-                      houseWorkName: "リビングと部屋の掃除",
-                      userIconImageUrl: 'assets/images/man.png',
-                      time: "18:00",
-                      point: 150),
-                  _HouseWorkDetail(
-                      categoryImageUrl: "assets/images/trash.png",
-                      categoryName: "ゴミ出し",
-                      houseWorkName: "粗大ごみだし",
-                      userIconImageUrl: 'assets/images/woman.png',
-                      time: "18:00",
-                      point: 150),
-                ],
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: const Footer(),
-      ),
-    );
+      );
+    });
   }
 }
 
