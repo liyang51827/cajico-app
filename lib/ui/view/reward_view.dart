@@ -85,86 +85,48 @@ class RewardView extends GetView<RewardViewController> {
           body: GetLoadingStack<RewardViewController>(
             child: TabBarView(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: const [
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "ライト",
-                          rewardName: 'コンビニのお菓子',
-                          imageUrl: 'assets/images/afternoon_tea.png',
-                          rating: 1.0,
-                          ownedPoint: 1000,
-                          requiredPoint: 1000,
-                          differencePoint: 0,
-                        ),
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "スタンダード",
-                          rewardName: 'Amazonギフト券',
-                          imageUrl: 'assets/images/present.png',
-                          rating: 0.33,
-                          ownedPoint: 1000,
-                          requiredPoint: 3000,
-                          differencePoint: 2000,
-                        ),
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "スペシャル",
-                          rewardName: 'あなたが欲しいもの',
-                          imageUrl: 'assets/images/propose.png',
-                          rating: 0.1,
-                          ownedPoint: 1000,
-                          requiredPoint: 10000,
-                          differencePoint: 9000,
-                        ),
-                        verticalSpaceSmall,
-                      ],
+                for(var familyReward in controller.familyRewards()) ... {
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          verticalSpaceSmall,
+                          RewardCategoryCard(
+                            rank: "ライト",
+                            rewardName: familyReward.smallRewardName,
+                            imageUrl: 'assets/images/afternoon_tea.png',
+                            rating: familyReward.smallRewardRating,
+                            ownedPoint: familyReward.smallRewardOwnedPoint,
+                            requiredPoint: familyReward.smallRewardPoint,
+                            differencePoint: familyReward.smallRewardDifferencePoint,
+                          ),
+                          verticalSpaceSmall,
+                          RewardCategoryCard(
+                            rank: "スタンダード",
+                            rewardName: 'Amazonギフト券',
+                            imageUrl: 'assets/images/present.png',
+                            rating: familyReward.middleRewardRating,
+                            ownedPoint: familyReward.middleRewardOwnedPoint,
+                            requiredPoint: familyReward.middleRewardPoint,
+                            differencePoint: familyReward.middleRewardDifferencePoint,
+                          ),
+                          verticalSpaceSmall,
+                          RewardCategoryCard(
+                            rank: "スペシャル",
+                            rewardName: 'あなたが欲しいもの',
+                            imageUrl: 'assets/images/propose.png',
+                            rating: familyReward.largeRewardRating,
+                            ownedPoint: familyReward.largeRewardOwnedPoint,
+                            requiredPoint: familyReward.largeRewardPoint,
+                            differencePoint: familyReward.largeRewardDifferencePoint,
+                          ),
+                          verticalSpaceSmall,
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: const [
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "ライト",
-                          rewardName: 'コンビニのお菓子',
-                          imageUrl: 'assets/images/afternoon_tea.png',
-                          rating: 1.0,
-                          ownedPoint: 1000,
-                          requiredPoint: 1000,
-                          differencePoint: 0,
-                        ),
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "スタンダード",
-                          rewardName: 'Amazonギフト券',
-                          imageUrl: 'assets/images/present.png',
-                          rating: 0.33,
-                          ownedPoint: 1000,
-                          requiredPoint: 3000,
-                          differencePoint: 2000,
-                        ),
-                        verticalSpaceSmall,
-                        RewardCategoryCard(
-                          rank: "スペシャル",
-                          rewardName: 'あなたが欲しいもの',
-                          imageUrl: 'assets/images/propose.png',
-                          rating: 0.1,
-                          ownedPoint: 1000,
-                          requiredPoint: 10000,
-                          differencePoint: 9000,
-                        ),
-                        verticalSpaceSmall,
-                      ],
-                    ),
-                  ),
-                ),
+                }
               ],
             ),
           ),

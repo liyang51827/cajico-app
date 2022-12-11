@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:speech_balloon/speech_balloon.dart';
 import '../common/app_color.dart';
 import '../view/reward_detail_view.dart';
+import 'package:intl/intl.dart';
 
 class RewardCategoryCard extends StatelessWidget {
   const RewardCategoryCard(
@@ -26,6 +27,7 @@ class RewardCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###");
     return InkWell(
       onTap: () => Get.to(() => RewardDetailView(
             imageUrl: imageUrl,
@@ -99,7 +101,7 @@ class RewardCategoryCard extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                      Text("${differencePoint}P"),
+                      Text("${formatter.format(differencePoint)}P"),
                     ],
                   ),
                 )
@@ -127,7 +129,7 @@ class RewardCategoryCard extends StatelessWidget {
                       style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                     Text(
-                      "${ownedPoint}P",
+                      "${formatter.format(ownedPoint)}P",
                       style: const TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ],
@@ -139,7 +141,7 @@ class RewardCategoryCard extends StatelessWidget {
                       style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                     Text(
-                      "${requiredPoint}P",
+                      "${formatter.format(requiredPoint)}P",
                       style: const TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ],
