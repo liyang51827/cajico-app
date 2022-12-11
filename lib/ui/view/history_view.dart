@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
+import 'package:intl/intl.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
@@ -17,6 +18,7 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.put(HistoryViewController());
+      final totalPointHistory = controller.totalPointHistory();
 
       return DefaultTabController(
         initialIndex: 0,
@@ -86,8 +88,19 @@ class HistoryView extends StatelessWidget {
             children: [
               SingleChildScrollView(
                 child: Column(
-                  children: const [
-                    _PointSummaries(todayPoint: 70, totalPoint: 100),
+                  children: [
+                    _PointSummaries(
+                        todayPoint: totalPointHistory?.todayPoint ?? 0,
+                        totalPoint: totalPointHistory?.totalPoint ?? 0),
+                    for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
+                      _HouseWorkDetail(
+                          categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
+                          categoryName: houseWork.houseWorkCategoryName,
+                          houseWorkName: houseWork.houseWorkName,
+                          userIconImageUrl: houseWork.iconUrl,
+                          time: houseWork.time,
+                          point: houseWork.point),
+                    }
                   ],
                 ),
               ),
@@ -151,12 +164,13 @@ class _PointSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###");
     return Row(
       children: [
         Text(title, style: const TextStyle(fontSize: 18)),
         horizontalSpaceSmall,
         Text(
-          '${point}P',
+          '${formatter.format(point)}P',
           style: const TextStyle(fontSize: 30, color: primaryColor),
         ),
       ],

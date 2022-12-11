@@ -5,6 +5,7 @@ import 'base_view_controller.dart';
 class HistoryViewController extends BaseViewController {
 
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
+  final totalPointHistory = Rxn<TotalPointHistory>();
 
   @override
   void onInit() {
@@ -14,7 +15,14 @@ class HistoryViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      pointHistories.value = await api.getPointHistoryList();
+      await Future.wait([
+        () async {
+          pointHistories.value = await api.getPointHistoryList();
+        }(),
+        () async {
+          totalPointHistory.value = await api.getTotalPointHistory();
+        }(),
+      ]);
     });
   }
 }

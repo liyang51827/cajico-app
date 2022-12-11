@@ -101,6 +101,15 @@ class ApiService extends GetConnect {
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => PointHistory.fromJson(json)).toList();
   }
+
+  Future<TotalPointHistory> getTotalPointHistory() async {
+    final res = await http.get(
+      _makeUri('/point-histories/total'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final dynamic data = _decodeResponse(res)['data'];
+    return TotalPointHistory.fromJson(data);
+  }
 }
 
 class ApiException implements Exception {
