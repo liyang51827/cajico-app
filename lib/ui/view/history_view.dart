@@ -11,6 +11,8 @@ import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
 
+import '../widget/loading_stack.dart';
+
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
@@ -84,33 +86,16 @@ class HistoryView extends StatelessWidget {
             ),
           ),
           drawer: const HomeDrawer(),
-          body: TabBarView(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _PointSummaries(
-                        todayPoint: totalPointHistory?.todayPoint ?? 0,
-                        totalPoint: totalPointHistory?.totalPoint ?? 0),
-                    for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
-                      _HouseWorkDetail(
-                          categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                          categoryName: houseWork.houseWorkCategoryName,
-                          houseWorkName: houseWork.houseWorkName,
-                          userIconImageUrl: houseWork.iconUrl,
-                          time: houseWork.time,
-                          point: houseWork.point),
-                    }
-                  ],
-                ),
-              ),
-              for (var pointHistory in controller.pointHistories()) ...{
+          body: GetLoadingStack<HistoryViewController>(
+            child: TabBarView(
+              children: [
                 SingleChildScrollView(
                   child: Column(
                     children: [
                       _PointSummaries(
-                          todayPoint: pointHistory.todayPoint, totalPoint: pointHistory.totalPoint),
-                      for (var houseWork in pointHistory.pointHistories) ...{
+                          todayPoint: totalPointHistory?.todayPoint ?? 0,
+                          totalPoint: totalPointHistory?.totalPoint ?? 0),
+                      for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
                         _HouseWorkDetail(
                             categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
                             categoryName: houseWork.houseWorkCategoryName,
@@ -122,8 +107,27 @@ class HistoryView extends StatelessWidget {
                     ],
                   ),
                 ),
-              }
-            ],
+                for (var pointHistory in controller.pointHistories()) ...{
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _PointSummaries(
+                            todayPoint: pointHistory.todayPoint, totalPoint: pointHistory.totalPoint),
+                        for (var houseWork in pointHistory.pointHistories) ...{
+                          _HouseWorkDetail(
+                              categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
+                              categoryName: houseWork.houseWorkCategoryName,
+                              houseWorkName: houseWork.houseWorkName,
+                              userIconImageUrl: houseWork.iconUrl,
+                              time: houseWork.time,
+                              point: houseWork.point),
+                        }
+                      ],
+                    ),
+                  ),
+                }
+              ],
+            ),
           ),
           bottomNavigationBar: const Footer(),
         ),
