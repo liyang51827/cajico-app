@@ -2,6 +2,7 @@ class FamilyReward {
   FamilyReward({
     required this.userName,
     required this.iconUrl,
+    required this.requestingCount,
     required this.smallRewardName,
     required this.smallRewardPoint,
     required this.smallRewardOwnedPoint,
@@ -27,6 +28,7 @@ class FamilyReward {
 
   final String userName;
   final String iconUrl;
+  final int requestingCount;
   final String smallRewardName;
   final int smallRewardPoint;
   final int smallRewardOwnedPoint;
@@ -53,6 +55,7 @@ class FamilyReward {
     return FamilyReward(
       userName: json['user']['userName'],
       iconUrl: json['user']['iconUrl'],
+      requestingCount: json['requestingCount'],
       smallRewardName:  json['smallReward']['name'],
       smallRewardPoint: json['smallReward']['rewardPoint'],
       smallRewardOwnedPoint: json['smallReward']['ownedPoint'],

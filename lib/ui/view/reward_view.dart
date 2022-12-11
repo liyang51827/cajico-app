@@ -53,7 +53,7 @@ class RewardView extends GetView<RewardViewController> {
                   indicatorWeight: 3,
                   labelStyle: const TextStyle(fontSize: 16),
                   tabs: <Widget>[
-                    for(var familyReward in controller.familyRewards()) ... {
+                    for (var familyReward in controller.familyRewards()) ...{
                       Tab(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +72,18 @@ class RewardView extends GetView<RewardViewController> {
                             ),
                             horizontalSpaceSmall,
                             Text(familyReward.userName),
+                            horizontalSpaceTiny,
+                            familyReward.requestingCount > 0 ?
+                                Container(
+                                  width: 20,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle, color: secondaryColor),
+                                  child: Text(
+                                    familyReward.requestingCount.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ) : const SizedBox()
                           ],
                         ),
                       )
@@ -85,7 +97,7 @@ class RewardView extends GetView<RewardViewController> {
           body: GetLoadingStack<RewardViewController>(
             child: TabBarView(
               children: [
-                for(var familyReward in controller.familyRewards()) ... {
+                for (var familyReward in controller.familyRewards()) ...{
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: SingleChildScrollView(
