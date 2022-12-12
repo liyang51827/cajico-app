@@ -171,16 +171,18 @@ class _Detail extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("ごほうび", style: TextStyle(fontSize: 16)),
               Text(
-                "「$rank」",
-                style: const TextStyle(fontSize: 20),
+                rank,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              horizontalSpaceTiny,
+              const Text("プラン", style: TextStyle(fontSize: 16)),
             ],
           ),
-          verticalSpaceSmall,
+          verticalSpaceMedium,
           Text(
             rewardName,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
