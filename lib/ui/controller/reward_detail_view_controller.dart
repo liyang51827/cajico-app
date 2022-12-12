@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'base_view_controller.dart';
 
 class RewardDetailViewController extends BaseViewController {
+  RewardDetailViewController({required this.rewardId});
 
+  final int rewardId;
   final RxList<RewardHistory> rewardHistories = <RewardHistory>[].obs;
 
   @override
@@ -14,7 +16,7 @@ class RewardDetailViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      rewardHistories.value = await api.getRewardHistoryList(1);
+      rewardHistories.value = await api.getRewardHistoryList(rewardId);
     });
   }
 }

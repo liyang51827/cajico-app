@@ -16,6 +16,7 @@ class RewardDetailView extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.rank,
+    required this.rewardId,
     required this.rewardName,
     required this.point,
     required this.text,
@@ -23,6 +24,7 @@ class RewardDetailView extends StatelessWidget {
 
   final String imageUrl;
   final String rank;
+  final int rewardId;
   final String rewardName;
   final int point;
   final String text;
@@ -30,7 +32,7 @@ class RewardDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final controller = Get.put(RewardDetailViewController());
+      final controller = Get.put(RewardDetailViewController(rewardId: rewardId));
       return DefaultTabController(
         initialIndex: 0,
         length: 2,

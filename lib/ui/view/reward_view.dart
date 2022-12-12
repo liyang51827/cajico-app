@@ -107,6 +107,7 @@ class RewardView extends GetView<RewardViewController> {
                           verticalSpaceSmall,
                           RewardCategoryCard(
                             rank: "リーズナブル",
+                            rewardId: familyReward.smallRewardId,
                             rewardName: familyReward.smallRewardName,
                             imageUrl: 'assets/images/afternoon_tea.png',
                             rating: familyReward.smallRewardRating,
@@ -119,6 +120,7 @@ class RewardView extends GetView<RewardViewController> {
                           verticalSpaceSmall,
                           RewardCategoryCard(
                             rank: "スタンダード",
+                            rewardId: familyReward.middleRewardId,
                             rewardName: 'Amazonギフト券',
                             imageUrl: 'assets/images/present.png',
                             rating: familyReward.middleRewardRating,
@@ -131,6 +133,7 @@ class RewardView extends GetView<RewardViewController> {
                           verticalSpaceSmall,
                           RewardCategoryCard(
                             rank: "ゴージャス",
+                            rewardId: familyReward.largeRewardId,
                             rewardName: 'あなたが欲しいもの',
                             imageUrl: 'assets/images/propose.png',
                             rating: familyReward.largeRewardRating,

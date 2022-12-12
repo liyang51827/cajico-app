@@ -11,6 +11,7 @@ class RewardCategoryCard extends StatelessWidget {
       {
         super.key,
         required this.rank,
+        required this.rewardId,
         required this.rewardName,
         required this.rating,
         required this.ownedPoint,
@@ -22,6 +23,7 @@ class RewardCategoryCard extends StatelessWidget {
       });
 
   final String rank;
+  final int rewardId;
   final String rewardName;
   final double rating;
   final int ownedPoint;
@@ -36,6 +38,7 @@ class RewardCategoryCard extends StatelessWidget {
     final formatter = NumberFormat("#,###");
     return InkWell(
       onTap: () => Get.to(() => RewardDetailView(
+            rewardId: rewardId,
             imageUrl: imageUrl,
             rewardName: rewardName,
             rank: rank,
