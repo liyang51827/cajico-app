@@ -1,8 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../controller/reward_detail_view_controller.dart';
+import '../widget/loading_stack.dart';
 import '../widget/reward_request_completed_dialog.dart';
 import '../widget/reward_request_dialog.dart';
 import 'package:intl/intl.dart';
@@ -25,121 +29,100 @@ class RewardDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 2,
-      child: Scaffold(
-          backgroundColor: gray7,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(200.0),
-            child: AppBar(
-                iconTheme: const IconThemeData(color: gray2),
-                elevation: 0.0,
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+    return Obx(() {
+      final controller = Get.put(RewardDetailViewController());
+      return DefaultTabController(
+        initialIndex: 0,
+        length: 2,
+        child: Scaffold(
+            backgroundColor: gray7,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(200.0),
+              child: AppBar(
+                  iconTheme: const IconThemeData(color: gray2),
+                  elevation: 0.0,
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+                  ),
+                  actions: <Widget>[
+                    PopupMenuButton(
+                        offset: const Offset(0, 50),
+                        itemBuilder: (BuildContext context) {
+                          return [
+                            const PopupMenuItem(child: Text('編集する')),
+                          ];
+                        })
+                  ],
+                  bottom: const ColoredTabBar(
+                    color: Colors.white,
+                    tabBar: TabBar(
+                      labelColor: primaryColor,
+                      unselectedLabelColor: gray4,
+                      indicatorColor: primaryColor,
+                      indicatorWeight: 3,
+                      labelStyle: TextStyle(fontSize: 16),
+                      tabs: <Widget>[
+                        Tab(child: Text('ごほうび情報')),
+                        Tab(child: Text('履歴')),
+                      ],
+                    ),
+                  )),
+            ),
+            body: GetLoadingStack<RewardDetailViewController>(
+              child: TabBarView(children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SingleChildScrollView(
+                      child: Column(
+                    children: [
+                      _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
+                      verticalSpaceMedium,
+                      PrimaryButton(
+                        label: 'ねぎらってもらう！',
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return RewardRequestDialog(rewardName: rewardName, point: point);
+                              }).then((value) {
+                            if (value) {
+                              return showDialog(
+                                  context: context,
+                                  builder: (context) => const RewardRequestCompletedDialog());
+                            }
+                          });
+                        },
+                      )
+                    ],
+                  )),
                 ),
-                actions: <Widget>[
-                  PopupMenuButton(
-                      offset: const Offset(0, 50),
-                      itemBuilder: (BuildContext context) {
-                        return [
-                          const PopupMenuItem(child: Text('編集する')),
-                        ];
-                      })
-                ],
-                bottom: const ColoredTabBar(
-                  color: Colors.white,
-                  tabBar: TabBar(
-                    labelColor: primaryColor,
-                    unselectedLabelColor: gray4,
-                    indicatorColor: primaryColor,
-                    indicatorWeight: 3,
-                    labelStyle: TextStyle(fontSize: 16),
-                    tabs: <Widget>[
-                      Tab(child: Text('ごほうび情報')),
-                      Tab(child: Text('履歴')),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.rewardHistories().length,
+                        itemBuilder: (context, index) {
+                          final item = controller.rewardHistories.elementAt(index);
+                          return _RewardHistoryDetail(
+                              rewardName: item.rewardName,
+                              date: item.createdAt,
+                              userImageUrl: item.iconUrl,
+                              message: item.message,
+                              point: item.point);
+                        },
+                      ),
                     ],
                   ),
-                )),
+                ),
+              ],
+            ),
           ),
-          body: TabBarView(children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                  child: Column(
-                children: [
-                  _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
-                  verticalSpaceMedium,
-                  PrimaryButton(
-                    label: 'ねぎらってもらう！',
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return RewardRequestDialog(rewardName: rewardName, point: point);
-                          }).then((value) {
-                        if (value) {
-                          return showDialog(
-                              context: context,
-                              builder: (context) => const RewardRequestCompletedDialog());
-                        }
-                      });
-                    },
-                  )
-                ],
-              )),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                  _RewardHistoryDetail(
-                      rewardName: rewardName,
-                      date: '2022年10月11日',
-                      userImageUrl: 'assets/images/woman.png',
-                      message: 'いつも家事をしてくれてありがとう！ほんのお礼です',
-                      point: point),
-                ],
-              ),
-            ),
-          ])),
-    );
+        ),
+      );
+    });
   }
 }
 
@@ -262,9 +245,17 @@ class _RewardHistoryDetail extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    radius: 20,
-                    backgroundImage: AssetImage('assets/images/woman.png'),
+                  CachedNetworkImage(
+                    imageUrl: userImageUrl,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(color: primaryColor),
+                    ),
+                    imageBuilder: (context, imageProvider) {
+                      return CircleAvatar(
+                        radius: 20,
+                        backgroundImage: imageProvider,
+                      );
+                    },
                   ),
                   horizontalSpaceSmall,
                   SizedBox(

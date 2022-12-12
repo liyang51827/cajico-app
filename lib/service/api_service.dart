@@ -5,6 +5,7 @@ import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
 import '../model/notice.dart';
 import '../model/family_reward.dart';
+import '../model/reward_history.dart';
 
 class ApiService extends GetConnect {
   static const _commonHeaders = {
@@ -102,6 +103,7 @@ class ApiService extends GetConnect {
     return data.map((json) => PointHistory.fromJson(json)).toList();
   }
 
+  // 家族全体の家事履歴API
   Future<TotalPointHistory> getTotalPointHistory() async {
     final res = await http.get(
       _makeUri('/point-histories/total'),
@@ -109,6 +111,16 @@ class ApiService extends GetConnect {
     );
     final dynamic data = _decodeResponse(res)['data'];
     return TotalPointHistory.fromJson(data);
+  }
+
+  // ごほうび履歴API
+  Future<List<RewardHistory>> getRewardHistoryList(int rewardId) async {
+    final res = await http.get(
+      _makeUri('/rewards/$rewardId/history'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => RewardHistory.fromJson(json)).toList();
   }
 }
 
