@@ -99,6 +99,7 @@ class RewardDetailView extends StatelessWidget {
                     ],
                   )),
                 ),
+                controller.rewardHistories().isNotEmpty ?
                 SingleChildScrollView(
                   child: Column(
                     children: [
@@ -118,6 +119,9 @@ class RewardDetailView extends StatelessWidget {
                       ),
                     ],
                   ),
+                ): Container(
+                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+                  child: const Text('ごほうび履歴はありません', textAlign: TextAlign.center,)
                 ),
               ],
             ),
