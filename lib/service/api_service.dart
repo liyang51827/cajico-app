@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../model/point_history.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import '../model/family_reward.dart';
 import '../model/reward_history.dart';
 
 class ApiService extends GetConnect {
+  String? token;
   static const _commonHeaders = {
     'content-type': 'application/json',
   };
@@ -35,10 +37,38 @@ class ApiService extends GetConnect {
   }
 
   Future<Map<String, String>> makeAuthorizationBearerHeader() async {
+    await _setToken();
     const token = '1|mkwpdINcP5sDsIrg23g46RjgndoD0WMy3R4kZrDn';
     return {
       'Authorization': "Bearer $token",
     };
+  }
+
+  // SharedPreferencesからトークンを取得
+  _setToken() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    String? localToken = localStorage.getString('token');
+
+    // なぜかlocalStorageから取得した値の前後に"が入るので仕方なくここで置換する
+    if (localToken != null) {
+      token = localToken.replaceAll('"', '');
+    }
+  }
+
+  Future<String?> login({
+    required String email,
+    required String password
+  }) async {
+    final res = await http.post(
+      _makeUri('/login'),
+      headers: _commonHeaders,
+      body: jsonEncode({
+        'email': email,
+        'password': password
+      }),
+    );
+    final String? token = _decodeResponse(res)['data']['accessToken'];
+    return token;
   }
 
   Map<String, dynamic> _decodeResponse<T>(http.Response response) {

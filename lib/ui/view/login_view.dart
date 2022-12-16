@@ -35,6 +35,7 @@ class LoginView extends StatelessWidget {
                 verticalSpaceLarge,
                 TextFormField(
                   cursorColor: primaryColor,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'メールアドレス',
                       labelStyle: const TextStyle(color: gray3),
@@ -49,6 +50,7 @@ class LoginView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   cursorColor: primaryColor,
+                  obscureText: true,
                   decoration: InputDecoration(
                       labelText: 'パスワード',
                       labelStyle: const TextStyle(color: gray3),
