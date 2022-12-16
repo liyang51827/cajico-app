@@ -37,23 +37,22 @@ class ApiService extends GetConnect {
   }
 
   Future<Map<String, String>> makeAuthorizationBearerHeader() async {
-    await _setToken();
     const token = '1|mkwpdINcP5sDsIrg23g46RjgndoD0WMy3R4kZrDn';
     return {
       'Authorization': "Bearer $token",
     };
   }
 
-  // SharedPreferencesからトークンを取得
-  _setToken() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    String? localToken = localStorage.getString('token');
-
-    // なぜかlocalStorageから取得した値の前後に"が入るので仕方なくここで置換する
-    if (localToken != null) {
-      token = localToken.replaceAll('"', '');
-    }
-  }
+  // // SharedPreferencesからトークンを取得
+  // _setToken() async {
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   String? localToken = localStorage.getString('token');
+  //
+  //   // なぜかlocalStorageから取得した値の前後に"が入るので仕方なくここで置換する
+  //   if (localToken != null) {
+  //     token = localToken.replaceAll('"', '');
+  //   }
+  // }
 
   Map<String, dynamic> _decodeResponse<T>(http.Response response) {
     _checkStatusCode(response);
