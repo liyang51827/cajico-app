@@ -55,22 +55,6 @@ class ApiService extends GetConnect {
     }
   }
 
-  Future<String?> login({
-    required String email,
-    required String password
-  }) async {
-    final res = await http.post(
-      _makeUri('/login'),
-      headers: _commonHeaders,
-      body: jsonEncode({
-        'email': email,
-        'password': password
-      }),
-    );
-    final String? token = _decodeResponse(res)['data']['accessToken'];
-    return token;
-  }
-
   Map<String, dynamic> _decodeResponse<T>(http.Response response) {
     _checkStatusCode(response);
     return json.decode(response.body);
@@ -80,6 +64,17 @@ class ApiService extends GetConnect {
     return {}
       ..addAll(_commonHeaders)
       ..addAll(await makeAuthorizationBearerHeader());
+  }
+
+  // ログインAPI
+  Future<String?> login({required String email, required String password}) async {
+    final res = await http.post(
+      _makeUri('/login'),
+      headers: _commonHeaders,
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+    final String? token = _decodeResponse(res)['data']['accessToken'];
+    return token;
   }
 
   // 最近の家事取得API
