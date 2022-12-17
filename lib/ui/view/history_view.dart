@@ -89,33 +89,16 @@ class HistoryView extends StatelessWidget {
           body: GetLoadingStack<HistoryViewController>(
             child: TabBarView(
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _PointSummaries(
-                          todayPoint: totalPointHistory?.todayPoint ?? 0,
-                          totalPoint: totalPointHistory?.totalPoint ?? 0),
-                      for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
-                        _HouseWorkDetail(
-                            categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                            categoryName: houseWork.houseWorkCategoryName,
-                            houseWorkName: houseWork.houseWorkName,
-                            userIconImageUrl: houseWork.iconUrl,
-                            date: houseWork.date,
-                            time: houseWork.time,
-                            point: houseWork.point),
-                      }
-                    ],
-                  ),
-                ),
-                for (var pointHistory in controller.pointHistories()) ...{
-                  SingleChildScrollView(
+                RefreshIndicator(
+                  color: primaryColor,
+                  onRefresh: controller.fetchData,
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
                         _PointSummaries(
-                            todayPoint: pointHistory.todayPoint,
-                            totalPoint: pointHistory.totalPoint),
-                        for (var houseWork in pointHistory.pointHistories) ...{
+                            todayPoint: totalPointHistory?.todayPoint ?? 0,
+                            totalPoint: totalPointHistory?.totalPoint ?? 0),
+                        for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
                           _HouseWorkDetail(
                               categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
                               categoryName: houseWork.houseWorkCategoryName,
@@ -126,6 +109,31 @@ class HistoryView extends StatelessWidget {
                               point: houseWork.point),
                         }
                       ],
+                    ),
+                  ),
+                ),
+                for (var pointHistory in controller.pointHistories()) ...{
+                  RefreshIndicator(
+                  color: primaryColor,
+                  onRefresh: controller.fetchData,
+                  child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          _PointSummaries(
+                              todayPoint: pointHistory.todayPoint,
+                              totalPoint: pointHistory.totalPoint),
+                          for (var houseWork in pointHistory.pointHistories) ...{
+                            _HouseWorkDetail(
+                                categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
+                                categoryName: houseWork.houseWorkCategoryName,
+                                houseWorkName: houseWork.houseWorkName,
+                                userIconImageUrl: houseWork.iconUrl,
+                                date: houseWork.date,
+                                time: houseWork.time,
+                                point: houseWork.point),
+                          }
+                        ],
+                      ),
                     ),
                   ),
                 }
