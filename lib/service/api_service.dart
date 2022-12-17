@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../model/point_history.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
