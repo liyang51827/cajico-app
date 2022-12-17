@@ -75,6 +75,10 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                       houseWorkName: item.name,
                       imageUrl: item.categoryImageUrl,
                       point: item.point,
+                      onPressed: () {
+                          controller.onTapComplete(houseWorkId: item.houseWorkId);
+                          Navigator.pop(context, true);
+                        },
                     ),
                   );
                 },

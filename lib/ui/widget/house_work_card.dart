@@ -12,11 +12,13 @@ class HouseWorkCard extends StatelessWidget {
     required this.houseWorkName,
     required this.imageUrl,
     required this.point,
+    required this.onPressed
   });
 
   final String houseWorkName;
   final String imageUrl;
   final int point;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class HouseWorkCard extends StatelessWidget {
           showDialog(
               context: context,
               builder: (_) {
-                return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point);
+                return HouseWorkCompleteDialog(houseWorkName: houseWorkName, point: point, onPressed: onPressed,);
               }).then((value) {
             if (value) {
               return showDialog(

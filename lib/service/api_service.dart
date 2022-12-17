@@ -97,6 +97,15 @@ class ApiService extends GetConnect {
     return data.map((json) => HouseWork.fromJson(json)).toList();
   }
 
+  // 家事完了API
+  Future<bool> postCompleteHouseWork({required int houseWorkId}) async {
+    await http.post(
+      _makeUri('/house-works/$houseWorkId/complete'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return true;
+  }
+
   // お知らせ一覧API
   Future<List<Notice>> getNoticesList() async {
     final res = await http.get(

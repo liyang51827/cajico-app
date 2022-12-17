@@ -9,10 +9,12 @@ class HouseWorkCompleteDialog extends StatelessWidget {
     super.key,
     required this.houseWorkName,
     required this.point,
+    required this.onPressed
   });
 
   final String houseWorkName;
   final int point;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,8 @@ class HouseWorkCompleteDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
+          onPressed: onPressed,
           child: const PrimarySmallButton(text: 'はい！'),
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
         ),
         SimpleDialogOption(
           child: const PrimarySmallOutlineButton(text: 'いいえ'),
