@@ -172,7 +172,10 @@ class _ResentHouseWorks extends GetView<HomeViewController> {
                   houseWorkName: item.name,
                   imageUrl: item.categoryImageUrl,
                   point: item.point,
-                  onPressed: () {print('test');},
+                  onPressed: () {
+                    controller.onTapComplete(houseWorkId: item.houseWorkId);
+                    Navigator.pop(context, true);
+                  },
                 ),
               );
             },

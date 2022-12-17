@@ -17,4 +17,10 @@ class HomeViewController extends BaseViewController {
         houseWorks.value = await api.getRecentHouseWorksList();
     });
   }
+
+  Future<void> onTapComplete({required int houseWorkId}) async {
+    await callAsyncApi(() async {
+      await api.postCompleteHouseWork(houseWorkId: houseWorkId);
+    });
+  }
 }
