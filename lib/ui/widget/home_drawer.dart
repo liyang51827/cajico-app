@@ -52,7 +52,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('ご意見箱'),
-            onTap: () => Get.to(() => const InquiryView()),
+            onTap: () => Get.to(() => InquiryView()),
           ),
           ListTile(
             leading: const Icon(
