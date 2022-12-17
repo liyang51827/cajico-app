@@ -101,6 +101,7 @@ class HistoryView extends StatelessWidget {
                             categoryName: houseWork.houseWorkCategoryName,
                             houseWorkName: houseWork.houseWorkName,
                             userIconImageUrl: houseWork.iconUrl,
+                            date: houseWork.date,
                             time: houseWork.time,
                             point: houseWork.point),
                       }
@@ -112,13 +113,15 @@ class HistoryView extends StatelessWidget {
                     child: Column(
                       children: [
                         _PointSummaries(
-                            todayPoint: pointHistory.todayPoint, totalPoint: pointHistory.totalPoint),
+                            todayPoint: pointHistory.todayPoint,
+                            totalPoint: pointHistory.totalPoint),
                         for (var houseWork in pointHistory.pointHistories) ...{
                           _HouseWorkDetail(
                               categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
                               categoryName: houseWork.houseWorkCategoryName,
                               houseWorkName: houseWork.houseWorkName,
                               userIconImageUrl: houseWork.iconUrl,
+                              date: houseWork.date,
                               time: houseWork.time,
                               point: houseWork.point),
                         }
@@ -188,6 +191,7 @@ class _HouseWorkDetail extends StatelessWidget {
       required this.categoryName,
       required this.houseWorkName,
       required this.userIconImageUrl,
+      this.date = '不要',
       required this.time,
       required this.point});
 
@@ -196,6 +200,7 @@ class _HouseWorkDetail extends StatelessWidget {
   final String houseWorkName;
   final String userIconImageUrl;
   final String time;
+  final String date;
   final int point;
 
   @override
@@ -217,75 +222,84 @@ class _HouseWorkDetail extends StatelessWidget {
           }
         });
       },
-      child: Container(
-        height: 70,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: Colors.black12, //枠線の色
-                width: 1, //枠線の太さ
-              ),
-            ),
-            color: Colors.white),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: categoryImageUrl,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (date == 'todo')
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: Text(date, style: const TextStyle(color: gray3))),
+          Container(
+            height: 70,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: Colors.black12, //枠線の色
+                    width: 1, //枠線の太さ
                   ),
                 ),
-                horizontalSpaceTiny,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                color: Colors.white),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    Text(categoryName, style: const TextStyle(fontSize: 12)),
-                    verticalSpaceTiny,
-                    Text(
-                      houseWorkName,
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    )
+                    CachedNetworkImage(
+                      imageUrl: categoryImageUrl,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      ),
+                    ),
+                    horizontalSpaceTiny,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(categoryName, style: const TextStyle(fontSize: 12)),
+                        verticalSpaceTiny,
+                        Text(
+                          houseWorkName,
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: userIconImageUrl,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      ),
+                      imageBuilder: (context, imageProvider) {
+                        return CircleAvatar(
+                          radius: 15,
+                          backgroundImage: imageProvider,
+                        );
+                      },
+                    ),
+                    horizontalSpaceSmall,
+                    SizedBox(
+                      width: 50,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(time, style: const TextStyle(fontSize: 16)),
+                          Text(
+                            "${point}P",
+                            style: const TextStyle(fontSize: 20, color: primaryColor),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
-            Row(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: userIconImageUrl,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
-                  ),
-                  imageBuilder: (context, imageProvider) {
-                    return CircleAvatar(
-                      radius: 15,
-                      backgroundImage: imageProvider,
-                    );
-                  },
-                ),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 50,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(time, style: const TextStyle(fontSize: 16)),
-                      Text(
-                        "${point}P",
-                        style: const TextStyle(fontSize: 20, color: primaryColor),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
