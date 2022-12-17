@@ -99,11 +99,11 @@ class ApiService extends GetConnect {
 
   // 家事完了API
   Future<bool> postCompleteHouseWork({required int houseWorkId}) async {
-    await http.post(
+    final res = await http.post(
       _makeUri('/house-works/$houseWorkId/complete'),
       headers: await _makeAuthenticatedHeader(),
     );
-    return true;
+    return _checkStatusCode(res);
   }
 
   // お知らせ一覧API
@@ -154,6 +154,16 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => RewardHistory.fromJson(json)).toList();
+  }
+
+  // 問い合わせAPI
+  Future<bool> postInquiry({required String title, required String body}) async {
+    final res = await http.post(
+      _makeUri('/inquiry'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'title': title, 'body': body}),
+    );
+    return _checkStatusCode(res);
   }
 }
 

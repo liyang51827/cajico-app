@@ -3,9 +3,14 @@ import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
 class NormalDialog extends StatelessWidget {
-  const NormalDialog({super.key, required this.message});
+  const NormalDialog({
+    super.key,
+    required this.message,
+    required this.onPressed
+  });
 
   final String message;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +21,8 @@ class NormalDialog extends StatelessWidget {
           textAlign: TextAlign.center),
       children: [
         SimpleDialogOption(
-          child: const PrimarySmallButton(text: 'はい！'),
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
+          onPressed: onPressed,
+          child: const PrimarySmallButton(text: 'はい！')
         ),
         SimpleDialogOption(
           child: const PrimarySmallOutlineButton(text: 'いいえ'),

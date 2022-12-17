@@ -1,7 +1,9 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/controller/inquiry_view_controller.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -11,6 +13,7 @@ class InquiryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(InquiryViewController());
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -72,7 +75,13 @@ class InquiryView extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (_) {
-                          return const NormalDialog(message: '送信しますか？');
+                          return NormalDialog(
+                            message: '送信しますか？',
+                            onPressed: () {
+                              controller.onTapInquiry();
+                              Navigator.pop(context, true);
+                            },
+                          );
                         }).then((value) {
                       if (value) {
                         return showDialog(
