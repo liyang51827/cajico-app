@@ -1,5 +1,7 @@
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../view/home_view.dart';
 
 class NormalCompletedDialog extends StatelessWidget {
   const NormalCompletedDialog({super.key, required this.message});
@@ -18,6 +20,7 @@ class NormalCompletedDialog extends StatelessWidget {
           child: const PrimarySmallButton(text: 'OK'),
           onPressed: () {
             Navigator.pop(context);
+            Get.to(() => const HouseWork());
           },
         )
       ],

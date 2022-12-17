@@ -5,10 +5,9 @@ import 'base_view_controller.dart';
 class InquiryViewController extends BaseViewController {
   InquiryViewController();
 
-  Future<void> onTapInquiry() async {
+  Future<void> onTapInquiry({required String title, required String body}) async {
     await callAsyncApi(() async {
-      print('test');
-      await api.postInquiry(title: 'test', body: 'test');
+      await api.postInquiry(title: title, body: body);
     });
   }
 }

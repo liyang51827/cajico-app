@@ -10,6 +10,8 @@ import '../widget/primary_button.dart';
 class InquiryView extends StatelessWidget {
   InquiryView({super.key});
   final focusNode = FocusNode();
+  String title = '';
+  String body = '';
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class InquiryView extends StatelessWidget {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
+                  onChanged: (value) {title = value;},
                 ),
                 verticalSpaceMedium,
                 TextFormField(
@@ -67,6 +70,7 @@ class InquiryView extends StatelessWidget {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
+                  onChanged: (value) {body = value;},
                 ),
                 verticalSpaceLarge,
                 PrimaryButton(
@@ -78,7 +82,7 @@ class InquiryView extends StatelessWidget {
                           return NormalDialog(
                             message: '送信しますか？',
                             onPressed: () {
-                              controller.onTapInquiry();
+                              controller.onTapInquiry(title: title, body: body);
                               Navigator.pop(context, true);
                             },
                           );
