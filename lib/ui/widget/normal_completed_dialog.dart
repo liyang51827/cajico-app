@@ -20,7 +20,6 @@ class NormalCompletedDialog extends StatelessWidget {
           child: const PrimarySmallButton(text: 'OK'),
           onPressed: () {
             Navigator.pop(context);
-            Get.to(() => const HouseWork());
           },
         )
       ],

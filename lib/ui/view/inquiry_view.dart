@@ -9,7 +9,10 @@ import '../widget/primary_button.dart';
 
 class InquiryView extends StatelessWidget {
   InquiryView({super.key});
+
   final focusNode = FocusNode();
+  final titleTextController = TextEditingController();
+  final bodyTextController = TextEditingController();
   String title = '';
   String body = '';
 
@@ -41,6 +44,7 @@ class InquiryView extends StatelessWidget {
                 ),
                 verticalSpaceLarge,
                 TextField(
+                  controller: titleTextController,
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
                       labelText: 'タイトル',
@@ -52,10 +56,13 @@ class InquiryView extends StatelessWidget {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
-                  onChanged: (value) {title = value;},
+                  onChanged: (value) {
+                    title = value;
+                  },
                 ),
                 verticalSpaceMedium,
                 TextFormField(
+                  controller: bodyTextController,
                   cursorColor: primaryColor,
                   keyboardType: TextInputType.multiline,
                   minLines: 10,
@@ -70,7 +77,9 @@ class InquiryView extends StatelessWidget {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
-                  onChanged: (value) {body = value;},
+                  onChanged: (value) {
+                    body = value;
+                  },
                 ),
                 verticalSpaceLarge,
                 PrimaryButton(
@@ -82,6 +91,8 @@ class InquiryView extends StatelessWidget {
                           return NormalDialog(
                             message: '送信しますか？',
                             onPressed: () {
+                              titleTextController.clear();
+                              bodyTextController.clear();
                               controller.onTapInquiry(title: title, body: body);
                               Navigator.pop(context, true);
                             },
