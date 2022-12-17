@@ -99,9 +99,13 @@ class RewardView extends GetView<RewardViewController> {
             child: TabBarView(
               children: [
                 for (var familyReward in controller.familyRewards()) ...{
-                  Container(
+                RefreshIndicator(
+                color: primaryColor,
+                onRefresh: controller.fetchData,
+                child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
                           verticalSpaceSmall,
@@ -147,7 +151,7 @@ class RewardView extends GetView<RewardViewController> {
                         ],
                       ),
                     ),
-                  ),
+                  ),),
                 }
               ],
             ),

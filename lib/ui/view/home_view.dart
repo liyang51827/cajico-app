@@ -75,6 +75,7 @@ class HouseWork extends GetView<HomeViewController> {
               color: primaryColor,
               onRefresh: controller.fetchData,
               child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(

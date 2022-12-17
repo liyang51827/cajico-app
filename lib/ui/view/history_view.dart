@@ -93,6 +93,7 @@ class HistoryView extends StatelessWidget {
                   color: primaryColor,
                   onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
                       children: [
                         _PointSummaries(
@@ -117,6 +118,7 @@ class HistoryView extends StatelessWidget {
                   color: primaryColor,
                   onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
                           _PointSummaries(
