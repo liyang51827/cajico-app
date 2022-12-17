@@ -22,19 +22,24 @@ class NotificationView extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22)),
         body: GetLoadingStack<NotificationViewController>(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.notices().length,
-                  itemBuilder: (context, index) {
-                    final item = controller.notices.elementAt(index);
-                    return _NotificationDetail(date: item.date, message: item.message, isRead: item.isRead);
-                  },
-                ),
-              ],
+          child: RefreshIndicator(
+            color: primaryColor,
+            onRefresh: controller.fetchData,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.notices().length,
+                    itemBuilder: (context, index) {
+                      final item = controller.notices.elementAt(index);
+                      return _NotificationDetail(date: item.date, message: item.message, isRead: item.isRead);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
