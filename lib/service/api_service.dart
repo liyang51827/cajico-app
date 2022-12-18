@@ -115,6 +115,15 @@ class ApiService extends GetConnect {
     return data.map((json) => Notice.fromJson(json)).toList();
   }
 
+  // お知らせ既読API
+  Future<bool> readNotices() async {
+    final res = await http.put(
+      _makeUri('/notices/read'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
   // ごほうび一覧API
   Future<List<FamilyReward>> getFamilyRewardList() async {
     final res = await http.get(
