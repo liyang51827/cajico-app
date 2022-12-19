@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'base_view_controller.dart';
 
 class HistoryViewController extends BaseViewController {
-
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
   final totalPointHistory = Rxn<TotalPointHistory>();
 
@@ -27,8 +26,12 @@ class HistoryViewController extends BaseViewController {
   }
 
   Future<void> onTapDelete({required int pointHistoryId}) async {
+    var result = false;
     await callAsyncApi(() async {
-      await api.deletePointHistory(pointHistoryId: pointHistoryId);
+      result = await api.deletePointHistory(pointHistoryId: pointHistoryId);
     });
+    if (result) {
+      fetchData();
+    }
   }
 }
