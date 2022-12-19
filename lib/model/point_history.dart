@@ -34,7 +34,8 @@ class Point {
     required this.houseWorkName,
     required this.date,
     required this.time,
-    required this.point
+    required this.point,
+    required this.isMe
   });
 
   final String iconUrl;
@@ -44,6 +45,7 @@ class Point {
   final String date;
   final String time;
   final int point;
+  final bool isMe;
 
   static Point fromJson(Map<String, dynamic> json) {
     return Point(
@@ -53,7 +55,8 @@ class Point {
       houseWorkName: json['name'],
       date: json['date'],
       time: json['time'],
-      point: json['point']
+      point: json['point'],
+      isMe: json['isMe']
     );
   }
 }
@@ -88,7 +91,8 @@ class TotalPoint {
     required this.houseWorkName,
     required this.date,
     required this.time,
-    required this.point
+    required this.point,
+    required this.isMe
   });
 
   final String iconUrl;
@@ -98,6 +102,7 @@ class TotalPoint {
   final String date;
   final String time;
   final int point;
+  final bool isMe;
 
   static TotalPoint fromJson(Map<String, dynamic> json) {
     return TotalPoint(
@@ -107,7 +112,8 @@ class TotalPoint {
         houseWorkName: json['name'],
         date: json['date'],
         time: json['time'],
-        point: json['point']
+        point: json['point'],
+        isMe: json['isMe']
     );
   }
 }

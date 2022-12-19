@@ -101,13 +101,15 @@ class HistoryView extends StatelessWidget {
                             totalPoint: totalPointHistory?.totalPoint ?? 0),
                         for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
                           _HouseWorkDetail(
-                              categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                              categoryName: houseWork.houseWorkCategoryName,
-                              houseWorkName: houseWork.houseWorkName,
-                              userIconImageUrl: houseWork.iconUrl,
-                              date: houseWork.date,
-                              time: houseWork.time,
-                              point: houseWork.point),
+                            categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
+                            categoryName: houseWork.houseWorkCategoryName,
+                            houseWorkName: houseWork.houseWorkName,
+                            userIconImageUrl: houseWork.iconUrl,
+                            date: houseWork.date,
+                            time: houseWork.time,
+                            point: houseWork.point,
+                            isMe: houseWork.isMe,
+                          ),
                         }
                       ],
                     ),
@@ -115,10 +117,10 @@ class HistoryView extends StatelessWidget {
                 ),
                 for (var pointHistory in controller.pointHistories()) ...{
                   RefreshIndicator(
-                  color: primaryColor,
-                  onRefresh: controller.fetchData,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
+                    color: primaryColor,
+                    onRefresh: controller.fetchData,
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
                           _PointSummaries(
@@ -126,13 +128,15 @@ class HistoryView extends StatelessWidget {
                               totalPoint: pointHistory.totalPoint),
                           for (var houseWork in pointHistory.pointHistories) ...{
                             _HouseWorkDetail(
-                                categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                                categoryName: houseWork.houseWorkCategoryName,
-                                houseWorkName: houseWork.houseWorkName,
-                                userIconImageUrl: houseWork.iconUrl,
-                                date: houseWork.date,
-                                time: houseWork.time,
-                                point: houseWork.point),
+                              categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
+                              categoryName: houseWork.houseWorkCategoryName,
+                              houseWorkName: houseWork.houseWorkName,
+                              userIconImageUrl: houseWork.iconUrl,
+                              date: houseWork.date,
+                              time: houseWork.time,
+                              point: houseWork.point,
+                              isMe: houseWork.isMe,
+                            ),
                           }
                         ],
                       ),
@@ -203,7 +207,8 @@ class _HouseWorkDetail extends StatelessWidget {
       required this.userIconImageUrl,
       this.date = '不要',
       required this.time,
-      required this.point});
+      required this.point,
+      required this.isMe});
 
   final String categoryImageUrl;
   final String categoryName;
@@ -212,26 +217,29 @@ class _HouseWorkDetail extends StatelessWidget {
   final String time;
   final String date;
   final int point;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return HouseWorkHistoryDeleteDialog(
-                houseWorkName: houseWorkName,
-                categoryName: categoryName,
-              );
-            }).then((value) {
-          if (value) {
-            return showDialog(
-                context: context,
-                builder: (context) => const NormalCompletedDialog(message: '家事を取り消しました'));
-          }
-        });
-      },
+      onTap: isMe
+          ? () {
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return HouseWorkHistoryDeleteDialog(
+                      houseWorkName: houseWorkName,
+                      categoryName: categoryName,
+                    );
+                  }).then((value) {
+                if (value) {
+                  return showDialog(
+                      context: context,
+                      builder: (context) => const NormalCompletedDialog(message: '家事を取り消しました'));
+                }
+              });
+            }
+          : () {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
