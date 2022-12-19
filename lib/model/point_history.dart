@@ -28,6 +28,7 @@ class PointHistory {
 
 class Point {
   Point({
+    required this.pointHistoryId,
     required this.iconUrl,
     required this.houseWorkCategoryName,
     required this.houseWorkCategoryImageUrl,
@@ -38,6 +39,7 @@ class Point {
     required this.isMe
   });
 
+  final int pointHistoryId;
   final String iconUrl;
   final String houseWorkCategoryName;
   final String houseWorkCategoryImageUrl;
@@ -49,6 +51,7 @@ class Point {
 
   static Point fromJson(Map<String, dynamic> json) {
     return Point(
+      pointHistoryId: json['id'],
       iconUrl: json['icon']['uri'],
       houseWorkCategoryName: json['houseWorkCategory']['name'],
       houseWorkCategoryImageUrl: json['houseWorkCategory']['uri'],
@@ -85,6 +88,7 @@ class TotalPointHistory {
 
 class TotalPoint {
   TotalPoint({
+    required this.pointHistoryId,
     required this.iconUrl,
     required this.houseWorkCategoryName,
     required this.houseWorkCategoryImageUrl,
@@ -95,6 +99,7 @@ class TotalPoint {
     required this.isMe
   });
 
+  final int pointHistoryId;
   final String iconUrl;
   final String houseWorkCategoryName;
   final String houseWorkCategoryImageUrl;
@@ -106,6 +111,7 @@ class TotalPoint {
 
   static TotalPoint fromJson(Map<String, dynamic> json) {
     return TotalPoint(
+        pointHistoryId: json['id'],
         iconUrl: json['icon']['uri'],
         houseWorkCategoryName: json['houseWorkCategory']['name'],
         houseWorkCategoryImageUrl: json['houseWorkCategory']['uri'],

@@ -164,6 +164,15 @@ class ApiService extends GetConnect {
     return TotalPointHistory.fromJson(data);
   }
 
+  // 家事履歴削除API
+  Future<bool> deletePointHistory({required int pointHistoryId}) async {
+    final res = await http.delete(
+      _makeUri('/point-histories/$pointHistoryId'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
   // ごほうび履歴API
   Future<List<RewardHistory>> getRewardHistoryList(int rewardId) async {
     final res = await http.get(

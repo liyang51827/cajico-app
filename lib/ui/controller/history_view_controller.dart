@@ -25,4 +25,10 @@ class HistoryViewController extends BaseViewController {
       ]);
     });
   }
+
+  Future<void> onTapDelete({required int pointHistoryId}) async {
+    await callAsyncApi(() async {
+      await api.deletePointHistory(pointHistoryId: pointHistoryId);
+    });
+  }
 }

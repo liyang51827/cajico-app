@@ -101,6 +101,7 @@ class HistoryView extends StatelessWidget {
                             totalPoint: totalPointHistory?.totalPoint ?? 0),
                         for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
                           _HouseWorkDetail(
+                            pointHistoryId: houseWork.pointHistoryId,
                             categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
                             categoryName: houseWork.houseWorkCategoryName,
                             houseWorkName: houseWork.houseWorkName,
@@ -128,6 +129,7 @@ class HistoryView extends StatelessWidget {
                               totalPoint: pointHistory.totalPoint),
                           for (var houseWork in pointHistory.pointHistories) ...{
                             _HouseWorkDetail(
+                              pointHistoryId: houseWork.pointHistoryId,
                               categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
                               categoryName: houseWork.houseWorkCategoryName,
                               houseWorkName: houseWork.houseWorkName,
@@ -199,9 +201,10 @@ class _PointSummary extends StatelessWidget {
   }
 }
 
-class _HouseWorkDetail extends StatelessWidget {
+class _HouseWorkDetail extends GetView<HistoryViewController> {
   const _HouseWorkDetail(
-      {required this.categoryImageUrl,
+      {required this.pointHistoryId,
+      required this.categoryImageUrl,
       required this.categoryName,
       required this.houseWorkName,
       required this.userIconImageUrl,
@@ -210,6 +213,7 @@ class _HouseWorkDetail extends StatelessWidget {
       required this.point,
       required this.isMe});
 
+  final int pointHistoryId;
   final String categoryImageUrl;
   final String categoryName;
   final String houseWorkName;
@@ -230,6 +234,10 @@ class _HouseWorkDetail extends StatelessWidget {
                     return HouseWorkHistoryDeleteDialog(
                       houseWorkName: houseWorkName,
                       categoryName: categoryName,
+                      onPressed:  () {
+                        controller.onTapDelete(pointHistoryId: pointHistoryId);
+                        Navigator.pop(context, true);
+                      },
                     );
                   }).then((value) {
                 if (value) {

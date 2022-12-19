@@ -8,10 +8,12 @@ class HouseWorkHistoryDeleteDialog extends StatelessWidget {
     super.key,
     required this.categoryName,
     required this.houseWorkName,
+    required this.onPressed
   });
 
   final String categoryName;
   final String houseWorkName;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,8 @@ class HouseWorkHistoryDeleteDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
+          onPressed: onPressed,
           child: const PrimarySmallButton(text: 'はい'),
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
         ),
         SimpleDialogOption(
           child: const PrimarySmallOutlineButton(text: 'いいえ'),
