@@ -225,37 +225,37 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: isMe
-          ? () {
-              showDialog(
-                  context: context,
-                  builder: (_) {
-                    return HouseWorkHistoryDeleteDialog(
-                      houseWorkName: houseWorkName,
-                      categoryName: categoryName,
-                      onPressed: () {
-                        controller.onTapDelete(pointHistoryId: pointHistoryId);
-                        Navigator.pop(context, true);
-                      },
-                    );
-                  }).then((value) {
-                if (value) {
-                  return showDialog(
-                      context: context,
-                      builder: (context) => const NormalCompletedDialog(message: '家事を取り消しました'));
-                }
-              });
-            }
-          : () {},
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (date == 'todo')
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: Text(date, style: const TextStyle(color: gray3))),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (date == 'todo')
           Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              child: Text(date, style: const TextStyle(color: gray3))),
+        InkWell(
+          onTap: isMe
+              ? () {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return HouseWorkHistoryDeleteDialog(
+                          houseWorkName: houseWorkName,
+                          categoryName: categoryName,
+                          onPressed: () {
+                            controller.onTapDelete(pointHistoryId: pointHistoryId);
+                            Navigator.pop(context, true);
+                          },
+                        );
+                      }).then((value) {
+                    if (value) {
+                      return showDialog(
+                          context: context,
+                          builder: (context) => const NormalCompletedDialog(message: '家事を取り消しました'));
+                    }
+                  });
+                }
+              : () {},
+          child: Container(
             height: 70,
             width: double.infinity,
             decoration: const BoxDecoration(
@@ -325,8 +325,8 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
