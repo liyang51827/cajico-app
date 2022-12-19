@@ -124,6 +124,16 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // お知らせ未読数取得API
+  Future<int> getNotificationUnreadCount() async {
+    final res = await http.get(
+      _makeUri('/notice/unread-count'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final int count = _decodeResponse(res)['data']['unreadCount'];
+    return count;
+  }
+
   // ごほうび一覧API
   Future<List<FamilyReward>> getFamilyRewardList() async {
     final res = await http.get(
