@@ -36,8 +36,7 @@ class HouseWorkView extends StatelessWidget {
                 })
           ]),
       body: GetLoadingStack<HouseWorkViewController>(
-        child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)
-      ),
+          child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: primaryColor,
@@ -48,9 +47,8 @@ class HouseWorkView extends StatelessWidget {
 }
 
 class _HouseWorks extends GetView<HouseWorkViewController> {
-  const _HouseWorks({
-    required this.houseWorkCategoryId
-  });
+  const _HouseWorks({required this.houseWorkCategoryId});
+
   final int houseWorkCategoryId;
 
   @override
@@ -76,9 +74,9 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                       imageUrl: item.categoryImageUrl,
                       point: item.point,
                       onPressed: () {
-                          controller.onTapComplete(houseWorkId: item.houseWorkId);
-                          Navigator.pop(context, true);
-                        },
+                        controller.onTapComplete(houseWorkId: item.houseWorkId);
+                        Navigator.pop(context, true);
+                      },
                     ),
                   );
                 },

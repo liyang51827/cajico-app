@@ -11,16 +11,15 @@ class NotificationAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: IconButton(
-        onPressed: () => Get.to(() => const NotificationView()),
-        icon: Badge(
-          position: const BadgePosition(start: 15, top: 5),
-          elevation: 0,
-          badgeColor: secondaryColor,
-          child: const Icon(LineIcons.bell, size: 30),
-        ),
-      )
-    );
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: IconButton(
+          onPressed: () => Get.to(() => const NotificationView()),
+          icon: Badge(
+            position: const BadgePosition(start: 15, top: 5),
+            elevation: 0,
+            badgeColor: secondaryColor,
+            child: const Icon(LineIcons.bell, size: 30),
+          ),
+        ));
   }
 }

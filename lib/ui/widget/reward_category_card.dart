@@ -8,19 +8,17 @@ import 'package:intl/intl.dart';
 
 class RewardCategoryCard extends StatelessWidget {
   const RewardCategoryCard(
-      {
-        super.key,
-        required this.rank,
-        required this.rewardId,
-        required this.rewardName,
-        required this.rating,
-        required this.ownedPoint,
-        required this.requiredPoint,
-        required this.differencePoint,
-        required this.imageUrl,
-        required this.isRequesting,
-        required this.note
-      });
+      {super.key,
+      required this.rank,
+      required this.rewardId,
+      required this.rewardName,
+      required this.rating,
+      required this.ownedPoint,
+      required this.requiredPoint,
+      required this.differencePoint,
+      required this.imageUrl,
+      required this.isRequesting,
+      required this.note});
 
   final String rank;
   final int rewardId;
@@ -79,7 +77,8 @@ class RewardCategoryCard extends StatelessWidget {
                         horizontalSpaceTiny,
                         const Text(
                           "プラン",
-                          style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

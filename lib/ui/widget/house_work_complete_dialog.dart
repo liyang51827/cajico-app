@@ -5,12 +5,8 @@ import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
 class HouseWorkCompleteDialog extends StatelessWidget {
-  const HouseWorkCompleteDialog({
-    super.key,
-    required this.houseWorkName,
-    required this.point,
-    required this.onPressed
-  });
+  const HouseWorkCompleteDialog(
+      {super.key, required this.houseWorkName, required this.point, required this.onPressed});
 
   final String houseWorkName;
   final int point;

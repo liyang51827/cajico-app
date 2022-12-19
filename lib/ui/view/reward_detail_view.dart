@@ -37,42 +37,43 @@ class RewardDetailView extends StatelessWidget {
         initialIndex: 0,
         length: 2,
         child: Scaffold(
-            backgroundColor: gray7,
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(200.0),
-              child: AppBar(
-                  iconTheme: const IconThemeData(color: gray2),
-                  elevation: 0.0,
-                  flexibleSpace: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+          backgroundColor: gray7,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(200.0),
+            child: AppBar(
+                iconTheme: const IconThemeData(color: gray2),
+                elevation: 0.0,
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+                ),
+                actions: <Widget>[
+                  PopupMenuButton(
+                      offset: const Offset(0, 50),
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          const PopupMenuItem(child: Text('編集する')),
+                        ];
+                      })
+                ],
+                bottom: const ColoredTabBar(
+                  color: Colors.white,
+                  tabBar: TabBar(
+                    labelColor: primaryColor,
+                    unselectedLabelColor: gray4,
+                    indicatorColor: primaryColor,
+                    indicatorWeight: 3,
+                    labelStyle: TextStyle(fontSize: 16),
+                    tabs: <Widget>[
+                      Tab(child: Text('ごほうび情報')),
+                      Tab(child: Text('履歴')),
+                    ],
                   ),
-                  actions: <Widget>[
-                    PopupMenuButton(
-                        offset: const Offset(0, 50),
-                        itemBuilder: (BuildContext context) {
-                          return [
-                            const PopupMenuItem(child: Text('編集する')),
-                          ];
-                        })
-                  ],
-                  bottom: const ColoredTabBar(
-                    color: Colors.white,
-                    tabBar: TabBar(
-                      labelColor: primaryColor,
-                      unselectedLabelColor: gray4,
-                      indicatorColor: primaryColor,
-                      indicatorWeight: 3,
-                      labelStyle: TextStyle(fontSize: 16),
-                      tabs: <Widget>[
-                        Tab(child: Text('ごほうび情報')),
-                        Tab(child: Text('履歴')),
-                      ],
-                    ),
-                  )),
-            ),
-            body: GetLoadingStack<RewardDetailViewController>(
-              child: TabBarView(children: [
+                )),
+          ),
+          body: GetLoadingStack<RewardDetailViewController>(
+            child: TabBarView(
+              children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SingleChildScrollView(
@@ -99,30 +100,33 @@ class RewardDetailView extends StatelessWidget {
                     ],
                   )),
                 ),
-                controller.rewardHistories().isNotEmpty ?
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.rewardHistories().length,
-                        itemBuilder: (context, index) {
-                          final item = controller.rewardHistories.elementAt(index);
-                          return _RewardHistoryDetail(
-                              rewardName: item.rewardName,
-                              date: item.createdAt,
-                              userImageUrl: item.iconUrl,
-                              message: item.message,
-                              point: item.point);
-                        },
-                      ),
-                    ],
-                  ),
-                ): Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
-                  child: const Text('ごほうび履歴はありません', textAlign: TextAlign.center,)
-                ),
+                controller.rewardHistories().isNotEmpty
+                    ? SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.rewardHistories().length,
+                              itemBuilder: (context, index) {
+                                final item = controller.rewardHistories.elementAt(index);
+                                return _RewardHistoryDetail(
+                                    rewardName: item.rewardName,
+                                    date: item.createdAt,
+                                    userImageUrl: item.iconUrl,
+                                    message: item.message,
+                                    point: item.point);
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(
+                        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+                        child: const Text(
+                          'ごほうび履歴はありません',
+                          textAlign: TextAlign.center,
+                        )),
               ],
             ),
           ),

@@ -68,7 +68,8 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('プライバシーポリシー'),
-            onTap: () => Get.to(const WebViewView(initialPath: 'privacy_policy.html', title: 'プライバシーポリシー')),
+            onTap: () =>
+                Get.to(const WebViewView(initialPath: 'privacy_policy.html', title: 'プライバシーポリシー')),
           ),
           ListTile(
             leading: const Icon(

@@ -117,33 +117,52 @@ class _CategoryCards extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CategoryCard(categoryName: '料理', imageUrl: 'assets/images/cooking.png', houseWorkCategoryId: 1),
+            CategoryCard(
+                categoryName: '料理', imageUrl: 'assets/images/cooking.png', houseWorkCategoryId: 1),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: '買い物', imageUrl: 'assets/images/shopping.png', houseWorkCategoryId: 2),
+            CategoryCard(
+                categoryName: '買い物',
+                imageUrl: 'assets/images/shopping.png',
+                houseWorkCategoryId: 2),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: '洗濯', imageUrl: 'assets/images/washing.png', houseWorkCategoryId: 3),
+            CategoryCard(
+                categoryName: '洗濯', imageUrl: 'assets/images/washing.png', houseWorkCategoryId: 3),
           ],
         ),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CategoryCard(categoryName: '掃除', imageUrl: 'assets/images/cleaning.png', houseWorkCategoryId: 4),
+            CategoryCard(
+                categoryName: '掃除', imageUrl: 'assets/images/cleaning.png', houseWorkCategoryId: 4),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: 'ペット', imageUrl: 'assets/images/pet.png', houseWorkCategoryId: 5),
+            CategoryCard(
+                categoryName: 'ペット', imageUrl: 'assets/images/pet.png', houseWorkCategoryId: 5),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: 'その他家事', imageUrl: 'assets/images/other_house_work.png', houseWorkCategoryId: 6),
+            CategoryCard(
+                categoryName: 'その他家事',
+                imageUrl: 'assets/images/other_house_work.png',
+                houseWorkCategoryId: 6),
           ],
         ),
         verticalSpaceSmall,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CategoryCard(categoryName: '子守', imageUrl: 'assets/images/baby_sitting.png', houseWorkCategoryId: 7),
+            CategoryCard(
+                categoryName: '子守',
+                imageUrl: 'assets/images/baby_sitting.png',
+                houseWorkCategoryId: 7),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: '教育', imageUrl: 'assets/images/education.png', houseWorkCategoryId: 8),
+            CategoryCard(
+                categoryName: '教育',
+                imageUrl: 'assets/images/education.png',
+                houseWorkCategoryId: 8),
             horizontalSpaceSmall,
-            CategoryCard(categoryName: 'その他育児', imageUrl: 'assets/images/other_child_care.png', houseWorkCategoryId: 9),
+            CategoryCard(
+                categoryName: 'その他育児',
+                imageUrl: 'assets/images/other_child_care.png',
+                houseWorkCategoryId: 9),
           ],
         ),
       ],
