@@ -94,26 +94,32 @@ class HistoryView extends StatelessWidget {
                   onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: Column(
+                    child: totalPointHistory != null ? Column(
                       children: [
                         _PointSummaries(
-                            todayPoint: totalPointHistory?.todayPoint ?? 0,
-                            totalPoint: totalPointHistory?.totalPoint ?? 0),
-                        for (var houseWork in totalPointHistory?.pointHistories ?? []) ...{
-                          _HouseWorkDetail(
-                            pointHistoryId: houseWork.pointHistoryId,
-                            categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                            categoryName: houseWork.houseWorkCategoryName,
-                            houseWorkName: houseWork.houseWorkName,
-                            userIconImageUrl: houseWork.iconUrl,
-                            date: houseWork.date,
-                            time: houseWork.time,
-                            point: houseWork.point,
-                            isMe: houseWork.isMe,
-                          ),
-                        }
+                            todayPoint: totalPointHistory.todayPoint,
+                            totalPoint: totalPointHistory.totalPoint),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: totalPointHistory.pointHistories.length,
+                          itemBuilder: (context, index) {
+                            final item = totalPointHistory.pointHistories.elementAt(index);
+                            return _HouseWorkDetail(
+                              pointHistoryId: item.pointHistoryId,
+                              categoryImageUrl: item.houseWorkCategoryImageUrl,
+                              categoryName: item.houseWorkCategoryName,
+                              houseWorkName: item.houseWorkName,
+                              userIconImageUrl: item.iconUrl,
+                              date: item.date,
+                              time: item.time,
+                              point: item.point,
+                              isMe: item.isMe,
+                            );
+                          },
+                        ),
                       ],
-                    ),
+                    ) : const SizedBox(),
                   ),
                 ),
                 for (var pointHistory in controller.pointHistories()) ...{
@@ -127,19 +133,25 @@ class HistoryView extends StatelessWidget {
                           _PointSummaries(
                               todayPoint: pointHistory.todayPoint,
                               totalPoint: pointHistory.totalPoint),
-                          for (var houseWork in pointHistory.pointHistories) ...{
-                            _HouseWorkDetail(
-                              pointHistoryId: houseWork.pointHistoryId,
-                              categoryImageUrl: houseWork.houseWorkCategoryImageUrl,
-                              categoryName: houseWork.houseWorkCategoryName,
-                              houseWorkName: houseWork.houseWorkName,
-                              userIconImageUrl: houseWork.iconUrl,
-                              date: houseWork.date,
-                              time: houseWork.time,
-                              point: houseWork.point,
-                              isMe: houseWork.isMe,
-                            ),
-                          }
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: pointHistory.pointHistories.length,
+                            itemBuilder: (context, index) {
+                              final item = pointHistory.pointHistories.elementAt(index);
+                              return _HouseWorkDetail(
+                                pointHistoryId: item.pointHistoryId,
+                                categoryImageUrl: item.houseWorkCategoryImageUrl,
+                                categoryName: item.houseWorkCategoryName,
+                                houseWorkName: item.houseWorkName,
+                                userIconImageUrl: item.iconUrl,
+                                date: item.date,
+                                time: item.time,
+                                point: item.point,
+                                isMe: item.isMe,
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
