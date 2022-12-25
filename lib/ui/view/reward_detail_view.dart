@@ -12,17 +12,16 @@ import '../widget/reward_request_dialog.dart';
 import 'package:intl/intl.dart';
 
 class RewardDetailView extends StatelessWidget {
-  const RewardDetailView({
-    super.key,
-    required this.imageUrl,
-    required this.rank,
-    required this.rewardId,
-    required this.rewardName,
-    required this.point,
-    required this.text,
-    required this.isMe,
-    required this.isAvailable
-  });
+  const RewardDetailView(
+      {super.key,
+      required this.imageUrl,
+      required this.rank,
+      required this.rewardId,
+      required this.rewardName,
+      required this.point,
+      required this.text,
+      required this.isMe,
+      required this.isAvailable});
 
   final String imageUrl;
   final String rank;
@@ -81,28 +80,18 @@ class RewardDetailView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SingleChildScrollView(
-                      child: Column(
-                    children: [
-                      _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
-                      verticalSpaceMedium,
-                      PrimaryButton(
-                        label: isMe ? 'ねぎらってもらう！' : 'ねぎらう！',
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (_) {
-                                return RewardRequestDialog(rewardName: rewardName, point: point);
-                              }).then((value) {
-                            if (value) {
-                              return showDialog(
-                                  context: context,
-                                  builder: (context) => const RewardRequestCompletedDialog());
-                            }
-                          });
-                        },
-                      )
-                    ],
-                  )),
+                    child: Column(
+                      children: [
+                        _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
+                        verticalSpaceMedium,
+                        _RewardButton(
+                            rewardName: rewardName,
+                            point: point,
+                            isMe: isMe,
+                            isAvailable: isAvailable),
+                      ],
+                    ),
+                  ),
                 ),
                 controller.rewardHistories().isNotEmpty
                     ? SingleChildScrollView(
@@ -208,6 +197,40 @@ class _Detail extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _RewardButton extends StatelessWidget {
+  const _RewardButton({
+    required this.rewardName,
+    required this.point,
+    required this.isMe,
+    required this.isAvailable,
+  });
+
+  final String rewardName;
+  final int point;
+  final bool isMe;
+  final bool isAvailable;
+
+  @override
+  Widget build(BuildContext context) {
+    return PrimaryButton(
+      label: isMe ? 'ねぎらってもらう！' : 'ねぎらう！',
+      isValid: isAvailable,
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return RewardRequestDialog(rewardName: rewardName, point: point);
+            }).then((value) {
+          if (value) {
+            return showDialog(
+                context: context, builder: (context) => const RewardRequestCompletedDialog());
+          }
+        });
+      },
     );
   }
 }
