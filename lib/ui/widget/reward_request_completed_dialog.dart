@@ -3,12 +3,14 @@ import 'package:cajico_app/ui/view/reward_view.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/reward_view_controller.dart';
 
 class RewardRequestCompletedDialog extends StatelessWidget {
   const RewardRequestCompletedDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RewardViewController());
     return AlertDialog(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
@@ -26,6 +28,7 @@ class RewardRequestCompletedDialog extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   Get.to(() => const RewardView());
+                  controller.fetchData();
                 },
                 child: const PrimarySmallButton(text: '戻る'))),
       ],

@@ -113,11 +113,11 @@ class RewardCategoryCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           SizedBox(
-                            width: 35,
+                            width: 40,
                             child: Text(
-                              '申請中',
+                              'ねぎらい\n待ち',
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 11.6, fontWeight: FontWeight.bold),
+                                  color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                           ),

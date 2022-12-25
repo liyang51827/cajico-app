@@ -85,6 +85,7 @@ class RewardDetailView extends StatelessWidget {
                         _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
                         verticalSpaceMedium,
                         _RewardButton(
+                            rewardId: rewardId,
                             rewardName: rewardName,
                             point: point,
                             isMe: isMe,
@@ -201,14 +202,16 @@ class _Detail extends StatelessWidget {
   }
 }
 
-class _RewardButton extends StatelessWidget {
+class _RewardButton extends GetView<RewardDetailViewController> {
   const _RewardButton({
+    required this.rewardId,
     required this.rewardName,
     required this.point,
     required this.isMe,
     required this.isAvailable,
   });
 
+  final int rewardId;
   final String rewardName;
   final int point;
   final bool isMe;
@@ -216,6 +219,7 @@ class _RewardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RewardDetailViewController(rewardId: rewardId));
     return PrimaryButton(
       label: isMe ? 'ねぎらってもらう！' : 'ねぎらう！',
       isValid: isAvailable,
@@ -223,7 +227,14 @@ class _RewardButton extends StatelessWidget {
         showDialog(
             context: context,
             builder: (_) {
-              return RewardRequestDialog(rewardName: rewardName, point: point);
+              return RewardRequestDialog(
+                rewardName: rewardName,
+                point: point,
+                onPressed: () {
+                  controller.onTapRequest(rewardId: rewardId);
+                  Navigator.pop(context, true);
+                },
+              );
             }).then((value) {
           if (value) {
             return showDialog(

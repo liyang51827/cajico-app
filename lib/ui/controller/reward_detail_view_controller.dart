@@ -19,4 +19,14 @@ class RewardDetailViewController extends BaseViewController {
       rewardHistories.value = await api.getRewardHistoryList(rewardId);
     });
   }
+
+  Future<void> onTapRequest({required int rewardId}) async {
+    var result = false;
+    await callAsyncApi(() async {
+      result = await api.requestReward(rewardId: rewardId);
+    });
+    if (result) {
+      fetchData();
+    }
+  }
 }

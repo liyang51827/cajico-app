@@ -9,10 +9,12 @@ class RewardRequestDialog extends StatelessWidget {
     super.key,
     required this.rewardName,
     required this.point,
+    required this.onPressed
   });
 
   final String rewardName;
   final int point;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,8 @@ class RewardRequestDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
+          onPressed: onPressed,
           child: const PrimarySmallButton(text: 'はい！'),
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
         ),
         SimpleDialogOption(
           child: const PrimarySmallOutlineButton(text: 'いいえ'),

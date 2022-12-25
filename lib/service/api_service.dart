@@ -144,6 +144,15 @@ class ApiService extends GetConnect {
     return data.map((json) => FamilyReward.fromJson(json)).toList();
   }
 
+  // ごほうびリクエストAPI
+  Future<bool> requestReward({required int rewardId}) async {
+    final res = await http.put(
+      _makeUri('/rewards/$rewardId/request'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 家事履歴一覧API
   Future<List<PointHistory>> getPointHistoryList() async {
     final res = await http.get(
