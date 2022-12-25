@@ -20,6 +20,8 @@ class RewardDetailView extends StatelessWidget {
     required this.rewardName,
     required this.point,
     required this.text,
+    required this.isMe,
+    required this.isAvailable
   });
 
   final String imageUrl;
@@ -28,6 +30,8 @@ class RewardDetailView extends StatelessWidget {
   final String rewardName;
   final int point;
   final String text;
+  final bool isMe;
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +86,7 @@ class RewardDetailView extends StatelessWidget {
                       _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
                       verticalSpaceMedium,
                       PrimaryButton(
-                        label: 'ねぎらってもらう！',
+                        label: isMe ? 'ねぎらってもらう！' : 'ねぎらう！',
                         onPressed: () {
                           showDialog(
                               context: context,

@@ -18,6 +18,8 @@ class RewardCategoryCard extends StatelessWidget {
       required this.differencePoint,
       required this.imageUrl,
       required this.isRequesting,
+      required this.isMe,
+      required this.isAvailable,
       required this.note});
 
   final String rank;
@@ -29,6 +31,8 @@ class RewardCategoryCard extends StatelessWidget {
   final int differencePoint;
   final String imageUrl;
   final bool isRequesting;
+  final bool isMe;
+  final bool isAvailable;
   final String note;
 
   @override
@@ -41,6 +45,8 @@ class RewardCategoryCard extends StatelessWidget {
             rewardName: rewardName,
             rank: rank,
             point: requiredPoint,
+            isMe: isMe,
+            isAvailable: isAvailable,
             text: note,
           )),
       child: Container(

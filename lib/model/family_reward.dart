@@ -10,6 +10,8 @@ class FamilyReward {
     required this.smallRewardDifferencePoint,
     required this.smallRewardRating,
     required this.smallRewardIsRequesting,
+    required this.smallRewardIsMe,
+    required this.smallRewardIsAvailable,
     required this.smallRewardNote,
     required this.middleRewardId,
     required this.middleRewardName,
@@ -18,6 +20,8 @@ class FamilyReward {
     required this.middleRewardDifferencePoint,
     required this.middleRewardRating,
     required this.middleRewardIsRequesting,
+    required this.middleRewardIsMe,
+    required this.middleRewardIsAvailable,
     required this.middleRewardNote,
     required this.largeRewardId,
     required this.largeRewardName,
@@ -26,6 +30,8 @@ class FamilyReward {
     required this.largeRewardDifferencePoint,
     required this.largeRewardRating,
     required this.largeRewardIsRequesting,
+    required this.largeRewardIsMe,
+    required this.largeRewardIsAvailable,
     required this.largeRewardNote,
   });
 
@@ -39,6 +45,8 @@ class FamilyReward {
   final int smallRewardDifferencePoint;
   final double smallRewardRating;
   final bool smallRewardIsRequesting;
+  final bool smallRewardIsMe;
+  final bool smallRewardIsAvailable;
   final String smallRewardNote;
   final int middleRewardId;
   final String middleRewardName;
@@ -47,6 +55,8 @@ class FamilyReward {
   final int middleRewardDifferencePoint;
   final double middleRewardRating;
   final bool middleRewardIsRequesting;
+  final bool middleRewardIsMe;
+  final bool middleRewardIsAvailable;
   final String middleRewardNote;
   final int largeRewardId;
   final String largeRewardName;
@@ -55,6 +65,8 @@ class FamilyReward {
   final int largeRewardDifferencePoint;
   final double largeRewardRating;
   final bool largeRewardIsRequesting;
+  final bool largeRewardIsMe;
+  final bool largeRewardIsAvailable;
   final String largeRewardNote;
 
   static FamilyReward fromJson(Map<String, dynamic> json) {
@@ -69,6 +81,8 @@ class FamilyReward {
       smallRewardDifferencePoint: json['smallReward']['differencePoint'],
       smallRewardRating: json['smallReward']['rating'],
       smallRewardIsRequesting: json['smallReward']['isRequesting'],
+      smallRewardIsMe: json['smallReward']['isMe'],
+      smallRewardIsAvailable: json['smallReward']['isAvailable'],
       smallRewardNote: json['smallReward']['note'],
       middleRewardId: json['middleReward']['id'],
       middleRewardName:  json['middleReward']['name'],
@@ -77,6 +91,8 @@ class FamilyReward {
       middleRewardDifferencePoint: json['middleReward']['differencePoint'],
       middleRewardRating: json['middleReward']['rating'],
       middleRewardIsRequesting: json['middleReward']['isRequesting'],
+      middleRewardIsMe: json['middleReward']['isMe'],
+      middleRewardIsAvailable: json['middleReward']['isAvailable'],
       middleRewardNote: json['middleReward']['note'],
       largeRewardId: json['largeReward']['id'],
       largeRewardName:  json['largeReward']['name'],
@@ -85,6 +101,8 @@ class FamilyReward {
       largeRewardDifferencePoint: json['largeReward']['differencePoint'],
       largeRewardRating: json['largeReward']['rating'],
       largeRewardIsRequesting: json['largeReward']['isRequesting'],
+      largeRewardIsMe: json['largeReward']['isMe'],
+      largeRewardIsAvailable: json['largeReward']['isAvailable'],
       largeRewardNote: json['largeReward']['note'],
     );
   }
