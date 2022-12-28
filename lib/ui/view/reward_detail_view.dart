@@ -253,8 +253,13 @@ class _RewardButton extends GetView<RewardDetailViewController> {
               }
             }).then((value) {
           if (value) {
-            return showDialog(
-                context: context, builder: (context) => const RewardRequestCompletedDialog());
+            if (isMe) {
+              return showDialog(
+                context: context, builder: (context) => const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
+            } else {
+              return showDialog(
+                  context: context, builder: (context) => const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
+            }
           }
         });
       },

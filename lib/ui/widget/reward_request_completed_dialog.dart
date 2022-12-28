@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/reward_view_controller.dart';
 
-class RewardRequestCompletedDialog extends StatelessWidget {
-  const RewardRequestCompletedDialog({super.key});
+class RewardCompletedDialog extends StatelessWidget {
+  const RewardCompletedDialog({super.key, required this.message});
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +16,12 @@ class RewardRequestCompletedDialog extends StatelessWidget {
     return AlertDialog(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
-        children: const [
-          Text('ねぎらいリクエストを\n送りました！',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        children: [
+          Text(message,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               textAlign: TextAlign.center),
           verticalSpaceMedium,
-          Image(image: AssetImage('assets/images/other_child_care.png'), width: 200)
+          const Image(image: AssetImage('assets/images/other_child_care.png'), width: 200)
         ],
       ),
       actions: [
