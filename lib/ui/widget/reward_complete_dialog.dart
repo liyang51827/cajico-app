@@ -45,9 +45,7 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(color: primaryColor))),
-            onChanged: (value) {
-              body = value;
-            },
+            onChanged: (value) => body = value,
           ),
         ],
       ),

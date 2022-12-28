@@ -78,9 +78,12 @@ class RewardDetailView extends StatelessWidget {
           body: GetLoadingStack<RewardDetailViewController>(
             child: TabBarView(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                RefreshIndicator(
+                  color: primaryColor,
+                  onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
                         _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
@@ -96,26 +99,31 @@ class RewardDetailView extends StatelessWidget {
                   ),
                 ),
                 controller.rewardHistories().isNotEmpty
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.rewardHistories().length,
-                              itemBuilder: (context, index) {
-                                final item = controller.rewardHistories.elementAt(index);
-                                return _RewardHistoryDetail(
-                                    rewardName: item.rewardName,
-                                    date: item.createdAt,
-                                    userImageUrl: item.iconUrl,
-                                    message: item.message ?? '',
-                                    point: item.point);
-                              },
-                            ),
-                          ],
+                    ? RefreshIndicator(
+                      color: primaryColor,
+                      onRefresh: controller.fetchData,
+                      child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.rewardHistories().length,
+                                itemBuilder: (context, index) {
+                                  final item = controller.rewardHistories.elementAt(index);
+                                  return _RewardHistoryDetail(
+                                      rewardName: item.rewardName,
+                                      date: item.createdAt,
+                                      userImageUrl: item.iconUrl,
+                                      message: item.message ?? '',
+                                      point: item.point);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      )
+                    )
                     : Container(
                         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
                         child: const Text(
