@@ -109,7 +109,7 @@ class RewardDetailView extends StatelessWidget {
                                     rewardName: item.rewardName,
                                     date: item.createdAt,
                                     userImageUrl: item.iconUrl,
-                                    message: item.message,
+                                    message: item.message ?? '',
                                     point: item.point);
                               },
                             ),
