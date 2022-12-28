@@ -7,6 +7,8 @@ import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grouped_list/grouped_list.dart';
+import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
@@ -26,7 +28,7 @@ class HistoryView extends StatelessWidget {
         initialIndex: 0,
         length: controller.pointHistories().length + 1,
         child: Scaffold(
-          backgroundColor: gray7,
+          backgroundColor: Colors.white,
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
@@ -99,23 +101,28 @@ class HistoryView extends StatelessWidget {
                         _PointSummaries(
                             todayPoint: totalPointHistory.todayPoint,
                             totalPoint: totalPointHistory.totalPoint),
-                        ListView.builder(
+                        GroupedListView<Point, String>(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: totalPointHistory.pointHistories.length,
-                          itemBuilder: (context, index) {
-                            final item = totalPointHistory.pointHistories.elementAt(index);
+                          elements: totalPointHistory.pointHistories,
+                          groupBy: (element) => element.date,
+                          sort: false,
+                          itemBuilder: (context, element) {
                             return _HouseWorkDetail(
-                              pointHistoryId: item.pointHistoryId,
-                              categoryImageUrl: item.houseWorkCategoryImageUrl,
-                              categoryName: item.houseWorkCategoryName,
-                              houseWorkName: item.houseWorkName,
-                              userIconImageUrl: item.iconUrl,
-                              date: item.date,
-                              time: item.time,
-                              point: item.point,
-                              isMe: item.isMe,
+                              pointHistoryId: element.pointHistoryId,
+                              categoryImageUrl: element.houseWorkCategoryImageUrl,
+                              categoryName: element.houseWorkCategoryName,
+                              houseWorkName: element.houseWorkName,
+                              userIconImageUrl: element.iconUrl,
+                              time: element.time,
+                              point: element.point,
+                              isMe: element.isMe,
                             );
+                          },
+                          groupSeparatorBuilder: (date) {
+                            return Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                child: Text(date, style: const TextStyle(color: gray3)));
                           },
                         ),
                       ],
@@ -133,23 +140,28 @@ class HistoryView extends StatelessWidget {
                           _PointSummaries(
                               todayPoint: pointHistory.todayPoint,
                               totalPoint: pointHistory.totalPoint),
-                          ListView.builder(
+                          GroupedListView<Point, String>(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: pointHistory.pointHistories.length,
-                            itemBuilder: (context, index) {
-                              final item = pointHistory.pointHistories.elementAt(index);
+                            elements: pointHistory.pointHistories,
+                            groupBy: (element) => element.date,
+                            sort: false,
+                            itemBuilder: (context, element) {
                               return _HouseWorkDetail(
-                                pointHistoryId: item.pointHistoryId,
-                                categoryImageUrl: item.houseWorkCategoryImageUrl,
-                                categoryName: item.houseWorkCategoryName,
-                                houseWorkName: item.houseWorkName,
-                                userIconImageUrl: item.iconUrl,
-                                date: item.date,
-                                time: item.time,
-                                point: item.point,
-                                isMe: item.isMe,
+                                pointHistoryId: element.pointHistoryId,
+                                categoryImageUrl: element.houseWorkCategoryImageUrl,
+                                categoryName: element.houseWorkCategoryName,
+                                houseWorkName: element.houseWorkName,
+                                userIconImageUrl: element.iconUrl,
+                                time: element.time,
+                                point: element.point,
+                                isMe: element.isMe,
                               );
+                            },
+                            groupSeparatorBuilder: (date) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                  child: Text(date, style: const TextStyle(color: gray3)));
                             },
                           ),
                         ],
@@ -176,7 +188,7 @@ class _PointSummaries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 80,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -220,7 +232,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
       required this.categoryName,
       required this.houseWorkName,
       required this.userIconImageUrl,
-      this.date = '不要',
       required this.time,
       required this.point,
       required this.isMe});
@@ -231,7 +242,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
   final String houseWorkName;
   final String userIconImageUrl;
   final String time;
-  final String date;
   final int point;
   final bool isMe;
 
@@ -240,10 +250,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (date == 'todo')
-          Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: Text(date, style: const TextStyle(color: gray3))),
         InkWell(
           onTap: isMe
               ? () {
@@ -270,14 +276,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
           child: Container(
             height: 70,
             width: double.infinity,
-            decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.black12, //枠線の色
-                    width: 1, //枠線の太さ
-                  ),
-                ),
-                color: Colors.white),
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,7 +289,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                         child: CircularProgressIndicator(color: primaryColor),
                       ),
                     ),
-                    horizontalSpaceTiny,
+                    horizontalSpaceSmall,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

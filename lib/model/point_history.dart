@@ -75,39 +75,3 @@ class TotalPointHistory {
     );
   }
 }
-
-class TotalPoint {
-  TotalPoint(
-      {required this.pointHistoryId,
-      required this.iconUrl,
-      required this.houseWorkCategoryName,
-      required this.houseWorkCategoryImageUrl,
-      required this.houseWorkName,
-      required this.date,
-      required this.time,
-      required this.point,
-      required this.isMe});
-
-  final int pointHistoryId;
-  final String iconUrl;
-  final String houseWorkCategoryName;
-  final String houseWorkCategoryImageUrl;
-  final String houseWorkName;
-  final String date;
-  final String time;
-  final int point;
-  final bool isMe;
-
-  static TotalPoint fromJson(Map<String, dynamic> json) {
-    return TotalPoint(
-        pointHistoryId: json['id'],
-        iconUrl: json['icon']['uri'],
-        houseWorkCategoryName: json['houseWorkCategory']['name'],
-        houseWorkCategoryImageUrl: json['houseWorkCategory']['uri'],
-        houseWorkName: json['name'],
-        date: json['date'],
-        time: json['time'],
-        point: json['point'],
-        isMe: json['isMe']);
-  }
-}
