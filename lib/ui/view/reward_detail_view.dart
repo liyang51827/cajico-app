@@ -100,9 +100,9 @@ class RewardDetailView extends StatelessWidget {
                 ),
                 controller.rewardHistories().isNotEmpty
                     ? RefreshIndicator(
-                      color: primaryColor,
-                      onRefresh: controller.fetchData,
-                      child: SingleChildScrollView(
+                        color: primaryColor,
+                        onRefresh: controller.fetchData,
+                        child: SingleChildScrollView(
                           physics: const AlwaysScrollableScrollPhysics(),
                           child: Column(
                             children: [
@@ -123,7 +123,7 @@ class RewardDetailView extends StatelessWidget {
                             ],
                           ),
                         ),
-                    )
+                      )
                     : Container(
                         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
                         child: const Text(

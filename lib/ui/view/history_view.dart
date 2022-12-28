@@ -96,37 +96,40 @@ class HistoryView extends StatelessWidget {
                   onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: totalPointHistory != null ? Column(
-                      children: [
-                        _PointSummaries(
-                            todayPoint: totalPointHistory.todayPoint,
-                            totalPoint: totalPointHistory.totalPoint),
-                        GroupedListView<Point, String>(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          elements: totalPointHistory.pointHistories,
-                          groupBy: (element) => element.date,
-                          sort: false,
-                          itemBuilder: (context, element) {
-                            return _HouseWorkDetail(
-                              pointHistoryId: element.pointHistoryId,
-                              categoryImageUrl: element.houseWorkCategoryImageUrl,
-                              categoryName: element.houseWorkCategoryName,
-                              houseWorkName: element.houseWorkName,
-                              userIconImageUrl: element.iconUrl,
-                              time: element.time,
-                              point: element.point,
-                              isMe: element.isMe,
-                            );
-                          },
-                          groupSeparatorBuilder: (date) {
-                            return Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                child: Text(date, style: const TextStyle(color: gray3)));
-                          },
-                        ),
-                      ],
-                    ) : const SizedBox(),
+                    child: totalPointHistory != null
+                        ? Column(
+                            children: [
+                              _PointSummaries(
+                                  todayPoint: totalPointHistory.todayPoint,
+                                  totalPoint: totalPointHistory.totalPoint),
+                              GroupedListView<Point, String>(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                elements: totalPointHistory.pointHistories,
+                                groupBy: (element) => element.date,
+                                sort: false,
+                                itemBuilder: (context, element) {
+                                  return _HouseWorkDetail(
+                                    pointHistoryId: element.pointHistoryId,
+                                    categoryImageUrl: element.houseWorkCategoryImageUrl,
+                                    categoryName: element.houseWorkCategoryName,
+                                    houseWorkName: element.houseWorkName,
+                                    userIconImageUrl: element.iconUrl,
+                                    time: element.time,
+                                    point: element.point,
+                                    isMe: element.isMe,
+                                  );
+                                },
+                                groupSeparatorBuilder: (date) {
+                                  return Container(
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                      child: Text(date, style: const TextStyle(color: gray3)));
+                                },
+                              ),
+                            ],
+                          )
+                        : const SizedBox(),
                   ),
                 ),
                 for (var pointHistory in controller.pointHistories()) ...{
