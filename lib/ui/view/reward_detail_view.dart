@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/reward_detail_view_controller.dart';
 import '../widget/loading_stack.dart';
+import '../widget/reward_complete_dialog.dart';
 import '../widget/reward_request_completed_dialog.dart';
 import '../widget/reward_request_dialog.dart';
 import 'package:intl/intl.dart';
@@ -227,14 +228,24 @@ class _RewardButton extends GetView<RewardDetailViewController> {
         showDialog(
             context: context,
             builder: (_) {
-              return RewardRequestDialog(
-                rewardName: rewardName,
-                point: point,
-                onPressed: () {
-                  controller.onTapRequest(rewardId: rewardId);
-                  Navigator.pop(context, true);
-                },
-              );
+              if (isMe) {
+                return RewardRequestDialog(
+                  rewardName: rewardName,
+                  point: point,
+                  onPressed: () {
+                    controller.onTapRequest(rewardId: rewardId);
+                    Navigator.pop(context, true);
+                  },
+                );
+              } else {
+                return RewardCompleteDialog(
+                  rewardName: rewardName,
+                  onPressed: () {
+                    controller.onTapRequest(rewardId: rewardId);
+                    Navigator.pop(context, true);
+                  },
+                );
+              }
             }).then((value) {
           if (value) {
             return showDialog(
