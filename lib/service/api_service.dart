@@ -158,7 +158,7 @@ class ApiService extends GetConnect {
     final res = await http.put(
       _makeUri('/rewards/$rewardId/complete'),
       headers: await _makeAuthenticatedHeader(),
-      body: jsonEncode({'body': body}),
+      body: jsonEncode({'message': body}),
     );
     return _checkStatusCode(res);
   }
