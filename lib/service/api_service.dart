@@ -153,6 +153,16 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // ねぎらい完了リクエストAPI
+  Future<bool> completeReward({required int rewardId, required String body}) async {
+    final res = await http.put(
+      _makeUri('/rewards/$rewardId/complete'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'body': body}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 家事履歴一覧API
   Future<List<PointHistory>> getPointHistoryList() async {
     final res = await http.get(

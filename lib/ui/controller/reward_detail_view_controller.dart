@@ -25,4 +25,10 @@ class RewardDetailViewController extends BaseViewController {
       await api.requestReward(rewardId: rewardId);
     });
   }
+
+  Future<void> onTapComplete({required int rewardId, required String body}) async {
+    await callAsyncApi(() async {
+      await api.completeReward(rewardId: rewardId, body: body);
+    });
+  }
 }

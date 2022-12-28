@@ -3,22 +3,25 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import '../controller/reward_detail_view_controller.dart';
 
-class RewardCompleteDialog extends StatelessWidget {
+class RewardCompleteDialog extends GetView<RewardDetailViewController> {
   RewardCompleteDialog({
     super.key,
-    required this.rewardName,
-    required this.onPressed
+    required this.rewardId,
+    required this.rewardName
   });
 
+  final int rewardId;
   final String rewardName;
-  final VoidCallback onPressed;
   final bodyTextController = TextEditingController();
   String body = '';
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
+      insetPadding: const EdgeInsets.all(0),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: [
@@ -50,7 +53,10 @@ class RewardCompleteDialog extends StatelessWidget {
       ),
       children: [
         SimpleDialogOption(
-          onPressed: onPressed,
+          onPressed: () {
+            controller.onTapComplete(rewardId: rewardId, body: body);
+            Navigator.pop(context, true);
+          },
           child: const PrimarySmallButton(text: 'はい！'),
         ),
         SimpleDialogOption(

@@ -239,11 +239,8 @@ class _RewardButton extends GetView<RewardDetailViewController> {
                 );
               } else {
                 return RewardCompleteDialog(
+                  rewardId: rewardId,
                   rewardName: rewardName,
-                  onPressed: () {
-                    controller.onTapRequest(rewardId: rewardId);
-                    Navigator.pop(context, true);
-                  },
                 );
               }
             }).then((value) {
