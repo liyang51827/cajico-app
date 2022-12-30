@@ -32,6 +32,9 @@ class CategoryCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          side: const BorderSide(
+            color: gray6,
+          ),
         ),
         child: Column(
           children: [

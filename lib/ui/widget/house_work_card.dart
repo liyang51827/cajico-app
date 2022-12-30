@@ -50,6 +50,9 @@ class HouseWorkCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          side: const BorderSide(
+            color: gray6,
+          ),
         ),
         child: Container(
           padding: const EdgeInsets.only(right: 16),
