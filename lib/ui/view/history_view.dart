@@ -135,7 +135,8 @@ class HistoryView extends StatelessWidget {
                                           side: const BorderSide(color: gray4),
                                           elevation: 0,
                                         ),
-                                        onPressed: () => controller.onTapNextTotalPage(page: totalCurrentPage),
+                                        onPressed: () =>
+                                            controller.onTapNextTotalPage(page: totalCurrentPage),
                                         child: const Text(
                                           '次の10件を表示',
                                           style: TextStyle(fontWeight: FontWeight.w700),
