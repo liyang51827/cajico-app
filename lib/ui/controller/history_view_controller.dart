@@ -43,7 +43,7 @@ class HistoryViewController extends BaseViewController {
     await callAsyncApi(() async {
       totalNextPointHistory.value = await api.getTotalPointHistory(page: 2);
       totalNextPointHistories.value = totalNextPointHistory()?.pointHistories ?? [];
+      totalPointHistories.value = [...totalPointHistories(), ...totalNextPointHistories()];
     });
-    totalPointHistories().addAll(totalNextPointHistories());
   }
 }
