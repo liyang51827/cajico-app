@@ -174,9 +174,11 @@ class ApiService extends GetConnect {
   }
 
   // 家族全体の家事履歴API
-  Future<TotalPointHistory> getTotalPointHistory() async {
+  Future<TotalPointHistory> getTotalPointHistory({int page = 1}) async {
     final res = await http.get(
-      _makeUri('/point-histories/total'),
+      _makeUri('/point-histories/total', queryParams: {
+        'page': page.toString(),
+      }),
       headers: await _makeAuthenticatedHeader(),
     );
     final dynamic data = _decodeResponse(res)['data'];
