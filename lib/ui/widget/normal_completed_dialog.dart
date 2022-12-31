@@ -22,7 +22,7 @@ class NormalCompletedDialog extends StatelessWidget {
           child: const PrimarySmallButton(text: 'OK'),
           onPressed: () {
             Navigator.pop(context);
-            homeController.fetchData();
+            homeController.onTapGetUnreadCount();
           },
         )
       ],

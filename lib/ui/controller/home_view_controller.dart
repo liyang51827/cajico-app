@@ -37,4 +37,10 @@ class HomeViewController extends BaseViewController {
       unreadCount.value = 0;
     });
   }
+
+  Future<void> onTapGetUnreadCount() async {
+    await callAsyncApi(() async {
+      unreadCount.value = await api.getNotificationUnreadCount();
+    });
+  }
 }
