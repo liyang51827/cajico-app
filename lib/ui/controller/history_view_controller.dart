@@ -8,6 +8,7 @@ class HistoryViewController extends BaseViewController {
   final totalNextPointHistory = Rxn<TotalPointHistory>();
   final RxList<Point> totalPointHistories = <Point>[].obs;
   final RxList<Point> totalNextPointHistories = <Point>[].obs;
+  final totalCurrentPage = 1.obs;
 
   @override
   void onInit() {
@@ -25,6 +26,7 @@ class HistoryViewController extends BaseViewController {
           totalPointHistory.value = await api.getTotalPointHistory();
           totalPointHistories.value = totalPointHistory()?.pointHistories ?? [];
           totalNextPointHistories.value = [];
+          totalCurrentPage.value = 1;
         }(),
       ]);
     });
@@ -45,6 +47,7 @@ class HistoryViewController extends BaseViewController {
       totalNextPointHistory.value = await api.getTotalPointHistory(page: page + 1);
       totalNextPointHistories.value = totalNextPointHistory()?.pointHistories ?? [];
       totalPointHistories.value = [...totalPointHistories(), ...totalNextPointHistories()];
+      totalCurrentPage.value = totalNextPointHistory()?.currentPage ?? 1;
     });
   }
 }

@@ -21,8 +21,7 @@ class HistoryView extends StatelessWidget {
     return Obx(() {
       final controller = Get.put(HistoryViewController());
       final totalPointHistory = controller.totalPointHistory();
-      final totalNextPointHistory = controller.totalNextPointHistory();
-      final int totalCurrentPage = totalNextPointHistory?.currentPage ?? 1;
+      final int totalCurrentPage = controller.totalCurrentPage();
 
       return DefaultTabController(
         initialIndex: 0,
