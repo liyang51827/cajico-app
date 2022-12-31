@@ -65,8 +65,12 @@ class HouseWork extends GetView<HomeViewController> {
             ]),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
-            actions: const [
-              NotificationAction(),
+            actions: [
+              Obx(() {
+                final controller = Get.put(HomeViewController());
+                final int unreadCount = controller.unreadCount();
+                return NotificationAction(unreadCount: unreadCount);
+              }),
             ],
           ),
           drawer: const HomeDrawer(),

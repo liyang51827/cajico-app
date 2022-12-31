@@ -16,7 +16,6 @@ class NotificationViewController extends BaseViewController {
   Future<void> fetchData() async {
     await callAsyncApi(() async {
       notices.value = await api.getNoticesList();
-      await api.readNotices();
     });
   }
 }

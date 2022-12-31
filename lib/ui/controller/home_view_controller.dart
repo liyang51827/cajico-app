@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'base_view_controller.dart';
 
 class HomeViewController extends BaseViewController {
-
   final RxList<HouseWork> houseWorks = <HouseWork>[].obs;
+  final unreadCount = 0.obs;
 
   @override
   void onInit() {
@@ -14,13 +14,27 @@ class HomeViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-        houseWorks.value = await api.getRecentHouseWorksList();
+      await Future.wait([
+        () async {
+          houseWorks.value = await api.getRecentHouseWorksList();
+        }(),
+        () async {
+          unreadCount.value = await api.getNotificationUnreadCount();
+        }(),
+      ]);
     });
   }
 
   Future<void> onTapComplete({required int houseWorkId}) async {
     await callAsyncApi(() async {
       await api.postCompleteHouseWork(houseWorkId: houseWorkId);
+    });
+  }
+
+  Future<void> onTapRead() async {
+    await callAsyncApi(() async {
+      await api.readNotices();
+      unreadCount.value = 0;
     });
   }
 }
