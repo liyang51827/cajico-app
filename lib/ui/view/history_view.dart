@@ -21,6 +21,8 @@ class HistoryView extends StatelessWidget {
     return Obx(() {
       final controller = Get.put(HistoryViewController());
       final totalPointHistory = controller.totalPointHistory();
+      final totalNextPointHistory = controller.totalNextPointHistory();
+      final int totalCurrentPage = totalNextPointHistory?.currentPage ?? 1;
 
       return DefaultTabController(
         initialIndex: 0,
@@ -122,23 +124,26 @@ class HistoryView extends StatelessWidget {
                                       child: Text(date, style: const TextStyle(color: gray3)));
                                 },
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                child: OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: gray4,
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(color: gray4),
-                                    elevation: 0,
-                                  ),
-                                  onPressed: () => controller.onTapNextTotalPage(),
-                                  child: const Text(
-                                    '次の10件を表示',
-                                    style: TextStyle(fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ),
+                              totalCurrentPage < totalPointHistory.lastPage
+                                  ? Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                      child: OutlinedButton(
+                                        style: OutlinedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          foregroundColor: gray4,
+                                          shape: const StadiumBorder(),
+                                          side: const BorderSide(color: gray4),
+                                          elevation: 0,
+                                        ),
+                                        onPressed: () => controller.onTapNextTotalPage(page: totalCurrentPage),
+                                        child: const Text(
+                                          '次の10件を表示',
+                                          style: TextStyle(fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
                             ],
                           )
                         : const SizedBox(),

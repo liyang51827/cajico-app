@@ -61,17 +61,25 @@ class Point {
 
 class TotalPointHistory {
   TotalPointHistory(
-      {required this.todayPoint, required this.totalPoint, required this.pointHistories});
+      {required this.todayPoint,
+      required this.totalPoint,
+      required this.pointHistories,
+      required this.currentPage,
+      required this.lastPage});
 
   final int todayPoint;
   final int totalPoint;
   final List<Point> pointHistories;
+  final int currentPage;
+  final int lastPage;
 
   static TotalPointHistory fromJson(Map<String, dynamic> json) {
     return TotalPointHistory(
       todayPoint: json['todayPoint'],
       totalPoint: json['totalPoint'],
       pointHistories: (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
+      currentPage: json['meta']['current_page'],
+      lastPage: json['meta']['last_page']
     );
   }
 }
