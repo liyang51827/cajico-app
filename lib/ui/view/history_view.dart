@@ -4,7 +4,6 @@ import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
-import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -12,7 +11,6 @@ import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
-
 import '../widget/loading_stack.dart';
 
 class HistoryView extends StatelessWidget {
@@ -43,9 +41,6 @@ class HistoryView extends StatelessWidget {
             ]),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
-            actions: const [
-              NotificationAction(),
-            ],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(50),
               child: Align(
@@ -105,7 +100,7 @@ class HistoryView extends StatelessWidget {
                               GroupedListView<Point, String>(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                elements: totalPointHistory.pointHistories,
+                                elements: controller.totalPointHistories(),
                                 groupBy: (element) => element.date,
                                 sort: false,
                                 itemBuilder: (context, element) {
@@ -126,6 +121,23 @@ class HistoryView extends StatelessWidget {
                                           const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                       child: Text(date, style: const TextStyle(color: gray3)));
                                 },
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: gray4,
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(color: gray4),
+                                    elevation: 0,
+                                  ),
+                                  onPressed: () => controller.onTapNextTotalPage(),
+                                  child: const Text(
+                                    '次の10件を表示',
+                                    style: TextStyle(fontWeight: FontWeight.w700),
+                                  ),
+                                ),
                               ),
                             ],
                           )

@@ -38,9 +38,6 @@ class RewardView extends GetView<RewardViewController> {
             ]),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
-            actions: const [
-              NotificationAction(),
-            ],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(55),
               child: Align(
