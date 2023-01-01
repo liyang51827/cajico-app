@@ -1,25 +1,34 @@
 class PointHistory {
   PointHistory(
-      {required this.userName,
+      {required this.userId,
+      required this.userName,
       required this.iconUrl,
       required this.todayPoint,
       required this.totalPoint,
-      required this.pointHistories});
+      required this.pointHistories,
+      required this.currentPage,
+      required this.lastPage});
 
+  final int userId;
   final String userName;
   final String iconUrl;
   final int todayPoint;
   final int totalPoint;
   final List<Point> pointHistories;
+  final int currentPage;
+  final int lastPage;
 
   static PointHistory fromJson(Map<String, dynamic> json) {
     return PointHistory(
-      userName: json['user']['userName'],
-      iconUrl: json['user']['iconUrl'],
-      todayPoint: json['todayPoint'],
-      totalPoint: json['totalPoint'],
-      pointHistories: (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
-    );
+        userId: json['user']['id'],
+        userName: json['user']['userName'],
+        iconUrl: json['user']['iconUrl'],
+        todayPoint: json['todayPoint'],
+        totalPoint: json['totalPoint'],
+        pointHistories:
+            (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
+        currentPage: json['meta']['current_page'],
+        lastPage: json['meta']['last_page']);
   }
 }
 

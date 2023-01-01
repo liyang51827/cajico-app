@@ -184,6 +184,27 @@ class HistoryView extends StatelessWidget {
                                   child: Text(date, style: const TextStyle(color: gray3)));
                             },
                           ),
+                          pointHistory.currentPage < pointHistory.lastPage
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                  child: OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                      foregroundColor: gray4,
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(color: gray4),
+                                      elevation: 0,
+                                    ),
+                                    onPressed: () => controller.onTapNextPage(
+                                        userId: pointHistory.userId,
+                                        page: pointHistory.currentPage),
+                                    child: const Text(
+                                      '次の10件を表示',
+                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                     ),

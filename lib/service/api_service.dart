@@ -173,6 +173,18 @@ class ApiService extends GetConnect {
     return data.map((json) => PointHistory.fromJson(json)).toList();
   }
 
+  // 個人別家事履歴一覧API
+  Future<List<Point>> getUserPointHistoryList({required int userId, int page = 1}) async {
+    final res = await http.get(
+      _makeUri('/$userId/point-histories', queryParams: {
+        'page': page.toString(),
+      }),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => Point.fromJson(json)).toList();
+  }
+
   // 家族全体の家事履歴API
   Future<TotalPointHistory> getTotalPointHistory({int page = 1}) async {
     final res = await http.get(

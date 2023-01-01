@@ -4,6 +4,10 @@ import 'base_view_controller.dart';
 
 class HistoryViewController extends BaseViewController {
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
+  final RxList<Point> nextPointHistories = <Point>[].obs;
+  final userHistories = <Point>[].obs;
+
+  // 全体家事履歴関連の変数
   final totalPointHistory = Rxn<TotalPointHistory>();
   final totalNextPointHistory = Rxn<TotalPointHistory>();
   final RxList<Point> totalPointHistories = <Point>[].obs;
@@ -40,6 +44,17 @@ class HistoryViewController extends BaseViewController {
     if (result) {
       fetchData();
     }
+  }
+
+  Future<void> onTapNextPage({required int page, required int userId}) async {
+    await callAsyncApi(() async {
+      nextPointHistories.value = await api.getUserPointHistoryList(userId: userId, page: page + 1);
+      userHistories.value = [
+        ...pointHistories.firstWhere((element) => element.userId == userId).pointHistories,
+        ...nextPointHistories()
+      ];
+      print(nextPointHistories.length);
+    });
   }
 
   Future<void> onTapNextTotalPage({required int page}) async {
