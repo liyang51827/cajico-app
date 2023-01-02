@@ -3,7 +3,6 @@ import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/home_view_controller.dart';
 import '../controller/notification_view_controller.dart';
 
 class NotificationView extends StatelessWidget {
