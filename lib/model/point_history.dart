@@ -14,8 +14,8 @@ class PointHistory {
   final String iconUrl;
   final int todayPoint;
   final int totalPoint;
-  final List<Point> pointHistories;
-  final int currentPage;
+  List<Point> pointHistories;
+  int currentPage;
   final int lastPage;
 
   static PointHistory fromJson(Map<String, dynamic> json) {

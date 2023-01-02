@@ -6,6 +6,7 @@ class HistoryViewController extends BaseViewController {
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
   final RxList<Point> nextPointHistories = <Point>[].obs;
   final userHistories = <Point>[].obs;
+  final pointHistory = Rxn<PointHistory>();
 
   // 全体家事履歴関連の変数
   final totalPointHistory = Rxn<TotalPointHistory>();
@@ -49,11 +50,11 @@ class HistoryViewController extends BaseViewController {
   Future<void> onTapNextPage({required int page, required int userId}) async {
     await callAsyncApi(() async {
       nextPointHistories.value = await api.getUserPointHistoryList(userId: userId, page: page + 1);
-      userHistories.value = [
+      pointHistories.firstWhere((element) => element.userId == userId).pointHistories = [
         ...pointHistories.firstWhere((element) => element.userId == userId).pointHistories,
         ...nextPointHistories()
       ];
-      print(nextPointHistories.length);
+      pointHistories.firstWhere((element) => element.userId == userId).currentPage = page + 1;
     });
   }
 

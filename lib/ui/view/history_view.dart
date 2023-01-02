@@ -149,7 +149,7 @@ class HistoryView extends StatelessWidget {
                         : const SizedBox(),
                   ),
                 ),
-                for (var pointHistory in controller.pointHistories()) ...{
+                for (var item in controller.pointHistories()) ...{
                   RefreshIndicator(
                     color: primaryColor,
                     onRefresh: controller.fetchData,
@@ -158,12 +158,12 @@ class HistoryView extends StatelessWidget {
                       child: Column(
                         children: [
                           _PointSummaries(
-                              todayPoint: pointHistory.todayPoint,
-                              totalPoint: pointHistory.totalPoint),
+                              todayPoint: item.todayPoint,
+                              totalPoint: item.totalPoint),
                           GroupedListView<Point, String>(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            elements: pointHistory.pointHistories,
+                            elements: item.pointHistories,
                             groupBy: (element) => element.date,
                             sort: false,
                             itemBuilder: (context, element) {
@@ -184,7 +184,7 @@ class HistoryView extends StatelessWidget {
                                   child: Text(date, style: const TextStyle(color: gray3)));
                             },
                           ),
-                          pointHistory.currentPage < pointHistory.lastPage
+                          item.currentPage < item.lastPage
                               ? Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                                   child: OutlinedButton(
@@ -196,8 +196,8 @@ class HistoryView extends StatelessWidget {
                                       elevation: 0,
                                     ),
                                     onPressed: () => controller.onTapNextPage(
-                                        userId: pointHistory.userId,
-                                        page: pointHistory.currentPage),
+                                        userId: item.userId,
+                                        page: item.currentPage),
                                     child: const Text(
                                       '次の10件を表示',
                                       style: TextStyle(fontWeight: FontWeight.w700),
