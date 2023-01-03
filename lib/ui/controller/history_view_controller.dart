@@ -5,8 +5,6 @@ import 'base_view_controller.dart';
 class HistoryViewController extends BaseViewController {
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
   final RxList<Point> nextPointHistories = <Point>[].obs;
-  final userHistories = <Point>[].obs;
-  final pointHistory = Rxn<PointHistory>();
 
   // 全体家事履歴関連の変数
   final totalPointHistory = Rxn<TotalPointHistory>();
