@@ -115,6 +115,18 @@ class ApiService extends GetConnect {
     return data.map((json) => Notice.fromJson(json)).toList();
   }
 
+  // // お知らせ一覧API
+  // Future<EntireNotice> getEntireNoticesList({int page = 1}) async {
+  //   final res = await http.get(
+  //     _makeUri('/notices', queryParams: {
+  //       'page': page.toString(),
+  //     }),
+  //     headers: await _makeAuthenticatedHeader(),
+  //   );
+  //   final List<dynamic> data = _decodeResponse(res)['data'];
+  //   return data.map((json) => Notice.fromJson(json)).toList();
+  // }
+
   // お知らせ既読API
   Future<bool> readNotices() async {
     final res = await http.put(
