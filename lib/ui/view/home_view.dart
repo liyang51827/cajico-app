@@ -11,6 +11,7 @@ import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import '../widget/header.dart';
 
 void main() {
   Get.lazyPut(ApiService.new);
@@ -51,28 +52,19 @@ class HouseWork extends GetView<HomeViewController> {
       children: [
         Scaffold(
           backgroundColor: gray7,
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black54),
-            centerTitle: true,
-            title: Row(children: const [
-              Image(
-                image: AssetImage(
-                  'assets/images/logo.png',
-                ),
-                height: 55,
-              ),
-              Text('家事をする', style: TextStyle(color: gray2)),
-            ]),
-            backgroundColor: Colors.white,
-            titleTextStyle: const TextStyle(fontSize: 22),
-            actions: [
-              Obx(() {
-                final controller = Get.put(HomeViewController());
-                final int unreadCount = controller.unreadCount();
-                return NotificationAction(unreadCount: unreadCount);
-              }),
-            ],
-          ),
+          appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(55),
+              child: Header(
+                imageUrl: 'assets/images/logo.png',
+                title: '家事をする',
+                actions: [
+                  Obx(() {
+                    final controller = Get.put(HomeViewController());
+                    final int unreadCount = controller.unreadCount();
+                    return NotificationAction(unreadCount: unreadCount);
+                  }),
+                ],
+              )),
           drawer: const HomeDrawer(),
           body: GetLoadingStack<HomeViewController>(
             child: RefreshIndicator(

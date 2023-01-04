@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
+import 'package:cajico_app/ui/widget/header.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
@@ -29,61 +30,16 @@ class HistoryView extends StatelessWidget {
         length: controller.pointHistories().length + 1,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black54),
-            centerTitle: true,
-            title: Row(children: const [
-              Image(
-                image: AssetImage(
-                  'assets/images/logo_history.png',
+          appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(105),
+              child: Header(
+                imageUrl: 'assets/images/logo_history.png',
+                title: '家事履歴',
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(50),
+                  child: _TabBar(),
                 ),
-                height: 55,
-              ),
-              Text('家事履歴', style: TextStyle(color: gray2)),
-            ]),
-            backgroundColor: Colors.white,
-            titleTextStyle: const TextStyle(fontSize: 22),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(50),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TabBar(
-                  isScrollable: true,
-                  labelColor: primaryColor,
-                  unselectedLabelColor: gray4,
-                  indicatorColor: primaryColor,
-                  indicatorWeight: 3,
-                  labelStyle: const TextStyle(fontSize: 16),
-                  tabs: <Widget>[
-                    const Tab(text: '全て'),
-                    for (var pointHistory in controller.pointHistories()) ...{
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: pointHistory.iconUrl,
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(color: primaryColor),
-                              ),
-                              imageBuilder: (context, imageProvider) {
-                                return CircleAvatar(
-                                  radius: 15,
-                                  backgroundImage: imageProvider,
-                                );
-                              },
-                            ),
-                            horizontalSpaceSmall,
-                            Text(pointHistory.userName)
-                          ],
-                        ),
-                      )
-                    },
-                  ],
-                ),
-              ),
-            ),
-          ),
+              )),
           drawer: const HomeDrawer(),
           body: GetLoadingStack<HistoryViewController>(
             child: TabBarView(
@@ -181,6 +137,55 @@ class HistoryView extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: const Footer(),
+        ),
+      );
+    });
+  }
+}
+
+class _TabBar extends StatelessWidget {
+  const _TabBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final controller = Get.put(HistoryViewController());
+
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: TabBar(
+          isScrollable: true,
+          labelColor: primaryColor,
+          unselectedLabelColor: gray4,
+          indicatorColor: primaryColor,
+          indicatorWeight: 3,
+          labelStyle: const TextStyle(fontSize: 16),
+          tabs: <Widget>[
+            const Tab(text: '全て'),
+            for (var pointHistory in controller.pointHistories()) ...{
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: pointHistory.iconUrl,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      ),
+                      imageBuilder: (context, imageProvider) {
+                        return CircleAvatar(
+                          radius: 15,
+                          backgroundImage: imageProvider,
+                        );
+                      },
+                    ),
+                    horizontalSpaceSmall,
+                    Text(pointHistory.userName)
+                  ],
+                ),
+              )
+            },
+          ],
         ),
       );
     });

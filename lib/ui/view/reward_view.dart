@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/reward_view_controller.dart';
+import '../widget/header.dart';
 import '../widget/loading_stack.dart';
 import '../widget/reward_category_card.dart';
 
@@ -22,74 +23,16 @@ class RewardView extends GetView<RewardViewController> {
         length: controller.familyRewards().length,
         child: Scaffold(
           backgroundColor: gray7,
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black54),
-            centerTitle: true,
-            title: Row(children: const [
-              Image(
-                image: AssetImage(
-                  'assets/images/logo_reward.png',
+          appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(105),
+              child: Header(
+                imageUrl: 'assets/images/logo_reward.png',
+                title: 'ごほうび',
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(50),
+                  child: _TabBar(),
                 ),
-                height: 55,
-              ),
-              horizontalSpaceSmall,
-              Text('ごほうび', style: TextStyle(color: gray2)),
-            ]),
-            backgroundColor: Colors.white,
-            titleTextStyle: const TextStyle(fontSize: 22),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(55),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TabBar(
-                  isScrollable: true,
-                  labelColor: primaryColor,
-                  unselectedLabelColor: gray4,
-                  indicatorColor: primaryColor,
-                  indicatorWeight: 3,
-                  labelStyle: const TextStyle(fontSize: 16),
-                  tabs: <Widget>[
-                    for (var familyReward in controller.familyRewards()) ...{
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: familyReward.iconUrl,
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(color: primaryColor),
-                              ),
-                              imageBuilder: (context, imageProvider) {
-                                return CircleAvatar(
-                                  radius: 15,
-                                  backgroundImage: imageProvider,
-                                );
-                              },
-                            ),
-                            horizontalSpaceSmall,
-                            Text(familyReward.userName),
-                            horizontalSpaceTiny,
-                            familyReward.requestingCount > 0
-                                ? Container(
-                                    width: 20,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle, color: secondaryColor),
-                                    child: Text(
-                                      familyReward.requestingCount.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                  )
-                                : const SizedBox()
-                          ],
-                        ),
-                      )
-                    }
-                  ],
-                ),
-              ),
-            ),
-          ),
+              )),
           drawer: const HomeDrawer(),
           body: GetLoadingStack<RewardViewController>(
             child: TabBarView(
@@ -160,6 +103,67 @@ class RewardView extends GetView<RewardViewController> {
             ),
           ),
           bottomNavigationBar: const Footer(),
+        ),
+      );
+    });
+  }
+}
+
+class _TabBar extends StatelessWidget {
+  const _TabBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final controller = Get.put(RewardViewController());
+
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: TabBar(
+          isScrollable: true,
+          labelColor: primaryColor,
+          unselectedLabelColor: gray4,
+          indicatorColor: primaryColor,
+          indicatorWeight: 3,
+          labelStyle: const TextStyle(fontSize: 16),
+          tabs: <Widget>[
+            for (var familyReward in controller.familyRewards()) ...{
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: familyReward.iconUrl,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: primaryColor),
+                      ),
+                      imageBuilder: (context, imageProvider) {
+                        return CircleAvatar(
+                          radius: 15,
+                          backgroundImage: imageProvider,
+                        );
+                      },
+                    ),
+                    horizontalSpaceSmall,
+                    Text(familyReward.userName),
+                    horizontalSpaceTiny,
+                    familyReward.requestingCount > 0
+                        ? Container(
+                            width: 20,
+                            decoration:
+                                const BoxDecoration(shape: BoxShape.circle, color: secondaryColor),
+                            child: Text(
+                              familyReward.requestingCount.toString(),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          )
+                        : const SizedBox()
+                  ],
+                ),
+              )
+            }
+          ],
         ),
       );
     });
