@@ -69,7 +69,7 @@ class _NotificationDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 120,
+        height: 90,
         width: double.infinity,
         decoration: const BoxDecoration(
             border: Border(
@@ -82,15 +82,14 @@ class _NotificationDetail extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            isRead ? Text(date) : Text(date, style: const TextStyle(fontWeight: FontWeight.bold)),
+            isRead ? Text(date, style: const TextStyle(fontSize: 14)) : Text(date, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             verticalSpaceTiny,
             SizedBox(
                 width: double.infinity,
                 child: isRead
-                    ? Text(message)
-                    : Text(message, style: const TextStyle(fontWeight: FontWeight.bold)))
+                    ? Text(message, style: const TextStyle(fontSize: 14))
+                    : Text(message, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)))
           ],
         ));
   }
