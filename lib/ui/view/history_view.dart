@@ -163,7 +163,7 @@ class HistoryView extends StatelessWidget {
                           GroupedListView<Point, String>(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            elements: item.pointHistories,
+                            elements: item.points,
                             groupBy: (element) => element.date,
                             sort: false,
                             itemBuilder: (context, element) {

@@ -26,7 +26,7 @@ class HistoryViewController extends BaseViewController {
         }(),
         () async {
           totalPointHistory.value = await api.getTotalPointHistory();
-          totalPointHistories.value = totalPointHistory()?.pointHistories ?? [];
+          totalPointHistories.value = totalPointHistory()?.points ?? [];
           totalNextPointHistories.value = [];
           totalCurrentPage.value = 1;
         }(),
@@ -47,8 +47,8 @@ class HistoryViewController extends BaseViewController {
   Future<void> onTapNextPage({required int page, required int userId}) async {
     await callAsyncApi(() async {
       final nextPointHistories = await api.getUserPointHistoryList(userId: userId, page: page + 1);
-      pointHistories.firstWhere((element) => element.userId == userId).pointHistories = [
-        ...pointHistories.firstWhere((element) => element.userId == userId).pointHistories,
+      pointHistories.firstWhere((element) => element.userId == userId).points = [
+        ...pointHistories.firstWhere((element) => element.userId == userId).points,
         ...nextPointHistories
       ];
       pointHistories.firstWhere((element) => element.userId == userId).currentPage = page + 1;
@@ -59,7 +59,7 @@ class HistoryViewController extends BaseViewController {
   Future<void> onTapNextTotalPage({required int page}) async {
     await callAsyncApi(() async {
       totalNextPointHistory.value = await api.getTotalPointHistory(page: page + 1);
-      totalNextPointHistories.value = totalNextPointHistory()?.pointHistories ?? [];
+      totalNextPointHistories.value = totalNextPointHistory()?.points ?? [];
       totalPointHistories.value = [...totalPointHistories(), ...totalNextPointHistories()];
       totalCurrentPage.value = totalNextPointHistory()?.currentPage ?? 1;
     });

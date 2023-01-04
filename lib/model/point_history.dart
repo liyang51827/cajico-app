@@ -5,7 +5,7 @@ class PointHistory {
       required this.iconUrl,
       required this.todayPoint,
       required this.totalPoint,
-      required this.pointHistories,
+      required this.points,
       required this.currentPage,
       required this.lastPage});
 
@@ -14,7 +14,7 @@ class PointHistory {
   final String iconUrl;
   final int todayPoint;
   final int totalPoint;
-  List<Point> pointHistories;
+  List<Point> points;
   int currentPage;
   final int lastPage;
 
@@ -25,7 +25,7 @@ class PointHistory {
         iconUrl: json['user']['iconUrl'],
         todayPoint: json['todayPoint'],
         totalPoint: json['totalPoint'],
-        pointHistories:
+        points:
             (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
         currentPage: json['meta']['current_page'],
         lastPage: json['meta']['last_page']);
@@ -72,13 +72,13 @@ class TotalPointHistory {
   TotalPointHistory(
       {required this.todayPoint,
       required this.totalPoint,
-      required this.pointHistories,
+      required this.points,
       required this.currentPage,
       required this.lastPage});
 
   final int todayPoint;
   final int totalPoint;
-  final List<Point> pointHistories;
+  final List<Point> points;
   final int currentPage;
   final int lastPage;
 
@@ -86,7 +86,7 @@ class TotalPointHistory {
     return TotalPointHistory(
         todayPoint: json['todayPoint'],
         totalPoint: json['totalPoint'],
-        pointHistories:
+        points:
             (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
         currentPage: json['meta']['current_page'],
         lastPage: json['meta']['last_page']);
