@@ -43,7 +43,8 @@ class NotificationView extends StatelessWidget {
                   ),
                   paginate != null && paginate.hasNextPage()
                       ? NextPageButton(
-                          onPressed: () => controller.onTapNextPage(page: paginate.getNextPage()))
+                          onPressed: () => controller.onTapNextPage(page: paginate.getNextPage()),
+                          label: '次の20件を表示')
                       : const SizedBox(),
                 ],
               ),
@@ -83,13 +84,16 @@ class _NotificationDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            isRead ? Text(date, style: const TextStyle(fontSize: 14)) : Text(date, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            isRead
+                ? Text(date, style: const TextStyle(fontSize: 14))
+                : Text(date, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             verticalSpaceTiny,
             SizedBox(
                 width: double.infinity,
                 child: isRead
                     ? Text(message, style: const TextStyle(fontSize: 14))
-                    : Text(message, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)))
+                    : Text(message,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)))
           ],
         ));
   }
