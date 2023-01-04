@@ -12,6 +12,7 @@ class NotificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.put(NotificationViewController());
+      final paginate = controller.paginate();
 
       return Scaffold(
         backgroundColor: Colors.white,
@@ -39,6 +40,25 @@ class NotificationView extends StatelessWidget {
                           date: item.date, message: item.message, isRead: item.isRead);
                     },
                   ),
+                  paginate != null && paginate.hasNextPage()
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: gray4,
+                            shape: const StadiumBorder(),
+                            side: const BorderSide(color: gray4),
+                            elevation: 0,
+                          ),
+                          onPressed: () => controller.onTapNextPage(page: paginate.getNextPage()),
+                          child: const Text(
+                            '次の20件を表示',
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
                 ],
               ),
             ),

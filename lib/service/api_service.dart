@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import '../model/pagination_response.dart';
 import '../model/point_history.dart';
 import '../model/house_works.dart';
 import 'package:http/http.dart' as http;
@@ -106,26 +107,20 @@ class ApiService extends GetConnect {
   }
 
   // お知らせ一覧API
-  Future<List<Notice>> getNoticesList() async {
+  Future<PaginationResponse<List<Notice>>> getNoticesList({int page = 1}) async {
     final res = await http.get(
-      _makeUri('/notices'),
+      _makeUri('/notices', queryParams: {
+        'page': page.toString(),
+      }),
       headers: await _makeAuthenticatedHeader(),
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
-    return data.map((json) => Notice.fromJson(json)).toList();
+    final dynamic meta = _decodeResponse(res)['meta'];
+    return PaginationResponse(
+      data: data.map((json) => Notice.fromJson(json)).toList(),
+      meta: PaginationMeta.fromJson(meta),
+    );
   }
-
-  // // お知らせ一覧API
-  // Future<EntireNotice> getEntireNoticesList({int page = 1}) async {
-  //   final res = await http.get(
-  //     _makeUri('/notices', queryParams: {
-  //       'page': page.toString(),
-  //     }),
-  //     headers: await _makeAuthenticatedHeader(),
-  //   );
-  //   final List<dynamic> data = _decodeResponse(res)['data'];
-  //   return data.map((json) => Notice.fromJson(json)).toList();
-  // }
 
   // お知らせ既読API
   Future<bool> readNotices() async {
