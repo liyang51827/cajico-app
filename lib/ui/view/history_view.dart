@@ -12,6 +12,7 @@ import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
 import '../widget/loading_stack.dart';
+import '../widget/next_page_button.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
@@ -124,25 +125,9 @@ class HistoryView extends StatelessWidget {
                                 },
                               ),
                               totalCurrentPage < totalPointHistory.lastPage
-                                  ? Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                      child: OutlinedButton(
-                                        style: OutlinedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: gray4,
-                                          shape: const StadiumBorder(),
-                                          side: const BorderSide(color: gray4),
-                                          elevation: 0,
-                                        ),
-                                        onPressed: () =>
-                                            controller.onTapNextTotalPage(page: totalCurrentPage),
-                                        child: const Text(
-                                          '次の10件を表示',
-                                          style: TextStyle(fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    )
+                                  ? NextPageButton(
+                                      onPressed: () =>
+                                          controller.onTapNextTotalPage(page: totalCurrentPage))
                                   : const SizedBox(),
                             ],
                           )
@@ -157,9 +142,7 @@ class HistoryView extends StatelessWidget {
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
-                          _PointSummaries(
-                              todayPoint: item.todayPoint,
-                              totalPoint: item.totalPoint),
+                          _PointSummaries(todayPoint: item.todayPoint, totalPoint: item.totalPoint),
                           GroupedListView<Point, String>(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -185,25 +168,9 @@ class HistoryView extends StatelessWidget {
                             },
                           ),
                           item.currentPage < item.lastPage
-                              ? Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                  child: OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: gray4,
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(color: gray4),
-                                      elevation: 0,
-                                    ),
-                                    onPressed: () => controller.onTapNextPage(
-                                        userId: item.userId,
-                                        page: item.currentPage),
-                                    child: const Text(
-                                      '次の10件を表示',
-                                      style: TextStyle(fontWeight: FontWeight.w700),
-                                    ),
-                                  ),
-                                )
+                              ? NextPageButton(
+                                  onPressed: () => controller.onTapNextPage(
+                                      userId: item.userId, page: item.currentPage))
                               : const SizedBox(),
                         ],
                       ),

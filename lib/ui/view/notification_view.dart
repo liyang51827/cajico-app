@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
+import 'package:cajico_app/ui/widget/next_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
@@ -41,24 +42,9 @@ class NotificationView extends StatelessWidget {
                     },
                   ),
                   paginate != null && paginate.hasNextPage()
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: gray4,
-                            shape: const StadiumBorder(),
-                            side: const BorderSide(color: gray4),
-                            elevation: 0,
-                          ),
-                          onPressed: () => controller.onTapNextPage(page: paginate.getNextPage()),
-                          child: const Text(
-                            '次の20件を表示',
-                            style: TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
+                      ? NextPageButton(
+                          onPressed: () => controller.onTapNextPage(page: paginate.getNextPage()))
+                      : const SizedBox(),
                 ],
               ),
             ),
