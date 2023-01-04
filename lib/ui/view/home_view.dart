@@ -48,57 +48,53 @@ class HouseWork extends GetView<HomeViewController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewController());
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: gray7,
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(55),
-              child: Header(
-                imageUrl: 'assets/images/logo.png',
-                title: '家事をする',
-                actions: [
-                  Obx(() {
-                    final controller = Get.put(HomeViewController());
-                    final int unreadCount = controller.unreadCount();
-                    return NotificationAction(unreadCount: unreadCount);
-                  }),
-                ],
-              )),
-          drawer: const HomeDrawer(),
-          body: GetLoadingStack<HomeViewController>(
-            child: RefreshIndicator(
-              color: primaryColor,
-              onRefresh: controller.fetchData,
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        alignment: Alignment.centerLeft,
-                        child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
-                      ),
-                      const _CategoryCards(),
-                      Container(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        alignment: Alignment.centerLeft,
-                        margin: const EdgeInsets.only(top: 24),
-                        child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
-                      ),
-                      const _ResentHouseWorks(),
-                      verticalSpaceSmall
-                    ],
+    return Scaffold(
+      backgroundColor: gray7,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(55),
+          child: Header(
+            imageUrl: 'assets/images/logo.png',
+            title: '家事をする',
+            actions: [
+              Obx(() {
+                final controller = Get.put(HomeViewController());
+                final int unreadCount = controller.unreadCount();
+                return NotificationAction(unreadCount: unreadCount);
+              }),
+            ],
+          )),
+      drawer: const HomeDrawer(),
+      body: GetLoadingStack<HomeViewController>(
+        child: RefreshIndicator(
+          color: primaryColor,
+          onRefresh: controller.fetchData,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    alignment: Alignment.centerLeft,
+                    child: const Text('ジャンルから選ぶ', style: TextStyle(fontSize: 16)),
                   ),
-                ),
+                  const _CategoryCards(),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.only(top: 24),
+                    child: const Text('最近の家事から選ぶ', style: TextStyle(fontSize: 16)),
+                  ),
+                  const _ResentHouseWorks(),
+                  verticalSpaceSmall
+                ],
               ),
             ),
           ),
-          bottomNavigationBar: const Footer(),
-        )
-      ],
+        ),
+      ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }
