@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/reward_edit_view.dart';
 import 'package:cajico_app/ui/widget/colored_tab_bar.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +55,23 @@ class RewardDetailView extends StatelessWidget {
                 actions: <Widget>[
                   PopupMenuButton(
                       offset: const Offset(0, 50),
+                      onSelected: (result) {
+                        if (result == 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const RewardEditView(),
+                              fullscreenDialog: true,
+                            ),
+                          );
+                        }
+                      },
                       itemBuilder: (BuildContext context) {
                         return [
-                          const PopupMenuItem(child: Text('編集する')),
+                          const PopupMenuItem(
+                            value: 1,
+                            child: Text('編集する'),
+                          ),
                         ];
                       })
                 ],
@@ -255,10 +270,12 @@ class _RewardButton extends GetView<RewardDetailViewController> {
           if (value) {
             if (isMe) {
               return showDialog(
-                context: context, builder: (context) => const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
+                  context: context,
+                  builder: (context) => const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
             } else {
               return showDialog(
-                  context: context, builder: (context) => const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
+                  context: context,
+                  builder: (context) => const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
             }
           }
         });
