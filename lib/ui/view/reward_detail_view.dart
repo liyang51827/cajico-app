@@ -60,7 +60,11 @@ class RewardDetailView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => RewardEditView(rank: rank, point: point, rewardName: rewardName, memo: text),
+                              builder: (_) => RewardEditView(
+                                  rank: rank,
+                                  initPoint: point,
+                                  initRewardName: rewardName,
+                                  initMemo: text),
                               fullscreenDialog: true,
                             ),
                           );

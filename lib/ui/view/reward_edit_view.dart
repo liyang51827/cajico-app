@@ -11,15 +11,15 @@ class RewardEditView extends StatelessWidget {
   RewardEditView({
     super.key,
     required this.rank,
-    required this.point,
-    required this.rewardName,
-    required this.memo
+    required this.initPoint,
+    required this.initRewardName,
+    required this.initMemo
   });
 
-  final String memo;
-  final String rewardName;
-  final int point;
   final String rank;
+  final int initPoint;
+  final String initRewardName;
+  final String initMemo;
   final focusNode = FocusNode();
   final titleTextController = TextEditingController();
   late TextEditingController bodyTextController = TextEditingController();
@@ -34,6 +34,7 @@ class RewardEditView extends StatelessWidget {
       child: GestureDetector(
         onTap: focusNode.requestFocus,
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black54),
               centerTitle: true,
@@ -70,7 +71,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    TextEditingValue(text: rewardName),
+                    TextEditingValue(text: initRewardName),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
@@ -90,7 +91,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    TextEditingValue(text: point.toString()),
+                    TextEditingValue(text: initPoint.toString()),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
@@ -110,7 +111,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    TextEditingValue(text: memo),
+                    TextEditingValue(text: initMemo),
                   ),
                   cursorColor: primaryColor,
                   keyboardType: TextInputType.multiline,
