@@ -151,6 +151,30 @@ class ApiService extends GetConnect {
     return data.map((json) => FamilyReward.fromJson(json)).toList();
   }
 
+  // ごほうび履歴API
+  Future<List<RewardHistory>> getRewardHistoryList(int rewardId) async {
+    final res = await http.get(
+      _makeUri('/rewards/$rewardId/history'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => RewardHistory.fromJson(json)).toList();
+  }
+
+  // ごほうび更新API
+  Future<bool> putReward(
+      {required int rewardId,
+      required String rewardName,
+      required int point,
+      required String memo}) async {
+    final res = await http.post(
+      _makeUri('/rewards/$rewardId'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'name': rewardName, 'point': point, 'note': memo}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // ごほうびリクエストAPI
   Future<bool> requestReward({required int rewardId}) async {
     final res = await http.put(
@@ -211,16 +235,6 @@ class ApiService extends GetConnect {
       headers: await _makeAuthenticatedHeader(),
     );
     return _checkStatusCode(res);
-  }
-
-  // ごほうび履歴API
-  Future<List<RewardHistory>> getRewardHistoryList(int rewardId) async {
-    final res = await http.get(
-      _makeUri('/rewards/$rewardId/history'),
-      headers: await _makeAuthenticatedHeader(),
-    );
-    final List<dynamic> data = _decodeResponse(res)['data'];
-    return data.map((json) => RewardHistory.fromJson(json)).toList();
   }
 
   // 問い合わせAPI

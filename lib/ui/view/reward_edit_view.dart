@@ -11,20 +11,18 @@ import '../widget/primary_button.dart';
 class RewardEditView extends StatelessWidget {
   RewardEditView(
       {super.key,
+      required this.rewardId,
       required this.rank,
       required this.initPoint,
       required this.initRewardName,
       required this.initMemo});
 
+  final int rewardId;
   final String rank;
   final int initPoint;
   final String initRewardName;
   final String initMemo;
   final focusNode = FocusNode();
-  final titleTextController = TextEditingController();
-  late TextEditingController bodyTextController = TextEditingController();
-  String title = '';
-  String body = '';
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +92,7 @@ class RewardEditView extends StatelessWidget {
                     verticalSpaceMedium,
                     TextFormField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                      inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       controller: TextEditingController.fromValue(
                         TextEditingValue(text: initPoint.toString()),
                       ),
@@ -146,8 +142,15 @@ class RewardEditView extends StatelessWidget {
                             context: context,
                             builder: (_) {
                               return NormalDialog(
-                                message: '送信しますか？',
-                                onPressed: () {},
+                                message: '更新しますか？',
+                                onPressed: () {
+                                  controller.onTapUpdate(
+                                      rewardId: rewardId,
+                                      rewardName: rewardName,
+                                      point: point,
+                                      memo: memo);
+                                  Navigator.pop(context, true);
+                                },
                               );
                             }).then((value) {
                           if (value) {

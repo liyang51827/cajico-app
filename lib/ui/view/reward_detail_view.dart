@@ -61,6 +61,7 @@ class RewardDetailView extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (_) => RewardEditView(
+                                  rewardId: rewardId,
                                   rank: rank,
                                   initPoint: point,
                                   initRewardName: rewardName,
