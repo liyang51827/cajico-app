@@ -2,10 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/house_work_view_controller.dart';
 import '../controller/inquiry_view_controller.dart';
-import '../widget/house_work_card.dart';
-import '../widget/loading_stack.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
@@ -37,7 +34,6 @@ class RewardEditView extends StatelessWidget {
       child: GestureDetector(
         onTap: focusNode.requestFocus,
         child: Scaffold(
-          backgroundColor: gray7,
           appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black54),
               centerTitle: true,
@@ -50,20 +46,23 @@ class RewardEditView extends StatelessWidget {
               children: [
                 verticalSpaceLarge,
                 TextFormField(
+                  readOnly: true,
                   controller: TextEditingController.fromValue(
                     TextEditingValue(text: rank),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
+                    fillColor: gray8,
+                      filled: true,
                       labelText: 'プラン',
                       labelStyle: const TextStyle(color: gray3),
                       alignLabelWithHint: true,
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
+                          borderSide: const BorderSide(color: gray4)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
+                          borderSide: const BorderSide(color: gray4))),
                   onChanged: (value) {
                     title = value;
                   },
@@ -78,9 +77,9 @@ class RewardEditView extends StatelessWidget {
                       labelText: 'ごほうび名',
                       labelStyle: const TextStyle(color: gray3),
                       alignLabelWithHint: true,
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
+                          borderSide: const BorderSide(color: gray4)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
@@ -98,9 +97,9 @@ class RewardEditView extends StatelessWidget {
                       labelText: '必要ポイント（100P~500P）',
                       labelStyle: const TextStyle(color: gray3),
                       alignLabelWithHint: true,
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
+                          borderSide: const BorderSide(color: gray4)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),
@@ -121,9 +120,9 @@ class RewardEditView extends StatelessWidget {
                       labelText: 'ごほうびメモ',
                       labelStyle: const TextStyle(color: gray3),
                       alignLabelWithHint: true,
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
+                          borderSide: const BorderSide(color: gray4)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: primaryColor))),

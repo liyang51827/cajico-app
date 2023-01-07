@@ -9,6 +9,7 @@ const gray4 = Color(0xFFA3A3A3);
 const gray5 = Color(0xFFDBDBDB);
 const gray6 = Color(0xFFF5F5F5);
 const gray7 = Color(0xFFF8F8F8);
+const gray8 = Color(0xFFF4F4F4);
 const reservedRectangleColor = Color(0xFF666666);
 const boxShadowColor = Color.fromRGBO(0, 0, 0, 0.05);
 const backgroundColor = Color(0xE6FFFFFF);

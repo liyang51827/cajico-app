@@ -24,7 +24,7 @@ class InquiryView extends StatelessWidget {
       child: GestureDetector(
         onTap: focusNode.requestFocus,
         child: Scaffold(
-          backgroundColor: gray7,
+          backgroundColor: Colors.white,
           appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black54),
               centerTitle: true,
