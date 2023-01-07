@@ -67,7 +67,7 @@ class HistoryView extends StatelessWidget {
                                     categoryImageUrl: element.houseWorkCategoryImageUrl,
                                     categoryName: element.houseWorkCategoryName,
                                     houseWorkName: element.houseWorkName,
-                                    userIconImageUrl: element.iconUrl,
+                                    userIconImageUrl: element.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                                     time: element.time,
                                     point: element.point,
                                     isMe: element.isMe,
@@ -111,7 +111,7 @@ class HistoryView extends StatelessWidget {
                                 categoryImageUrl: element.houseWorkCategoryImageUrl,
                                 categoryName: element.houseWorkCategoryName,
                                 houseWorkName: element.houseWorkName,
-                                userIconImageUrl: element.iconUrl,
+                                userIconImageUrl: element.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                                 time: element.time,
                                 point: element.point,
                                 isMe: element.isMe,
@@ -168,7 +168,7 @@ class _TabBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: pointHistory.iconUrl,
+                      imageUrl: pointHistory.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(color: primaryColor),
                       ),

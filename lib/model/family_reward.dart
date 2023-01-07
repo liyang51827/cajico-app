@@ -36,7 +36,7 @@ class FamilyReward {
   });
 
   final String userName;
-  final String iconUrl;
+  final String? iconUrl;
   final int requestingCount;
   final int smallRewardId;
   final String smallRewardName;

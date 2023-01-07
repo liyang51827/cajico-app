@@ -8,7 +8,7 @@ class RewardHistory {
   });
 
   final String rewardName;
-  final String iconUrl;
+  final String? iconUrl;
   final int point;
   final String? message;
   final String createdAt;

@@ -11,7 +11,7 @@ class PointHistory {
 
   final int userId;
   final String userName;
-  final String iconUrl;
+  final String? iconUrl;
   final int todayPoint;
   final int totalPoint;
   List<Point> points;
@@ -45,7 +45,7 @@ class Point {
       required this.isMe});
 
   final int pointHistoryId;
-  final String iconUrl;
+  final String? iconUrl;
   final String houseWorkCategoryName;
   final String houseWorkCategoryImageUrl;
   final String houseWorkName;
