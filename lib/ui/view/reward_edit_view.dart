@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -48,91 +49,35 @@ class RewardEditView extends StatelessWidget {
             child: Column(
               children: [
                 verticalSpaceLarge,
-                TextFormField(
+                CajicoTextFormField(
                   readOnly: true,
-                  controller: TextEditingController.fromValue(
-                    TextEditingValue(text: rank),
-                  ),
-                  cursorColor: primaryColor,
-                  decoration: InputDecoration(
-                      fillColor: gray8,
-                      filled: true,
-                      labelText: 'プラン',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray4)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray4))),
+                  initValue: rank,
+                  label: 'プラン',
+                  filled: true,
+                  fillColor: gray8,
+                  focusedBorderColor: gray4,
                 ),
                 verticalSpaceMedium,
-                TextFormField(
-                  controller: TextEditingController.fromValue(
-                    TextEditingValue(text: initRewardName),
-                  ),
-                  cursorColor: primaryColor,
-                  decoration: InputDecoration(
-                      labelText: 'ごほうび名',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray4)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
-                  onChanged: (value) {
-                    rewardName = value;
-                  },
-                ),
+                CajicoTextFormField(
+                    initValue: initRewardName,
+                    label: 'ごほうび名',
+                    onChanged: (value) => rewardName = value),
                 verticalSpaceMedium,
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  controller: TextEditingController.fromValue(
-                    TextEditingValue(text: initPoint.toString()),
-                  ),
-                  cursorColor: primaryColor,
-                  decoration: InputDecoration(
-                      labelText: '必要ポイント（100P~500P）',
-                      suffixText: 'ポイント',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray4)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
-                  onChanged: (value) {
-                    point = int.parse(value);
-                  },
-                ),
+                CajicoTextFormField(
+                    initValue: initPoint.toString(),
+                    label: '必要ポイント（100P~500P）',
+                    suffixText: 'ポイント',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (value) => point = int.parse(value)),
                 verticalSpaceMedium,
-                TextFormField(
-                  controller: TextEditingController.fromValue(
-                    TextEditingValue(text: initMemo),
-                  ),
-                  cursorColor: primaryColor,
-                  keyboardType: TextInputType.multiline,
-                  minLines: 10,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                      labelText: 'ごほうびメモ',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray4)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
-                  onChanged: (value) {
-                    memo = value;
-                  },
-                ),
+                CajicoTextFormField(
+                    initValue: initMemo,
+                    label: 'ごほうびメモ',
+                    keyboardType: TextInputType.multiline,
+                    minLines: 10,
+                    maxLines: 10,
+                    onChanged: (value) => memo = value),
                 verticalSpaceLarge,
                 PrimaryButton(
                   label: '変更する',
