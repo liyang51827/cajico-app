@@ -13,8 +13,16 @@ import '../widget/primary_button.dart';
 class RewardEditView extends StatelessWidget {
   RewardEditView({
     super.key,
+    required this.rank,
+    required this.point,
+    required this.rewardName,
+    required this.memo
   });
 
+  final String memo;
+  final String rewardName;
+  final int point;
+  final String rank;
   final focusNode = FocusNode();
   final titleTextController = TextEditingController();
   late TextEditingController bodyTextController = TextEditingController();
@@ -43,7 +51,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceLarge,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    const TextEditingValue(text: 'リーズナブル'),
+                    TextEditingValue(text: rank),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
@@ -63,7 +71,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    const TextEditingValue(text: 'お菓子・スイーツ'),
+                    TextEditingValue(text: rewardName),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
@@ -83,7 +91,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    TextEditingValue(text: 300.toString()),
+                    TextEditingValue(text: point.toString()),
                   ),
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
@@ -103,7 +111,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 TextFormField(
                   controller: TextEditingController.fromValue(
-                    const TextEditingValue(text: 'コンビニで手軽なスナック菓子を買ってもらえる！\n↓欲しいお菓子\nhttps://example.com'),
+                    TextEditingValue(text: memo),
                   ),
                   cursorColor: primaryColor,
                   keyboardType: TextInputType.multiline,
