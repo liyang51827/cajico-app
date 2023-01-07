@@ -10,9 +10,6 @@ class RewardEditViewController extends BaseViewController {
   final rewardName = ''.obs;
   final point = 0.obs;
   final memo = ''.obs;
-  final rewardNameController = TextEditingController();
-  final pointController = TextEditingController();
-  final memoController = TextEditingController();
 
   Future<void> onTapUpdate({required String title, required String body}) async {
     await callAsyncApi(() async {
