@@ -46,6 +46,7 @@ class RewardCategoryCard extends StatelessWidget {
             rank: rank,
             point: requiredPoint,
             isMe: isMe,
+            isRequesting: isRequesting,
             isAvailable: isAvailable,
             text: note,
           )),

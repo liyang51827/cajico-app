@@ -24,7 +24,8 @@ class RewardDetailView extends StatelessWidget {
       required this.point,
       required this.text,
       required this.isMe,
-      required this.isAvailable});
+      required this.isAvailable,
+      required this.isRequesting});
 
   final String imageUrl;
   final String rank;
@@ -34,6 +35,7 @@ class RewardDetailView extends StatelessWidget {
   final String text;
   final bool isMe;
   final bool isAvailable;
+  final bool isRequesting;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class RewardDetailView extends StatelessWidget {
                   PopupMenuButton(
                       offset: const Offset(0, 50),
                       onSelected: (result) {
-                        if (result) {
+                        if (!result) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -73,13 +75,14 @@ class RewardDetailView extends StatelessWidget {
                         } else {
                           showDialog(
                               context: context,
-                              builder: (context) => const NormalCompletedDialog(message: 'ねぎらい待ちのごほうびは\n編集できません'));
+                              builder: (context) =>
+                                  const NormalCompletedDialog(message: 'ねぎらい待ちのごほうびは\n編集できません'));
                         }
                       },
                       itemBuilder: (BuildContext context) {
                         return [
                           PopupMenuItem(
-                            value: isAvailable,
+                            value: isRequesting,
                             child: const Text('編集する'),
                           ),
                         ];
@@ -140,7 +143,8 @@ class RewardDetailView extends StatelessWidget {
                                   return _RewardHistoryDetail(
                                       rewardName: item.rewardName,
                                       date: item.createdAt,
-                                      userImageUrl: item.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                                      userImageUrl: item.iconUrl ??
+                                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                                       message: item.message ?? '',
                                       point: item.point);
                                 },
