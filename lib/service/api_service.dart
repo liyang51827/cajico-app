@@ -167,7 +167,7 @@ class ApiService extends GetConnect {
       required String rewardName,
       required int point,
       required String memo}) async {
-    final res = await http.post(
+    final res = await http.put(
       _makeUri('/rewards/$rewardId'),
       headers: await _makeAuthenticatedHeader(),
       body: jsonEncode({'name': rewardName, 'point': point, 'note': memo}),
