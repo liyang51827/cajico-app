@@ -1,17 +1,15 @@
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../controller/home_view_controller.dart';
 
 class NormalCompletedDialog extends StatelessWidget {
-  const NormalCompletedDialog({super.key, required this.message});
+  const NormalCompletedDialog({super.key, required this.message, required this.onPressed});
 
   final String message;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
 
-    final homeController = Get.put(HomeViewController());
     return SimpleDialog(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Text(message,
@@ -19,11 +17,8 @@ class NormalCompletedDialog extends StatelessWidget {
           textAlign: TextAlign.center),
       children: [
         SimpleDialogOption(
+          onPressed: onPressed,
           child: const PrimarySmallButton(text: 'OK'),
-          onPressed: () {
-            Navigator.pop(context);
-            homeController.onTapGetUnreadCount();
-          },
         )
       ],
     );

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../controller/home_view_controller.dart';
 import '../controller/reward_edit_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
+import 'package:cajico_app/ui/view/home_view.dart';
 
 class RewardEditView extends StatelessWidget {
   RewardEditView(
@@ -28,6 +30,7 @@ class RewardEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RewardEditViewController());
+    final homeController = Get.put(HomeViewController());
     String rewardName = initRewardName;
     int point = initPoint;
     String memo = initMemo;
@@ -99,8 +102,16 @@ class RewardEditView extends StatelessWidget {
                         }).then((value) {
                       if (value) {
                         return showDialog(
-                            context: context,
-                            builder: (context) => const NormalCompletedDialog(message: '更新されました'));
+                          context: context,
+                          builder: (context) => NormalCompletedDialog(
+                            message: '更新されました',
+                            onPressed: () {
+                              Navigator.pop(context);
+                              homeController.onTapGetUnreadCount();
+                              Get.to(() => const HouseWork());
+                            },
+                          ),
+                        );
                       }
                     });
                   },

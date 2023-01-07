@@ -12,6 +12,7 @@ import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
+import '../controller/home_view_controller.dart';
 import '../widget/loading_stack.dart';
 import '../widget/next_page_button.dart';
 
@@ -67,7 +68,8 @@ class HistoryView extends StatelessWidget {
                                     categoryImageUrl: element.houseWorkCategoryImageUrl,
                                     categoryName: element.houseWorkCategoryName,
                                     houseWorkName: element.houseWorkName,
-                                    userIconImageUrl: element.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                                    userIconImageUrl: element.iconUrl ??
+                                        'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                                     time: element.time,
                                     point: element.point,
                                     isMe: element.isMe,
@@ -111,7 +113,8 @@ class HistoryView extends StatelessWidget {
                                 categoryImageUrl: element.houseWorkCategoryImageUrl,
                                 categoryName: element.houseWorkCategoryName,
                                 houseWorkName: element.houseWorkName,
-                                userIconImageUrl: element.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                                userIconImageUrl: element.iconUrl ??
+                                    'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                                 time: element.time,
                                 point: element.point,
                                 isMe: element.isMe,
@@ -168,7 +171,8 @@ class _TabBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: pointHistory.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                      imageUrl: pointHistory.iconUrl ??
+                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(color: primaryColor),
                       ),
@@ -260,6 +264,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomeViewController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -280,8 +285,15 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                       }).then((value) {
                     if (value) {
                       return showDialog(
-                          context: context,
-                          builder: (context) => const NormalCompletedDialog(message: '家事を取り消しました'));
+                        context: context,
+                        builder: (context) => NormalCompletedDialog(
+                          message: '家事を取り消しました',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            homeController.onTapGetUnreadCount();
+                          },
+                        ),
+                      );
                     }
                   });
                 }

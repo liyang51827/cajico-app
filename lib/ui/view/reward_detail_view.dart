@@ -6,6 +6,7 @@ import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../controller/home_view_controller.dart';
 import '../controller/reward_detail_view_controller.dart';
 import '../widget/loading_stack.dart';
 import '../widget/normal_completed_dialog.dart';
@@ -41,6 +42,7 @@ class RewardDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.put(RewardDetailViewController(rewardId: rewardId));
+      final homeController = Get.put(HomeViewController());
       return DefaultTabController(
         initialIndex: 0,
         length: 2,
@@ -74,9 +76,15 @@ class RewardDetailView extends StatelessWidget {
                           );
                         } else {
                           showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  const NormalCompletedDialog(message: 'ねぎらい待ちのごほうびは\n編集できません'));
+                            context: context,
+                            builder: (context) => NormalCompletedDialog(
+                              message: 'ねぎらい待ちのごほうびは\n編集できません',
+                              onPressed: () {
+                                Navigator.pop(context);
+                                homeController.onTapGetUnreadCount();
+                              },
+                            ),
+                          );
                         }
                       },
                       itemBuilder: (BuildContext context) {

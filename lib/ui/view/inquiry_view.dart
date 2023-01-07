@@ -4,6 +4,7 @@ import 'package:cajico_app/ui/controller/inquiry_view_controller.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/home_view_controller.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -19,6 +20,7 @@ class InquiryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(InquiryViewController());
+    final homeController = Get.put(HomeViewController());
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -100,8 +102,15 @@ class InquiryView extends StatelessWidget {
                         }).then((value) {
                       if (value) {
                         return showDialog(
-                            context: context,
-                            builder: (context) => const NormalCompletedDialog(message: '送信されました'));
+                          context: context,
+                          builder: (context) => NormalCompletedDialog(
+                            message: '送信されました',
+                            onPressed: () {
+                              Navigator.pop(context);
+                              homeController.onTapGetUnreadCount();
+                            },
+                          ),
+                        );
                       }
                     });
                   },
