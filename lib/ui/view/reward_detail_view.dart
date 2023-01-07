@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/reward_detail_view_controller.dart';
 import '../widget/loading_stack.dart';
+import '../widget/normal_completed_dialog.dart';
 import '../widget/reward_complete_dialog.dart';
 import '../widget/reward_request_completed_dialog.dart';
 import '../widget/reward_request_dialog.dart';
@@ -56,7 +57,7 @@ class RewardDetailView extends StatelessWidget {
                   PopupMenuButton(
                       offset: const Offset(0, 50),
                       onSelected: (result) {
-                        if (result == 1) {
+                        if (result) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -69,13 +70,17 @@ class RewardDetailView extends StatelessWidget {
                               fullscreenDialog: true,
                             ),
                           );
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const NormalCompletedDialog(message: 'ねぎらい待ちのごほうびは\n編集できません'));
                         }
                       },
                       itemBuilder: (BuildContext context) {
                         return [
-                          const PopupMenuItem(
-                            value: 1,
-                            child: Text('編集する'),
+                          PopupMenuItem(
+                            value: isAvailable,
+                            child: const Text('編集する'),
                           ),
                         ];
                       })
