@@ -72,32 +72,37 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
     return Obx(() {
       final controller = Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
 
-      return SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Column(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.houseWorks().length,
-                itemBuilder: (context, index) {
-                  final item = controller.houseWorks.elementAt(index);
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: HouseWorkCard(
-                      houseWorkName: item.name,
-                      imageUrl: item.categoryImageUrl,
-                      point: item.point,
-                      onPressed: () {
-                        controller.onTapComplete(houseWorkId: item.houseWorkId);
-                        Navigator.pop(context, true);
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
+      return RefreshIndicator(
+        color: primaryColor,
+        onRefresh: controller.fetchData,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            child: Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.houseWorks().length,
+                  itemBuilder: (context, index) {
+                    final item = controller.houseWorks.elementAt(index);
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: HouseWorkCard(
+                        houseWorkName: item.name,
+                        imageUrl: item.categoryImageUrl,
+                        point: item.point,
+                        onPressed: () {
+                          controller.onTapComplete(houseWorkId: item.houseWorkId);
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       );
