@@ -2,7 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/house_work_view_controller.dart';
-import '../widget/house_work_card.dart';
+import '../widget/house_work_edit_card.dart';
 import '../widget/loading_stack.dart';
 
 class HouseWorkEditIndexView extends StatelessWidget {
@@ -26,15 +26,7 @@ class HouseWorkEditIndexView extends StatelessWidget {
           title: Text(categoryName, style: const TextStyle(color: gray2)),
           backgroundColor: Colors.white,
           titleTextStyle: const TextStyle(fontSize: 22),
-          actions: <Widget>[
-            PopupMenuButton(
-                offset: const Offset(0, 50),
-                itemBuilder: (BuildContext context) {
-                  return [
-                    const PopupMenuItem(child: Text('編集する')),
-                  ];
-                })
-          ]),
+      ),
       body: GetLoadingStack<HouseWorkViewController>(
           child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),
       floatingActionButton: FloatingActionButton(
@@ -69,7 +61,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                   final item = controller.houseWorks.elementAt(index);
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: HouseWorkCard(
+                    child: HouseWorkEditCard(
                       houseWorkName: item.name,
                       imageUrl: item.categoryImageUrl,
                       point: item.point,

@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../common/app_color.dart';
 import 'house_work_complete_dialog.dart';
 import 'house_work_completed_dialog.dart';
 
-class HouseWorkCard extends StatelessWidget {
-  const HouseWorkCard(
+class HouseWorkEditCard extends StatelessWidget {
+  const HouseWorkEditCard(
       {super.key,
       required this.houseWorkName,
       required this.imageUrl,
@@ -94,7 +95,12 @@ class HouseWorkCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              horizontalSpaceLarge,
+              const Icon(
+                LineIcons.angleRight,
+                color: gray3,
+              ),
             ],
           ),
         ),
