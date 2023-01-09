@@ -23,7 +23,7 @@ class HouseWorkEditIndexView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black54),
         centerTitle: true,
-        title: Text(categoryName, style: const TextStyle(color: gray2)),
+        title: Text('$categoryNameの編集', style: const TextStyle(color: gray2)),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
       ),
@@ -62,6 +62,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: HouseWorkEditCard(
+                      categoryId: houseWorkCategoryId,
                       houseWorkId: item.houseWorkId,
                       houseWorkName: item.name,
                       categoryName: item.categoryName,

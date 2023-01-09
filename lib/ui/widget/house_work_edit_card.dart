@@ -9,6 +9,7 @@ import '../common/app_color.dart';
 class HouseWorkEditCard extends StatelessWidget {
   const HouseWorkEditCard({
     super.key,
+    required this.categoryId,
     required this.houseWorkId,
     required this.categoryName,
     required this.houseWorkName,
@@ -16,6 +17,7 @@ class HouseWorkEditCard extends StatelessWidget {
     required this.point,
   });
 
+  final int categoryId;
   final int houseWorkId;
   final String categoryName;
   final String houseWorkName;
@@ -30,6 +32,7 @@ class HouseWorkEditCard extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => Get.to(
           () => HouseWorkEditView(
+            categoryId: categoryId,
             houseWorkId: houseWorkId,
             categoryName: categoryName,
             initHouseWorkName: houseWorkName,

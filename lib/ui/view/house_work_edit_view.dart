@@ -1,5 +1,4 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/view/house_work_edit_index_view.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/home_view_controller.dart';
 import '../controller/house_work_edit_view_controller.dart';
+import '../controller/house_work_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
@@ -14,12 +14,14 @@ import '../widget/primary_button.dart';
 class HouseWorkEditView extends StatelessWidget {
   HouseWorkEditView({
     super.key,
+    required this.categoryId,
     required this.houseWorkId,
     required this.categoryName,
     required this.initHouseWorkName,
     required this.initPoint,
   });
 
+  final int categoryId;
   final int houseWorkId;
   final int initPoint;
   final String categoryName;
@@ -29,6 +31,7 @@ class HouseWorkEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
+    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
     final homeController = Get.put(HomeViewController());
     String houseWorkName = initHouseWorkName;
     int point = initPoint;
@@ -40,11 +43,12 @@ class HouseWorkEditView extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black54),
-              centerTitle: true,
-              title: const Text('家事の編集', style: TextStyle(color: gray2)),
-              backgroundColor: Colors.white,
-              titleTextStyle: const TextStyle(fontSize: 22)),
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: const Text('家事の編集', style: TextStyle(color: gray2)),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22),
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -100,12 +104,8 @@ class HouseWorkEditView extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                               homeController.onTapGetUnreadCount();
-                              Get.to(
-                                () => HouseWorkEditIndexView(
-                                  categoryName: categoryName,
-                                  houseWorkCategoryId: houseWorkId,
-                                ),
-                              );
+                              Navigator.pop(context);
+                              houseWorkController.fetchData();
                             },
                           ),
                         );
