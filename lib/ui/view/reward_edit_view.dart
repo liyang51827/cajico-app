@@ -3,6 +3,7 @@ import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
 import '../controller/base_view_controller.dart';
 import '../controller/home_view_controller.dart';
@@ -19,8 +20,12 @@ class RewardEditView extends StatelessWidget {
     required this.initPoint,
     required this.initRewardName,
     required this.initMemo,
+    required this.minPoint,
+    required this.maxPoint,
   });
 
+  final int minPoint;
+  final int maxPoint;
   final int rewardId;
   final String rank;
   final int initPoint;
@@ -33,6 +38,7 @@ class RewardEditView extends StatelessWidget {
     final controller = Get.put(RewardEditViewController());
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
+    final formatter = NumberFormat("#,###");
     String rewardName = initRewardName;
     int point = initPoint;
     String memo = initMemo;
@@ -72,7 +78,7 @@ class RewardEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 CajicoTextFormField(
                   initValue: initPoint.toString(),
-                  label: '必要ポイント（100P~500P）',
+                  label: '必要ポイント（${formatter.format(minPoint)}P~${formatter.format(maxPoint)}P）',
                   suffixText: 'ポイント',
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],

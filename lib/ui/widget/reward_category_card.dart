@@ -21,6 +21,8 @@ class RewardCategoryCard extends StatelessWidget {
     required this.isMe,
     required this.isAvailable,
     required this.note,
+    required this.minPoint,
+    required this.maxPoint,
   });
 
   final String rank;
@@ -35,6 +37,8 @@ class RewardCategoryCard extends StatelessWidget {
   final bool isMe;
   final bool isAvailable;
   final String note;
+  final int minPoint;
+  final int maxPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,8 @@ class RewardCategoryCard extends StatelessWidget {
     return InkWell(
       onTap: () => Get.to(
         () => RewardDetailView(
+          minPoint: minPoint,
+          maxPoint: maxPoint,
           rewardId: rewardId,
           imageUrl: imageUrl,
           rewardName: rewardName,

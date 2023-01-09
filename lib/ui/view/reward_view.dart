@@ -62,6 +62,8 @@ class RewardView extends GetView<RewardViewController> {
                               isMe: familyReward.smallRewardIsMe,
                               isAvailable: familyReward.smallRewardIsAvailable,
                               note: familyReward.smallRewardNote,
+                              minPoint: familyReward.smallRewardMinPoint,
+                              maxPoint: familyReward.smallRewardMaxPoint,
                             ),
                             verticalSpaceSmall,
                             RewardCategoryCard(
@@ -77,6 +79,8 @@ class RewardView extends GetView<RewardViewController> {
                               isMe: familyReward.middleRewardIsMe,
                               isAvailable: familyReward.middleRewardIsAvailable,
                               note: familyReward.middleRewardNote,
+                              minPoint: familyReward.middleRewardMinPoint,
+                              maxPoint: familyReward.middleRewardMaxPoint,
                             ),
                             verticalSpaceSmall,
                             RewardCategoryCard(
@@ -92,6 +96,8 @@ class RewardView extends GetView<RewardViewController> {
                               isMe: familyReward.largeRewardIsMe,
                               isAvailable: familyReward.largeRewardIsAvailable,
                               note: familyReward.largeRewardNote,
+                              minPoint: familyReward.largeRewardMinPoint,
+                              maxPoint: familyReward.largeRewardMaxPoint,
                             ),
                             verticalSpaceSmall,
                           ],

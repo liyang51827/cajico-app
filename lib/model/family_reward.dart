@@ -13,6 +13,8 @@ class FamilyReward {
     required this.smallRewardIsMe,
     required this.smallRewardIsAvailable,
     required this.smallRewardNote,
+    required this.smallRewardMinPoint,
+    required this.smallRewardMaxPoint,
     required this.middleRewardId,
     required this.middleRewardName,
     required this.middleRewardPoint,
@@ -23,6 +25,8 @@ class FamilyReward {
     required this.middleRewardIsMe,
     required this.middleRewardIsAvailable,
     required this.middleRewardNote,
+    required this.middleRewardMinPoint,
+    required this.middleRewardMaxPoint,
     required this.largeRewardId,
     required this.largeRewardName,
     required this.largeRewardPoint,
@@ -33,6 +37,8 @@ class FamilyReward {
     required this.largeRewardIsMe,
     required this.largeRewardIsAvailable,
     required this.largeRewardNote,
+    required this.largeRewardMinPoint,
+    required this.largeRewardMaxPoint,
   });
 
   final String userName;
@@ -48,6 +54,8 @@ class FamilyReward {
   final bool smallRewardIsMe;
   final bool smallRewardIsAvailable;
   final String smallRewardNote;
+  final int smallRewardMinPoint;
+  final int smallRewardMaxPoint;
   final int middleRewardId;
   final String middleRewardName;
   final int middleRewardPoint;
@@ -58,6 +66,8 @@ class FamilyReward {
   final bool middleRewardIsMe;
   final bool middleRewardIsAvailable;
   final String middleRewardNote;
+  final int middleRewardMinPoint;
+  final int middleRewardMaxPoint;
   final int largeRewardId;
   final String largeRewardName;
   final int largeRewardPoint;
@@ -68,6 +78,8 @@ class FamilyReward {
   final bool largeRewardIsMe;
   final bool largeRewardIsAvailable;
   final String largeRewardNote;
+  final int largeRewardMinPoint;
+  final int largeRewardMaxPoint;
 
   static FamilyReward fromJson(Map<String, dynamic> json) {
     return FamilyReward(
@@ -84,6 +96,8 @@ class FamilyReward {
       smallRewardIsMe: json['smallReward']['isMe'],
       smallRewardIsAvailable: json['smallReward']['isAvailable'],
       smallRewardNote: json['smallReward']['note'],
+      smallRewardMinPoint: json['smallReward']['rewardCategory']['minPoint'],
+      smallRewardMaxPoint: json['smallReward']['rewardCategory']['maxPoint'],
       middleRewardId: json['middleReward']['id'],
       middleRewardName:  json['middleReward']['name'],
       middleRewardPoint: json['middleReward']['rewardPoint'],
@@ -94,6 +108,8 @@ class FamilyReward {
       middleRewardIsMe: json['middleReward']['isMe'],
       middleRewardIsAvailable: json['middleReward']['isAvailable'],
       middleRewardNote: json['middleReward']['note'],
+      middleRewardMinPoint: json['middleReward']['rewardCategory']['minPoint'],
+      middleRewardMaxPoint: json['middleReward']['rewardCategory']['maxPoint'],
       largeRewardId: json['largeReward']['id'],
       largeRewardName:  json['largeReward']['name'],
       largeRewardPoint: json['largeReward']['rewardPoint'],
@@ -104,6 +120,8 @@ class FamilyReward {
       largeRewardIsMe: json['largeReward']['isMe'],
       largeRewardIsAvailable: json['largeReward']['isAvailable'],
       largeRewardNote: json['largeReward']['note'],
+      largeRewardMinPoint: json['largeReward']['rewardCategory']['minPoint'],
+      largeRewardMaxPoint: json['largeReward']['rewardCategory']['maxPoint'],
     );
   }
 }

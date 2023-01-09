@@ -16,17 +16,20 @@ import '../widget/reward_request_dialog.dart';
 import 'package:intl/intl.dart';
 
 class RewardDetailView extends StatelessWidget {
-  const RewardDetailView(
-      {super.key,
-      required this.imageUrl,
-      required this.rank,
-      required this.rewardId,
-      required this.rewardName,
-      required this.point,
-      required this.text,
-      required this.isMe,
-      required this.isAvailable,
-      required this.isRequesting});
+  const RewardDetailView({
+    super.key,
+    required this.imageUrl,
+    required this.rank,
+    required this.rewardId,
+    required this.rewardName,
+    required this.point,
+    required this.text,
+    required this.isMe,
+    required this.isAvailable,
+    required this.isRequesting,
+    required this.minPoint,
+    required this.maxPoint,
+  });
 
   final String imageUrl;
   final String rank;
@@ -37,6 +40,8 @@ class RewardDetailView extends StatelessWidget {
   final bool isMe;
   final bool isAvailable;
   final bool isRequesting;
+  final int minPoint;
+  final int maxPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +71,14 @@ class RewardDetailView extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (_) => RewardEditView(
-                              rewardId: rewardId,
-                              rank: rank,
-                              initPoint: point,
-                              initRewardName: rewardName,
-                              initMemo: text),
+                            minPoint: minPoint,
+                            maxPoint: maxPoint,
+                            rewardId: rewardId,
+                            rank: rank,
+                            initPoint: point,
+                            initRewardName: rewardName,
+                            initMemo: text,
+                          ),
                           fullscreenDialog: true,
                         ),
                       );

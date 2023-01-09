@@ -37,7 +37,7 @@ class ApiService extends GetConnect {
   }
 
   Future<Map<String, String>> makeAuthorizationBearerHeader() async {
-    const token = '1|v3VDupElEJNd55fd2mTR8kVWglmW157r6gZjsu4S';
+    const token = '1|ggekvMjZ7BqOHmhVjbLf9itGvniZw94fXIgRmaJt';
     return {
       'Authorization': "Bearer $token",
     };
