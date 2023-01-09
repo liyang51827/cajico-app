@@ -4,7 +4,9 @@ import 'package:cajico_app/ui/controller/inquiry_view_controller.dart';
 import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/base_view_controller.dart';
 import '../controller/home_view_controller.dart';
+import '../widget/cajico_text_form_field.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -12,15 +14,14 @@ class InquiryView extends StatelessWidget {
   InquiryView({super.key});
 
   final focusNode = FocusNode();
-  final titleTextController = TextEditingController();
-  final bodyTextController = TextEditingController();
-  String title = '';
-  String body = '';
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(InquiryViewController());
     final homeController = Get.put(HomeViewController());
+    final baseController = Get.put(BaseViewController());
+    String title = '';
+    String body = '';
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -46,49 +47,19 @@ class InquiryView extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceLarge,
-                TextField(
-                  controller: titleTextController,
-                  cursorColor: primaryColor,
-                  decoration: InputDecoration(
-                    labelText: 'タイトル',
-                    labelStyle: const TextStyle(color: gray3),
-                    alignLabelWithHint: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: gray6),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: primaryColor),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    title = value;
-                  },
+                CajicoTextFormField(
+                  label: 'タイトル',
+                  onChanged: (value) => title = value,
+                  initValue: '',
                 ),
                 verticalSpaceMedium,
-                TextFormField(
-                  controller: bodyTextController,
-                  cursorColor: primaryColor,
-                  keyboardType: TextInputType.multiline,
+                CajicoTextFormField(
+                  label: 'ご意見 / 改善点など',
+                  onChanged: (value) => body = value,
+                  initValue: '',
                   minLines: 10,
                   maxLines: 10,
-                  decoration: InputDecoration(
-                    labelText: 'ご意見 / 改善点など',
-                    labelStyle: const TextStyle(color: gray3),
-                    alignLabelWithHint: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: gray6),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: primaryColor),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    body = value;
-                  },
+                  keyboardType: TextInputType.multiline,
                 ),
               ],
             ),
@@ -104,28 +75,25 @@ class InquiryView extends StatelessWidget {
                       return NormalDialog(
                         message: '送信しますか？',
                         onPressed: () {
-                          titleTextController.clear();
-                          bodyTextController.clear();
                           controller.onTapInquiry(title: title, body: body);
                           Navigator.pop(context, true);
                         },
                       );
-                    }).then(
-                      (value) {
-                    if (value) {
-                      return showDialog(
-                        context: context,
-                        builder: (context) => NormalCompletedDialog(
-                          message: '送信されました',
-                          onPressed: () {
-                            Navigator.pop(context);
-                            homeController.onTapGetUnreadCount();
-                          },
-                        ),
-                      );
-                    }
-                  },
-                );
+                    }).then((value) {
+                  if (value) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) => NormalCompletedDialog(
+                        message: '送信されました',
+                        onPressed: () {
+                          Navigator.pop(context);
+                          homeController.onTapGetUnreadCount();
+                          baseController.onTapBottomNavigation(0);
+                        },
+                      ),
+                    );
+                  }
+                });
               },
             ),
           ),

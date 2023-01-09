@@ -118,7 +118,7 @@ class RewardEditView extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                           homeController.onTapGetUnreadCount();
-                          baseController.onTapBottomNavigation(0);
+                          baseController.onTapBottomNavigation(1);
                         },
                       ),
                     );
