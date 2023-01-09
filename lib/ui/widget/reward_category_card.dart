@@ -7,20 +7,21 @@ import '../view/reward_detail_view.dart';
 import 'package:intl/intl.dart';
 
 class RewardCategoryCard extends StatelessWidget {
-  const RewardCategoryCard(
-      {super.key,
-      required this.rank,
-      required this.rewardId,
-      required this.rewardName,
-      required this.rating,
-      required this.ownedPoint,
-      required this.requiredPoint,
-      required this.differencePoint,
-      required this.imageUrl,
-      required this.isRequesting,
-      required this.isMe,
-      required this.isAvailable,
-      required this.note});
+  const RewardCategoryCard({
+    super.key,
+    required this.rank,
+    required this.rewardId,
+    required this.rewardName,
+    required this.rating,
+    required this.ownedPoint,
+    required this.requiredPoint,
+    required this.differencePoint,
+    required this.imageUrl,
+    required this.isRequesting,
+    required this.isMe,
+    required this.isAvailable,
+    required this.note,
+  });
 
   final String rank;
   final int rewardId;
@@ -39,31 +40,34 @@ class RewardCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatter = NumberFormat("#,###");
     return InkWell(
-      onTap: () => Get.to(() => RewardDetailView(
-            rewardId: rewardId,
-            imageUrl: imageUrl,
-            rewardName: rewardName,
-            rank: rank,
-            point: requiredPoint,
-            isMe: isMe,
-            isRequesting: isRequesting,
-            isAvailable: isAvailable,
-            text: note,
-          )),
+      onTap: () => Get.to(
+        () => RewardDetailView(
+          rewardId: rewardId,
+          imageUrl: imageUrl,
+          rewardName: rewardName,
+          rank: rank,
+          point: requiredPoint,
+          isMe: isMe,
+          isRequesting: isRequesting,
+          isAvailable: isAvailable,
+          text: note,
+        ),
+      ),
       child: Container(
         width: double.infinity,
         height: 170,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: AssetImage(imageUrl),
-              fit: BoxFit.cover,
-              colorFilter: const ColorFilter.mode(
-                Colors.black26,
-                BlendMode.srcATop,
-              ), //
-            )),
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.cover,
+            colorFilter: const ColorFilter.mode(
+              Colors.black26,
+              BlendMode.srcATop,
+            ), //
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

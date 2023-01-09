@@ -31,59 +31,65 @@ class _CarouselWithIndicatorState extends State<TopView> {
       backgroundColor: Colors.white,
       body: SizedBox(
         height: double.infinity,
-        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-          CarouselSlider(
-            items: const [
-              _CarouselCard(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CarouselSlider(
+              items: const [
+                _CarouselCard(
                   title: 'CAJICO',
                   subtitle: 'カジコは毎日の家事をポイント化する\n「家事ポイ活」アプリです',
-                  imageUrl: 'assets/images/introduction_1.png'),
-              _CarouselCard(
+                  imageUrl: 'assets/images/introduction_1.png',
+                ),
+                _CarouselCard(
                   title: '家事ポイント',
                   subtitle: '家事をクリアして\nポイントをゲット！',
-                  imageUrl: 'assets/images/introduction_2.png'),
-              _CarouselCard(
+                  imageUrl: 'assets/images/introduction_2.png',
+                ),
+                _CarouselCard(
                   title: 'ごほうび',
                   subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
-                  imageUrl: 'assets/images/introduction_3.png'),
-            ],
-            carouselController: _controller,
-            options: CarouselOptions(
-                aspectRatio: 0.85,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 3),
-                autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                viewportFraction: 1,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _controller.animateToPage(entry.key),
-                child: Container(
-                  width: 8.0,
-                  height: 6.0,
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                  imageUrl: 'assets/images/introduction_3.png',
                 ),
-              );
-            }).toList(),
-          ),
-          const _AuthSection(),
-        ]),
+              ],
+              carouselController: _controller,
+              options: CarouselOptions(
+                  aspectRatio: 0.85,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  viewportFraction: 1,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => _controller.animateToPage(entry.key),
+                  child: Container(
+                    width: 8.0,
+                    height: 6.0,
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black)
+                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                  ),
+                );
+              }).toList(),
+            ),
+            const _AuthSection(),
+          ],
+        ),
       ),
     );
   }
@@ -102,25 +108,28 @@ class _CarouselCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-        height: 50,
-        alignment: Alignment.center,
-        child: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black87),
-          textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Container(
+          height: 50,
+          alignment: Alignment.center,
+          child: Text(
+            title,
+            style:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black87),
+            textAlign: TextAlign.center,
+          ),
         ),
-      ),
-      verticalSpaceMedium,
-      Text(
-        subtitle,
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
-      ),
-      verticalSpaceMedium,
-      Image(image: AssetImage(imageUrl)),
-    ]);
+        verticalSpaceMedium,
+        Text(
+          subtitle,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+        ),
+        verticalSpaceMedium,
+        Image(image: AssetImage(imageUrl)),
+      ],
+    );
   }
 }
 

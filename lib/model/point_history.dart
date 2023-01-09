@@ -25,24 +25,24 @@ class PointHistory {
         iconUrl: json['user']['iconUrl'],
         todayPoint: json['todayPoint'],
         totalPoint: json['totalPoint'],
-        points:
-            (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
+        points: (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
         currentPage: json['meta']['current_page'],
         lastPage: json['meta']['last_page']);
   }
 }
 
 class Point {
-  Point(
-      {required this.pointHistoryId,
-      required this.iconUrl,
-      required this.houseWorkCategoryName,
-      required this.houseWorkCategoryImageUrl,
-      required this.houseWorkName,
-      required this.date,
-      required this.time,
-      required this.point,
-      required this.isMe});
+  Point({
+    required this.pointHistoryId,
+    required this.iconUrl,
+    required this.houseWorkCategoryName,
+    required this.houseWorkCategoryImageUrl,
+    required this.houseWorkName,
+    required this.date,
+    required this.time,
+    required this.point,
+    required this.isMe,
+  });
 
   final int pointHistoryId;
   final String? iconUrl;
@@ -69,12 +69,13 @@ class Point {
 }
 
 class TotalPointHistory {
-  TotalPointHistory(
-      {required this.todayPoint,
-      required this.totalPoint,
-      required this.points,
-      required this.currentPage,
-      required this.lastPage});
+  TotalPointHistory({
+    required this.todayPoint,
+    required this.totalPoint,
+    required this.points,
+    required this.currentPage,
+    required this.lastPage,
+  });
 
   final int todayPoint;
   final int totalPoint;
@@ -86,8 +87,7 @@ class TotalPointHistory {
     return TotalPointHistory(
         todayPoint: json['todayPoint'],
         totalPoint: json['totalPoint'],
-        points:
-            (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
+        points: (json['pointHistories'] as List).map((data) => Point.fromJson(data)).toList(),
         currentPage: json['meta']['current_page'],
         lastPage: json['meta']['last_page']);
   }

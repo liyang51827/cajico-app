@@ -44,11 +44,12 @@ class RewardEditView extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black54),
-              centerTitle: true,
-              title: const Text('ごほうびの編集', style: TextStyle(color: gray2)),
-              backgroundColor: Colors.white,
-              titleTextStyle: const TextStyle(fontSize: 22)),
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: const Text('ごほうびの編集', style: TextStyle(color: gray2)),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22),
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(

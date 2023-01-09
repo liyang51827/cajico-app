@@ -36,8 +36,11 @@ class MyApp extends StatelessWidget {
         Locale("ja", "JP"),
       ],
       theme: ThemeData(
-          textTheme: const TextTheme(
-              bodyText1: TextStyle(color: gray2), bodyText2: TextStyle(color: gray2))),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: gray2),
+          bodyText2: TextStyle(color: gray2),
+        ),
+      ),
     );
   }
 }
@@ -51,18 +54,19 @@ class HouseWork extends GetView<HomeViewController> {
     return Scaffold(
       backgroundColor: gray7,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(55),
-          child: Header(
-            imageUrl: 'assets/images/logo.png',
-            title: '家事をする',
-            actions: [
-              Obx(() {
-                final controller = Get.put(HomeViewController());
-                final int unreadCount = controller.unreadCount();
-                return NotificationAction(unreadCount: unreadCount);
-              }),
-            ],
-          )),
+        preferredSize: const Size.fromHeight(55),
+        child: Header(
+          imageUrl: 'assets/images/logo.png',
+          title: '家事をする',
+          actions: [
+            Obx(() {
+              final controller = Get.put(HomeViewController());
+              final int unreadCount = controller.unreadCount();
+              return NotificationAction(unreadCount: unreadCount);
+            }),
+          ],
+        ),
+      ),
       drawer: const HomeDrawer(),
       body: GetLoadingStack<HomeViewController>(
         child: RefreshIndicator(

@@ -24,15 +24,16 @@ class RewardView extends GetView<RewardViewController> {
         child: Scaffold(
           backgroundColor: gray7,
           appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(105),
-              child: Header(
-                imageUrl: 'assets/images/logo_reward.png',
-                title: 'ごほうび',
-                bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(50),
-                  child: _TabBar(),
-                ),
-              )),
+            preferredSize: Size.fromHeight(105),
+            child: Header(
+              imageUrl: 'assets/images/logo_reward.png',
+              title: 'ごほうび',
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(50),
+                child: _TabBar(),
+              ),
+            ),
+          ),
           drawer: const HomeDrawer(),
           body: GetLoadingStack<RewardViewController>(
             child: TabBarView(
@@ -133,7 +134,8 @@ class _TabBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CachedNetworkImage(
-                      imageUrl: familyReward.iconUrl ?? 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                      imageUrl: familyReward.iconUrl ??
+                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(color: primaryColor),
                       ),

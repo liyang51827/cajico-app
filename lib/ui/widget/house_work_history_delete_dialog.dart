@@ -4,11 +4,12 @@ import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
 class HouseWorkHistoryDeleteDialog extends StatelessWidget {
-  const HouseWorkHistoryDeleteDialog(
-      {super.key,
-      required this.categoryName,
-      required this.houseWorkName,
-      required this.onPressed});
+  const HouseWorkHistoryDeleteDialog({
+    super.key,
+    required this.categoryName,
+    required this.houseWorkName,
+    required this.onPressed,
+  });
 
   final String categoryName;
   final String houseWorkName;

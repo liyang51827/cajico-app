@@ -7,12 +7,13 @@ import 'house_work_complete_dialog.dart';
 import 'house_work_completed_dialog.dart';
 
 class HouseWorkCard extends StatelessWidget {
-  const HouseWorkCard(
-      {super.key,
-      required this.houseWorkName,
-      required this.imageUrl,
-      required this.point,
-      required this.onPressed});
+  const HouseWorkCard({
+    super.key,
+    required this.houseWorkName,
+    required this.imageUrl,
+    required this.point,
+    required this.onPressed,
+  });
 
   final String houseWorkName;
   final String imageUrl;

@@ -10,7 +10,12 @@ class RewardEditViewController extends BaseViewController {
     required String memo,
   }) async {
     await callAsyncApi(() async {
-      await api.putReward(rewardId: rewardId, rewardName: rewardName, point: point, memo: memo);
+      await api.putReward(
+        rewardId: rewardId,
+        rewardName: rewardName,
+        point: point,
+        memo: memo,
+      );
     });
   }
 }

@@ -21,8 +21,9 @@ class CategoryCard extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
       child: ElevatedButton(
-        onPressed: () => Get.to(() =>
-            HouseWorkView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId)),
+        onPressed: () => Get.to(
+          () => HouseWorkView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
+        ),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,

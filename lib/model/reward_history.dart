@@ -4,7 +4,7 @@ class RewardHistory {
     required this.iconUrl,
     required this.point,
     this.message,
-    required this.createdAt
+    required this.createdAt,
   });
 
   final String rewardName;
@@ -19,7 +19,7 @@ class RewardHistory {
       iconUrl: json['messageUserIconUrl'],
       point: json['point'],
       message: json['message'],
-      createdAt: json['createdAt']
+      createdAt: json['createdAt'],
     );
   }
 }

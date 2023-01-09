@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import '../common/app_color.dart';
 
 class NextPageButton extends StatelessWidget {
-  const NextPageButton({super.key, required this.onPressed, this.label = '次の10件を表示'});
+  const NextPageButton({
+    super.key,
+    required this.onPressed,
+    this.label = '次の10件を表示',
+  });
 
   final String label;
   final VoidCallback onPressed;

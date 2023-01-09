@@ -7,11 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import '../controller/reward_detail_view_controller.dart';
 
 class RewardCompleteDialog extends GetView<RewardDetailViewController> {
-  RewardCompleteDialog({
-    super.key,
-    required this.rewardId,
-    required this.rewardName
-  });
+  RewardCompleteDialog({super.key, required this.rewardId, required this.rewardName});
 
   final int rewardId;
   final String rewardName;
@@ -36,15 +32,18 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
             minLines: 3,
             maxLines: 3,
             decoration: InputDecoration(
-                labelText: 'ひとことメッセージ',
-                labelStyle: const TextStyle(color: gray3),
-                alignLabelWithHint: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: gray6)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: primaryColor))),
+              labelText: 'ひとことメッセージ',
+              labelStyle: const TextStyle(color: gray3),
+              alignLabelWithHint: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: gray6),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: primaryColor),
+              ),
+            ),
             onChanged: (value) => body = value,
           ),
         ],

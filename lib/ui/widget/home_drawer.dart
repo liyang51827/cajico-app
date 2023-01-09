@@ -17,26 +17,27 @@ class HomeDrawer extends StatelessWidget {
           SizedBox(
             height: 120,
             child: DrawerHeader(
-                padding: EdgeInsets.zero,
-                margin: EdgeInsets.zero,
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      child: const Image(
-                        image: AssetImage('assets/images/logo_drawer.png'),
-                        height: 70,
-                      ),
+              padding: EdgeInsets.zero,
+              margin: EdgeInsets.zero,
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    child: const Image(
+                      image: AssetImage('assets/images/logo_drawer.png'),
+                      height: 70,
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(top: 20, left: 8),
-                      child: const Text(
-                        'メニュー',
-                        style: TextStyle(fontSize: 24, color: Colors.black54),
-                      ),
-                    )
-                  ],
-                )),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20, left: 8),
+                    child: const Text(
+                      'メニュー',
+                      style: TextStyle(fontSize: 24, color: Colors.black54),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
           ListTile(
             leading: const Icon(

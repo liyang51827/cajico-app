@@ -51,65 +51,67 @@ class RewardDetailView extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(200.0),
             child: AppBar(
-                iconTheme: const IconThemeData(color: gray2),
-                elevation: 0.0,
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+              iconTheme: const IconThemeData(color: gray2),
+              elevation: 0.0,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+              ),
+              actions: <Widget>[
+                PopupMenuButton(
+                  offset: const Offset(0, 50),
+                  onSelected: (result) {
+                    if (!result) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RewardEditView(
+                              rewardId: rewardId,
+                              rank: rank,
+                              initPoint: point,
+                              initRewardName: rewardName,
+                              initMemo: text),
+                          fullscreenDialog: true,
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => NormalCompletedDialog(
+                          message: 'ねぎらい待ちのごほうびは\n編集できません',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            homeController.onTapGetUnreadCount();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      PopupMenuItem(
+                        value: isRequesting,
+                        child: const Text('編集する'),
+                      ),
+                    ];
+                  },
+                )
+              ],
+              bottom: const ColoredTabBar(
+                color: Colors.white,
+                tabBar: TabBar(
+                  labelColor: primaryColor,
+                  unselectedLabelColor: gray4,
+                  indicatorColor: primaryColor,
+                  indicatorWeight: 3,
+                  labelStyle: TextStyle(fontSize: 16),
+                  tabs: <Widget>[
+                    Tab(child: Text('ごほうび情報')),
+                    Tab(child: Text('履歴')),
+                  ],
                 ),
-                actions: <Widget>[
-                  PopupMenuButton(
-                      offset: const Offset(0, 50),
-                      onSelected: (result) {
-                        if (!result) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => RewardEditView(
-                                  rewardId: rewardId,
-                                  rank: rank,
-                                  initPoint: point,
-                                  initRewardName: rewardName,
-                                  initMemo: text),
-                              fullscreenDialog: true,
-                            ),
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) => NormalCompletedDialog(
-                              message: 'ねぎらい待ちのごほうびは\n編集できません',
-                              onPressed: () {
-                                Navigator.pop(context);
-                                homeController.onTapGetUnreadCount();
-                              },
-                            ),
-                          );
-                        }
-                      },
-                      itemBuilder: (BuildContext context) {
-                        return [
-                          PopupMenuItem(
-                            value: isRequesting,
-                            child: const Text('編集する'),
-                          ),
-                        ];
-                      })
-                ],
-                bottom: const ColoredTabBar(
-                  color: Colors.white,
-                  tabBar: TabBar(
-                    labelColor: primaryColor,
-                    unselectedLabelColor: gray4,
-                    indicatorColor: primaryColor,
-                    indicatorWeight: 3,
-                    labelStyle: TextStyle(fontSize: 16),
-                    tabs: <Widget>[
-                      Tab(child: Text('ごほうび情報')),
-                      Tab(child: Text('履歴')),
-                    ],
-                  ),
-                )),
+              ),
+            ),
           ),
           body: GetLoadingStack<RewardDetailViewController>(
             child: TabBarView(
@@ -166,7 +168,8 @@ class RewardDetailView extends StatelessWidget {
                         child: const Text(
                           'ごほうび履歴はありません',
                           textAlign: TextAlign.center,
-                        )),
+                        ),
+                      ),
               ],
             ),
           ),

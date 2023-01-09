@@ -2,14 +2,17 @@ import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:flutter/material.dart';
 
 class NormalCompletedDialog extends StatelessWidget {
-  const NormalCompletedDialog({super.key, required this.message, required this.onPressed});
+  const NormalCompletedDialog({
+    super.key,
+    required this.message,
+    required this.onPressed,
+  });
 
   final String message;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-
     return SimpleDialog(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Text(message,

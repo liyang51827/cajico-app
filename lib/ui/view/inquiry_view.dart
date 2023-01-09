@@ -28,11 +28,12 @@ class InquiryView extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black54),
-              centerTitle: true,
-              title: const Text('ご意見箱', style: TextStyle(color: gray2)),
-              backgroundColor: Colors.white,
-              titleTextStyle: const TextStyle(fontSize: 22)),
+            iconTheme: const IconThemeData(color: Colors.black54),
+            centerTitle: true,
+            title: const Text('ご意見箱', style: TextStyle(color: gray2)),
+            backgroundColor: Colors.white,
+            titleTextStyle: const TextStyle(fontSize: 22),
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -49,15 +50,18 @@ class InquiryView extends StatelessWidget {
                   controller: titleTextController,
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
-                      labelText: 'タイトル',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
+                    labelText: 'タイトル',
+                    labelStyle: const TextStyle(color: gray3),
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: gray6),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: primaryColor),
+                    ),
+                  ),
                   onChanged: (value) {
                     title = value;
                   },
@@ -70,15 +74,18 @@ class InquiryView extends StatelessWidget {
                   minLines: 10,
                   maxLines: 10,
                   decoration: InputDecoration(
-                      labelText: 'ご意見 / 改善点など',
-                      labelStyle: const TextStyle(color: gray3),
-                      alignLabelWithHint: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: gray6)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: primaryColor))),
+                    labelText: 'ご意見 / 改善点など',
+                    labelStyle: const TextStyle(color: gray3),
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: gray6),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: primaryColor),
+                    ),
+                  ),
                   onChanged: (value) {
                     body = value;
                   },
@@ -99,20 +106,22 @@ class InquiryView extends StatelessWidget {
                               Navigator.pop(context, true);
                             },
                           );
-                        }).then((value) {
-                      if (value) {
-                        return showDialog(
-                          context: context,
-                          builder: (context) => NormalCompletedDialog(
-                            message: '送信されました',
-                            onPressed: () {
-                              Navigator.pop(context);
-                              homeController.onTapGetUnreadCount();
-                            },
-                          ),
-                        );
-                      }
-                    });
+                        }).then(
+                      (value) {
+                        if (value) {
+                          return showDialog(
+                            context: context,
+                            builder: (context) => NormalCompletedDialog(
+                              message: '送信されました',
+                              onPressed: () {
+                                Navigator.pop(context);
+                                homeController.onTapGetUnreadCount();
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    );
                   },
                 )
               ],

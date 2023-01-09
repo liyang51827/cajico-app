@@ -3,7 +3,11 @@ import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 
 class NormalDialog extends StatelessWidget {
-  const NormalDialog({super.key, required this.message, required this.onPressed});
+  const NormalDialog({
+    super.key,
+    required this.message,
+    required this.onPressed,
+  });
 
   final String message;
   final VoidCallback onPressed;

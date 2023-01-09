@@ -22,37 +22,40 @@ class HouseWorkView extends StatelessWidget {
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
-          centerTitle: true,
-          title: Text(categoryName, style: const TextStyle(color: gray2)),
-          backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(fontSize: 22),
-          actions: <Widget>[
-            PopupMenuButton(
-                offset: const Offset(0, 50),
-                onSelected: (result) {
-                  if (result == true) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => HouseWorkEditIndexView(
-                            categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
-                        fullscreenDialog: true,
-                      ),
-                    );
-                  }
-                },
-                itemBuilder: (BuildContext context) {
-                  return [
-                    const PopupMenuItem(
-                      value: true,
-                      child: Text('編集する'),
-                    ),
-                  ];
-                })
-          ]),
+        iconTheme: const IconThemeData(color: Colors.black54),
+        centerTitle: true,
+        title: Text(categoryName, style: const TextStyle(color: gray2)),
+        backgroundColor: Colors.white,
+        titleTextStyle: const TextStyle(fontSize: 22),
+        actions: <Widget>[
+          PopupMenuButton(
+            offset: const Offset(0, 50),
+            onSelected: (result) {
+              if (result == true) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => HouseWorkEditIndexView(
+                        categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
+                    fullscreenDialog: true,
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem(
+                  value: true,
+                  child: Text('編集する'),
+                ),
+              ];
+            },
+          )
+        ],
+      ),
       body: GetLoadingStack<HouseWorkViewController>(
-          child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),
+        child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId),
+      ),
     );
   }
 }

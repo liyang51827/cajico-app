@@ -4,20 +4,21 @@ import 'package:line_icons/line_icons.dart';
 import '../common/app_color.dart';
 
 class CajicoTextFormField extends StatelessWidget {
-  const CajicoTextFormField(
-      {super.key,
-      required this.initValue,
-      required this.label,
-      this.maxLines,
-      this.minLines,
-      this.suffixText,
-      this.keyboardType,
-      this.inputFormatters,
-      this.readOnly = false,
-      this.fillColor,
-      this.filled = false,
-      this.focusedBorderColor = primaryColor,
-      this.onChanged});
+  const CajicoTextFormField({
+    super.key,
+    required this.initValue,
+    required this.label,
+    this.maxLines,
+    this.minLines,
+    this.suffixText,
+    this.keyboardType,
+    this.inputFormatters,
+    this.readOnly = false,
+    this.fillColor,
+    this.filled = false,
+    this.focusedBorderColor = primaryColor,
+    this.onChanged,
+  });
 
   final String label;
   final String initValue;
@@ -45,17 +46,21 @@ class CajicoTextFormField extends StatelessWidget {
       minLines: minLines,
       maxLines: maxLines,
       decoration: InputDecoration(
-          fillColor: fillColor,
-          filled: filled,
-          labelText: label,
-          suffixText: suffixText,
-          labelStyle: const TextStyle(color: gray3),
-          alignLabelWithHint: true,
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: gray4)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: focusedBorderColor))),
+        fillColor: fillColor,
+        filled: filled,
+        labelText: label,
+        suffixText: suffixText,
+        labelStyle: const TextStyle(color: gray3),
+        alignLabelWithHint: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: gray4),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: focusedBorderColor),
+        ),
+      ),
       onChanged: onChanged,
     );
   }

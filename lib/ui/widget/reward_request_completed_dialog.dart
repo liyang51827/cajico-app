@@ -17,22 +17,29 @@ class RewardCompletedDialog extends StatelessWidget {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
       title: Column(
         children: [
-          Text(message,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              textAlign: TextAlign.center),
+          Text(
+            message,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
           verticalSpaceMedium,
-          const Image(image: AssetImage('assets/images/other_child_care.png'), width: 200)
+          const Image(
+            image: AssetImage('assets/images/other_child_care.png'),
+            width: 200,
+          )
         ],
       ),
       actions: [
         Container(
-            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-            child: TextButton(
-                onPressed: () {
-                  Get.to(() => const RewardView());
-                  controller.fetchData();
-                },
-                child: const PrimarySmallButton(text: '戻る'))),
+          padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+          child: TextButton(
+            onPressed: () {
+              Get.to(() => const RewardView());
+              controller.fetchData();
+            },
+            child: const PrimarySmallButton(text: '戻る'),
+          ),
+        ),
       ],
     );
   }
