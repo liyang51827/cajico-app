@@ -4,6 +4,7 @@ import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
+import '../widget/cajico_text_form_field.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -34,34 +35,16 @@ class LoginView extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     verticalSpaceLarge,
-                    TextFormField(
-                      cursorColor: primaryColor,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          labelText: 'メールアドレス',
-                          labelStyle: const TextStyle(color: gray3),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: gray6)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: primaryColor))),
+                    const CajicoTextFormField(
+                      label: 'メールアドレス',
+                      initValue: '',
                     ),
                     verticalSpaceMedium,
-                    TextFormField(
-                      cursorColor: primaryColor,
+                    const CajicoTextFormField(
+                      label: 'パスワード',
+                      initValue: '',
                       obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: 'パスワード',
-                          labelStyle: const TextStyle(color: gray3),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: gray6)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: primaryColor))),
+                      maxLines: 1,
                     ),
                     verticalSpaceMediumLarge,
                     Container(

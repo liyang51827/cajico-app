@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:line_icons/line_icons.dart';
 import '../common/app_color.dart';
 
 class CajicoTextFormField extends StatelessWidget {
@@ -18,6 +17,7 @@ class CajicoTextFormField extends StatelessWidget {
     this.filled = false,
     this.focusedBorderColor = primaryColor,
     this.onChanged,
+    this.obscureText = false,
   });
 
   final String label;
@@ -32,6 +32,7 @@ class CajicoTextFormField extends StatelessWidget {
   final Color? fillColor;
   final Color focusedBorderColor;
   final bool? filled;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class CajicoTextFormField extends StatelessWidget {
       inputFormatters: inputFormatters,
       minLines: minLines,
       maxLines: maxLines,
+      obscureText: obscureText,
       decoration: InputDecoration(
         fillColor: fillColor,
         filled: filled,
