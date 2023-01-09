@@ -87,42 +87,44 @@ class RewardEditView extends StatelessWidget {
                   maxLines: 10,
                   onChanged: (value) => memo = value,
                 ),
-                verticalSpaceLarge,
-                PrimaryButton(
-                  label: '変更する',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return NormalDialog(
-                            message: '更新しますか？',
-                            onPressed: () {
-                              controller.onTapUpdate(
-                                  rewardId: rewardId,
-                                  rewardName: rewardName,
-                                  point: point,
-                                  memo: memo);
-                              Navigator.pop(context, true);
-                            },
-                          );
-                        }).then((value) {
-                      if (value) {
-                        return showDialog(
-                          context: context,
-                          builder: (context) => NormalCompletedDialog(
-                            message: '更新されました',
-                            onPressed: () {
-                              Navigator.pop(context);
-                              homeController.onTapGetUnreadCount();
-                              baseController.onTapBottomNavigation(0);
-                            },
-                          ),
-                        );
-                      }
-                    });
-                  },
-                )
               ],
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PrimaryButton(
+              label: '変更する',
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return NormalDialog(
+                        message: '更新しますか？',
+                        onPressed: () {
+                          controller.onTapUpdate(
+                              rewardId: rewardId,
+                              rewardName: rewardName,
+                              point: point,
+                              memo: memo);
+                          Navigator.pop(context, true);
+                        },
+                      );
+                    }).then((value) {
+                  if (value) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) => NormalCompletedDialog(
+                        message: '更新されました',
+                        onPressed: () {
+                          Navigator.pop(context);
+                          homeController.onTapGetUnreadCount();
+                          baseController.onTapBottomNavigation(0);
+                        },
+                      ),
+                    );
+                  }
+                });
+              },
             ),
           ),
         ),

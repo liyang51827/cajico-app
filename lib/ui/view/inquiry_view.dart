@@ -90,41 +90,43 @@ class InquiryView extends StatelessWidget {
                     body = value;
                   },
                 ),
-                verticalSpaceLarge,
-                PrimaryButton(
-                  label: '送信する',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return NormalDialog(
-                            message: '送信しますか？',
-                            onPressed: () {
-                              titleTextController.clear();
-                              bodyTextController.clear();
-                              controller.onTapInquiry(title: title, body: body);
-                              Navigator.pop(context, true);
-                            },
-                          );
-                        }).then(
-                      (value) {
-                        if (value) {
-                          return showDialog(
-                            context: context,
-                            builder: (context) => NormalCompletedDialog(
-                              message: '送信されました',
-                              onPressed: () {
-                                Navigator.pop(context);
-                                homeController.onTapGetUnreadCount();
-                              },
-                            ),
-                          );
-                        }
-                      },
-                    );
-                  },
-                )
               ],
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PrimaryButton(
+              label: '送信する',
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return NormalDialog(
+                        message: '送信しますか？',
+                        onPressed: () {
+                          titleTextController.clear();
+                          bodyTextController.clear();
+                          controller.onTapInquiry(title: title, body: body);
+                          Navigator.pop(context, true);
+                        },
+                      );
+                    }).then(
+                      (value) {
+                    if (value) {
+                      return showDialog(
+                        context: context,
+                        builder: (context) => NormalCompletedDialog(
+                          message: '送信されました',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            homeController.onTapGetUnreadCount();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                );
+              },
             ),
           ),
         ),

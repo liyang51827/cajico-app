@@ -77,43 +77,45 @@ class HouseWorkEditView extends StatelessWidget {
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) => point = int.parse(value),
                 ),
-                verticalSpaceLarge,
-                PrimaryButton(
-                  label: '変更する',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return NormalDialog(
-                            message: '更新しますか？',
-                            onPressed: () {
-                              controller.onTapUpdate(
-                                houseWorkId: houseWorkId,
-                                houseWorkName: houseWorkName,
-                                point: point,
-                              );
-                              Navigator.pop(context, true);
-                            },
-                          );
-                        }).then((value) {
-                      if (value) {
-                        return showDialog(
-                          context: context,
-                          builder: (context) => NormalCompletedDialog(
-                            message: '更新されました',
-                            onPressed: () {
-                              Navigator.pop(context);
-                              homeController.onTapGetUnreadCount();
-                              Navigator.pop(context);
-                              houseWorkController.fetchData();
-                            },
-                          ),
-                        );
-                      }
-                    });
-                  },
-                )
               ],
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PrimaryButton(
+              label: '変更する',
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return NormalDialog(
+                        message: '更新しますか？',
+                        onPressed: () {
+                          controller.onTapUpdate(
+                            houseWorkId: houseWorkId,
+                            houseWorkName: houseWorkName,
+                            point: point,
+                          );
+                          Navigator.pop(context, true);
+                        },
+                      );
+                    }).then((value) {
+                  if (value) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) => NormalCompletedDialog(
+                        message: '更新されました',
+                        onPressed: () {
+                          Navigator.pop(context);
+                          homeController.onTapGetUnreadCount();
+                          Navigator.pop(context);
+                          houseWorkController.fetchData();
+                        },
+                      ),
+                    );
+                  }
+                });
+              },
             ),
           ),
         ),
