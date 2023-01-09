@@ -53,7 +53,7 @@ class RewardEditView extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
             title: const Text('ごほうびの編集', style: TextStyle(color: gray2)),
-            backgroundColor: Colors.white,
+            backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
           body: SingleChildScrollView(
