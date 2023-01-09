@@ -63,6 +63,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: HouseWorkEditCard(
                       houseWorkName: item.name,
+                      categoryName: item.categoryName,
                       imageUrl: item.categoryImageUrl,
                       point: item.point,
                       onPressed: () {

@@ -12,9 +12,17 @@ import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
 class HouseWorkEditView extends StatelessWidget {
-  HouseWorkEditView({super.key});
+  HouseWorkEditView({
+    super.key,
+    required this.categoryName,
+    required this.houseWorkName,
+    required this.point,
+  });
 
+  final int point;
+  final String categoryName;
   final focusNode = FocusNode();
+  final String houseWorkName;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class HouseWorkEditView extends StatelessWidget {
           appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black54),
               centerTitle: true,
-              title: const Text('ごほうびの編集', style: TextStyle(color: gray2)),
+              title: const Text('家事の編集', style: TextStyle(color: gray2)),
               backgroundColor: Colors.white,
               titleTextStyle: const TextStyle(fontSize: 22)),
           body: SingleChildScrollView(
@@ -39,21 +47,19 @@ class HouseWorkEditView extends StatelessWidget {
             child: Column(
               children: [
                 verticalSpaceLarge,
-                const CajicoTextFormField(
+                CajicoTextFormField(
                   readOnly: true,
-                  initValue: '料理',
+                  initValue: categoryName,
                   label: '家事カテゴリー',
                   filled: true,
                   fillColor: gray8,
                   focusedBorderColor: gray4,
                 ),
                 verticalSpaceMedium,
-                const CajicoTextFormField(
-                    initValue: '朝ごはん準備',
-                    label: '家事名'),
+                CajicoTextFormField(initValue: houseWorkName, label: '家事名'),
                 verticalSpaceMedium,
                 CajicoTextFormField(
-                    initValue: 80.toString(),
+                    initValue: point.toString(),
                     label: '必要ポイント（100P~500P）',
                     suffixText: 'ポイント',
                     keyboardType: TextInputType.number,

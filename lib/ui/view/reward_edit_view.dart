@@ -12,13 +12,14 @@ import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
 class RewardEditView extends StatelessWidget {
-  RewardEditView(
-      {super.key,
-      required this.rewardId,
-      required this.rank,
-      required this.initPoint,
-      required this.initRewardName,
-      required this.initMemo});
+  RewardEditView({
+    super.key,
+    required this.rewardId,
+    required this.rank,
+    required this.initPoint,
+    required this.initRewardName,
+    required this.initMemo,
+  });
 
   final int rewardId;
   final String rank;

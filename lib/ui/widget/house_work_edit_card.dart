@@ -7,13 +7,16 @@ import 'package:line_icons/line_icons.dart';
 import '../common/app_color.dart';
 
 class HouseWorkEditCard extends StatelessWidget {
-  const HouseWorkEditCard(
-      {super.key,
-      required this.houseWorkName,
-      required this.imageUrl,
-      required this.point,
-      required this.onPressed});
+  const HouseWorkEditCard({
+    super.key,
+    required this.categoryName,
+    required this.houseWorkName,
+    required this.imageUrl,
+    required this.point,
+    required this.onPressed,
+  });
 
+  final String categoryName;
   final String houseWorkName;
   final String imageUrl;
   final int point;
@@ -25,7 +28,11 @@ class HouseWorkEditCard extends StatelessWidget {
       width: double.infinity,
       height: 90,
       child: ElevatedButton(
-        onPressed: () => Get.to(() => HouseWorkEditView()),
+        onPressed: () => Get.to(() => HouseWorkEditView(
+              categoryName: categoryName,
+              houseWorkName: houseWorkName,
+              point: point,
+            )),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
