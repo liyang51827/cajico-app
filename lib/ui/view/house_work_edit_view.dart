@@ -30,9 +30,6 @@ class HouseWorkEditView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HouseWorkEditViewController());
-    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
-    final homeController = Get.put(HomeViewController());
     String houseWorkName = initHouseWorkName;
     int point = initPoint;
 
@@ -80,46 +77,130 @@ class HouseWorkEditView extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: Padding(
+          bottomNavigationBar: Container(
+            height: 160,
             padding: const EdgeInsets.all(16),
-            child: PrimaryButton(
-              label: '変更する',
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return NormalDialog(
-                        message: '更新しますか？',
-                        onPressed: () {
-                          controller.onTapUpdate(
-                            houseWorkId: houseWorkId,
-                            houseWorkName: houseWorkName,
-                            point: point,
-                          );
-                          Navigator.pop(context, true);
-                        },
-                      );
-                    }).then((value) {
-                  if (value) {
-                    return showDialog(
-                      context: context,
-                      builder: (context) => NormalCompletedDialog(
-                        message: '更新されました',
-                        onPressed: () {
-                          Navigator.pop(context);
-                          homeController.onTapGetUnreadCount();
-                          Navigator.pop(context);
-                          houseWorkController.fetchData();
-                        },
-                      ),
-                    );
-                  }
-                });
-              },
+            child: Column(
+              children: [
+                _UpdateBottom(
+                  houseWorkId: houseWorkId,
+                  houseWorkName: houseWorkName,
+                  point: point,
+                  categoryId: categoryId,
+                ),
+                verticalSpaceMedium,
+                _DeleteBottom(houseWorkId: houseWorkId, categoryId: categoryId),
+              ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _UpdateBottom extends StatelessWidget {
+  const _UpdateBottom({
+    required this.categoryId,
+    required this.houseWorkId,
+    required this.houseWorkName,
+    required this.point,
+  });
+
+  final int categoryId;
+  final int houseWorkId;
+  final String houseWorkName;
+  final int point;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(HouseWorkEditViewController());
+    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
+    final homeController = Get.put(HomeViewController());
+
+    return PrimaryButton(
+      label: '変更する',
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return NormalDialog(
+                message: '更新しますか？',
+                onPressed: () {
+                  controller.onTapUpdate(
+                    houseWorkId: houseWorkId,
+                    houseWorkName: houseWorkName,
+                    point: point,
+                  );
+                  Navigator.pop(context, true);
+                },
+              );
+            }).then((value) {
+          if (value) {
+            return showDialog(
+              context: context,
+              builder: (context) => NormalCompletedDialog(
+                message: '更新されました',
+                onPressed: () {
+                  Navigator.pop(context);
+                  homeController.onTapGetUnreadCount();
+                  Navigator.pop(context);
+                  houseWorkController.fetchData();
+                },
+              ),
+            );
+          }
+        });
+      },
+    );
+  }
+}
+
+class _DeleteBottom extends StatelessWidget {
+  const _DeleteBottom({
+    required this.categoryId,
+    required this.houseWorkId,
+  });
+
+  final int categoryId;
+  final int houseWorkId;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(HouseWorkEditViewController());
+    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
+    final homeController = Get.put(HomeViewController());
+
+    return PrimaryOutlineButton(
+      label: '削除する',
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return NormalDialog(
+                message: '削除しますか？',
+                onPressed: () {
+                  controller.onTapDelete(houseWorkId: houseWorkId);
+                  Navigator.pop(context, true);
+                },
+              );
+            }).then((value) {
+          if (value) {
+            return showDialog(
+              context: context,
+              builder: (context) => NormalCompletedDialog(
+                message: '削除されました',
+                onPressed: () {
+                  Navigator.pop(context);
+                  homeController.onTapGetUnreadCount();
+                  Navigator.pop(context);
+                  houseWorkController.fetchData();
+                },
+              ),
+            );
+          }
+        });
+      },
     );
   }
 }

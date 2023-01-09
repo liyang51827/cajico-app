@@ -26,4 +26,10 @@ class HouseWorkEditViewController extends BaseViewController {
       );
     });
   }
+
+  Future<void> onTapDelete({required int houseWorkId}) async {
+    await callAsyncApi(() async {
+      await api.deleteHouseWork(houseWorkId: houseWorkId);
+    });
+  }
 }

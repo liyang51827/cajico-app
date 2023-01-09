@@ -97,7 +97,7 @@ class ApiService extends GetConnect {
     return data.map((json) => HouseWork.fromJson(json)).toList();
   }
 
-  // 家事更新API
+  // 家事登録API
   Future<bool> createHouseWork({
     required int houseWorkCategoryId,
     required String houseWorkName,
@@ -122,6 +122,15 @@ class ApiService extends GetConnect {
       _makeUri('/house-works/$houseWorkId'),
       headers: await _makeAuthenticatedHeader(),
       body: jsonEncode({'name': houseWorkName, 'point': point}),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 家事削除API
+  Future<bool> deleteHouseWork({required int houseWorkId}) async {
+    final res = await http.delete(
+      _makeUri('/house-works/$houseWorkId'),
+      headers: await _makeAuthenticatedHeader(),
     );
     return _checkStatusCode(res);
   }

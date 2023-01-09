@@ -42,6 +42,46 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 
+class PrimaryOutlineButton extends StatelessWidget {
+  const PrimaryOutlineButton({
+    super.key,
+    required this.label,
+    this.width = double.infinity,
+    this.height = buttonHeight,
+    this.isValid = true,
+    this.onPressed,
+  });
+
+  final String label;
+  final double width;
+  final double height;
+  final VoidCallback? onPressed;
+  final bool isValid;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: height,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: primaryColor,
+          shape: const StadiumBorder(),
+          side: const BorderSide(color: primaryColor),
+          elevation: 0,
+        ),
+        onPressed: onPressed,
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+}
+
 class DarkGrayButton extends StatelessWidget {
   const DarkGrayButton({
     super.key,
