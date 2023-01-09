@@ -71,7 +71,7 @@ class HouseWorkEditView extends StatelessWidget {
                 verticalSpaceMedium,
                 CajicoTextFormField(
                   initValue: point.toString(),
-                  label: '必要ポイント（100P~500P）',
+                  label: '獲得ポイント',
                   suffixText: 'ポイント',
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],

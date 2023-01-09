@@ -24,7 +24,7 @@ class HouseWorkEditIndexView extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black54),
         centerTitle: true,
         title: Text('$categoryNameの編集', style: const TextStyle(color: gray2)),
-        backgroundColor: Colors.white,
+        backgroundColor: secondaryColor,
         titleTextStyle: const TextStyle(fontSize: 22),
       ),
       body: GetLoadingStack<HouseWorkViewController>(

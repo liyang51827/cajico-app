@@ -3,7 +3,6 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/view/house_work_edit_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 import '../common/app_color.dart';
 
 class HouseWorkEditCard extends StatelessWidget {
@@ -97,7 +96,7 @@ class HouseWorkEditCard extends StatelessWidget {
               ),
               horizontalSpaceLarge,
               const Icon(
-                LineIcons.angleRight,
+                Icons.arrow_forward_ios_rounded,
                 color: gray3,
               ),
             ],
