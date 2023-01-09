@@ -10,7 +10,6 @@ import '../controller/reward_edit_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
-import 'package:cajico_app/ui/view/home_view.dart';
 
 class RewardEditView extends StatelessWidget {
   RewardEditView(

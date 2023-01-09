@@ -5,8 +5,8 @@ import '../controller/house_work_view_controller.dart';
 import '../widget/house_work_card.dart';
 import '../widget/loading_stack.dart';
 
-class HouseWorkView extends StatelessWidget {
-  const HouseWorkView({
+class HouseWorkEditIndexView extends StatelessWidget {
+  const HouseWorkEditIndexView({
     super.key,
     required this.categoryName,
     required this.houseWorkCategoryId,
@@ -37,6 +37,11 @@ class HouseWorkView extends StatelessWidget {
           ]),
       body: GetLoadingStack<HouseWorkViewController>(
           child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: primaryColor,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
