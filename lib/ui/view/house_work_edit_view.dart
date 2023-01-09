@@ -1,5 +1,4 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/controller/house_work_view_controller.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +6,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/base_view_controller.dart';
 import '../controller/home_view_controller.dart';
-import '../controller/reward_edit_view_controller.dart';
+import '../controller/house_work_edit_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
@@ -19,7 +18,7 @@ class HouseWorkEditView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HouseWorkViewController(houseWorkCategoryId: 1));
+    final controller = Get.put(HouseWorkEditViewController());
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
 
