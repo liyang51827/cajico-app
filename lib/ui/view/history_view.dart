@@ -122,14 +122,18 @@ class HistoryView extends StatelessWidget {
                             },
                             groupSeparatorBuilder: (date) {
                               return Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                  child: Text(date, style: const TextStyle(color: gray3)));
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                child: Text(date, style: const TextStyle(color: gray3)),
+                              );
                             },
                           ),
                           item.currentPage < item.lastPage
                               ? NextPageButton(
                                   onPressed: () => controller.onTapNextPage(
-                                      userId: item.userId, page: item.currentPage))
+                                    userId: item.userId,
+                                    page: item.currentPage,
+                                  ),
+                                )
                               : const SizedBox(),
                         ],
                       ),
