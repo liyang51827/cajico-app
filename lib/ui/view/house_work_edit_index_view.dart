@@ -2,6 +2,7 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/house_work_create_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../common/ui_helper.dart';
 import '../controller/house_work_view_controller.dart';
 import '../widget/house_work_edit_card.dart';
 import '../widget/loading_stack.dart';
@@ -57,7 +58,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            padding: const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 70),
             child: Column(
               children: [
                 ListView.builder(
