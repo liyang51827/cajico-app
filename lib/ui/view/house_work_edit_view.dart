@@ -1,10 +1,10 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/house_work_edit_index_view.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/base_view_controller.dart';
 import '../controller/home_view_controller.dart';
 import '../controller/house_work_edit_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
@@ -14,11 +14,13 @@ import '../widget/primary_button.dart';
 class HouseWorkEditView extends StatelessWidget {
   HouseWorkEditView({
     super.key,
+    required this.houseWorkId,
     required this.categoryName,
     required this.initHouseWorkName,
     required this.initPoint,
   });
 
+  final int houseWorkId;
   final int initPoint;
   final String categoryName;
   final String initHouseWorkName;
@@ -28,7 +30,6 @@ class HouseWorkEditView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
     final homeController = Get.put(HomeViewController());
-    final baseController = Get.put(BaseViewController());
     String houseWorkName = initHouseWorkName;
     int point = initPoint;
 
@@ -81,7 +82,14 @@ class HouseWorkEditView extends StatelessWidget {
                         builder: (_) {
                           return NormalDialog(
                             message: '更新しますか？',
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.onTapUpdate(
+                                houseWorkId: houseWorkId,
+                                houseWorkName: houseWorkName,
+                                point: point,
+                              );
+                              Navigator.pop(context, true);
+                            },
                           );
                         }).then((value) {
                       if (value) {
@@ -92,7 +100,12 @@ class HouseWorkEditView extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                               homeController.onTapGetUnreadCount();
-                              baseController.onTapBottomNavigation(0);
+                              Get.to(
+                                () => HouseWorkEditIndexView(
+                                  categoryName: categoryName,
+                                  houseWorkCategoryId: houseWorkId,
+                                ),
+                              );
                             },
                           ),
                         );

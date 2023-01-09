@@ -62,14 +62,11 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: HouseWorkEditCard(
+                      houseWorkId: item.houseWorkId,
                       houseWorkName: item.name,
                       categoryName: item.categoryName,
                       imageUrl: item.categoryImageUrl,
                       point: item.point,
-                      onPressed: () {
-                        controller.onTapComplete(houseWorkId: item.houseWorkId);
-                        Navigator.pop(context, true);
-                      },
                     ),
                   );
                 },

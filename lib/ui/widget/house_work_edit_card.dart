@@ -9,18 +9,18 @@ import '../common/app_color.dart';
 class HouseWorkEditCard extends StatelessWidget {
   const HouseWorkEditCard({
     super.key,
+    required this.houseWorkId,
     required this.categoryName,
     required this.houseWorkName,
     required this.imageUrl,
     required this.point,
-    required this.onPressed,
   });
 
+  final int houseWorkId;
   final String categoryName;
   final String houseWorkName;
   final String imageUrl;
   final int point;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class HouseWorkEditCard extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => Get.to(
           () => HouseWorkEditView(
+            houseWorkId: houseWorkId,
             categoryName: categoryName,
             initHouseWorkName: houseWorkName,
             initPoint: point,

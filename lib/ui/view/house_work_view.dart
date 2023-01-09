@@ -36,7 +36,9 @@ class HouseWorkView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => HouseWorkEditIndexView(
-                        categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
+                      categoryName: categoryName,
+                      houseWorkCategoryId: houseWorkCategoryId,
+                    ),
                     fullscreenDialog: true,
                   ),
                 );

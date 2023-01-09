@@ -9,11 +9,7 @@ class HouseWorkEditViewController extends BaseViewController {
     required int point,
   }) async {
     await callAsyncApi(() async {
-      await api.putHouseWork(
-        houseWorkId: houseWorkId,
-        houseWorkName: houseWorkName,
-        point: point,
-      );
+      await api.putHouseWork(houseWorkId: houseWorkId, houseWorkName: houseWorkName, point: point);
     });
   }
 }
