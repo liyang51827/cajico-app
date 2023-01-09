@@ -15,20 +15,22 @@ class HouseWorkEditView extends StatelessWidget {
   HouseWorkEditView({
     super.key,
     required this.categoryName,
-    required this.houseWorkName,
-    required this.point,
+    required this.initHouseWorkName,
+    required this.initPoint,
   });
 
-  final int point;
+  final int initPoint;
   final String categoryName;
+  final String initHouseWorkName;
   final focusNode = FocusNode();
-  final String houseWorkName;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
+    String houseWorkName = initHouseWorkName;
+    int point = initPoint;
 
     return Focus(
       focusNode: focusNode,
@@ -56,14 +58,20 @@ class HouseWorkEditView extends StatelessWidget {
                   focusedBorderColor: gray4,
                 ),
                 verticalSpaceMedium,
-                CajicoTextFormField(initValue: houseWorkName, label: '家事名'),
+                CajicoTextFormField(
+                  initValue: houseWorkName,
+                  label: '家事名',
+                  onChanged: (value) => houseWorkName = value,
+                ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
-                    initValue: point.toString(),
-                    label: '必要ポイント（100P~500P）',
-                    suffixText: 'ポイント',
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]),
+                  initValue: point.toString(),
+                  label: '必要ポイント（100P~500P）',
+                  suffixText: 'ポイント',
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                  onChanged: (value) => point = int.parse(value),
+                ),
                 verticalSpaceLarge,
                 PrimaryButton(
                   label: '変更する',

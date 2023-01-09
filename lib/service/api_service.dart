@@ -97,6 +97,20 @@ class ApiService extends GetConnect {
     return data.map((json) => HouseWork.fromJson(json)).toList();
   }
 
+  // 家事更新API
+  Future<bool> putHouseWork({
+    required int houseWorkId,
+    required String houseWorkName,
+    required int point,
+  }) async {
+    final res = await http.put(
+      _makeUri('/house-works/$houseWorkId'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'name': houseWorkName, 'point': point}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 家事完了API
   Future<bool> postCompleteHouseWork({required int houseWorkId}) async {
     final res = await http.post(
@@ -162,11 +176,12 @@ class ApiService extends GetConnect {
   }
 
   // ごほうび更新API
-  Future<bool> putReward(
-      {required int rewardId,
-      required String rewardName,
-      required int point,
-      required String memo}) async {
+  Future<bool> putReward({
+    required int rewardId,
+    required String rewardName,
+    required int point,
+    required String memo,
+  }) async {
     final res = await http.put(
       _makeUri('/rewards/$rewardId'),
       headers: await _makeAuthenticatedHeader(),

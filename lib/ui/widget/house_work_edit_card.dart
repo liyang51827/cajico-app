@@ -28,11 +28,13 @@ class HouseWorkEditCard extends StatelessWidget {
       width: double.infinity,
       height: 90,
       child: ElevatedButton(
-        onPressed: () => Get.to(() => HouseWorkEditView(
-              categoryName: categoryName,
-              houseWorkName: houseWorkName,
-              point: point,
-            )),
+        onPressed: () => Get.to(
+          () => HouseWorkEditView(
+            categoryName: categoryName,
+            initHouseWorkName: houseWorkName,
+            initPoint: point,
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,
@@ -69,8 +71,10 @@ class HouseWorkEditCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(houseWorkName,
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text(
+                          houseWorkName,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                     verticalSpaceSmall,
