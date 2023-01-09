@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/view/house_work_edit_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../common/app_color.dart';
-import 'house_work_complete_dialog.dart';
-import 'house_work_completed_dialog.dart';
 
 class HouseWorkEditCard extends StatelessWidget {
   const HouseWorkEditCard(
@@ -26,22 +25,7 @@ class HouseWorkEditCard extends StatelessWidget {
       width: double.infinity,
       height: 90,
       child: ElevatedButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (_) {
-                return HouseWorkCompleteDialog(
-                  houseWorkName: houseWorkName,
-                  point: point,
-                  onPressed: onPressed,
-                );
-              }).then((value) {
-            if (value) {
-              return showDialog(
-                  context: context, builder: (context) => HouseWorkCompletedDialog(point: point));
-            }
-          });
-        },
+        onPressed: () => Get.to(() => HouseWorkEditView()),
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
           elevation: 2,

@@ -21,11 +21,11 @@ class HouseWorkEditIndexView extends StatelessWidget {
     return Scaffold(
       backgroundColor: gray7,
       appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
-          centerTitle: true,
-          title: Text(categoryName, style: const TextStyle(color: gray2)),
-          backgroundColor: Colors.white,
-          titleTextStyle: const TextStyle(fontSize: 22),
+        iconTheme: const IconThemeData(color: Colors.black54),
+        centerTitle: true,
+        title: Text(categoryName, style: const TextStyle(color: gray2)),
+        backgroundColor: Colors.white,
+        titleTextStyle: const TextStyle(fontSize: 22),
       ),
       body: GetLoadingStack<HouseWorkViewController>(
           child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),

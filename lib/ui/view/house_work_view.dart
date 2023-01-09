@@ -35,7 +35,8 @@ class HouseWorkView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => HouseWorkEditIndexView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
+                        builder: (_) => HouseWorkEditIndexView(
+                            categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
                         fullscreenDialog: true,
                       ),
                     );
@@ -43,7 +44,10 @@ class HouseWorkView extends StatelessWidget {
                 },
                 itemBuilder: (BuildContext context) {
                   return [
-                    const PopupMenuItem(value: true,child: Text('編集する'),),
+                    const PopupMenuItem(
+                      value: true,
+                      child: Text('編集する'),
+                    ),
                   ];
                 })
           ]),
