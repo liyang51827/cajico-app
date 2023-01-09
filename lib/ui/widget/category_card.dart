@@ -18,8 +18,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.28, // SEでも対応できるギリギリのサイズ
+    return Expanded(
       child: ElevatedButton(
         onPressed: () => Get.to(
           () => HouseWorkView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),

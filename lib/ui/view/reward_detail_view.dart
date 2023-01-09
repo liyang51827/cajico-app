@@ -122,18 +122,7 @@ class RewardDetailView extends StatelessWidget {
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
-                        verticalSpaceMedium,
-                        _RewardButton(
-                            rewardId: rewardId,
-                            rewardName: rewardName,
-                            point: point,
-                            isMe: isMe,
-                            isAvailable: isAvailable),
-                      ],
-                    ),
+                    child: _Detail(rewardName: rewardName, text: text, point: point, rank: rank),
                   ),
                 ),
                 controller.rewardHistories().isNotEmpty
@@ -171,6 +160,16 @@ class RewardDetailView extends StatelessWidget {
                         ),
                       ),
               ],
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(16),
+            child: _RewardButton(
+              rewardId: rewardId,
+              rewardName: rewardName,
+              point: point,
+              isMe: isMe,
+              isAvailable: isAvailable,
             ),
           ),
         ),
