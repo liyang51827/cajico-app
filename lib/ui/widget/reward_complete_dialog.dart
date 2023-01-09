@@ -1,21 +1,20 @@
-import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import '../controller/reward_detail_view_controller.dart';
+import 'cajico_text_form_field.dart';
 
 class RewardCompleteDialog extends GetView<RewardDetailViewController> {
-  RewardCompleteDialog({super.key, required this.rewardId, required this.rewardName});
+  const RewardCompleteDialog({super.key, required this.rewardId, required this.rewardName});
 
   final int rewardId;
   final String rewardName;
-  final bodyTextController = TextEditingController();
-  String body = '';
 
   @override
   Widget build(BuildContext context) {
+    String body = '';
     return SimpleDialog(
       insetPadding: const EdgeInsets.all(0),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -25,26 +24,13 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
           verticalSpaceMedium,
           const Text('ねぎらいを完了しますか？', style: TextStyle(fontSize: 16)),
           verticalSpaceMedium,
-          TextFormField(
-            controller: bodyTextController,
-            cursorColor: primaryColor,
-            keyboardType: TextInputType.multiline,
+          CajicoTextFormField(
+            label: 'ひとことメッセージ',
+            onChanged: (value) => body = value,
+            initValue: '',
             minLines: 3,
             maxLines: 3,
-            decoration: InputDecoration(
-              labelText: 'ひとことメッセージ',
-              labelStyle: const TextStyle(color: gray3),
-              alignLabelWithHint: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: gray6),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: primaryColor),
-              ),
-            ),
-            onChanged: (value) => body = value,
+            keyboardType: TextInputType.multiline,
           ),
         ],
       ),
