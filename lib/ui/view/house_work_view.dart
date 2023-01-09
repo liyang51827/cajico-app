@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/house_work_edit_index_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/house_work_view_controller.dart';
@@ -29,9 +30,20 @@ class HouseWorkView extends StatelessWidget {
           actions: <Widget>[
             PopupMenuButton(
                 offset: const Offset(0, 50),
+                onSelected: (result) {
+                  if (result == true) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => HouseWorkEditIndexView(categoryName: categoryName, houseWorkCategoryId: houseWorkCategoryId),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  }
+                },
                 itemBuilder: (BuildContext context) {
                   return [
-                    const PopupMenuItem(child: Text('編集する')),
+                    const PopupMenuItem(value: true,child: Text('編集する'),),
                   ];
                 })
           ]),
