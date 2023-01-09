@@ -84,7 +84,14 @@ class HouseWorkCreateView extends StatelessWidget {
                     builder: (_) {
                       return NormalDialog(
                         message: '登録しますか？',
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.onTapCreate(
+                            houseWorkCategoryId: categoryId,
+                            houseWorkName: houseWorkName,
+                            point: point,
+                          );
+                          Navigator.pop(context, true);
+                        },
                       );
                     }).then((value) {
                   if (value) {

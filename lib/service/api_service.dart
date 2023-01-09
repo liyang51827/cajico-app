@@ -98,6 +98,21 @@ class ApiService extends GetConnect {
   }
 
   // 家事更新API
+  Future<bool> createHouseWork({
+    required int houseWorkCategoryId,
+    required String houseWorkName,
+    required int point,
+  }) async {
+    final res = await http.post(
+      _makeUri('/house-works'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode(
+          {'houseWorkCategoryId': houseWorkCategoryId, 'name': houseWorkName, 'point': point}),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 家事更新API
   Future<bool> putHouseWork({
     required int houseWorkId,
     required String houseWorkName,

@@ -12,4 +12,18 @@ class HouseWorkEditViewController extends BaseViewController {
       await api.putHouseWork(houseWorkId: houseWorkId, houseWorkName: houseWorkName, point: point);
     });
   }
+
+  Future<void> onTapCreate({
+    required int houseWorkCategoryId,
+    required String houseWorkName,
+    required int point,
+  }) async {
+    await callAsyncApi(() async {
+      await api.createHouseWork(
+        houseWorkCategoryId: houseWorkCategoryId,
+        houseWorkName: houseWorkName,
+        point: point,
+      );
+    });
+  }
 }
