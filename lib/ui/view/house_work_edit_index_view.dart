@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/house_work_create_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/house_work_view_controller.dart';
@@ -30,7 +31,9 @@ class HouseWorkEditIndexView extends StatelessWidget {
       body: GetLoadingStack<HouseWorkViewController>(
           child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId)),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Get.to(
+          HouseWorkCreateView(categoryId: houseWorkCategoryId, categoryName: categoryName),
+        ),
         backgroundColor: primaryColor,
         child: const Icon(Icons.add),
       ),
