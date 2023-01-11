@@ -35,7 +35,7 @@ class MyPageView extends StatelessWidget {
                 return const SizedBox();
               }
               return Container(
-                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 36),
+                padding: const EdgeInsets.all(24),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   border: Border.all(color: gray5),
@@ -74,17 +74,25 @@ class MyPageView extends StatelessWidget {
                         verticalSpaceLarge,
                       ],
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _MyPageMenu(menu: 'ファミリーネーム', value: '${user.familyName}家'),
-                        _MyPageMenu(menu: 'ファミリーコード', value: user.familyCode),
-                        _MyPageMenu(menu: '続柄', value: user.position),
-                        _MyPageMenu(menu: 'メールアドレス', value: user.email),
-                        _MyPageMenu(menu: '誕生日', value: user.birthday),
-                        _MyPageMenu(menu: '本日の獲得P', value: '${formatter.format(user.todayPoint)}P'),
-                        _MyPageMenu(menu: '累計獲得P', value: '${formatter.format(user.totalPoint)}P'),
-                      ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _Divider(),
+                          _MyPageMenu(menu: 'ファミリーネーム', value: '${user.familyName}家'),
+                          _MyPageMenu(menu: 'ファミリーコード', value: user.familyCode),
+                          const _Divider(),
+                          _MyPageMenu(menu: '続柄', value: user.position),
+                          _MyPageMenu(menu: 'メールアドレス', value: user.email),
+                          _MyPageMenu(menu: '誕生日', value: user.birthday),
+                          const _Divider(),
+                          _MyPageMenu(
+                              menu: '本日の獲得P', value: '${formatter.format(user.todayPoint)}P'),
+                          _MyPageMenu(
+                              menu: '累計獲得P', value: '${formatter.format(user.totalPoint)}P'),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -110,11 +118,26 @@ class _MyPageMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(menu, style: const TextStyle(fontSize: 12)),
+          Text(menu, style: const TextStyle(fontSize: 13)),
           verticalSpaceTiny,
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold),)
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          )
         ],
       ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Divider(height: 1, color: gray4,),
     );
   }
 }
