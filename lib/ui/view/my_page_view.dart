@@ -27,7 +27,11 @@ class MyPageView extends StatelessWidget {
               return [
                 const PopupMenuItem(
                   value: true,
-                  child: Text('編集する'),
+                  child: Text('プロフィール編集'),
+                ),
+                const PopupMenuItem(
+                  value: true,
+                  child: Text('通知設定'),
                 ),
               ];
             },
