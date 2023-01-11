@@ -20,6 +20,19 @@ class MyPageView extends StatelessWidget {
         title: const Text('マイページ', style: TextStyle(color: gray2)),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
+        actions: <Widget>[
+          PopupMenuButton(
+            offset: const Offset(0, 50),
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem(
+                  value: true,
+                  child: Text('編集する'),
+                ),
+              ];
+            },
+          )
+        ],
       ),
       body: GetLoadingStack<MyPageViewController>(
         child: RefreshIndicator(
