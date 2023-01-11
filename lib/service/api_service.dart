@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import '../model/my_page.dart';
 import '../model/pagination_response.dart';
 import '../model/point_history.dart';
 import '../model/house_works.dart';
@@ -74,6 +75,16 @@ class ApiService extends GetConnect {
     );
     final String? token = _decodeResponse(res)['data']['accessToken'];
     return token;
+  }
+
+  // マイページ取得API
+  Future<MyPage> getMyPage() async {
+    final res = await http.get(
+      _makeUri('/me'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final dynamic data = _decodeResponse(res)['data'];
+    return MyPage.fromJson(data);
   }
 
   // 最近の家事取得API
