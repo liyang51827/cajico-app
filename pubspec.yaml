@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.15
   intl: ^0.17.0
   grouped_list: ^5.1.2
+  tutorial_coach_mark: ^1.2.4
 
 dev_dependencies:
   flutter_test:
