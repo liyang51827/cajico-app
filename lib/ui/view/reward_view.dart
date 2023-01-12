@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/reward_view_controller.dart';
+import '../widget/cajico_cashed_network_image.dart';
 import '../widget/header.dart';
 import '../widget/loading_stack.dart';
 import '../widget/reward_category_card.dart';
@@ -139,18 +140,10 @@ class _TabBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CachedNetworkImage(
+                    CajicoCachedNetworkIconImage(
                       imageUrl: familyReward.iconUrl ??
                           'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(color: primaryColor),
-                      ),
-                      imageBuilder: (context, imageProvider) {
-                        return CircleAvatar(
-                          radius: 15,
-                          backgroundImage: imageProvider,
-                        );
-                      },
+                      radius: 15,
                     ),
                     horizontalSpaceSmall,
                     Text(familyReward.userName),

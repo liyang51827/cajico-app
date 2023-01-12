@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/home_view_controller.dart';
 import '../controller/reward_detail_view_controller.dart';
+import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/reward_complete_dialog.dart';
@@ -363,18 +364,7 @@ class _RewardHistoryDetail extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: userImageUrl,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(color: primaryColor),
-                    ),
-                    imageBuilder: (context, imageProvider) {
-                      return CircleAvatar(
-                        radius: 20,
-                        backgroundImage: imageProvider,
-                      );
-                    },
-                  ),
+                  CajicoCachedNetworkIconImage(imageUrl: userImageUrl, radius: 20),
                   horizontalSpaceSmall,
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,

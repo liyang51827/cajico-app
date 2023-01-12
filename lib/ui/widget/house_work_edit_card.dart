@@ -4,6 +4,7 @@ import 'package:cajico_app/ui/view/house_work_edit_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
+import 'cajico_cashed_network_image.dart';
 
 class HouseWorkEditCard extends StatelessWidget {
   const HouseWorkEditCard({
@@ -59,12 +60,7 @@ class HouseWorkEditCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 16),
                 width: 100,
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
-                  ),
-                ),
+                child: CajicoCachedNetworkImage(imageUrl: imageUrl),
               ),
               horizontalSpaceSmall,
               Expanded(

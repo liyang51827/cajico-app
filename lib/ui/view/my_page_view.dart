@@ -5,6 +5,7 @@ import 'package:cajico_app/ui/controller/my_page_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 
 class MyPageView extends StatelessWidget {
@@ -68,15 +69,7 @@ class MyPageView extends StatelessWidget {
                           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         verticalSpaceMediumLarge,
-                        SizedBox(
-                          height: 80,
-                          child: CachedNetworkImage(
-                            imageUrl: user.iconUrl,
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(color: primaryColor),
-                            ),
-                          ),
-                        ),
+                        CajicoCachedNetworkIconImage(imageUrl: user.iconUrl, radius: 40),
                         verticalSpaceMediumLarge,
                         const Text('保有ポイント', style: TextStyle(fontWeight: FontWeight.bold)),
                         verticalSpaceSmall,
@@ -154,7 +147,10 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.symmetric(vertical: 8),
-      child: Divider(height: 1, color: gray4,),
+      child: Divider(
+        height: 1,
+        color: gray4,
+      ),
     );
   }
 }

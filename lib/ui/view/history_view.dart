@@ -13,6 +13,7 @@ import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
 import '../controller/home_view_controller.dart';
+import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/next_page_button.dart';
 
@@ -174,18 +175,10 @@ class _TabBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CachedNetworkImage(
+                    CajicoCachedNetworkIconImage(
                       imageUrl: pointHistory.iconUrl ??
                           'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(color: primaryColor),
-                      ),
-                      imageBuilder: (context, imageProvider) {
-                        return CircleAvatar(
-                          radius: 15,
-                          backgroundImage: imageProvider,
-                        );
-                      },
+                      radius: 15,
                     ),
                     horizontalSpaceSmall,
                     Text(pointHistory.userName)
@@ -312,12 +305,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
               children: [
                 Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: categoryImageUrl,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(color: primaryColor),
-                      ),
-                    ),
+                    CajicoCachedNetworkImage(imageUrl: categoryImageUrl),
                     horizontalSpaceSmall,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,18 +322,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                 ),
                 Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: userIconImageUrl,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(color: primaryColor),
-                      ),
-                      imageBuilder: (context, imageProvider) {
-                        return CircleAvatar(
-                          radius: 15,
-                          backgroundImage: imageProvider,
-                        );
-                      },
-                    ),
+                    CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
                     horizontalSpaceSmall,
                     SizedBox(
                       width: 50,

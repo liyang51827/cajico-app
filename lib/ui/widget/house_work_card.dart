@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import '../common/app_color.dart';
+import 'cajico_cashed_network_image.dart';
 import 'house_work_complete_dialog.dart';
 import 'house_work_completed_dialog.dart';
 
@@ -62,12 +63,7 @@ class HouseWorkCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 16),
                 width: 100,
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
-                  ),
-                ),
+                child: CajicoCachedNetworkImage(imageUrl: imageUrl),
               ),
               horizontalSpaceSmall,
               Expanded(
