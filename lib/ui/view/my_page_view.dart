@@ -71,15 +71,13 @@ class MyPageView extends StatelessWidget {
                         verticalSpaceMediumLarge,
                         CajicoCachedNetworkIconImage(imageUrl: user.iconUrl, radius: 40),
                         verticalSpaceMediumLarge,
-                        const Text('保有ポイント', style: TextStyle(fontWeight: FontWeight.bold)),
-                        verticalSpaceSmall,
-                        Text(
-                          '${formatter.format(user.ownedPoint)}P',
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _PointTitle(title: '保有ポイント', point: user.ownedPoint),
+                            horizontalSpaceLarge,
+                            _PointTitle(title: '累計ポイント', point: user.totalPoint),
+                          ],
                         ),
                         verticalSpaceLarge,
                       ],
@@ -151,6 +149,31 @@ class _Divider extends StatelessWidget {
         height: 1,
         color: gray4,
       ),
+    );
+  }
+}
+
+class _PointTitle extends StatelessWidget {
+  _PointTitle({required this.title, required this.point});
+  final int point;
+  final String title;
+  final formatter = NumberFormat("#,###");
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        verticalSpaceSmall,
+        Text(
+          '${formatter.format(point)}P',
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+          ),
+        ),
+      ],
     );
   }
 }
