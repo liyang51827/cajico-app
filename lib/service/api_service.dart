@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../model/my_page.dart';
 import '../model/pagination_response.dart';
 import '../model/point_history.dart';
@@ -14,6 +15,17 @@ class ApiService extends GetConnect {
   static const _commonHeaders = {
     'content-type': 'application/json',
   };
+
+  // SharedPreferencesからトークンを取得
+  _setToken() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    String? localToken = localStorage.getString('token');
+
+    // なぜかlocalStorageから取得した値の前後に"が入るので仕方なくここで置換する
+    if (localToken != null) {
+      token = localToken.replaceAll('"', '');
+    }
+  }
 
   Uri _makeUri(String path, {Map<String, String?>? queryParams}) {
     final apiPath = "/api$path";
@@ -38,7 +50,7 @@ class ApiService extends GetConnect {
   }
 
   Future<Map<String, String>> makeAuthorizationBearerHeader() async {
-    const token = '1|ggekvMjZ7BqOHmhVjbLf9itGvniZw94fXIgRmaJt';
+    await _setToken();
     return {
       'Authorization': "Bearer $token",
     };
