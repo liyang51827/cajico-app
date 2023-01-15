@@ -13,7 +13,6 @@ class LoginViewController extends BaseViewController {
       result = await api.login(email: email, password: password);
     });
     if (result != null) {
-      print(result);
       prefs.setString('token', result!);
       Get.to(const HouseWork());
     }

@@ -56,17 +56,6 @@ class ApiService extends GetConnect {
     };
   }
 
-  // // SharedPreferencesからトークンを取得
-  // _setToken() async {
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   String? localToken = localStorage.getString('token');
-  //
-  //   // なぜかlocalStorageから取得した値の前後に"が入るので仕方なくここで置換する
-  //   if (localToken != null) {
-  //     token = localToken.replaceAll('"', '');
-  //   }
-  // }
-
   Map<String, dynamic> _decodeResponse<T>(http.Response response) {
     _checkStatusCode(response);
     return json.decode(response.body);
@@ -87,6 +76,15 @@ class ApiService extends GetConnect {
     );
     final String? token = _decodeResponse(res)['data']['accessToken'];
     return token;
+  }
+
+  // ログアウトAPI
+  Future<bool> logout() async {
+    final res = await http.post(
+      _makeUri('/logout'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
   }
 
   // マイページ取得API

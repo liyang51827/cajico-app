@@ -23,15 +23,24 @@ class MyPageView extends StatelessWidget {
         actions: <Widget>[
           PopupMenuButton(
             offset: const Offset(0, 50),
+            onSelected: (result) {
+              if (result == 2) {
+                controller.onTapLogout();
+              }
+            },
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem(
-                  value: true,
+                  value: 0,
                   child: Text('プロフィール編集'),
                 ),
                 const PopupMenuItem(
-                  value: true,
+                  value: 1,
                   child: Text('通知設定'),
+                ),
+                const PopupMenuItem(
+                  value: 2,
+                  child: Text('ログアウト'),
                 ),
               ];
             },
