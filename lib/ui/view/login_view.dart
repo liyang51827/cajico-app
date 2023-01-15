@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/login_view_controller.dart';
 import '../widget/cajico_text_form_field.dart';
+import '../widget/loading_stack.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -31,49 +32,51 @@ class LoginView extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: Container(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 40, bottom: 24),
-            child: Column(
-              children: [
-                const Text(
-                  'メールアドレスとパスワードを\n入力してください',
-                  textAlign: TextAlign.center,
-                ),
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  label: 'メールアドレス',
-                  initValue: '',
-                  onChanged: (value) => email = value,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  label: 'パスワード',
-                  initValue: '',
-                  obscureText: true,
-                  maxLines: 1,
-                  onChanged: (value) => password = value,
-                ),
-                verticalSpaceMediumLarge,
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'メールアドレス及びパスワードをお忘れの方は',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      InkWell(
-                        child: const Text(
-                          'こちら',
-                          style: TextStyle(color: primaryColor, fontSize: 13),
-                        ),
-                        onTap: () => Get.to(() => const HouseWork()),
-                      ),
-                    ],
+          body: GetLoadingStack<LoginViewController>(
+            child: Container(
+              padding: const EdgeInsets.only(right: 16, left: 16, top: 40, bottom: 24),
+              child: Column(
+                children: [
+                  const Text(
+                    'メールアドレスとパスワードを\n入力してください',
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    label: 'メールアドレス',
+                    initValue: '',
+                    onChanged: (value) => email = value,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    label: 'パスワード',
+                    initValue: '',
+                    obscureText: true,
+                    maxLines: 1,
+                    onChanged: (value) => password = value,
+                  ),
+                  verticalSpaceMediumLarge,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'メールアドレス及びパスワードをお忘れの方は',
+                          style: TextStyle(fontSize: 13),
+                        ),
+                        InkWell(
+                          child: const Text(
+                            'こちら',
+                            style: TextStyle(color: primaryColor, fontSize: 13),
+                          ),
+                          onTap: () => Get.to(() => const HouseWork()),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Container(
