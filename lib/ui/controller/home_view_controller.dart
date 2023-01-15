@@ -1,5 +1,7 @@
 import 'package:cajico_app/model/house_works.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../view/top_view.dart';
 import 'base_view_controller.dart';
 
 class HomeViewController extends BaseViewController {
@@ -14,14 +16,19 @@ class HomeViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      await Future.wait([
-        () async {
-          houseWorks.value = await api.getRecentHouseWorksList();
-        }(),
-        () async {
-          unreadCount.value = await api.getNotificationUnreadCount();
-        }(),
-      ]);
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getString('token') != null) {
+        await Future.wait([
+              () async {
+            houseWorks.value = await api.getRecentHouseWorksList();
+          }(),
+              () async {
+            unreadCount.value = await api.getNotificationUnreadCount();
+          }(),
+        ]);
+      } else {
+        Get.to(() => const TopView());
+      }
     });
   }
 
