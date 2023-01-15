@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/controller/my_page_view_controller.dart';
