@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
+import '../widget/normal_dialog.dart';
 
 class MyPageView extends StatelessWidget {
   const MyPageView({super.key});
@@ -25,7 +26,16 @@ class MyPageView extends StatelessWidget {
             offset: const Offset(0, 50),
             onSelected: (result) {
               if (result == 2) {
-                controller.onTapLogout();
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return NormalDialog(
+                        message: 'ログアウトしますか？',
+                        onPressed: () {
+                          controller.onTapLogout();
+                        },
+                      );
+                    });
               }
             },
             itemBuilder: (BuildContext context) {
@@ -163,6 +173,7 @@ class _Divider extends StatelessWidget {
 
 class _PointTitle extends StatelessWidget {
   _PointTitle({required this.title, required this.point});
+
   final int point;
   final String title;
   final formatter = NumberFormat("#,###");
