@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../view/inquiry_view.dart';
 import '../view/my_page_view.dart';
-import '../view/top_view.dart';
 import '../view/web_view_view.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -46,7 +45,7 @@ class HomeDrawer extends StatelessWidget {
               color: Colors.brown,
             ),
             title: const Text('マイページ'),
-            onTap: () => Get.to(() => MyPageView()),
+            onTap: () => Get.to(() => const MyPageView()),
           ),
           ListTile(
             leading: const Icon(

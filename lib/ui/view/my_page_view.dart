@@ -182,7 +182,7 @@ class _PointTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         verticalSpaceSmall,
         Text(
           '${formatter.format(point)}P',
