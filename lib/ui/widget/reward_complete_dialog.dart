@@ -1,8 +1,9 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/widget/primary_small_button.dart';
 import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
+import 'package:cajico_app/ui/widget/reward_request_completed_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 import '../controller/reward_detail_view_controller.dart';
 import 'cajico_text_form_field.dart';
 
@@ -36,9 +37,10 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
       ),
       children: [
         SimpleDialogOption(
-          onPressed: () {
-            controller.onTapComplete(rewardId: rewardId, body: body);
-            Navigator.pop(context, true);
+          onPressed: () async {
+            await controller.onTapComplete(rewardId: rewardId, body: body);
+            Get.back();
+            Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
           },
           child: const PrimarySmallButton(text: 'はい！'),
         ),

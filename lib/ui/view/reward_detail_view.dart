@@ -279,34 +279,56 @@ class _RewardButton extends GetView<RewardDetailViewController> {
       label: isMe ? 'ねぎらってもらう！' : 'ねぎらう！',
       isValid: isAvailable,
       onPressed: () {
-        showDialog(
-            context: context,
-            builder: (_) {
-              if (isMe) {
-                return RewardRequestDialog(
-                  rewardName: rewardName,
-                  point: point,
-                  onPressed: () {
-                    controller.onTapRequest(rewardId: rewardId);
-                    Navigator.pop(context, true);
-                  },
-                );
-              } else {
-                return RewardCompleteDialog(
-                  rewardId: rewardId,
-                  rewardName: rewardName,
-                );
-              }
-            }).then((value) {
-          if (value) {
-            if (isMe) {
-              return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
-            } else {
-              return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
-            }
-          }
-        });
+        if (isMe) {
+          Get.dialog(
+            RewardRequestDialog(
+              rewardName: rewardName,
+              point: point,
+              onPressed: () async {
+                await controller.onTapRequest(rewardId: rewardId);
+                Get.back();
+                Get.dialog(const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
+              },
+            ),
+          );
+        } else {
+          Get.dialog(
+              RewardCompleteDialog(
+                rewardId: rewardId,
+                rewardName: rewardName,
+              )
+          );
+        }
       },
+      // onPressed: () {
+      //   showDialog(
+      //       context: context,
+      //       builder: (_) {
+      //         if (isMe) {
+      //           return RewardRequestDialog(
+      //             rewardName: rewardName,
+      //             point: point,
+      //             onPressed: () {
+      //               controller.onTapRequest(rewardId: rewardId);
+      //               Navigator.pop(context, true);
+      //             },
+      //           );
+      //         } else {
+      //           return RewardCompleteDialog(
+      //             rewardId: rewardId,
+      //             rewardName: rewardName,
+      //           );
+      //         }
+      //       }).then((value) {
+      //     if (value) {
+      //       if (isMe) {
+      //         return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
+      //       } else {
+      //         return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
+      //       }
+      //     }
+      //   });
+      // },
     );
   }
 }
