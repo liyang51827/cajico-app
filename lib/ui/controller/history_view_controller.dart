@@ -50,7 +50,7 @@ class HistoryViewController extends BaseViewController {
           houseWorkName: houseWorkName,
           categoryName: categoryName,
           onPressed: () async {
-            await onTapDelete(pointHistoryId: pointHistoryId);
+            await deleteApi(pointHistoryId: pointHistoryId);
             Get.back();
             Get.dialog(
               NormalCompletedDialog(
@@ -67,7 +67,7 @@ class HistoryViewController extends BaseViewController {
     }
   }
 
-  Future<void> onTapDelete({required int pointHistoryId}) async {
+  Future<void> deleteApi({required int pointHistoryId}) async {
     var result = false;
     await callAsyncApi(() async {
       result = await api.deletePointHistory(pointHistoryId: pointHistoryId);

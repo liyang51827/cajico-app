@@ -34,12 +34,12 @@ class HomeViewController extends BaseViewController {
   }
 
   Future<void> onTapCompleteDialog({required int houseWorkId, required int point}) async {
-    await complete(houseWorkId: houseWorkId);
+    await completeApi(houseWorkId: houseWorkId);
     Get.back();
     Get.dialog(HouseWorkCompletedDialog(point: point));
   }
 
-  Future<void> complete({required int houseWorkId}) async {
+  Future<void> completeApi({required int houseWorkId}) async {
     await callAsyncApi(() async {
       await api.postCompleteHouseWork(houseWorkId: houseWorkId);
     });
