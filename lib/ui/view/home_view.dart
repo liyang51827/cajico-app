@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'CAJICO',
-      home: const HouseWork(),
+      home: const HomeView(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HouseWork extends GetView<HomeViewController> {
-  const HouseWork({super.key});
+class HomeView extends GetView<HomeViewController> {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

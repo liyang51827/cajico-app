@@ -152,7 +152,7 @@ class _AuthSection extends StatelessWidget {
                 shape: const StadiumBorder(),
                 elevation: 0,
               ),
-              onPressed: () => Get.to(() => const HouseWork()),
+              onPressed: () => Get.to(() => const HomeView()),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -179,7 +179,7 @@ class _AuthSection extends StatelessWidget {
                 side: const BorderSide(color: primaryColor),
                 elevation: 0,
               ),
-              onPressed: () => Get.to(() => const HouseWork()),
+              onPressed: () => Get.to(() => const HomeView()),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [

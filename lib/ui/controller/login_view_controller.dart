@@ -14,7 +14,7 @@ class LoginViewController extends BaseViewController {
     });
     if (result != null) {
       prefs.setString('token', result!);
-      Get.to(const HouseWork());
+      Get.to(const HomeView());
     }
   }
 }

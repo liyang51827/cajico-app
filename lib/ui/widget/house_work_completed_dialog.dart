@@ -38,7 +38,7 @@ class HouseWorkCompletedDialog extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   Navigator.pop(context, true);
-                  Get.to(() => const HouseWork());
+                  Get.to(() => const HomeView());
                 },
                 child: const PrimarySmallButton(text: '戻る'))),
       ],

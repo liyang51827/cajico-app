@@ -70,7 +70,7 @@ class LoginView extends StatelessWidget {
                             'こちら',
                             style: TextStyle(color: primaryColor, fontSize: 13),
                           ),
-                          onTap: () => Get.to(() => const HouseWork()),
+                          onTap: () => Get.to(() => const HomeView()),
                         ),
                       ],
                     ),
