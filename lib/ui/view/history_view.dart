@@ -2,8 +2,6 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/header.dart';
 import 'package:cajico_app/ui/widget/home_drawer.dart';
-import 'package:cajico_app/ui/widget/house_work_history_delete_dialog.dart';
-import 'package:cajico_app/ui/widget/normal_completed_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -11,7 +9,6 @@ import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
-import '../controller/home_view_controller.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/next_page_button.dart';
@@ -260,37 +257,17 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Get.put(HomeViewController());
+    final controller = Get.put(HistoryViewController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
-          onTap: isMe
-              ? () {
-                  Get.dialog(
-                    HouseWorkHistoryDeleteDialog(
-                      houseWorkName: houseWorkName,
-                      categoryName: categoryName,
-                      onPressed: () async {
-                        await controller.onTapDelete(pointHistoryId: pointHistoryId);
-                        Navigator.pop(context, true);
-                      },
-                    ),
-                  ).then((value) {
-                    if (value) {
-                      return Get.dialog(
-                        NormalCompletedDialog(
-                          message: '家事を取り消しました',
-                          onPressed: () {
-                            Navigator.pop(context);
-                            homeController.onTapGetUnreadCount();
-                          },
-                        ),
-                      );
-                    }
-                  });
-                }
-              : () {},
+          onTap: () => controller.onTapDeleteDialog(
+            isMe: isMe,
+            houseWorkName: houseWorkName,
+            categoryName: categoryName,
+            pointHistoryId: pointHistoryId,
+          ),
           child: Container(
             height: 70,
             width: double.infinity,

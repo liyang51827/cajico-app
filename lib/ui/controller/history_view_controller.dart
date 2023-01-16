@@ -1,6 +1,9 @@
 import 'package:cajico_app/model/point_history.dart';
 import 'package:get/get.dart';
+import '../widget/house_work_history_delete_dialog.dart';
+import '../widget/normal_completed_dialog.dart';
 import 'base_view_controller.dart';
+import 'home_view_controller.dart';
 
 class HistoryViewController extends BaseViewController {
   final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
@@ -32,6 +35,36 @@ class HistoryViewController extends BaseViewController {
         }(),
       ]);
     });
+  }
+
+  Future<void> onTapDeleteDialog({
+    required bool isMe,
+    required String houseWorkName,
+    required String categoryName,
+    required int pointHistoryId,
+  }) async {
+    if (isMe) {
+      final homeController = Get.put(HomeViewController());
+      Get.dialog(
+        HouseWorkHistoryDeleteDialog(
+          houseWorkName: houseWorkName,
+          categoryName: categoryName,
+          onPressed: () async {
+            await onTapDelete(pointHistoryId: pointHistoryId);
+            Get.back();
+            Get.dialog(
+              NormalCompletedDialog(
+                message: '家事を取り消しました',
+                onPressed: () {
+                  Get.back();
+                  homeController.onTapGetUnreadCount();
+                },
+              ),
+            );
+          },
+        ),
+      );
+    }
   }
 
   Future<void> onTapDelete({required int pointHistoryId}) async {
