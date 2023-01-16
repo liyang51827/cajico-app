@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/controller/home_view_controller.dart';
 import 'package:cajico_app/ui/view/house_work_edit_index_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,6 +72,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
+      final homeController = Get.put(HomeViewController());
 
       return RefreshIndicator(
         color: primaryColor,
@@ -93,10 +95,10 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                         houseWorkName: item.name,
                         imageUrl: item.categoryImageUrl,
                         point: item.point,
-                        onPressed: () {
-                          controller.onTapComplete(houseWorkId: item.houseWorkId);
-                          Navigator.pop(context, true);
-                        },
+                        onPressed: () => homeController.onTapCompleteDialog(
+                          houseWorkId: item.houseWorkId,
+                          point: item.point,
+                        ),
                       ),
                     );
                   },

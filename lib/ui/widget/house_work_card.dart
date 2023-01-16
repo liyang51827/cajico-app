@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../common/app_color.dart';
 import 'cajico_cashed_network_image.dart';
 import 'house_work_complete_dialog.dart';
-import 'house_work_completed_dialog.dart';
 
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
@@ -33,11 +32,7 @@ class HouseWorkCard extends StatelessWidget {
               point: point,
               onPressed: onPressed,
             ),
-          ).then((value) {
-            if (value) {
-              return Get.dialog(HouseWorkCompletedDialog(point: point));
-            }
-          });
+          );
         },
         style: ElevatedButton.styleFrom(
           splashFactory: InkRipple.splashFactory,
