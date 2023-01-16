@@ -300,35 +300,6 @@ class _RewardButton extends GetView<RewardDetailViewController> {
           );
         }
       },
-      // onPressed: () {
-      //   showDialog(
-      //       context: context,
-      //       builder: (_) {
-      //         if (isMe) {
-      //           return RewardRequestDialog(
-      //             rewardName: rewardName,
-      //             point: point,
-      //             onPressed: () {
-      //               controller.onTapRequest(rewardId: rewardId);
-      //               Navigator.pop(context, true);
-      //             },
-      //           );
-      //         } else {
-      //           return RewardCompleteDialog(
-      //             rewardId: rewardId,
-      //             rewardName: rewardName,
-      //           );
-      //         }
-      //       }).then((value) {
-      //     if (value) {
-      //       if (isMe) {
-      //         return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
-      //       } else {
-      //         return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
-      //       }
-      //     }
-      //   });
-      // },
     );
   }
 }
