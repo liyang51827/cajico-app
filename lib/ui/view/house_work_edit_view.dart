@@ -121,25 +121,22 @@ class _UpdateBottom extends StatelessWidget {
     return PrimaryButton(
       label: '変更する',
       onPressed: () {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return NormalDialog(
-                message: '更新しますか？',
-                onPressed: () {
-                  controller.onTapUpdate(
-                    houseWorkId: houseWorkId,
-                    houseWorkName: houseWorkName,
-                    point: point,
-                  );
-                  Navigator.pop(context, true);
-                },
+        Get.dialog(
+          NormalDialog(
+            message: '更新しますか？',
+            onPressed: () {
+              controller.onTapUpdate(
+                houseWorkId: houseWorkId,
+                houseWorkName: houseWorkName,
+                point: point,
               );
-            }).then((value) {
+              Navigator.pop(context, true);
+            },
+          ),
+        ).then((value) {
           if (value) {
-            return showDialog(
-              context: context,
-              builder: (context) => NormalCompletedDialog(
+            return Get.dialog(
+              NormalCompletedDialog(
                 message: '更新されました',
                 onPressed: () {
                   Navigator.pop(context);
@@ -174,21 +171,18 @@ class _DeleteBottom extends StatelessWidget {
     return PrimaryOutlineButton(
       label: '削除する',
       onPressed: () {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return NormalDialog(
-                message: '削除しますか？',
-                onPressed: () {
-                  controller.onTapDelete(houseWorkId: houseWorkId);
-                  Navigator.pop(context, true);
-                },
-              );
-            }).then((value) {
+        Get.dialog(
+          NormalDialog(
+            message: '削除しますか？',
+            onPressed: () {
+              controller.onTapDelete(houseWorkId: houseWorkId);
+              Navigator.pop(context, true);
+            },
+          ),
+        ).then((value) {
           if (value) {
-            return showDialog(
-              context: context,
-              builder: (context) => NormalCompletedDialog(
+            return Get.dialog(
+              NormalCompletedDialog(
                 message: '削除されました',
                 onPressed: () {
                   Navigator.pop(context);

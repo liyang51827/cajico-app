@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../common/app_color.dart';
 import 'cajico_cashed_network_image.dart';
 import 'house_work_complete_dialog.dart';
@@ -26,18 +27,15 @@ class HouseWorkCard extends StatelessWidget {
       height: 90,
       child: ElevatedButton(
         onPressed: () {
-          showDialog(
-              context: context,
-              builder: (_) {
-                return HouseWorkCompleteDialog(
-                  houseWorkName: houseWorkName,
-                  point: point,
-                  onPressed: onPressed,
-                );
-              }).then((value) {
+          Get.dialog(
+            HouseWorkCompleteDialog(
+              houseWorkName: houseWorkName,
+              point: point,
+              onPressed: onPressed,
+            ),
+          ).then((value) {
             if (value) {
-              return showDialog(
-                  context: context, builder: (context) => HouseWorkCompletedDialog(point: point));
+              return Get.dialog(HouseWorkCompletedDialog(point: point));
             }
           });
         },

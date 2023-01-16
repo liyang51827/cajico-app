@@ -83,9 +83,8 @@ class RewardDetailView extends StatelessWidget {
                         ),
                       );
                     } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => NormalCompletedDialog(
+                      Get.dialog(
+                        NormalCompletedDialog(
                           message: 'ねぎらい待ちのごほうびは\n編集できません',
                           onPressed: () {
                             Navigator.pop(context);
@@ -301,13 +300,9 @@ class _RewardButton extends GetView<RewardDetailViewController> {
             }).then((value) {
           if (value) {
             if (isMe) {
-              return showDialog(
-                  context: context,
-                  builder: (context) => const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
+              return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいリクエストを\n送りました！'));
             } else {
-              return showDialog(
-                  context: context,
-                  builder: (context) => const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
+              return Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
             }
           }
         });

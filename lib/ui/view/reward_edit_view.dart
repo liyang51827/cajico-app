@@ -101,25 +101,19 @@ class RewardEditView extends StatelessWidget {
             child: PrimaryButton(
               label: '変更する',
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return NormalDialog(
-                        message: '更新しますか？',
-                        onPressed: () {
-                          controller.onTapUpdate(
-                              rewardId: rewardId,
-                              rewardName: rewardName,
-                              point: point,
-                              memo: memo);
-                          Navigator.pop(context, true);
-                        },
-                      );
-                    }).then((value) {
+                Get.dialog(
+                  NormalDialog(
+                    message: '更新しますか？',
+                    onPressed: () {
+                      controller.onTapUpdate(
+                          rewardId: rewardId, rewardName: rewardName, point: point, memo: memo);
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                ).then((value) {
                   if (value) {
-                    return showDialog(
-                      context: context,
-                      builder: (context) => NormalCompletedDialog(
+                    return Get.dialog(
+                      NormalCompletedDialog(
                         message: '更新されました',
                         onPressed: () {
                           Navigator.pop(context);

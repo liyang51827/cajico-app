@@ -26,16 +26,14 @@ class MyPageView extends StatelessWidget {
             offset: const Offset(0, 50),
             onSelected: (result) {
               if (result == 2) {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return NormalDialog(
-                        message: 'ログアウトしますか？',
-                        onPressed: () {
-                          controller.onTapLogout();
-                        },
-                      );
-                    });
+                Get.dialog(
+                  NormalDialog(
+                    message: 'ログアウトしますか？',
+                    onPressed: () {
+                      controller.onTapLogout();
+                    },
+                  ),
+                );
               }
             },
             itemBuilder: (BuildContext context) {

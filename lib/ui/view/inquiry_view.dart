@@ -69,21 +69,18 @@ class InquiryView extends StatelessWidget {
             child: PrimaryButton(
               label: '送信する',
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return NormalDialog(
-                        message: '送信しますか？',
-                        onPressed: () {
-                          controller.onTapInquiry(title: title, body: body);
-                          Navigator.pop(context, true);
-                        },
-                      );
-                    }).then((value) {
+                Get.dialog(
+                  NormalDialog(
+                    message: '送信しますか？',
+                    onPressed: () {
+                      controller.onTapInquiry(title: title, body: body);
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                ).then((value) {
                   if (value) {
-                    return showDialog(
-                      context: context,
-                      builder: (context) => NormalCompletedDialog(
+                    return Get.dialog(
+                      NormalCompletedDialog(
                         message: '送信されました',
                         onPressed: () {
                           Navigator.pop(context);

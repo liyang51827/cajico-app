@@ -79,25 +79,22 @@ class HouseWorkCreateView extends StatelessWidget {
             child: PrimaryButton(
               label: '登録する',
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return NormalDialog(
-                        message: '登録しますか？',
-                        onPressed: () {
-                          controller.onTapCreate(
-                            houseWorkCategoryId: categoryId,
-                            houseWorkName: houseWorkName,
-                            point: point,
-                          );
-                          Navigator.pop(context, true);
-                        },
+                Get.dialog(
+                  NormalDialog(
+                    message: '登録しますか？',
+                    onPressed: () {
+                      controller.onTapCreate(
+                        houseWorkCategoryId: categoryId,
+                        houseWorkName: houseWorkName,
+                        point: point,
                       );
-                    }).then((value) {
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                ).then((value) {
                   if (value) {
-                    return showDialog(
-                      context: context,
-                      builder: (context) => NormalCompletedDialog(
+                    return Get.dialog(
+                      NormalCompletedDialog(
                         message: '登録されました',
                         onPressed: () {
                           Navigator.pop(context);

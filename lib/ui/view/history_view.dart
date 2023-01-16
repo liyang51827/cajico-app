@@ -267,22 +267,19 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
         InkWell(
           onTap: isMe
               ? () {
-                  showDialog(
-                      context: context,
-                      builder: (_) {
-                        return HouseWorkHistoryDeleteDialog(
-                          houseWorkName: houseWorkName,
-                          categoryName: categoryName,
-                          onPressed: () async {
-                            await controller.onTapDelete(pointHistoryId: pointHistoryId);
-                            Navigator.pop(context, true);
-                          },
-                        );
-                      }).then((value) {
+                  Get.dialog(
+                    HouseWorkHistoryDeleteDialog(
+                      houseWorkName: houseWorkName,
+                      categoryName: categoryName,
+                      onPressed: () async {
+                        await controller.onTapDelete(pointHistoryId: pointHistoryId);
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  ).then((value) {
                     if (value) {
-                      return showDialog(
-                        context: context,
-                        builder: (context) => NormalCompletedDialog(
+                      return Get.dialog(
+                        NormalCompletedDialog(
                           message: '家事を取り消しました',
                           onPressed: () {
                             Navigator.pop(context);
