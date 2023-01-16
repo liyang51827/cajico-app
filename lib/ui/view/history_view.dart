@@ -273,8 +273,8 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                         return HouseWorkHistoryDeleteDialog(
                           houseWorkName: houseWorkName,
                           categoryName: categoryName,
-                          onPressed: () {
-                            controller.onTapDelete(pointHistoryId: pointHistoryId);
+                          onPressed: () async {
+                            await controller.onTapDelete(pointHistoryId: pointHistoryId);
                             Navigator.pop(context, true);
                           },
                         );

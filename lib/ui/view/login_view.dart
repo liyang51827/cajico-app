@@ -83,7 +83,9 @@ class LoginView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: PrimaryButton(
               label: 'ログイン',
-              onPressed: () => controller.onTapLogin(email: email, password: password),
+              onPressed: () {
+                controller.onTapLogin(email: email, password: password);
+              }
             ),
           ),
         ),
