@@ -30,6 +30,7 @@ class HouseWorkEditView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HouseWorkEditViewController());
     String houseWorkName = initHouseWorkName;
     int point = initPoint;
 
@@ -82,73 +83,22 @@ class HouseWorkEditView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                _UpdateBottom(
-                  houseWorkId: houseWorkId,
-                  houseWorkName: houseWorkName,
-                  point: point,
-                  categoryId: categoryId,
+                PrimaryButton(
+                  label: '変更する',
+                  onPressed: () => controller.onTapUpdateDialog(
+                    houseWorkCategoryId: categoryId,
+                    houseWorkId: houseWorkId,
+                    houseWorkName: houseWorkName,
+                    point: point,
+                  ),
                 ),
                 verticalSpaceMedium,
-                _DeleteBottom(houseWorkId: houseWorkId, categoryId: categoryId),
+                _DeleteBottom(categoryId: categoryId, houseWorkId: houseWorkId)
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _UpdateBottom extends StatelessWidget {
-  const _UpdateBottom({
-    required this.categoryId,
-    required this.houseWorkId,
-    required this.houseWorkName,
-    required this.point,
-  });
-
-  final int categoryId;
-  final int houseWorkId;
-  final String houseWorkName;
-  final int point;
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(HouseWorkEditViewController());
-    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
-    final homeController = Get.put(HomeViewController());
-
-    return PrimaryButton(
-      label: '変更する',
-      onPressed: () {
-        Get.dialog(
-          NormalDialog(
-            message: '更新しますか？',
-            onPressed: () {
-              controller.onTapUpdate(
-                houseWorkId: houseWorkId,
-                houseWorkName: houseWorkName,
-                point: point,
-              );
-              Navigator.pop(context, true);
-            },
-          ),
-        ).then((value) {
-          if (value) {
-            return Get.dialog(
-              NormalCompletedDialog(
-                message: '更新されました',
-                onPressed: () {
-                  Navigator.pop(context);
-                  homeController.onTapGetUnreadCount();
-                  Navigator.pop(context);
-                  houseWorkController.fetchData();
-                },
-              ),
-            );
-          }
-        });
-      },
     );
   }
 }

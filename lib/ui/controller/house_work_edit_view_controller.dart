@@ -8,7 +8,41 @@ import 'house_work_view_controller.dart';
 class HouseWorkEditViewController extends BaseViewController {
   HouseWorkEditViewController();
 
-  Future<void> onTapUpdate({
+  Future<void> onTapUpdateDialog({
+    required int houseWorkCategoryId,
+    required int houseWorkId,
+    required String houseWorkName,
+    required int point,
+  }) async {
+    final homeController = Get.put(HomeViewController());
+    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
+    Get.dialog(
+      NormalDialog(
+        message: '更新しますか？',
+        onPressed: () async {
+          await updateApi(
+            houseWorkId: houseWorkId,
+            houseWorkName: houseWorkName,
+            point: point,
+          );
+          Get.back();
+          Get.dialog(
+            NormalCompletedDialog(
+              message: '更新されました',
+              onPressed: () {
+                Get.back();
+                homeController.onTapGetUnreadCount();
+                Get.back();
+                houseWorkController.fetchData();
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> updateApi({
     required int houseWorkId,
     required String houseWorkName,
     required int point,
