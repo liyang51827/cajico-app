@@ -72,25 +72,21 @@ class InquiryView extends StatelessWidget {
                 Get.dialog(
                   NormalDialog(
                     message: '送信しますか？',
-                    onPressed: () {
-                      controller.onTapInquiry(title: title, body: body);
-                      Navigator.pop(context, true);
+                    onPressed: () async {
+                      await controller.onTapInquiry(title: title, body: body);
+                      Get.back();Get.dialog(
+                        NormalCompletedDialog(
+                          message: '送信されました',
+                          onPressed: () {
+                            Get.back();
+                            homeController.onTapGetUnreadCount();
+                            baseController.onTapBottomNavigation(0);
+                          },
+                        ),
+                      );
                     },
                   ),
-                ).then((value) {
-                  if (value) {
-                    return Get.dialog(
-                      NormalCompletedDialog(
-                        message: '送信されました',
-                        onPressed: () {
-                          Get.back();
-                          homeController.onTapGetUnreadCount();
-                          baseController.onTapBottomNavigation(0);
-                        },
-                      ),
-                    );
-                  }
-                });
+                );
               },
             ),
           ),
