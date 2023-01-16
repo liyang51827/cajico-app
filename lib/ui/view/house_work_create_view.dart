@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/home_view_controller.dart';
 import '../controller/house_work_edit_view_controller.dart';
-import '../controller/house_work_view_controller.dart';
-import '../widget/normal_completed_dialog.dart';
-import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
 class HouseWorkCreateView extends StatelessWidget {
@@ -25,8 +21,6 @@ class HouseWorkCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
-    final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
-    final homeController = Get.put(HomeViewController());
     String houseWorkName = '';
     int point = 0;
 
@@ -78,35 +72,11 @@ class HouseWorkCreateView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: PrimaryButton(
               label: '登録する',
-              onPressed: () {
-                Get.dialog(
-                  NormalDialog(
-                    message: '登録しますか？',
-                    onPressed: () {
-                      controller.onTapCreate(
-                        houseWorkCategoryId: categoryId,
-                        houseWorkName: houseWorkName,
-                        point: point,
-                      );
-                      Navigator.pop(context, true);
-                    },
-                  ),
-                ).then((value) {
-                  if (value) {
-                    return Get.dialog(
-                      NormalCompletedDialog(
-                        message: '登録されました',
-                        onPressed: () {
-                          Navigator.pop(context);
-                          homeController.onTapGetUnreadCount();
-                          Navigator.pop(context);
-                          houseWorkController.fetchData();
-                        },
-                      ),
-                    );
-                  }
-                });
-              },
+              onPressed: () => controller.onTapCreateDialog(
+                houseWorkCategoryId: categoryId,
+                houseWorkName: houseWorkName,
+                point: point,
+              ),
             ),
           ),
         ),
