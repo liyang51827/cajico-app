@@ -83,7 +83,7 @@ class InquiryView extends StatelessWidget {
                       NormalCompletedDialog(
                         message: '送信されました',
                         onPressed: () {
-                          Navigator.pop(context);
+                          Get.back();
                           homeController.onTapGetUnreadCount();
                           baseController.onTapBottomNavigation(0);
                         },

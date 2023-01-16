@@ -116,7 +116,7 @@ class RewardEditView extends StatelessWidget {
                       NormalCompletedDialog(
                         message: '更新されました',
                         onPressed: () {
-                          Navigator.pop(context);
+                          Get.back();
                           homeController.onTapGetUnreadCount();
                           baseController.onTapBottomNavigation(1);
                         },

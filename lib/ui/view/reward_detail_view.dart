@@ -87,7 +87,7 @@ class RewardDetailView extends StatelessWidget {
                         NormalCompletedDialog(
                           message: 'ねぎらい待ちのごほうびは\n編集できません',
                           onPressed: () {
-                            Navigator.pop(context);
+                            Get.back();
                             homeController.onTapGetUnreadCount();
                           },
                         ),

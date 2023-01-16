@@ -124,26 +124,23 @@ class _DeleteBottom extends StatelessWidget {
         Get.dialog(
           NormalDialog(
             message: '削除しますか？',
-            onPressed: () {
-              controller.onTapDelete(houseWorkId: houseWorkId);
-              Navigator.pop(context, true);
+            onPressed: () async {
+              await controller.onTapDelete(houseWorkId: houseWorkId);
+              Get.back();
+              Get.dialog(
+                NormalCompletedDialog(
+                  message: '削除されました',
+                  onPressed: () {
+                    Get.back();
+                    homeController.onTapGetUnreadCount();
+                    Get.back();
+                    houseWorkController.fetchData();
+                  },
+                ),
+              );
             },
           ),
-        ).then((value) {
-          if (value) {
-            return Get.dialog(
-              NormalCompletedDialog(
-                message: '削除されました',
-                onPressed: () {
-                  Navigator.pop(context);
-                  homeController.onTapGetUnreadCount();
-                  Navigator.pop(context);
-                  houseWorkController.fetchData();
-                },
-              ),
-            );
-          }
-        });
+        );
       },
     );
   }
