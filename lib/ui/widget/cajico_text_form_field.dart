@@ -47,6 +47,7 @@ class CajicoTextFormField extends StatelessWidget {
       minLines: minLines,
       maxLines: maxLines,
       obscureText: obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         fillColor: fillColor,
         filled: filled,
