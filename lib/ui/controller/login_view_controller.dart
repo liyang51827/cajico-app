@@ -12,7 +12,7 @@ class LoginViewController extends BaseViewController {
     await callAsyncApi(() async {
       result = await api.login(email: email, password: password);
     });
-    if (result != null) {
+    if (result != '') {
       prefs.setString('token', result!);
       Get.to(const HomeView());
     }
