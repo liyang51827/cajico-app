@@ -1,3 +1,4 @@
+import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/app_strings.dart';
@@ -43,7 +44,7 @@ class DefaultAlertDialog extends StatelessWidget {
             onPositive?.call();
             Get.back();
           },
-          child: Text(positiveLabel),
+          child: Text(positiveLabel, style: const TextStyle(color: primaryColor)),
         ),
       ],
     );
