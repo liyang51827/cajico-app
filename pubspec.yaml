@@ -28,6 +28,8 @@ dependencies:
   intl: ^0.17.0
   grouped_list: ^5.1.2
   tutorial_coach_mark: ^1.2.4
+  firebase_messaging: ^14.2.1
+  firebase_core: ^2.4.1
 
 dev_dependencies:
   flutter_test:
