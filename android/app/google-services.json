@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "546299062145",
+    "project_id": "cajico-prd",
+    "storage_bucket": "cajico-prd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546299062145:android:ba355bcee2a5b6b53aaa80",
+        "android_client_info": {
+          "package_name": "com.herokuapp.cajico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546299062145-h5nv07hne7jeeg9rl4vb7ref0qtjp8nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMyhRe6wHOT8Xem6AHF0ZKKVoOihz4l8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546299062145-h5nv07hne7jeeg9rl4vb7ref0qtjp8nd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

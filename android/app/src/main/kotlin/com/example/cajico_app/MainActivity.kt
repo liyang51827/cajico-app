@@ -1,4 +1,4 @@
-package com.example.cajico_app
+package com.herokuapp.cajico
 
 import io.flutter.embedding.android.FlutterActivity
 

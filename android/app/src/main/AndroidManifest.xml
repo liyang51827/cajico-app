@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cajico_app">
+    package="com.herokuapp.cajico">
    <application
         android:label="CAJICO"
         android:name="${applicationName}"
