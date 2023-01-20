@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         Locale("ja", "JP"),
       ],
       theme: ThemeData(
+        primarySwatch: Colors.orange,
         textTheme: const TextTheme(
           bodyText1: TextStyle(color: gray2),
           bodyText2: TextStyle(color: gray2),

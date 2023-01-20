@@ -16,7 +16,7 @@ class CajicoTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.fillColor,
     this.filled = false,
-    this.focusedBorderColor = primaryColor,
+    this.focusedBorderColor = Colors.orange,
     this.onChanged,
     this.obscureText = false,
   });
@@ -55,7 +55,6 @@ class CajicoTextFormField extends StatelessWidget {
         filled: filled,
         labelText: label,
         suffixText: suffixText,
-        labelStyle: const TextStyle(color: gray3),
         alignLabelWithHint: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
