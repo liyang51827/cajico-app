@@ -50,7 +50,8 @@ class InquiryView extends StatelessWidget {
                   label: 'タイトル',
                   onChanged: (newValue) => inquiryInfo.title.value = newValue,
                   initValue: '',
-                  validator: (value) => controller.validateInputEditData(value).message,
+                  validator: (value) =>
+                      controller.validateInputEditData(value: value, maxLength: 20).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -60,34 +61,40 @@ class InquiryView extends StatelessWidget {
                   minLines: 10,
                   maxLines: 10,
                   keyboardType: TextInputType.multiline,
+                  validator: (value) =>
+                      controller.validateInputEditData(value: value, maxLength: 500).message,
                 ),
               ],
             ),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16),
-            child: PrimaryButton(
-              label: '送信する',
-              onPressed: () {
-                Get.dialog(
-                  NormalDialog(
-                    message: '送信しますか？',
-                    onPressed: () async {
-                      await controller.onTapInquiry();
-                      Get.back();Get.dialog(
-                        NormalCompletedDialog(
-                          message: '送信されました',
-                          onPressed: () {
-                            Get.back();
-                            homeController.onTapGetUnreadCount();
-                            baseController.onTapBottomNavigation(0);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
+            child: Obx(
+              () => PrimaryButton(
+                label: '送信する',
+                isValid: controller.isInquiryButtonValid,
+                onPressed: () {
+                  Get.dialog(
+                    NormalDialog(
+                      message: '送信しますか？',
+                      onPressed: () async {
+                        await controller.onTapInquiry();
+                        Get.back();
+                        Get.dialog(
+                          NormalCompletedDialog(
+                            message: '送信されました',
+                            onPressed: () {
+                              Get.back();
+                              homeController.onTapGetUnreadCount();
+                              baseController.onTapBottomNavigation(0);
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

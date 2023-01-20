@@ -12,8 +12,12 @@ class InquiryViewController extends BaseViewController {
     body: ''.obs,
   );
 
-  FormValidation validateInputEditData(String? value) =>
-      FormValidator.validateEditBasicInfo(value: value, maxLength: 20);
+  FormValidation validateInputEditData({String? value, required maxLength}) =>
+      FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
+
+  bool get isInquiryButtonValid =>
+      validateInputEditData(value: inquiryData.title(), maxLength: 20).isValid &&
+      validateInputEditData(value: inquiryData.body(), maxLength: 500).isValid;
 
   Future<void> onTapInquiry() async {
     await callAsyncApi(() async {
