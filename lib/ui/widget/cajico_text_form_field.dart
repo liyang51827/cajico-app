@@ -65,6 +65,14 @@ class CajicoTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: focusedBorderColor),
         ),
+        errorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: focusedBorderColor),
+        ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: focusedBorderColor),
+        ),
       ),
       onChanged: onChanged,
       validator: validator,

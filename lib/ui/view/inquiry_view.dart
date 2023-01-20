@@ -50,6 +50,7 @@ class InquiryView extends StatelessWidget {
                   label: 'タイトル',
                   onChanged: (newValue) => inquiryInfo.title.value = newValue,
                   initValue: '',
+                  validator: (value) => controller.validateInputEditData(value).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
