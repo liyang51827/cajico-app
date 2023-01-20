@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/my_page.dart';
@@ -298,11 +299,11 @@ class ApiService extends GetConnect {
   }
 
   // 問い合わせAPI
-  Future<bool> postInquiry({required String title, required String body}) async {
+  Future<bool> postInquiry(InquiryData inquiryData) async {
     final res = await http.post(
       _makeUri('/inquiry'),
       headers: await _makeAuthenticatedHeader(),
-      body: jsonEncode({'title': title, 'body': body}),
+      body: jsonEncode({'title': inquiryData.title(), 'body': inquiryData.body()}),
     );
     return _checkStatusCode(res);
   }

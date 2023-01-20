@@ -20,8 +20,7 @@ class InquiryView extends StatelessWidget {
     final controller = Get.put(InquiryViewController());
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
-    String title = '';
-    String body = '';
+    final inquiryInfo = controller.inquiryData;
     return Focus(
       focusNode: focusNode,
       child: GestureDetector(
@@ -49,13 +48,13 @@ class InquiryView extends StatelessWidget {
                 verticalSpaceLarge,
                 CajicoTextFormField(
                   label: 'タイトル',
-                  onChanged: (value) => title = value,
+                  onChanged: (newValue) => inquiryInfo.title.value = newValue,
                   initValue: '',
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
                   label: 'ご意見 / 改善点など',
-                  onChanged: (value) => body = value,
+                  onChanged: (newValue) => inquiryInfo.body.value = newValue,
                   initValue: '',
                   minLines: 10,
                   maxLines: 10,
@@ -73,7 +72,7 @@ class InquiryView extends StatelessWidget {
                   NormalDialog(
                     message: '送信しますか？',
                     onPressed: () async {
-                      await controller.onTapInquiry(title: title, body: body);
+                      await controller.onTapInquiry();
                       Get.back();Get.dialog(
                         NormalCompletedDialog(
                           message: '送信されました',
