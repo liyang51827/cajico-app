@@ -11,6 +11,7 @@ class CajicoTextFormField extends StatelessWidget {
     this.minLines,
     this.suffixText,
     this.keyboardType,
+    this.validator,
     this.inputFormatters,
     this.readOnly = false,
     this.fillColor,
@@ -28,6 +29,7 @@ class CajicoTextFormField extends StatelessWidget {
   final int? minLines;
   final ValueChanged<String>? onChanged;
   final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
   final Color? fillColor;
   final Color focusedBorderColor;
@@ -65,6 +67,7 @@ class CajicoTextFormField extends StatelessWidget {
         ),
       ),
       onChanged: onChanged,
+      validator: validator,
     );
   }
 }
