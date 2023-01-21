@@ -8,21 +8,24 @@ class RewardEditViewController extends BaseViewController {
   RewardEditViewController();
 
   final rewardData = RewardData(
-    rewardId: 0.obs,
-    rewardName: ''.obs,
-    point: 0.obs,
-    memo: ''.obs,
+      rewardId: 0.obs,
+      rewardName: ''.obs,
+      point: 0.obs,
+      memo: ''.obs,
+      minPoint: 0.obs,
+      maxPoint: 0.obs,
   );
 
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
-  FormValidation validateInputPointData({String? value, required maxLength}) =>
-      FormValidator.validateRequirePoint(value: value, maxLength: maxLength);
+  FormValidation validateInputPointData({String? value}) =>
+      FormValidator.validateRequirePointRange(
+        value: value, minPoint: rewardData.minPoint(), maxPoint: rewardData.maxPoint());
 
   bool get isUpdateButtonValid =>
       validateInputEditData(value: rewardData.rewardName(), maxLength: 10).isValid &&
-          validateInputPointData(value: rewardData.point().toString(), maxLength: 4).isValid &&
+          validateInputPointData(value: rewardData.point().toString()).isValid &&
           validateInputEditData(value: rewardData.memo(), maxLength: 100).isValid;
 
   Future<void> onTapUpdate() async {

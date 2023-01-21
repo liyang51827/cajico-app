@@ -51,6 +51,20 @@ class FormValidator {
     return FormValidation.ok();
   }
 
+  static FormValidation validateRequirePointRange({
+    String? value,
+    required int minPoint,
+    required int maxPoint,
+  }) {
+    if (value == null || value.isEmpty) {
+      return FormValidation.ngMessage();
+    }
+    if (int.parse(value) < minPoint || int.parse(value) > maxPoint) {
+      return FormValidation.ngRange(min: minPoint, max: maxPoint);
+    }
+    return FormValidation.ok();
+  }
+
   static FormValidation validateEditBasicInfo({
     String? value,
     required int maxLength,

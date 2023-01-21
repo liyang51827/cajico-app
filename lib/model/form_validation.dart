@@ -1,7 +1,10 @@
+import 'package:intl/intl.dart';
+
 class FormValidation {
   FormValidation({required this.isValid, this.message});
 
   factory FormValidation.ok() => FormValidation(isValid: true);
+
   factory FormValidation.empty() => FormValidation(isValid: false, message: null);
 
   factory FormValidation.ngNumeric() {
@@ -40,6 +43,12 @@ class FormValidation {
     }
 
     return FormValidation(isValid: false, message: tmpMessage);
+  }
+
+  factory FormValidation.ngRange({int? min, int? max}) {
+    final formatter = NumberFormat("#,###");
+    return FormValidation(
+        isValid: false, message: '${formatter.format(min)}〜${formatter.format(max)}Pで入力してください');
   }
 
   factory FormValidation.ngMail() {

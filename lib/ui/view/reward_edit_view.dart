@@ -44,6 +44,8 @@ class RewardEditView extends StatelessWidget {
     rewardInfo.rewardName.value = initRewardName;
     rewardInfo.point.value = initPoint;
     rewardInfo.memo.value = initMemo;
+    rewardInfo.minPoint.value = minPoint;
+    rewardInfo.maxPoint.value = maxPoint;
 
     return Focus(
       focusNode: focusNode,
@@ -91,7 +93,7 @@ class RewardEditView extends StatelessWidget {
                   onChanged: (value) => rewardInfo.point.value = int.parse(value),
                   validator: (value) =>
                   controller
-                      .validateInputPointData(value: value, maxLength: 4)
+                      .validateInputPointData(value: value)
                       .message,
                 ),
                 verticalSpaceMedium,
