@@ -67,7 +67,7 @@ class HouseWorkEditView extends StatelessWidget {
                   label: '家事名',
                   onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
                   validator: (value) =>
-                  controller.validateInputEditData(value: value, maxLength: 10).message,
+                      controller.validateInputEditData(value: value, maxLength: 10).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -78,7 +78,7 @@ class HouseWorkEditView extends StatelessWidget {
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
                   validator: (value) =>
-                  controller.validateInputPointData(value: value, maxLength: 3).message,
+                      controller.validateInputPointData(value: value, maxLength: 3).message,
                 ),
               ],
             ),
@@ -86,18 +86,23 @@ class HouseWorkEditView extends StatelessWidget {
           bottomNavigationBar: Container(
             height: 160,
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                PrimaryButton(
-                  label: '変更する',
-                  onPressed: () => controller.onTapUpdateDialog(
-                    houseWorkCategoryId: categoryId,
-                    houseWorkId: houseWorkId,
+            child: Obx(
+              () => Column(
+                children: [
+                  PrimaryButton(
+                    label: '変更する',
+                    isValid: controller.isHouseWorkEditButtonValid &&
+                        (houseWorkInfo.houseWorkName() != initHouseWorkName ||
+                            houseWorkInfo.point() != initPoint),
+                    onPressed: () => controller.onTapUpdateDialog(
+                      houseWorkCategoryId: categoryId,
+                      houseWorkId: houseWorkId,
+                    ),
                   ),
-                ),
-                verticalSpaceMedium,
-                _DeleteBottom(categoryId: categoryId, houseWorkId: houseWorkId)
-              ],
+                  verticalSpaceMedium,
+                  _DeleteBottom(categoryId: categoryId, houseWorkId: houseWorkId)
+                ],
+              ),
             ),
           ),
         ),
