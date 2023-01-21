@@ -45,6 +45,7 @@ class LoginView extends StatelessWidget {
                     label: 'メールアドレス',
                     initValue: '',
                     onChanged: (value) => loginInfo.email.value = value,
+                    validator: (value) => controller.validateInputEmailData(value).message,
                   ),
                   verticalSpaceMedium,
                   CajicoTextFormField(
@@ -53,6 +54,8 @@ class LoginView extends StatelessWidget {
                     obscureText: true,
                     maxLines: 1,
                     onChanged: (value) => loginInfo.password.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 20).message,
                   ),
                   verticalSpaceMediumLarge,
                   Container(
@@ -80,12 +83,12 @@ class LoginView extends StatelessWidget {
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: PrimaryButton(
-              label: 'ログイン',
-              onPressed: () {
-                controller.onTapLogin();
-              }
-            ),
+            child: Obx(() => PrimaryButton(
+                label: 'ログイン',
+                isValid: controller.isLoginButtonValid,
+                onPressed: () {
+                  controller.onTapLogin();
+                })),
           ),
         ),
       ),

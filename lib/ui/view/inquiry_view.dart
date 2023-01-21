@@ -69,12 +69,10 @@ class InquiryView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16),
-            child: Obx(
-              () => PrimaryButton(
-                label: '送信する',
-                isValid: controller.isInquiryButtonValid,
-                onPressed: () {
-                  Get.dialog(
+            child: Obx(() => PrimaryButton(
+                  label: '送信する',
+                  isValid: controller.isInquiryButtonValid,
+                  onPressed: () => Get.dialog(
                     NormalDialog(
                       message: '送信しますか？',
                       onPressed: () async {
@@ -92,10 +90,8 @@ class InquiryView extends StatelessWidget {
                         );
                       },
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
+                )),
           ),
         ),
       ),

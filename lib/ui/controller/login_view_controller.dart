@@ -17,10 +17,11 @@ class LoginViewController extends BaseViewController {
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
-  bool get isInquiryButtonValid =>
-      validateInputEditData(value: loginData.email(), maxLength: 20).isValid &&
-          validateInputEditData(value: loginData.password(), maxLength: 500).isValid;
+  FormValidation validateInputEmailData(String? value) => FormValidator.validateRequireEmail(value);
 
+  bool get isLoginButtonValid =>
+      validateInputEditData(value: loginData.password(), maxLength: 20).isValid &&
+      validateInputEmailData(loginData.email()).isValid;
 
   Future<void> onTapLogin() async {
     String? result = '';
