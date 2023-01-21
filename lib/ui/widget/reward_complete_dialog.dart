@@ -28,7 +28,7 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
           CajicoTextFormField(
             label: 'ひとことメッセージ',
             onChanged: (value) => controller.rewardMessage.value = value,
-            initValue: '',
+            initValue: 'いつもありがとう！',
             minLines: 3,
             maxLines: 3,
             keyboardType: TextInputType.multiline,
