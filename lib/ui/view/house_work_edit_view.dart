@@ -93,8 +93,6 @@ class HouseWorkEditView extends StatelessWidget {
                   onPressed: () => controller.onTapUpdateDialog(
                     houseWorkCategoryId: categoryId,
                     houseWorkId: houseWorkId,
-                    houseWorkName: houseWorkInfo.houseWorkName(),
-                    point: houseWorkInfo.point(),
                   ),
                 ),
                 verticalSpaceMedium,

@@ -34,21 +34,16 @@ class HouseWorkEditViewController extends BaseViewController {
   Future<void> onTapUpdateDialog({
     required int houseWorkCategoryId,
     required int houseWorkId,
-    required String houseWorkName,
-    required int point,
   }) async {
     final homeController = Get.put(HomeViewController());
     final houseWorkController =
         Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
+    houseWorkEditData.houseWorkId.value = houseWorkId;
     Get.dialog(
       NormalDialog(
         message: '更新しますか？',
         onPressed: () async {
-          await updateApi(
-            houseWorkId: houseWorkId,
-            houseWorkName: houseWorkName,
-            point: point,
-          );
+          await api.putHouseWork(houseWorkEditData);
           Get.back();
           Get.dialog(
             NormalCompletedDialog(
@@ -64,16 +59,6 @@ class HouseWorkEditViewController extends BaseViewController {
         },
       ),
     );
-  }
-
-  Future<void> updateApi({
-    required int houseWorkId,
-    required String houseWorkName,
-    required int point,
-  }) async {
-    await callAsyncApi(() async {
-      await api.putHouseWork(houseWorkId: houseWorkId, houseWorkName: houseWorkName, point: point);
-    });
   }
 
   Future<void> onTapCreateDialog({required int houseWorkCategoryId}) async {
