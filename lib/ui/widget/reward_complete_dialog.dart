@@ -15,7 +15,7 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
 
   @override
   Widget build(BuildContext context) {
-    String body = '';
+    final controller = Get.put(RewardDetailViewController(rewardId: rewardId));
     return SimpleDialog(
       insetPadding: const EdgeInsets.all(0),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -27,18 +27,20 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
           verticalSpaceMedium,
           CajicoTextFormField(
             label: 'ひとことメッセージ',
-            onChanged: (value) => body = value,
+            onChanged: (value) => controller.rewardMessage.value = value,
             initValue: '',
             minLines: 3,
             maxLines: 3,
             keyboardType: TextInputType.multiline,
+            validator: (value) =>
+                controller.validateInputEditData(value: value, maxLength: 20).message,
           ),
         ],
       ),
       children: [
         SimpleDialogOption(
           onPressed: () async {
-            await controller.onTapComplete(rewardId: rewardId, body: body);
+            await controller.onTapComplete(rewardId: rewardId, body: controller.rewardMessage());
             Get.back();
             Get.dialog(const RewardCompletedDialog(message: 'ねぎらいを完了しました！'));
           },

@@ -1,5 +1,7 @@
 import 'package:cajico_app/model/reward_history.dart';
 import 'package:get/get.dart';
+import '../../model/form_validation.dart';
+import '../../util/form_validator.dart';
 import 'base_view_controller.dart';
 
 class RewardDetailViewController extends BaseViewController {
@@ -7,6 +9,13 @@ class RewardDetailViewController extends BaseViewController {
 
   final int rewardId;
   final RxList<RewardHistory> rewardHistories = <RewardHistory>[].obs;
+  final rewardMessage = ''.obs;
+
+  FormValidation validateInputEditData({String? value, required maxLength}) =>
+      FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
+
+  bool get isRewardButtonValid =>
+      validateInputEditData(value: rewardMessage(), maxLength: 20).isValid;
 
   @override
   void onInit() {
