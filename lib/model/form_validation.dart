@@ -25,6 +25,23 @@ class FormValidation {
     return FormValidation(isValid: false, message: tmpMessage);
   }
 
+  factory FormValidation.ngDigit({int? min, int? max}) {
+    var tmpMessage = '';
+    if (min != null && max != null && min == max) {
+      tmpMessage = '$min桁で入力してください';
+    } else {
+      if (min != null) {
+        tmpMessage += '$min桁以上';
+      }
+      if (max != null) {
+        tmpMessage += '$max桁以内';
+      }
+      tmpMessage += 'で入力してください';
+    }
+
+    return FormValidation(isValid: false, message: tmpMessage);
+  }
+
   factory FormValidation.ngMail() {
     return FormValidation(isValid: false, message: 'メールアドレスを入力してください');
   }

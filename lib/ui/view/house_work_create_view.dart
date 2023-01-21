@@ -54,6 +54,8 @@ class HouseWorkCreateView extends StatelessWidget {
                   initValue: '',
                   label: '家事名',
                   onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
+                  validator: (value) =>
+                      controller.validateInputEditData(value: value, maxLength: 10).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -63,15 +65,20 @@ class HouseWorkCreateView extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
+                  validator: (value) =>
+                      controller.validateInputPointData(value: value, maxLength: 3).message,
                 ),
               ],
             ),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16),
-            child: PrimaryButton(
-              label: '登録する',
-              onPressed: () => controller.onTapCreateDialog(houseWorkCategoryId: categoryId),
+            child: Obx(
+              () => PrimaryButton(
+                label: '登録する',
+                isValid: controller.isHouseWorkCreateButtonValid,
+                onPressed: () => controller.onTapCreateDialog(houseWorkCategoryId: categoryId),
+              ),
             ),
           ),
         ),

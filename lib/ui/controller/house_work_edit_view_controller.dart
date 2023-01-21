@@ -17,11 +17,12 @@ class HouseWorkEditViewController extends BaseViewController {
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
-  FormValidation validateInputPointData(value) => FormValidator.validateRequirePoint(value);
+  FormValidation validateInputPointData({String? value, required maxLength}) =>
+      FormValidator.validateRequirePoint(value: value, maxLength: maxLength);
 
-  bool get isInquiryButtonValid =>
+  bool get isHouseWorkCreateButtonValid =>
       validateInputEditData(value: houseWorkCreateData.houseWorkName(), maxLength: 10).isValid &&
-      validateInputPointData(houseWorkCreateData.point()).isValid;
+          validateInputPointData(value: houseWorkCreateData.point().toString(), maxLength: 10).isValid;
 
   Future<void> onTapUpdateDialog({
     required int houseWorkCategoryId,

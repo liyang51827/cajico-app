@@ -38,11 +38,17 @@ class FormValidator {
     );
   }
 
-  static FormValidation validateRequirePoint(String? value) {
+  static FormValidation validateRequirePoint({
+    String? value,
+    required int maxLength,
+  }) {
     if (value == null || value.isEmpty) {
-      return FormValidation.empty();
+      return FormValidation.ngMessage();
     }
-    return FormValidation.ngNumeric();
+    if (!isLength(value, 1, maxLength)) {
+      return FormValidation.ngDigit(max: maxLength);
+    }
+    return FormValidation.ok();
   }
 
   static FormValidation validateEditBasicInfo({
