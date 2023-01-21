@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cajico_app/model/house_work_data.dart';
 import 'package:cajico_app/model/inquiry_data.dart';
+import 'package:cajico_app/model/reward_data.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/login_data.dart';
@@ -222,16 +223,15 @@ class ApiService extends GetConnect {
   }
 
   // ごほうび更新API
-  Future<bool> putReward({
-    required int rewardId,
-    required String rewardName,
-    required int point,
-    required String memo,
-  }) async {
+  Future<bool> putReward(RewardData rewardData) async {
     final res = await http.put(
-      _makeUri('/rewards/$rewardId'),
+      _makeUri('/rewards/${rewardData.rewardId()}'),
       headers: await _makeAuthenticatedHeader(),
-      body: jsonEncode({'name': rewardName, 'point': point, 'note': memo}),
+      body: jsonEncode({
+        'name': rewardData.rewardName(),
+        'point': rewardData.point(),
+        'note': rewardData.memo(),
+      }),
     );
     return _checkStatusCode(res);
   }

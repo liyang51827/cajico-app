@@ -39,9 +39,11 @@ class RewardEditView extends StatelessWidget {
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
     final formatter = NumberFormat("#,###");
-    String rewardName = initRewardName;
-    int point = initPoint;
-    String memo = initMemo;
+    final rewardInfo = controller.rewardData;
+    rewardInfo.rewardId.value = rewardId;
+    rewardInfo.rewardName.value = initRewardName;
+    rewardInfo.point.value = initPoint;
+    rewardInfo.memo.value = initMemo;
 
     return Focus(
       focusNode: focusNode,
@@ -73,7 +75,11 @@ class RewardEditView extends StatelessWidget {
                 CajicoTextFormField(
                   initValue: initRewardName,
                   label: 'ごほうび名',
-                  onChanged: (value) => rewardName = value,
+                  onChanged: (value) => rewardInfo.rewardName.value = value,
+                  validator: (value) =>
+                  controller
+                      .validateInputEditData(value: value, maxLength: 10)
+                      .message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -82,7 +88,11 @@ class RewardEditView extends StatelessWidget {
                   suffixText: 'ポイント',
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => point = int.parse(value),
+                  onChanged: (value) => rewardInfo.point.value = int.parse(value),
+                  validator: (value) =>
+                  controller
+                      .validateInputPointData(value: value, maxLength: 4)
+                      .message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -91,41 +101,47 @@ class RewardEditView extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   minLines: 10,
                   maxLines: 10,
-                  onChanged: (value) => memo = value,
+                  onChanged: (value) => rewardInfo.memo.value = value,
+                  validator: (value) =>
+                  controller
+                      .validateInputEditData(value: value, maxLength: 500)
+                      .message,
                 ),
               ],
             ),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16),
-            child: PrimaryButton(
-              label: '変更する',
-              onPressed: () {
-                Get.dialog(
-                  NormalDialog(
-                    message: '更新しますか？',
-                    onPressed: () async {
-                      await controller.onTapUpdate(
-                        rewardId: rewardId,
-                        rewardName: rewardName,
-                        point: point,
-                        memo: memo,
-                      );
-                      Get.back();
+            child: Obx(
+                  () =>
+                  PrimaryButton(
+                    label: '変更する',
+                    isValid: controller.isUpdateButtonValid &&
+                        (rewardInfo.rewardName() != initRewardName ||
+                            rewardInfo.point() != initPoint ||
+                            rewardInfo.memo() != initMemo),
+                    onPressed: () {
                       Get.dialog(
-                        NormalCompletedDialog(
-                          message: '更新されました',
-                          onPressed: () {
+                        NormalDialog(
+                          message: '更新しますか？',
+                          onPressed: () async {
+                            await controller.onTapUpdate();
                             Get.back();
-                            homeController.onTapGetUnreadCount();
-                            baseController.onTapBottomNavigation(1);
+                            Get.dialog(
+                              NormalCompletedDialog(
+                                message: '更新されました',
+                                onPressed: () {
+                                  Get.back();
+                                  homeController.onTapGetUnreadCount();
+                                  baseController.onTapBottomNavigation(1);
+                                },
+                              ),
+                            );
                           },
                         ),
                       );
                     },
                   ),
-                );
-              },
             ),
           ),
         ),
