@@ -31,8 +31,9 @@ class HouseWorkEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
-    String houseWorkName = initHouseWorkName;
-    int point = initPoint;
+    final houseWorkInfo = controller.houseWorkEditData;
+    houseWorkInfo.houseWorkName.value = initHouseWorkName;
+    houseWorkInfo.point.value = initPoint;
 
     return Focus(
       focusNode: focusNode,
@@ -62,18 +63,22 @@ class HouseWorkEditView extends StatelessWidget {
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
-                  initValue: houseWorkName,
+                  initValue: initHouseWorkName,
                   label: '家事名',
-                  onChanged: (value) => houseWorkName = value,
+                  onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
+                  validator: (value) =>
+                  controller.validateInputEditData(value: value, maxLength: 10).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
-                  initValue: point.toString(),
+                  initValue: initPoint.toString(),
                   label: '獲得ポイント',
                   suffixText: 'ポイント',
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => point = int.parse(value),
+                  onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
+                  validator: (value) =>
+                  controller.validateInputPointData(value: value, maxLength: 3).message,
                 ),
               ],
             ),
@@ -88,8 +93,8 @@ class HouseWorkEditView extends StatelessWidget {
                   onPressed: () => controller.onTapUpdateDialog(
                     houseWorkCategoryId: categoryId,
                     houseWorkId: houseWorkId,
-                    houseWorkName: houseWorkName,
-                    point: point,
+                    houseWorkName: houseWorkInfo.houseWorkName(),
+                    point: houseWorkInfo.point(),
                   ),
                 ),
                 verticalSpaceMedium,

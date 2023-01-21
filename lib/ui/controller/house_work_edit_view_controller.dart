@@ -14,6 +14,9 @@ class HouseWorkEditViewController extends BaseViewController {
   final houseWorkCreateData =
       HouseWorkCreateData(houseWorkCategoryId: 0.obs, houseWorkName: ''.obs, point: 0.obs);
 
+  final houseWorkEditData =
+      HouseWorkEditData(houseWorkId: 0.obs, houseWorkName: ''.obs, point: 0.obs);
+
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
@@ -22,7 +25,11 @@ class HouseWorkEditViewController extends BaseViewController {
 
   bool get isHouseWorkCreateButtonValid =>
       validateInputEditData(value: houseWorkCreateData.houseWorkName(), maxLength: 10).isValid &&
-          validateInputPointData(value: houseWorkCreateData.point().toString(), maxLength: 10).isValid;
+      validateInputPointData(value: houseWorkCreateData.point().toString(), maxLength: 10).isValid;
+
+  bool get isHouseWorkEditButtonValid =>
+      validateInputEditData(value: houseWorkEditData.houseWorkName(), maxLength: 10).isValid &&
+          validateInputPointData(value: houseWorkEditData.point().toString(), maxLength: 10).isValid;
 
   Future<void> onTapUpdateDialog({
     required int houseWorkCategoryId,

@@ -11,3 +11,15 @@ class HouseWorkCreateData {
   final RxString houseWorkName;
   final RxInt point;
 }
+
+class HouseWorkEditData {
+  HouseWorkEditData({
+    required this.houseWorkId,
+    required this.houseWorkName,
+    required this.point,
+  });
+
+  final RxInt houseWorkId;
+  final RxString houseWorkName;
+  final RxInt point;
+}
