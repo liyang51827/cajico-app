@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/controller/reward_view_controller.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +39,7 @@ class RewardEditView extends StatelessWidget {
     final controller = Get.put(RewardEditViewController());
     final homeController = Get.put(HomeViewController());
     final baseController = Get.put(BaseViewController());
+    final rewardIndexController = Get.put(RewardViewController());
     final formatter = NumberFormat("#,###");
     final rewardInfo = controller.rewardData;
     rewardInfo.rewardId.value = rewardId;
@@ -136,6 +138,7 @@ class RewardEditView extends StatelessWidget {
                                   Get.back();
                                   homeController.onTapGetUnreadCount();
                                   baseController.onTapBottomNavigation(1);
+                                  rewardIndexController.fetchData();
                                 },
                               ),
                             );
