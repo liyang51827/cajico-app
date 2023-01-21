@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cajico_app/model/house_work_data.dart';
 import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,16 +122,15 @@ class ApiService extends GetConnect {
   }
 
   // 家事登録API
-  Future<bool> createHouseWork({
-    required int houseWorkCategoryId,
-    required String houseWorkName,
-    required int point,
-  }) async {
+  Future<bool> createHouseWork(HouseWorkCreateData houseWorkCreateData) async {
     final res = await http.post(
       _makeUri('/house-works'),
       headers: await _makeAuthenticatedHeader(),
-      body: jsonEncode(
-          {'houseWorkCategoryId': houseWorkCategoryId, 'name': houseWorkName, 'point': point}),
+      body: jsonEncode({
+        'houseWorkCategoryId': houseWorkCreateData.houseWorkCategoryId(),
+        'name': houseWorkCreateData.houseWorkName(),
+        'point': houseWorkCreateData.point(),
+      }),
     );
     return _checkStatusCode(res);
   }

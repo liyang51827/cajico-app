@@ -21,8 +21,7 @@ class HouseWorkCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
-    String houseWorkName = '';
-    int point = 0;
+    final houseWorkInfo = controller.houseWorkCreateData;
 
     return Focus(
       focusNode: focusNode,
@@ -54,7 +53,7 @@ class HouseWorkCreateView extends StatelessWidget {
                 CajicoTextFormField(
                   initValue: '',
                   label: '家事名',
-                  onChanged: (value) => houseWorkName = value,
+                  onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
@@ -63,7 +62,7 @@ class HouseWorkCreateView extends StatelessWidget {
                   suffixText: 'ポイント',
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => point = int.parse(value),
+                  onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
                 ),
               ],
             ),
@@ -72,11 +71,7 @@ class HouseWorkCreateView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: PrimaryButton(
               label: '登録する',
-              onPressed: () => controller.onTapCreateDialog(
-                houseWorkCategoryId: categoryId,
-                houseWorkName: houseWorkName,
-                point: point,
-              ),
+              onPressed: () => controller.onTapCreateDialog(houseWorkCategoryId: categoryId),
             ),
           ),
         ),

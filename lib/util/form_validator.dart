@@ -38,6 +38,13 @@ class FormValidator {
     );
   }
 
+  static FormValidation validateRequirePoint(String? value) {
+    if (value == null || value.isEmpty) {
+      return FormValidation.empty();
+    }
+    return FormValidation.ngNumeric();
+  }
+
   static FormValidation validateEditBasicInfo({
     String? value,
     required int maxLength,
