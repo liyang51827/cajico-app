@@ -15,9 +15,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String email = '';
-    String password = '';
     final controller = Get.put(LoginViewController());
+    final loginInfo = controller.loginData;
 
     return Focus(
       focusNode: focusNode,
@@ -45,7 +44,7 @@ class LoginView extends StatelessWidget {
                   CajicoTextFormField(
                     label: 'メールアドレス',
                     initValue: '',
-                    onChanged: (value) => email = value,
+                    onChanged: (value) => loginInfo.email.value = value,
                   ),
                   verticalSpaceMedium,
                   CajicoTextFormField(
@@ -53,7 +52,7 @@ class LoginView extends StatelessWidget {
                     initValue: '',
                     obscureText: true,
                     maxLines: 1,
-                    onChanged: (value) => password = value,
+                    onChanged: (value) => loginInfo.password.value = value,
                   ),
                   verticalSpaceMediumLarge,
                   Container(
@@ -84,7 +83,7 @@ class LoginView extends StatelessWidget {
             child: PrimaryButton(
               label: 'ログイン',
               onPressed: () {
-                controller.onTapLogin(email: email, password: password);
+                controller.onTapLogin();
               }
             ),
           ),

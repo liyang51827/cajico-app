@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/login_data.dart';
 import '../model/my_page.dart';
 import '../model/pagination_response.dart';
 import '../model/point_history.dart';
@@ -69,11 +70,11 @@ class ApiService extends GetConnect {
   }
 
   // ログインAPI
-  Future<String?> login({required String email, required String password}) async {
+  Future<String?> login(LoginData loginData) async {
     final res = await http.post(
       _makeUri('/login'),
       headers: _commonHeaders,
-      body: jsonEncode({'email': email, 'password': password}),
+      body: jsonEncode({'email': loginData.email(), 'password': loginData.password()}),
     );
     final String? token = _decodeResponse(res)['data']['accessToken'];
     return token;
