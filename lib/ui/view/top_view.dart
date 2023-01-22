@@ -156,10 +156,10 @@ class _AuthSection extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(Icons.family_restroom),
+                  Icon(Icons.home),
                   horizontalSpaceSmall,
                   Text(
-                    '家族に参加する',
+                    'CAJICOを始める',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
@@ -183,10 +183,10 @@ class _AuthSection extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(Icons.add_home),
+                  Icon(Icons.family_restroom),
                   horizontalSpaceSmall,
                   Text(
-                    '新しく家族を登録',
+                    '家族に参加する',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
