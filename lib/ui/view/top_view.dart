@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/view/email_send_view.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/login_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -152,7 +153,7 @@ class _AuthSection extends StatelessWidget {
                 shape: const StadiumBorder(),
                 elevation: 0,
               ),
-              onPressed: () => Get.to(() => const HomeView()),
+              onPressed: () => Get.to(() => EmailSendView()),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -179,7 +180,7 @@ class _AuthSection extends StatelessWidget {
                 side: const BorderSide(color: primaryColor),
                 elevation: 0,
               ),
-              onPressed: () => Get.to(() => const HomeView()),
+              onPressed: () => Get.to(() => EmailSendView()),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
