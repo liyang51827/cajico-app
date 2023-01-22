@@ -10,8 +10,9 @@ import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
 class EmailSendView extends StatelessWidget {
-  EmailSendView({super.key});
+  EmailSendView({super.key, required this.type});
 
+  final String type;
   final focusNode = FocusNode();
 
   @override
