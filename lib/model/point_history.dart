@@ -59,7 +59,7 @@ class Point {
   static Point fromJson(Map<String, dynamic> json) {
     return Point(
       pointHistoryId: json['id'],
-      iconUrl: json['icon']['uri'],
+      iconUrl: json['icon'],
       houseWorkCategoryName: json['houseWorkCategory']['name'],
       houseWorkCategoryImageUrl: json['houseWorkCategory']['uri'],
       houseWorkName: json['name'],
