@@ -1,11 +1,10 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/view/home_view.dart';
+import 'package:cajico_app/ui/controller/email_send_view_controller.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/login_view_controller.dart';
 import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
@@ -17,8 +16,7 @@ class EmailSendView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginViewController());
-    final loginInfo = controller.loginData;
+    final controller = Get.put(EmailSendViewController());
 
     return Focus(
       focusNode: focusNode,
@@ -33,7 +31,7 @@ class EmailSendView extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: GetLoadingStack<LoginViewController>(
+          body: GetLoadingStack<EmailSendViewController>(
             child: Container(
               padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
               child: Column(
@@ -45,7 +43,7 @@ class EmailSendView extends StatelessWidget {
                   CajicoTextFormField(
                     label: 'メールアドレス',
                     initValue: '',
-                    onChanged: (value) => loginInfo.email.value = value,
+                    onChanged: (value) => controller.email.value = value,
                     validator: (value) => controller.validateInputEmailData(value).message,
                   ),
                 ],
@@ -56,9 +54,9 @@ class EmailSendView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Obx(() => PrimaryButton(
                 label: '送信する',
-                isValid: controller.isLoginButtonValid,
+                isValid: controller.isSendButtonValid,
                 onPressed: () {
-                  controller.onTapLogin();
+                  controller.onTapSendEmail(type: type);
                 })),
           ),
         ),

@@ -91,6 +91,16 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // メール認証API
+  Future<bool> sendEmail({required email, required type}) async {
+    final res = await http.post(
+      _makeUri('/register/email'),
+      headers: _commonHeaders,
+      body: jsonEncode({'email': email, 'type': type}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // マイページ取得API
   Future<MyPage> getMyPage() async {
     final res = await http.get(
