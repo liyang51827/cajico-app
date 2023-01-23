@@ -19,6 +19,7 @@ class EmailSendViewController extends BaseViewController {
     //   result = await api.sendEmail(email: email(), type: type);
     // });
     if (result) {
+      email.value = '';
       Get.to(const EmailSentView());
     }
   }
