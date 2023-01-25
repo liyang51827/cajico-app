@@ -15,9 +15,9 @@ class EmailSendViewController extends BaseViewController {
 
   Future<void> onTapSendEmail({required type}) async {
     var result = true;
-    // await callAsyncApi(() async {
-    //   result = await api.sendEmail(email: email(), type: type);
-    // });
+    await callAsyncApi(() async {
+      result = await api.sendEmail(email: email(), type: type);
+    });
     if (result) {
       email.value = '';
       Get.to(const EmailSentView());
