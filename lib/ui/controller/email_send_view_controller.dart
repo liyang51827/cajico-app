@@ -14,7 +14,7 @@ class EmailSendViewController extends BaseViewController {
   bool get isSendButtonValid => validateInputEmailData(email()).isValid;
 
   Future<void> onTapSendEmail({required type}) async {
-    var result = true;
+    var result = false;
     await callAsyncApi(() async {
       result = await api.sendEmail(email: email(), type: type);
     });
