@@ -8,12 +8,14 @@ import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import '../../firebase_options.dart';
 import '../widget/header.dart';
 
-void main() {
+Future<void> main() async {
   Get.lazyPut(ApiService.new);
   runApp(const MyApp());
 }
