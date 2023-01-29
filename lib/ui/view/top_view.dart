@@ -51,6 +51,11 @@ class _CarouselWithIndicatorState extends State<TopView> {
                   subtitle: 'たまったポイントで\n家族にねぎらってもらおう！',
                   imageUrl: 'assets/images/introduction_3.png',
                 ),
+                _CarouselCard(
+                  title: '家事履歴',
+                  subtitle: 'これまでの家事を\n一覧でかんたんチェック！',
+                  imageUrl: 'assets/images/introduction_4.png',
+                ),
               ],
               carouselController: _controller,
               options: CarouselOptions(
