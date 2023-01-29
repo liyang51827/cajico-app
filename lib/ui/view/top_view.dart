@@ -122,7 +122,7 @@ class _CarouselCard extends StatelessWidget {
           child: Text(
             title,
             style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black87),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87, letterSpacing: 3),
             textAlign: TextAlign.center,
           ),
         ),
@@ -130,7 +130,7 @@ class _CarouselCard extends StatelessWidget {
         Text(
           subtitle,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87, letterSpacing: 2),
         ),
         verticalSpaceMedium,
         Image(image: AssetImage(imageUrl)),
