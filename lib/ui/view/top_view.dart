@@ -10,6 +10,7 @@ final List<String> imgList = [
   'assets/images/introduction_1.png',
   'assets/images/introduction_2.png',
   'assets/images/introduction_3.png',
+  'assets/images/introduction_4.png',
 ];
 
 class TopView extends StatefulWidget {
@@ -64,7 +65,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
                   enableInfiniteScroll: true,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
