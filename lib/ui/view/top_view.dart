@@ -38,12 +38,12 @@ class _CarouselWithIndicatorState extends State<TopView> {
               items: const [
                 _CarouselCard(
                   title: 'CAJICO',
-                  subtitle: 'カジコは毎日の家事をポイント化する\n「家事ポイ活」アプリです',
+                  subtitle: '日々の「当たり前」を「ありがとう」へ\nカジコは家事・育児共有アプリです',
                   imageUrl: 'assets/images/introduction_1.png',
                 ),
                 _CarouselCard(
                   title: '家事ポイント',
-                  subtitle: '家事をクリアして\nポイントをゲット！',
+                  subtitle: '家事をクリアすると\nポイントをゲット！',
                   imageUrl: 'assets/images/introduction_2.png',
                 ),
                 _CarouselCard(
