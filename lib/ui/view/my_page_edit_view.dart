@@ -38,7 +38,6 @@ class MyPageEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MyPageEditViewController());
-    final formatter = NumberFormat("#,###");
     final myPageInfo = controller.myPageData;
     myPageInfo.familyName.value = initFamilyName;
     myPageInfo.familyCode.value = initFamilyCode;

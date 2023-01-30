@@ -36,12 +36,12 @@ class MyPageView extends StatelessWidget {
                     },
                   ),
                 );
-              } else if (result == 0) {
+              } else if (result == 0 && user != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => MyPageEditView(
-                      initFamilyName: user!.familyName,
+                      initFamilyName: user.familyName,
                       initFamilyCode: user.familyCode,
                       initUserName: user.userName,
                       iconUrl: user.iconUrl,
