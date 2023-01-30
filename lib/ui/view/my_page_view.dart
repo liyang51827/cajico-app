@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/normal_dialog.dart';
+import 'my_page_edit_view.dart';
 
 class MyPageView extends StatelessWidget {
   const MyPageView({super.key});
@@ -14,6 +15,7 @@ class MyPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MyPageViewController());
+    final user = controller.user();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black54),
@@ -32,6 +34,22 @@ class MyPageView extends StatelessWidget {
                     onPressed: () {
                       controller.onTapLogout();
                     },
+                  ),
+                );
+              } else if (result == 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => MyPageEditView(
+                      initFamilyName: user!.familyName,
+                      initFamilyCode: user.familyCode,
+                      initUserName: user.userName,
+                      iconUrl: user.iconUrl,
+                      birthday: user.birthday,
+                      email: user.email,
+                      initPosition: user.position,
+                    ),
+                    fullscreenDialog: true,
                   ),
                 );
               }
@@ -63,7 +81,6 @@ class MyPageView extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
             child: Obx(() {
-              final user = controller.user();
               final formatter = NumberFormat("#,###");
               if (user == null) {
                 return const SizedBox();
