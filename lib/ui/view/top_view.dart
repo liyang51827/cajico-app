@@ -39,7 +39,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
               items: const [
                 _CarouselCard(
                   title: 'CAJICO',
-                  subtitle: '日々の「当たり前」を「ありがとう」へ\nカジコは家事・育児共有アプリです',
+                  subtitle: '日々の「当たり前」を「ありがとう」に\nカジコは家事記録・共有アプリです',
                   imageUrl: 'assets/images/introduction_1.png',
                 ),
                 _CarouselCard(
@@ -130,7 +130,7 @@ class _CarouselCard extends StatelessWidget {
         Text(
           subtitle,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87, letterSpacing: 2),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87, letterSpacing: 1),
         ),
         verticalSpaceMedium,
         Image(image: AssetImage(imageUrl)),
