@@ -81,6 +81,7 @@ class MyPageView extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
             child: Obx(() {
+              final user = controller.user();
               final formatter = NumberFormat("#,###");
               if (user == null) {
                 return const SizedBox();
