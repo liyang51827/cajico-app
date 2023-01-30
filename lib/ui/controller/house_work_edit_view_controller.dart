@@ -11,11 +11,17 @@ import 'house_work_view_controller.dart';
 class HouseWorkEditViewController extends BaseViewController {
   HouseWorkEditViewController();
 
-  final houseWorkCreateData =
-      HouseWorkCreateData(houseWorkCategoryId: 0.obs, houseWorkName: ''.obs, point: 0.obs);
+  final houseWorkCreateData = HouseWorkCreateData(
+    houseWorkCategoryId: 0.obs,
+    houseWorkName: ''.obs,
+    point: 0.obs,
+  );
 
-  final houseWorkEditData =
-      HouseWorkEditData(houseWorkId: 0.obs, houseWorkName: ''.obs, point: 0.obs);
+  final houseWorkEditData = HouseWorkEditData(
+    houseWorkId: 0.obs,
+    houseWorkName: ''.obs,
+    point: 0.obs,
+  );
 
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
@@ -29,7 +35,7 @@ class HouseWorkEditViewController extends BaseViewController {
 
   bool get isHouseWorkEditButtonValid =>
       validateInputEditData(value: houseWorkEditData.houseWorkName(), maxLength: 10).isValid &&
-          validateInputPointData(value: houseWorkEditData.point().toString(), maxLength: 10).isValid;
+      validateInputPointData(value: houseWorkEditData.point().toString(), maxLength: 10).isValid;
 
   Future<void> onTapUpdateDialog({
     required int houseWorkCategoryId,

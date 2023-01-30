@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/email_send_view_controller.dart';
+import 'package:cajico_app/ui/controller/register_view_controller.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class RegisterFamilyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(EmailSendViewController());
+    final controller = Get.put(RegisterViewController());
+    final familyInfo = controller.newFamilyData;
 
     return Focus(
       focusNode: focusNode,
@@ -42,15 +44,17 @@ class RegisterFamilyView extends StatelessWidget {
                   CajicoTextFormField(
                     label: '家族名',
                     initValue: '',
-                    onChanged: (value) => controller.email.value = value,
-                    validator: (value) => controller.validateInputEmailData(value).message,
+                    onChanged: (value) => familyInfo.familyName.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 5).message,
                   ),
                   verticalSpaceMedium,
                   CajicoTextFormField(
                     label: '家族コード',
                     initValue: '',
-                    onChanged: (value) => controller.email.value = value,
-                    validator: (value) => controller.validateInputEmailData(value).message,
+                    onChanged: (value) => familyInfo.familyCode.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 10).message,
                   ),
                   verticalSpaceSmall,
                   const Padding(
@@ -64,15 +68,11 @@ class RegisterFamilyView extends StatelessWidget {
               ),
             ),
           ),
-          // bottomNavigationBar: Container(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          //   child: Obx(() => PrimaryButton(
-          //       label: '次へ',
-          //       isValid: controller.isSendButtonValid,
-          //       onPressed: () {
-          //         controller.onTapSendEmail(type: type);
-          //       })),
-          // ),
+          bottomNavigationBar: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Obx(() => PrimaryButton(
+                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () {})),
+          ),
         ),
       ),
     );
