@@ -1,18 +1,9 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/controller/reward_view_controller.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
-import '../controller/base_view_controller.dart';
-import '../controller/home_view_controller.dart';
 import '../controller/my_page_edit_view_controller.dart';
-import '../controller/reward_edit_view_controller.dart';
-import '../widget/normal_completed_dialog.dart';
-import '../widget/normal_dialog.dart';
-import '../widget/primary_button.dart';
 
 class MyPageEditView extends StatelessWidget {
   MyPageEditView({
