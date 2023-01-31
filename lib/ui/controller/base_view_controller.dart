@@ -63,8 +63,8 @@ class BaseViewController extends GetxController {
       }
       if (onException == null) {
         unawaited(Get.dialog(
-          const DefaultAlertDialog(
-            description: Strings.apiError,
+          DefaultAlertDialog(
+            description:  e is ApiException ? e.message : Strings.apiError,
           ),
         ));
       } else {
