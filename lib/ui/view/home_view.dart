@@ -16,7 +16,8 @@ class HomeView extends GetView<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeViewController());
+    Get.replace(HomeViewController());
+    final controller = Get.find<HomeViewController>();
     return Scaffold(
       backgroundColor: gray7,
       appBar: PreferredSize(
