@@ -1,6 +1,7 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/reward_view_controller.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
+import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -62,56 +63,58 @@ class RewardEditView extends StatelessWidget {
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  readOnly: true,
-                  initValue: rank,
-                  label: 'プラン',
-                  filled: true,
-                  fillColor: gray8,
-                  focusedBorderColor: gray4,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initRewardName,
-                  label: 'ごほうび名',
-                  onChanged: (value) => rewardInfo.rewardName.value = value,
-                  validator: (value) =>
-                  controller
-                      .validateInputEditData(value: value, maxLength: 10)
-                      .message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initPoint.toString(),
-                  label: '必要ポイント（${formatter.format(minPoint)}P~${formatter.format(maxPoint)}P）',
-                  suffixText: 'ポイント',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => rewardInfo.point.value = int.parse(value),
-                  validator: (value) =>
-                  controller
-                      .validateInputPointData(value: value)
-                      .message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initMemo,
-                  label: 'ごほうびメモ',
-                  keyboardType: TextInputType.multiline,
-                  minLines: 10,
-                  maxLines: 10,
-                  onChanged: (value) => rewardInfo.memo.value = value,
-                  validator: (value) =>
-                  controller
-                      .validateInputEditData(value: value, maxLength: 500)
-                      .message,
-                ),
-              ],
+          body: GetLoadingStack<RewardEditViewController>(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    readOnly: true,
+                    initValue: rank,
+                    label: 'プラン',
+                    filled: true,
+                    fillColor: gray8,
+                    focusedBorderColor: gray4,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initRewardName,
+                    label: 'ごほうび名',
+                    onChanged: (value) => rewardInfo.rewardName.value = value,
+                    validator: (value) =>
+                    controller
+                        .validateInputEditData(value: value, maxLength: 10)
+                        .message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initPoint.toString(),
+                    label: '必要ポイント（${formatter.format(minPoint)}P~${formatter.format(maxPoint)}P）',
+                    suffixText: 'ポイント',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (value) => rewardInfo.point.value = int.parse(value),
+                    validator: (value) =>
+                    controller
+                        .validateInputPointData(value: value)
+                        .message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initMemo,
+                    label: 'ごほうびメモ',
+                    keyboardType: TextInputType.multiline,
+                    minLines: 10,
+                    maxLines: 10,
+                    onChanged: (value) => rewardInfo.memo.value = value,
+                    validator: (value) =>
+                    controller
+                        .validateInputEditData(value: value, maxLength: 500)
+                        .message,
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Padding(
