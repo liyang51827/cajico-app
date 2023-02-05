@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
+import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -48,39 +49,41 @@ class HouseWorkEditView extends StatelessWidget {
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  readOnly: true,
-                  initValue: categoryName,
-                  label: '家事カテゴリー',
-                  filled: true,
-                  fillColor: gray8,
-                  focusedBorderColor: gray4,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initHouseWorkName,
-                  label: '家事名',
-                  onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 10).message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initPoint.toString(),
-                  label: '獲得ポイント',
-                  suffixText: 'ポイント',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
-                  validator: (value) =>
-                      controller.validateInputPointData(value: value, maxLength: 3).message,
-                ),
-              ],
+          body: GetLoadingStack<HouseWorkEditViewController>(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    readOnly: true,
+                    initValue: categoryName,
+                    label: '家事カテゴリー',
+                    filled: true,
+                    fillColor: gray8,
+                    focusedBorderColor: gray4,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initHouseWorkName,
+                    label: '家事名',
+                    onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 10).message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initPoint.toString(),
+                    label: '獲得ポイント',
+                    suffixText: 'ポイント',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
+                    validator: (value) =>
+                        controller.validateInputPointData(value: value, maxLength: 3).message,
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Container(
@@ -124,7 +127,6 @@ class _DeleteBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HouseWorkEditViewController());
     final houseWorkController = Get.put(HouseWorkViewController(houseWorkCategoryId: categoryId));
-    final homeController = Get.put(HomeViewController());
 
     return PrimaryOutlineButton(
       label: '削除する',
@@ -140,7 +142,6 @@ class _DeleteBottom extends StatelessWidget {
                   message: '削除されました',
                   onPressed: () {
                     Get.back();
-                    homeController.onTapGetUnreadCount();
                     Get.back();
                     houseWorkController.fetchData();
                   },

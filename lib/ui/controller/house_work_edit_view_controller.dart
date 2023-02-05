@@ -50,7 +50,9 @@ class HouseWorkEditViewController extends BaseViewController {
         message: '更新しますか？',
         onPressed: () async {
           Get.back();
-          await api.putHouseWork(houseWorkEditData);
+          await callAsyncApi(() async {
+            await api.putHouseWork(houseWorkEditData);
+          });
           Get.dialog(
             NormalCompletedDialog(
               message: '更新されました',
@@ -77,7 +79,9 @@ class HouseWorkEditViewController extends BaseViewController {
         message: '登録しますか？',
         onPressed: () async {
           Get.back();
-          await api.createHouseWork(houseWorkCreateData);
+          await callAsyncApi(() async {
+            await api.createHouseWork(houseWorkCreateData);
+          });
           Get.dialog(
             NormalCompletedDialog(
               message: '登録されました',

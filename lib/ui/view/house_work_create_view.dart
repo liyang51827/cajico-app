@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/cajico_text_form_field.dart';
+import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,39 +37,41 @@ class HouseWorkCreateView extends StatelessWidget {
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  readOnly: true,
-                  initValue: categoryName,
-                  label: '家事カテゴリー',
-                  filled: true,
-                  fillColor: gray8,
-                  focusedBorderColor: gray4,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: '',
-                  label: '家事名',
-                  onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 10).message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: '',
-                  label: '獲得ポイント',
-                  suffixText: 'ポイント',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
-                  validator: (value) =>
-                      controller.validateInputPointData(value: value, maxLength: 3).message,
-                ),
-              ],
+          body: GetLoadingStack<HouseWorkEditViewController>(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    readOnly: true,
+                    initValue: categoryName,
+                    label: '家事カテゴリー',
+                    filled: true,
+                    fillColor: gray8,
+                    focusedBorderColor: gray4,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: '',
+                    label: '家事名',
+                    onChanged: (value) => houseWorkInfo.houseWorkName.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 10).message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: '',
+                    label: '獲得ポイント',
+                    suffixText: 'ポイント',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (value) => houseWorkInfo.point.value = int.parse(value),
+                    validator: (value) =>
+                        controller.validateInputPointData(value: value, maxLength: 3).message,
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Padding(
