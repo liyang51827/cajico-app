@@ -1,9 +1,10 @@
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/widget/primary_small_button.dart';
+import 'package:cajico_app/ui/widget/primary_small_outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
 import 'cajico_cashed_network_image.dart';
-import 'house_work_complete_dialog.dart';
 
 class HouseWorkCard extends StatelessWidget {
   const HouseWorkCard({
@@ -27,7 +28,7 @@ class HouseWorkCard extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Get.dialog(
-            HouseWorkCompleteDialog(
+            _HouseWorkCompleteDialog(
               houseWorkName: houseWorkName,
               point: point,
               onPressed: onPressed,
@@ -87,6 +88,52 @@ class HouseWorkCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _HouseWorkCompleteDialog extends StatelessWidget {
+  const _HouseWorkCompleteDialog({
+    required this.houseWorkName,
+    required this.point,
+    required this.onPressed,
+  });
+
+  final String houseWorkName;
+  final int point;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+      title: Column(
+        children: [
+          Text(houseWorkName, style: const TextStyle(fontWeight: FontWeight.bold)),
+          verticalSpaceSmall,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
+              const Text(' ポイント', style: TextStyle(fontSize: 16))
+            ],
+          ),
+          verticalSpaceMedium,
+          const Text('この家事をクリアした？', style: TextStyle(fontSize: 16))
+        ],
+      ),
+      children: [
+        SimpleDialogOption(
+          onPressed: onPressed,
+          child: const PrimarySmallButton(text: 'はい！'),
+        ),
+        SimpleDialogOption(
+          child: const PrimarySmallOutlineButton(text: 'いいえ'),
+          onPressed: () {
+            Navigator.pop(context, false);
+          },
+        )
+      ],
     );
   }
 }
