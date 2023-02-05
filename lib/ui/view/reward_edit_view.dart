@@ -129,8 +129,8 @@ class RewardEditView extends StatelessWidget {
                         NormalDialog(
                           message: '更新しますか？',
                           onPressed: () async {
-                            await controller.onTapUpdate();
                             Get.back();
+                            await controller.onTapUpdate();
                             Get.dialog(
                               NormalCompletedDialog(
                                 message: '更新されました',

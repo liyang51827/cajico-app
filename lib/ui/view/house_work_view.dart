@@ -72,7 +72,6 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.put(HouseWorkViewController(houseWorkCategoryId: houseWorkCategoryId));
-      final homeController = Get.put(HomeViewController());
 
       return RefreshIndicator(
         color: primaryColor,
@@ -95,7 +94,7 @@ class _HouseWorks extends GetView<HouseWorkViewController> {
                         houseWorkName: item.name,
                         imageUrl: item.categoryImageUrl,
                         point: item.point,
-                        onPressed: () => homeController.onTapCompleteDialog(
+                        onPressed: () => controller.onTapCompleteDialog(
                           houseWorkId: item.houseWorkId,
                           point: item.point,
                         ),

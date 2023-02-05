@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../controller/base_view_controller.dart';
 import '../controller/home_view_controller.dart';
 import '../widget/cajico_text_form_field.dart';
+import '../widget/loading_stack.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -34,37 +35,39 @@ class InquiryView extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    '追加してほしい機能や\n改善して欲しい箇所がありましたら\nお気軽にご連絡ください。\nできる限りご希望に添えるよう改善いたします。',
-                    textAlign: TextAlign.center,
+          body: GetLoadingStack<InquiryViewController>(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      '追加してほしい機能や\n改善して欲しい箇所がありましたら\nお気軽にご連絡ください。\nできる限りご希望に添えるよう改善いたします。',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  label: 'タイトル',
-                  onChanged: (newValue) => inquiryInfo.title.value = newValue,
-                  initValue: '',
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 20).message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  label: 'ご意見 / 改善点など',
-                  onChanged: (newValue) => inquiryInfo.body.value = newValue,
-                  initValue: '',
-                  minLines: 10,
-                  maxLines: 10,
-                  keyboardType: TextInputType.multiline,
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 500).message,
-                ),
-              ],
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    label: 'タイトル',
+                    onChanged: (newValue) => inquiryInfo.title.value = newValue,
+                    initValue: '',
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 20).message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    label: 'ご意見 / 改善点など',
+                    onChanged: (newValue) => inquiryInfo.body.value = newValue,
+                    initValue: '',
+                    minLines: 10,
+                    maxLines: 10,
+                    keyboardType: TextInputType.multiline,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 500).message,
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Padding(
@@ -76,8 +79,8 @@ class InquiryView extends StatelessWidget {
                     NormalDialog(
                       message: '送信しますか？',
                       onPressed: () async {
-                        await controller.onTapInquiry();
                         Get.back();
+                        await controller.onTapInquiry();
                         Get.dialog(
                           NormalCompletedDialog(
                             message: '送信されました',

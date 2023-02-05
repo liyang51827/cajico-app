@@ -50,8 +50,8 @@ class HistoryViewController extends BaseViewController {
           houseWorkName: houseWorkName,
           categoryName: categoryName,
           onPressed: () async {
-            await deleteApi(pointHistoryId: pointHistoryId);
             Get.back();
+            await deleteApi(pointHistoryId: pointHistoryId);
             Get.dialog(
               NormalCompletedDialog(
                 message: '家事を取り消しました',

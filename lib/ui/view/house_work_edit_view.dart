@@ -133,8 +133,8 @@ class _DeleteBottom extends StatelessWidget {
           NormalDialog(
             message: '削除しますか？',
             onPressed: () async {
-              await controller.onTapDelete(houseWorkId: houseWorkId);
               Get.back();
+              await controller.onTapDelete(houseWorkId: houseWorkId);
               Get.dialog(
                 NormalCompletedDialog(
                   message: '削除されました',
