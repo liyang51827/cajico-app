@@ -150,7 +150,7 @@ class RewardDetailView extends StatelessWidget {
                                       rewardName: item.rewardName,
                                       date: item.createdAt,
                                       userImageUrl: item.iconUrl ??
-                                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
                                       message: item.message ?? '',
                                       point: item.point);
                                 },

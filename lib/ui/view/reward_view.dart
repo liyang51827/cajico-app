@@ -144,7 +144,7 @@ class _TabBar extends StatelessWidget {
                   children: [
                     CajicoCachedNetworkIconImage(
                       imageUrl: familyReward.iconUrl ??
-                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon.png',
+                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
                       radius: 15,
                     ),
                     horizontalSpaceSmall,
