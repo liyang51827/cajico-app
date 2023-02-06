@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/reward_view_controller.dart';
+import '../widget/background.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/header.dart';
 import '../widget/loading_stack.dart';
@@ -35,78 +36,80 @@ class RewardView extends GetView<RewardViewController> {
             ),
           ),
           drawer: const HomeDrawer(),
-          body: GetLoadingStack<RewardViewController>(
-            child: TabBarView(
-              children: [
-                for (var familyReward in controller.familyRewards()) ...{
-                  RefreshIndicator(
-                    color: primaryColor,
-                    onRefresh: controller.fetchData,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                          children: [
-                            verticalSpaceSmall,
-                            RewardCategoryCard(
-                              rank: "リーズナブル",
-                              rewardId: familyReward.smallRewardId,
-                              rewardName: familyReward.smallRewardName,
-                              imageUrl: 'assets/images/afternoon_tea.png',
-                              rating: familyReward.smallRewardRating,
-                              ownedPoint: familyReward.smallRewardOwnedPoint,
-                              requiredPoint: familyReward.smallRewardPoint,
-                              differencePoint: familyReward.smallRewardDifferencePoint,
-                              isRequesting: familyReward.smallRewardIsRequesting,
-                              isMe: familyReward.smallRewardIsMe,
-                              isAvailable: familyReward.smallRewardIsAvailable,
-                              note: familyReward.smallRewardNote,
-                              minPoint: familyReward.smallRewardMinPoint,
-                              maxPoint: familyReward.smallRewardMaxPoint,
-                            ),
-                            verticalSpaceSmall,
-                            RewardCategoryCard(
-                              rank: "スタンダード",
-                              rewardId: familyReward.middleRewardId,
-                              rewardName: 'Amazonギフト券',
-                              imageUrl: 'assets/images/present.png',
-                              rating: familyReward.middleRewardRating,
-                              ownedPoint: familyReward.middleRewardOwnedPoint,
-                              requiredPoint: familyReward.middleRewardPoint,
-                              differencePoint: familyReward.middleRewardDifferencePoint,
-                              isRequesting: familyReward.middleRewardIsRequesting,
-                              isMe: familyReward.middleRewardIsMe,
-                              isAvailable: familyReward.middleRewardIsAvailable,
-                              note: familyReward.middleRewardNote,
-                              minPoint: familyReward.middleRewardMinPoint,
-                              maxPoint: familyReward.middleRewardMaxPoint,
-                            ),
-                            verticalSpaceSmall,
-                            RewardCategoryCard(
-                              rank: "ゴージャス",
-                              rewardId: familyReward.largeRewardId,
-                              rewardName: 'あなたが欲しいもの',
-                              imageUrl: 'assets/images/propose.png',
-                              rating: familyReward.largeRewardRating,
-                              ownedPoint: familyReward.largeRewardOwnedPoint,
-                              requiredPoint: familyReward.largeRewardPoint,
-                              differencePoint: familyReward.largeRewardDifferencePoint,
-                              isRequesting: familyReward.largeRewardIsRequesting,
-                              isMe: familyReward.largeRewardIsMe,
-                              isAvailable: familyReward.largeRewardIsAvailable,
-                              note: familyReward.largeRewardNote,
-                              minPoint: familyReward.largeRewardMinPoint,
-                              maxPoint: familyReward.largeRewardMaxPoint,
-                            ),
-                            verticalSpaceSmall,
-                          ],
+          body: Background(
+            child: GetLoadingStack<RewardViewController>(
+              child: TabBarView(
+                children: [
+                  for (var familyReward in controller.familyRewards()) ...{
+                    RefreshIndicator(
+                      color: primaryColor,
+                      onRefresh: controller.fetchData,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: Column(
+                            children: [
+                              verticalSpaceSmall,
+                              RewardCategoryCard(
+                                rank: "リーズナブル",
+                                rewardId: familyReward.smallRewardId,
+                                rewardName: familyReward.smallRewardName,
+                                imageUrl: 'assets/images/afternoon_tea.png',
+                                rating: familyReward.smallRewardRating,
+                                ownedPoint: familyReward.smallRewardOwnedPoint,
+                                requiredPoint: familyReward.smallRewardPoint,
+                                differencePoint: familyReward.smallRewardDifferencePoint,
+                                isRequesting: familyReward.smallRewardIsRequesting,
+                                isMe: familyReward.smallRewardIsMe,
+                                isAvailable: familyReward.smallRewardIsAvailable,
+                                note: familyReward.smallRewardNote,
+                                minPoint: familyReward.smallRewardMinPoint,
+                                maxPoint: familyReward.smallRewardMaxPoint,
+                              ),
+                              verticalSpaceSmall,
+                              RewardCategoryCard(
+                                rank: "スタンダード",
+                                rewardId: familyReward.middleRewardId,
+                                rewardName: 'Amazonギフト券',
+                                imageUrl: 'assets/images/present.png',
+                                rating: familyReward.middleRewardRating,
+                                ownedPoint: familyReward.middleRewardOwnedPoint,
+                                requiredPoint: familyReward.middleRewardPoint,
+                                differencePoint: familyReward.middleRewardDifferencePoint,
+                                isRequesting: familyReward.middleRewardIsRequesting,
+                                isMe: familyReward.middleRewardIsMe,
+                                isAvailable: familyReward.middleRewardIsAvailable,
+                                note: familyReward.middleRewardNote,
+                                minPoint: familyReward.middleRewardMinPoint,
+                                maxPoint: familyReward.middleRewardMaxPoint,
+                              ),
+                              verticalSpaceSmall,
+                              RewardCategoryCard(
+                                rank: "ゴージャス",
+                                rewardId: familyReward.largeRewardId,
+                                rewardName: 'あなたが欲しいもの',
+                                imageUrl: 'assets/images/propose.png',
+                                rating: familyReward.largeRewardRating,
+                                ownedPoint: familyReward.largeRewardOwnedPoint,
+                                requiredPoint: familyReward.largeRewardPoint,
+                                differencePoint: familyReward.largeRewardDifferencePoint,
+                                isRequesting: familyReward.largeRewardIsRequesting,
+                                isMe: familyReward.largeRewardIsMe,
+                                isAvailable: familyReward.largeRewardIsAvailable,
+                                note: familyReward.largeRewardNote,
+                                minPoint: familyReward.largeRewardMinPoint,
+                                maxPoint: familyReward.largeRewardMaxPoint,
+                              ),
+                              verticalSpaceSmall,
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                }
-              ],
+                  }
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: const Footer(),

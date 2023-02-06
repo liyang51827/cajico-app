@@ -1,9 +1,9 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/controller/home_view_controller.dart';
 import 'package:cajico_app/ui/view/house_work_edit_index_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/house_work_view_controller.dart';
+import '../widget/background.dart';
 import '../widget/house_work_card.dart';
 import '../widget/loading_stack.dart';
 
@@ -56,8 +56,10 @@ class HouseWorkView extends StatelessWidget {
           )
         ],
       ),
-      body: GetLoadingStack<HouseWorkViewController>(
-        child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId),
+      body: Background(
+        child: GetLoadingStack<HouseWorkViewController>(
+          child: _HouseWorks(houseWorkCategoryId: houseWorkCategoryId),
+        ),
       ),
     );
   }
