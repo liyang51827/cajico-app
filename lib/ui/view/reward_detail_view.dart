@@ -110,7 +110,7 @@ class RewardDetailView extends StatelessWidget {
                   labelColor: primaryColor,
                   unselectedLabelColor: gray4,
                   indicatorColor: primaryColor,
-                  indicatorWeight: 3,
+                  indicatorWeight: 4,
                   labelStyle: TextStyle(fontSize: 16),
                   tabs: <Widget>[
                     Tab(child: Text('ごほうび情報')),

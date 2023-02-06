@@ -166,7 +166,7 @@ class _TabBar extends StatelessWidget {
           labelColor: primaryColor,
           unselectedLabelColor: gray4,
           indicatorColor: primaryColor,
-          indicatorWeight: 3,
+          indicatorWeight: 4,
           labelStyle: const TextStyle(fontSize: 16),
           tabs: <Widget>[
             const Tab(text: '全て'),

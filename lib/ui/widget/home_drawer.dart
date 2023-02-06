@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import '../common/app_color.dart';
 import '../view/inquiry_view.dart';
 import '../view/my_page_view.dart';
 import '../view/web_view_view.dart';
@@ -42,7 +43,7 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.user,
-              color: Colors.brown,
+              color: subColor,
             ),
             title: const Text('マイページ'),
             onTap: () => Get.to(() => const MyPageView()),
@@ -50,7 +51,7 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.envelope,
-              color: Colors.brown,
+              color: subColor,
             ),
             title: const Text('ご意見箱'),
             onTap: () => Get.to(() => InquiryView()),
@@ -58,7 +59,7 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(
               LineIcons.book,
-              color: Colors.brown,
+              color: subColor,
             ),
             title: const Text('利用規約'),
             onTap: () => Get.to(const WebViewView(initialPath: 'term.html', title: '利用規約')),
