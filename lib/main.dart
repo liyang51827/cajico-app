@@ -1,4 +1,5 @@
 import 'package:cajico_app/service/api_service.dart';
+import 'package:cajico_app/service/dynamic_links_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,10 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   Get.lazyPut(ApiService.new);
+
+  // await Future.wait([
+  //   Get.putAsync(() => DynamicLinksService().init()),
+  // ]);
   runApp(const MyApp());
 }
 
