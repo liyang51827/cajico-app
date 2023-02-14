@@ -24,8 +24,8 @@ void main() => run(
 
 Future<void> run(AppConfig config) async {
   Get.lazyPut(ApiService.new);
-
-  Firebase.initializeApp(options: config.firebaseOptions);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: config.firebaseOptions);
   await Future.wait([
     Get.putAsync(() => DynamicLinksService().init()),
   ]);
