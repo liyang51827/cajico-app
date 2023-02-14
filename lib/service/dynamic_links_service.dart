@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../ui/view/register_family_view.dart';
 
 class DynamicLinksService extends GetxService {
-
   Future<DynamicLinksService> init() async {
     FirebaseDynamicLinks.instance.onLink.listen((dynamicLinks) {
       _checkDeepLink(dynamicLinks.link);
@@ -20,14 +19,15 @@ class DynamicLinksService extends GetxService {
     if (deepLink == null) {
       return;
     }
-    final mode = deepLink.queryParameters['mode'];
-    final actionCode = deepLink.queryParameters['oobCode'];
-    if (actionCode == null) {
+    final type = deepLink.queryParameters['type'];
+    final token = deepLink.queryParameters['token'];
+    if (type == null || token == null) {
       return;
     }
-    switch (mode) {
-      case 'verifyEmail':
-          unawaited(Get.to(RegisterFamilyView()));
+    switch (type) {
+      case 'new':
+      case 'join':
+        unawaited(Get.to(RegisterFamilyView(type: type, token: token)));
         break;
     }
   }

@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/email_send_view_controller.dart';
-import 'package:cajico_app/ui/view/register_family_view.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +46,6 @@ class EmailSendView extends StatelessWidget {
                     onChanged: (value) => controller.email.value = value,
                     validator: (value) => controller.validateInputEmailData(value).message,
                   ),
-                  verticalSpaceLarge,
-                  PrimaryButton(
-                    label: 'STEP2へ',
-                    onPressed: () => Get.to(() => RegisterFamilyView()),
-                  )
                 ],
               ),
             ),

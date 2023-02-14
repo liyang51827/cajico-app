@@ -23,6 +23,7 @@ void main() => run(
 );
 
 Future<void> run(AppConfig config) async {
+  print('test');
   Get.lazyPut(ApiService.new);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: config.firebaseOptions);

@@ -10,8 +10,14 @@ import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
 class RegisterFamilyView extends StatelessWidget {
-  RegisterFamilyView({super.key});
+  RegisterFamilyView({
+    super.key,
+    required this.type,
+    required this.token,
+  });
 
+  final String type;
+  final String token;
   final focusNode = FocusNode();
 
   @override
