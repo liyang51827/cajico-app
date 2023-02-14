@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
-import '../controller/home_view_controller.dart';
 import '../controller/house_work_edit_view_controller.dart';
 import '../controller/house_work_view_controller.dart';
 import '../widget/normal_completed_dialog.dart';
