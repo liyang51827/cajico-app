@@ -33,6 +33,7 @@ dependencies:
   validators: ^3.0.0
   firebase_dynamic_links: ^5.0.11
   image_picker: ^0.8.6+1
+  firebase_analytics: ^10.1.1
 
 dev_dependencies:
   flutter_test:
