@@ -38,7 +38,7 @@ class RegisterFamilyView extends StatelessWidget {
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: GetLoadingStack<EmailSendViewController>(
+          body: GetLoadingStack<RegisterViewController>(
             child: Container(
               padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
               child: Column(
