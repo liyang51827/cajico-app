@@ -16,8 +16,8 @@ class DynamicLinksService extends GetxService {
   }
 
   Future<void> _checkDeepLink(Uri? deepLink) async {
-    // const link = 'https://cajico.herokuapp.com/verify?type=new&token=7fe8ee11183678f9f3d57d325b7a53f970455aa47f5ba1820a4717a2ed1ea50a';
-    // final deepLink = Uri.parse(link);
+    const link = 'https://cajico.herokuapp.com/verify?type=new&token=7fe8ee11183678f9f3d57d325b7a53f970455aa47f5ba1820a4717a2ed1ea50a';
+    final deepLink = Uri.parse(link);
     if (deepLink == null) {
       return;
     }
@@ -29,7 +29,6 @@ class DynamicLinksService extends GetxService {
     switch (type) {
       case 'new':
       case 'join':
-        await Future.delayed(const Duration(seconds: 5));
         unawaited(Get.to(() => RegisterFamilyView(type: type, token: token)));
         break;
     }
