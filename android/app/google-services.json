@@ -34,7 +34,7 @@
               "client_id": "546299062145-4999v4mka151mt1n5danvgc82j2p5h65.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.cajicoApp"
+                "bundle_id": "com.herokuapp.cajico"
               }
             }
           ]
