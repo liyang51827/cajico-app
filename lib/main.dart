@@ -1,5 +1,4 @@
 import 'package:cajico_app/service/api_service.dart';
-import 'package:cajico_app/service/dynamic_links_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/top_view.dart';
@@ -31,9 +30,6 @@ Future<void> run(AppConfig config) async {
   final prefs = await SharedPreferences.getInstance();
   bool isLogin = prefs.getString('token') != null;
   runApp(MyApp(isLogin: isLogin));
-  await Future.wait([
-    Get.putAsync(() => DynamicLinksService().init()),
-  ]);
 }
 
 class MyApp extends StatelessWidget {

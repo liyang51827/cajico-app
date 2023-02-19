@@ -4,6 +4,7 @@ import 'package:cajico_app/ui/view/login_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../service/deeplink_mixin.dart';
 import '../common/app_color.dart';
 
 final List<String> imgList = [
@@ -22,7 +23,7 @@ class TopView extends StatefulWidget {
   }
 }
 
-class _CarouselWithIndicatorState extends State<TopView> {
+class _CarouselWithIndicatorState extends State<TopView> with DeepLinkMixin {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
