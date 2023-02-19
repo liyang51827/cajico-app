@@ -31,7 +31,6 @@ dependencies:
   firebase_messaging: ^14.2.1
   firebase_core: ^2.4.1
   validators: ^3.0.0
-  firebase_dynamic_links: ^5.0.11
   image_picker: ^0.8.6+1
   firebase_analytics: ^10.1.1
   uni_links: ^0.5.1
