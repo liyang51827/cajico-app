@@ -1,4 +1,5 @@
 import 'package:cajico_app/service/api_service.dart';
+import 'package:cajico_app/service/push_notification_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/top_view.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    PushNotificationService().initialize();
     return GetMaterialApp(
       title: 'CAJICO',
       home: isLogin ? const HomeView() : const TopView(),
