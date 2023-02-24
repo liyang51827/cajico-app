@@ -32,7 +32,6 @@ mixin DeepLinkMixin<T extends StatefulWidget> on State<T> {
   }
 
   Future<void> _checkDeepLink(Uri? deepLink) async {
-    print('object3');
     if (deepLink == null) {
       return;
     }

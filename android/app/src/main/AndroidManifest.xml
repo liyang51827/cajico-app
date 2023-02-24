@@ -17,7 +17,7 @@
            android:resource="@drawable/ic_home" />
        <meta-data
            android:name="com.google.firebase.messaging.default_notification_color"
-           android:value="#FFA500" />
+           android:resource="@color/colorPrimary" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
