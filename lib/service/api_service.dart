@@ -101,6 +101,16 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // デバイストークン更新API
+  Future<bool> registerDeviceToken({required deviceToken}) async {
+    final res = await http.put(
+      _makeUri('/me/device_token'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'deviceToken': deviceToken}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // マイページ取得API
   Future<MyPage> getMyPage() async {
     final res = await http.get(

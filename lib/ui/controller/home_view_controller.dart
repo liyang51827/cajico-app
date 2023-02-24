@@ -1,4 +1,5 @@
 import 'package:cajico_app/model/house_works.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../view/top_view.dart';
@@ -8,6 +9,7 @@ import 'base_view_controller.dart';
 class HomeViewController extends BaseViewController {
   final RxList<HouseWork> houseWorks = <HouseWork>[].obs;
   final unreadCount = 0.obs;
+  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
   @override
   void onInit() {
@@ -19,12 +21,18 @@ class HomeViewController extends BaseViewController {
     await callAsyncApi(() async {
       final prefs = await SharedPreferences.getInstance();
       if (prefs.getString('token') != null) {
+        String? token = await _fcm.getToken();
         await Future.wait([
           () async {
             houseWorks.value = await api.getRecentHouseWorksList();
           }(),
           () async {
             unreadCount.value = await api.getNotificationUnreadCount();
+          }(),
+          () async {
+            if (token != null) {
+              await api.registerDeviceToken(deviceToken: token);
+            }
           }(),
         ]);
       } else {
