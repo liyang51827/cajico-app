@@ -1,5 +1,6 @@
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PushNotificationService {
@@ -11,7 +12,21 @@ class PushNotificationService {
 
     // 通知を受信した場合の処理
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      Get.to(() => const HomeView());
+      showDialog(
+        context: Get.overlayContext!,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(message.notification?.title ?? ''),
+            content: Text(message.notification?.body ?? ''),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     });
 
     // アプリがバックグラウンドで実行中の場合、通知をタップしてアプリを起動した場合の処理
