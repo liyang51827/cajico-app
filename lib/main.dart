@@ -2,6 +2,7 @@ import 'package:cajico_app/service/api_service.dart';
 import 'package:cajico_app/service/push_notification_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
+import 'package:cajico_app/ui/view/register_family_view.dart';
 import 'package:cajico_app/ui/view/top_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +15,15 @@ import 'model/app_config.dart';
 import 'model/app_flavor.dart';
 
 void main() => run(
-  AppConfig(
-    flavor: AppFlavor.production,
-    androidPackageName: 'com.herokuapp.cajico',
-    iOSBundleId: 'com.herokuapp.cajico',
-    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-    domain: 'cajico.herokuapp.com',
-    dynamicLinkDomain: 'cajico.page.link',
-  ),
-);
+      AppConfig(
+        flavor: AppFlavor.production,
+        androidPackageName: 'com.herokuapp.cajico',
+        iOSBundleId: 'com.herokuapp.cajico',
+        firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+        domain: 'cajico.herokuapp.com',
+        dynamicLinkDomain: 'cajico.page.link',
+      ),
+    );
 
 Future<void> run(AppConfig config) async {
   Get.lazyPut(ApiService.new);
@@ -35,6 +36,7 @@ Future<void> run(AppConfig config) async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.isLogin});
+
   final bool isLogin;
 
   // This widget is the root of your application.
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
     PushNotificationService().initialize();
     return GetMaterialApp(
       title: 'CAJICO',
-      home: isLogin ? const HomeView() : const TopView(),
+      // home: isLogin ? const HomeView() : const TopView(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -59,6 +61,29 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: gray2),
         ),
       ),
+      onGenerateRoute: (settings) {
+        if (settings.name != null) {
+          // 受信したURIを取得
+          Uri uri = Uri.parse(settings.name!);
+          // クエリパラメーターからtypeとtokenを取得
+          String? type = uri.queryParameters['type'];
+          String? token = uri.queryParameters['token'];
+          if (type == 'new') {
+            // 新規作成画面に遷移
+            return MaterialPageRoute(
+              builder: (context) => RegisterFamilyView(type: type!, token: token!),
+            );
+          } else if (type == 'join') {
+            // 参加画面に遷移
+            return MaterialPageRoute(
+              builder: (context) => RegisterFamilyView(type: type!, token: token!),
+            );
+          }
+        }
+        // ナビゲーションに失敗した場合はホーム画面に遷移
+        return MaterialPageRoute(
+            builder: (context) => isLogin ? const HomeView() : const TopView());
+      },
     );
   }
 }
