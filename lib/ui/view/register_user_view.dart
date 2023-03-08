@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/register_view_controller.dart';
-import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,8 @@ import '../common/ui_helper.dart';
 import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
-class RegisterFamilyView extends StatelessWidget {
-  RegisterFamilyView({
+class RegisterUserView extends StatelessWidget {
+  RegisterUserView({
     super.key,
     required this.type,
     required this.token,
@@ -34,7 +33,7 @@ class RegisterFamilyView extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
-            title: const Text('家族登録', style: TextStyle(color: gray2)),
+            title: const Text('ユーザー登録', style: TextStyle(color: gray2)),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
@@ -43,12 +42,12 @@ class RegisterFamilyView extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
               child: Column(
                 children: [
-                  const ProgressBar(step: 2),
+                  const ProgressBar(step: 3),
                   verticalSpaceLarge,
-                  const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください', textAlign: TextAlign.center),
+                  const Text('ユーザー情報を入力してください', textAlign: TextAlign.center),
                   verticalSpaceLarge,
                   CajicoTextFormField(
-                    label: '家族名',
+                    label: 'お名前',
                     initValue: '',
                     onChanged: (value) => familyInfo.familyName.value = value,
                     validator: (value) =>
@@ -56,7 +55,7 @@ class RegisterFamilyView extends StatelessWidget {
                   ),
                   verticalSpaceMedium,
                   CajicoTextFormField(
-                    label: '家族コード',
+                    label: 'パスワード',
                     initValue: '',
                     onChanged: (value) => familyInfo.familyCode.value = value,
                     validator: (value) =>
@@ -77,7 +76,7 @@ class RegisterFamilyView extends StatelessWidget {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Obx(() => PrimaryButton(
-                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () => Get.to(RegisterUserView(type: type, token: token)))),
+                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () {})),
           ),
         ),
       ),
