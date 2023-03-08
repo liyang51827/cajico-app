@@ -25,12 +25,17 @@ class RegisterViewController extends BaseViewController {
   bool get isRegisterFamilyValid =>
       validateInputEditData(value: newFamilyData.familyName(), maxLength: 5).isValid;
 
-  Future<void> onTapConfirmNewFamily(
+  Future<void> onTapConfirmFamily(
       {required type, required token, required familyName, required familyCode}) async {
     var result = false;
     await callAsyncApi(() async {
-      result = await api.confirmNewFamily(
-          type: type, token: token, familyName: familyName, familyCode: familyCode);
+      if (type == 'new') {
+        result = await api.confirmNewFamily(
+            type: type, token: token, familyName: familyName, familyCode: familyCode);
+      } else if (type == 'join') {
+        result = await api.confirmJoinFamily(
+            type: type, token: token, familyName: familyName, familyCode: familyCode);
+      }
     });
     if (result) {
       Get.to(

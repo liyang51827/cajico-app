@@ -33,7 +33,9 @@ class RegisterFamilyView extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
-            title: const Text('家族登録', style: TextStyle(color: gray2)),
+            title: type == 'new'
+                ? const Text('家族登録', style: TextStyle(color: gray2))
+                : const Text('家族に参加する', style: TextStyle(color: gray2)),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
@@ -44,7 +46,11 @@ class RegisterFamilyView extends StatelessWidget {
                 children: [
                   const ProgressBar(step: 2),
                   verticalSpaceLarge,
-                  const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください', textAlign: TextAlign.center),
+                  if (type == 'new')
+                    const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください',
+                        textAlign: TextAlign.center),
+                  if (type == 'join')
+                    const Text('家族名と\n家族コードを入力してください', textAlign: TextAlign.center),
                   verticalSpaceLarge,
                   CajicoTextFormField(
                     label: '家族名',
@@ -78,12 +84,14 @@ class RegisterFamilyView extends StatelessWidget {
               () => PrimaryButton(
                 label: '次へ',
                 isValid: controller.isRegisterFamilyValid,
-                onPressed: () => controller.onTapConfirmNewFamily(
-                  type: type,
-                  token: token,
-                  familyName: familyInfo.familyName(),
-                  familyCode: familyInfo.familyCode(),
-                ),
+                onPressed: () => {
+                  controller.onTapConfirmFamily(
+                    type: type,
+                    token: token,
+                    familyName: familyInfo.familyName(),
+                    familyCode: familyInfo.familyCode(),
+                  ),
+                },
               ),
             ),
           ),
