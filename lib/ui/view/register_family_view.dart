@@ -63,9 +63,11 @@ class RegisterFamilyView extends StatelessWidget {
                   CajicoTextFormField(
                     label: '家族コード',
                     initValue: '',
+                    obscureText: true,
+                    maxLines: 1,
                     onChanged: (value) => familyInfo.familyCode.value = value,
                     validator: (value) =>
-                        controller.validateInputEditData(value: value, maxLength: 10).message,
+                        controller.validateInputEditData(value: value, maxLength: 20).message,
                   ),
                   verticalSpaceSmall,
                   const Padding(
