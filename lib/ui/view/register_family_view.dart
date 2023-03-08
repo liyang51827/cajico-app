@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/register_view_controller.dart';
-import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -64,20 +63,29 @@ class RegisterFamilyView extends StatelessWidget {
                   ),
                   verticalSpaceSmall,
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
-                    child: Text(
-                      '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
-                      style: TextStyle(color: gray4, fontSize: 13),
-                    ),
-                  ),
+                      padding: EdgeInsets.symmetric(horizontal: 4),
+                      child: Text(
+                        '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
+                        style: TextStyle(color: gray4, fontSize: 13),
+                      )),
                 ],
               ),
             ),
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: Obx(() => PrimaryButton(
-                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () => Get.to(RegisterUserView(type: type, token: token)))),
+            child: Obx(
+              () => PrimaryButton(
+                label: '次へ',
+                isValid: controller.isRegisterFamilyValid,
+                onPressed: () => controller.onTapConfirmNewFamily(
+                  type: type,
+                  token: token,
+                  familyName: familyInfo.familyName(),
+                  familyCode: familyInfo.familyCode(),
+                ),
+              ),
+            ),
           ),
         ),
       ),

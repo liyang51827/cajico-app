@@ -13,10 +13,14 @@ class RegisterUserView extends StatelessWidget {
     super.key,
     required this.type,
     required this.token,
+    required this.familyName,
+    required this.familyCode,
   });
 
   final String type;
   final String token;
+  final String familyName;
+  final String familyCode;
   final focusNode = FocusNode();
 
   @override

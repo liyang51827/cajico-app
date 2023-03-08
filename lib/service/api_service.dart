@@ -101,6 +101,18 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // 新規家族コード認証API
+  Future<bool> confirmNewFamily(
+      {required type, required token, required familyName, required familyCode}) async {
+    final res = await http.post(
+      _makeUri('/confirm/new-family'),
+      headers: _commonHeaders,
+      body: jsonEncode(
+          {'type': type, 'token': token, 'familyName': familyName, 'familyCode': familyCode}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // デバイストークン更新API
   Future<bool> registerDeviceToken({required deviceToken}) async {
     final res = await http.put(
