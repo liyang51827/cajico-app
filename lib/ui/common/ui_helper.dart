@@ -1,3 +1,4 @@
+import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 
 const Widget verticalSpaceTiny = SizedBox(height: 4);
@@ -11,6 +12,39 @@ const Widget horizontalSpaceSmall = SizedBox(width: 8);
 const Widget horizontalSpaceMediumSmall = SizedBox(width: 12);
 const Widget horizontalSpaceMedium = SizedBox(width: 16);
 const Widget horizontalSpaceLarge = SizedBox(width: 32);
+
+InputDecoration defaultInputDecoration({String? labelText, String? hintText, Widget? suffixIcon}) => InputDecoration(
+  labelText: labelText,
+  suffixIcon: suffixIcon,
+  fillColor: Colors.white,
+  filled: true,
+  errorMaxLines: 2,
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(color: gray4, width: 1),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(color: gray4, width: 1),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(color: primaryColor, width: 1),
+  ),
+  hintText: hintText,
+);
+
+InputDecoration disabledInputDecoration({String? hintText, Widget? suffixIcon}) => InputDecoration(
+  suffixIcon: suffixIcon,
+  fillColor: disabledFormBackground,
+  filled: true,
+  errorMaxLines: 2,
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: const BorderSide(color: outlineColor, width: 1),
+  ),
+  hintText: hintText,
+);
 
 InputDecoration memoInputDecoration({String? hintText, Widget? suffixIcon}) => InputDecoration(
       suffixIcon: suffixIcon,
