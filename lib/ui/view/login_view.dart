@@ -32,52 +32,55 @@ class LoginView extends StatelessWidget {
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
           body: GetLoadingStack<LoginViewController>(
-            child: Container(
-              padding: const EdgeInsets.only(right: 16, left: 16, top: 40, bottom: 24),
-              child: Column(
-                children: [
-                  const Text(
-                    'メールアドレスとパスワードを\n入力してください',
-                    textAlign: TextAlign.center,
-                  ),
-                  verticalSpaceLarge,
-                  CajicoTextFormField(
-                    label: 'メールアドレス',
-                    initValue: '',
-                    onChanged: (value) => loginInfo.email.value = value,
-                    validator: (value) => controller.validateInputEmailData(value).message,
-                  ),
-                  verticalSpaceMedium,
-                  CajicoTextFormField(
-                    label: 'パスワード',
-                    initValue: '',
-                    obscureText: true,
-                    maxLines: 1,
-                    onChanged: (value) => loginInfo.password.value = value,
-                    validator: (value) =>
-                        controller.validateInputEditData(value: value, maxLength: 20).message,
-                  ),
-                  verticalSpaceMediumLarge,
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'メールアドレス及びパスワードをお忘れの方は',
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        InkWell(
-                          child: const Text(
-                            'こちら',
-                            style: TextStyle(color: primaryColor, fontSize: 13),
-                          ),
-                          onTap: () => Get.to(() => const HomeView()),
-                        ),
-                      ],
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 16, left: 16, top: 40, bottom: 24),
+                child: Column(
+                  children: [
+                    const Text(
+                      'メールアドレスとパスワードを\n入力してください',
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
+                    verticalSpaceLarge,
+                    CajicoTextFormField(
+                      label: 'メールアドレス',
+                      initValue: '',
+                      onChanged: (value) => loginInfo.email.value = value,
+                      validator: (value) => controller.validateInputEmailData(value).message,
+                    ),
+                    verticalSpaceMedium,
+                    CajicoTextFormField(
+                      label: 'パスワード',
+                      initValue: '',
+                      obscureText: true,
+                      maxLines: 1,
+                      onChanged: (value) => loginInfo.password.value = value,
+                      validator: (value) =>
+                          controller.validateInputEditData(value: value, maxLength: 20).message,
+                    ),
+                    verticalSpaceMediumLarge,
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'メールアドレス及びパスワードをお忘れの方は',
+                            style: TextStyle(fontSize: 13),
+                          ),
+                          InkWell(
+                            child: const Text(
+                              'こちら',
+                              style: TextStyle(color: primaryColor, fontSize: 13),
+                            ),
+                            onTap: () => Get.to(() => const HomeView()),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

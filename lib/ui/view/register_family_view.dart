@@ -40,43 +40,46 @@ class RegisterFamilyView extends StatelessWidget {
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
           body: GetLoadingStack<RegisterViewController>(
-            child: Container(
-              padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
-              child: Column(
-                children: [
-                  const ProgressBar(step: 2),
-                  verticalSpaceLarge,
-                  if (type == 'new')
-                    const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください',
-                        textAlign: TextAlign.center),
-                  if (type == 'join')
-                    const Text('家族名と\n家族コードを入力してください', textAlign: TextAlign.center),
-                  verticalSpaceLarge,
-                  CajicoTextFormField(
-                    label: '家族名',
-                    initValue: '',
-                    onChanged: (value) => familyInfo.familyName.value = value,
-                    validator: (value) =>
-                        controller.validateInputEditData(value: value, maxLength: 5).message,
-                  ),
-                  verticalSpaceMedium,
-                  CajicoTextFormField(
-                    label: '家族コード',
-                    initValue: '',
-                    obscureText: true,
-                    maxLines: 1,
-                    onChanged: (value) => familyInfo.familyCode.value = value,
-                    validator: (value) =>
-                        controller.validateInputEditData(value: value, maxLength: 20).message,
-                  ),
-                  verticalSpaceSmall,
-                  const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4),
-                      child: Text(
-                        '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
-                        style: TextStyle(color: gray4, fontSize: 13),
-                      )),
-                ],
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Container(
+                padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
+                child: Column(
+                  children: [
+                    const ProgressBar(step: 2),
+                    verticalSpaceLarge,
+                    if (type == 'new')
+                      const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください',
+                          textAlign: TextAlign.center),
+                    if (type == 'join')
+                      const Text('家族名と\n家族コードを入力してください', textAlign: TextAlign.center),
+                    verticalSpaceLarge,
+                    CajicoTextFormField(
+                      label: '家族名',
+                      initValue: '',
+                      onChanged: (value) => familyInfo.familyName.value = value,
+                      validator: (value) =>
+                          controller.validateInputEditData(value: value, maxLength: 5).message,
+                    ),
+                    verticalSpaceMedium,
+                    CajicoTextFormField(
+                      label: '家族コード',
+                      initValue: '',
+                      obscureText: true,
+                      maxLines: 1,
+                      onChanged: (value) => familyInfo.familyCode.value = value,
+                      validator: (value) =>
+                          controller.validateInputEditData(value: value, maxLength: 20).message,
+                    ),
+                    verticalSpaceSmall,
+                    const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
+                          style: TextStyle(color: gray4, fontSize: 13),
+                        )),
+                  ],
+                ),
               ),
             ),
           ),
