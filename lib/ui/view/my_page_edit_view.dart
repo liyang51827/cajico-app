@@ -13,7 +13,6 @@ class MyPageEditView extends StatelessWidget {
     required this.initUserName,
     required this.iconUrl,
     required this.initPosition,
-    required this.birthday,
     required this.email,
   });
 
@@ -22,7 +21,6 @@ class MyPageEditView extends StatelessWidget {
   final String initUserName;
   final String iconUrl;
   final String initPosition;
-  final String birthday;
   final String email;
   final focusNode = FocusNode();
 

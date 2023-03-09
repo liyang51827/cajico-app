@@ -45,7 +45,6 @@ class MyPageView extends StatelessWidget {
                       initFamilyCode: user.familyCode,
                       initUserName: user.userName,
                       iconUrl: user.iconUrl,
-                      birthday: user.birthday,
                       email: user.email,
                       initPosition: user.position,
                     ),
@@ -127,7 +126,6 @@ class MyPageView extends StatelessWidget {
                           const _Divider(),
                           _MyPageMenu(menu: '続柄', value: user.position),
                           _MyPageMenu(menu: 'メールアドレス', value: user.email),
-                          _MyPageMenu(menu: '誕生日', value: user.birthday),
                           const _Divider(),
                           _MyPageMenu(
                               menu: '本日の獲得P', value: '${formatter.format(user.todayPoint)}P'),

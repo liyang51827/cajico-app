@@ -3,7 +3,6 @@ class MyPage {
     required this.familyName,
     required this.familyCode,
     required this.email,
-    required this.birthday,
     required this.userName,
     required this.position,
     required this.iconUrl,
@@ -15,7 +14,6 @@ class MyPage {
   final String familyName;
   final String familyCode;
   final String email;
-  final String birthday;
   final String userName;
   final String position;
   final String iconUrl;
@@ -28,7 +26,6 @@ class MyPage {
       familyName: json['familyName'],
       familyCode: json['familyCode'],
       email: json['email'],
-      birthday: json['birthday'],
       userName: json['userName'],
       position: json['position'],
       iconUrl: json['iconUrl'],
