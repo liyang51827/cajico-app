@@ -133,21 +133,22 @@ class ApiService extends GetConnect {
   }
 
   // 新規家族&ユーザー登録API
-  Future<bool> createFamilyAndUser(NewFamilyData newFamilyData) async {
+  Future<String?> createFamilyAndUser(NewFamilyData newFamilyData) async {
     final res = await http.post(
       _makeUri('/register/new-family'),
       headers: _commonHeaders,
       body: jsonEncode({
-        'token': newFamilyData.token,
+        'token': newFamilyData.token(),
         'familyName': newFamilyData.familyName(),
         'familyCode': newFamilyData.familyCode(),
         'userName': newFamilyData.userName(),
-        'iconImage': newFamilyData.iconImage(),
+        // 'iconImage': await MultipartFile.fromFile(newFamilyData.iconImage().path),
         'positionId': newFamilyData.positionId(),
         'password': newFamilyData.password(),
       }),
     );
-    return _checkStatusCode(res);
+    final String? token = _decodeResponse(res)['data']['accessToken'];
+    return token;
   }
 
   // デバイストークン更新API

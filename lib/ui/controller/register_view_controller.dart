@@ -3,6 +3,7 @@ import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/form_validation.dart';
 import '../../util/form_validator.dart';
 import 'base_view_controller.dart';
@@ -43,15 +44,20 @@ class RegisterViewController extends BaseViewController {
   }
 
   Future<void> onTapCreateUser() async {
-    var result = false;
+    print('1');
+    String? result = '';
+    final prefs = await SharedPreferences.getInstance();
     await callAsyncApi(() async {
       if (newFamilyData.type() == 'new') {
-        result = await api.confirmNewFamily(newFamilyData);
+        print('2');
+        result = await api.createFamilyAndUser(newFamilyData);
       } else if (newFamilyData.type() == 'join') {
-        result = await api.confirmJoinFamily(newFamilyData);
+        result = await api.createFamilyAndUser(newFamilyData);
       }
     });
-    if (result) {
+    if (result != '') {
+      print('3');
+      prefs.setString('token', result!);
       Get.to(() => const HomeView());
     }
   }

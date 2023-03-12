@@ -124,7 +124,7 @@ class RegisterUserView extends StatelessWidget {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Obx(() => PrimaryButton(
-                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () {})),
+                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () => controller.onTapCreateUser())),
           ),
         ),
       ),
