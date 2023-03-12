@@ -16,7 +16,7 @@ class MyPage {
   final String email;
   final String userName;
   final String position;
-  final String iconUrl;
+  final String? iconUrl;
   final int todayPoint;
   final int totalPoint;
   final int ownedPoint;

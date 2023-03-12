@@ -44,7 +44,8 @@ class MyPageView extends StatelessWidget {
                       initFamilyName: user.familyName,
                       initFamilyCode: user.familyCode,
                       initUserName: user.userName,
-                      iconUrl: user.iconUrl,
+                      iconUrl: user.iconUrl ??
+                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
                       email: user.email,
                       initPosition: user.position,
                     ),
@@ -102,7 +103,10 @@ class MyPageView extends StatelessWidget {
                           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         verticalSpaceMediumLarge,
-                        CajicoCachedNetworkIconImage(imageUrl: user.iconUrl, radius: 40),
+                        CajicoCachedNetworkIconImage(
+                            imageUrl: user.iconUrl ??
+                                'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                            radius: 40),
                         verticalSpaceMediumLarge,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
