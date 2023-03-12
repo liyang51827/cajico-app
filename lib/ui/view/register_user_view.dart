@@ -76,6 +76,7 @@ class RegisterUserView extends StatelessWidget {
                     verticalSpaceLarge,
                     CajicoTextFormField(
                       label: 'お名前',
+                      maxLines: 1,
                       initValue: '',
                       onChanged: (value) => familyInfo.userName.value = value,
                       validator: (value) =>
@@ -105,8 +106,9 @@ class RegisterUserView extends StatelessWidget {
                       obscureText: true,
                       maxLines: 1,
                       onChanged: (value) => familyInfo.password.value = value,
-                      validator: (value) =>
-                          controller.validateInputEditData(value: value, maxLength: 10).message,
+                      validator: (value) => controller
+                          .validateInputPasswordData(value: value, minLength: 8, maxLength: 20)
+                          .message,
                     ),
                     verticalSpaceSmall,
                     const Padding(
@@ -124,7 +126,9 @@ class RegisterUserView extends StatelessWidget {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Obx(() => PrimaryButton(
-                label: '次へ', isValid: controller.isRegisterFamilyValid, onPressed: () => controller.onTapCreateUser())),
+                label: '次へ',
+                isValid: controller.isRegisterUserValid,
+                onPressed: () => controller.onTapCreateUser())),
           ),
         ),
       ),

@@ -36,6 +36,11 @@ class RegisterViewController extends BaseViewController {
       validateInputPasswordData(value: newFamilyData.familyCode(), minLength: 8, maxLength: 20)
           .isValid;
 
+  bool get isRegisterUserValid =>
+      validateInputEditData(value: newFamilyData.userName(), maxLength: 5).isValid &&
+          validateInputPasswordData(value: newFamilyData.password(), minLength: 8, maxLength: 20)
+              .isValid;
+
   Future<void> onTapConfirmFamily() async {
     var result = false;
     await callAsyncApi(() async {
