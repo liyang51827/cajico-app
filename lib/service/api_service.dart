@@ -3,7 +3,10 @@ import 'package:cajico_app/model/house_work_data.dart';
 import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
+import 'package:cajico_app/util/xfile_extension.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/login_data.dart';
 import '../model/my_page.dart';
@@ -14,6 +17,7 @@ import 'package:http/http.dart' as http;
 import '../model/notice.dart';
 import '../model/family_reward.dart';
 import '../model/reward_history.dart';
+import 'dart:io';
 
 class ApiService extends GetConnect {
   String? token;
@@ -134,19 +138,26 @@ class ApiService extends GetConnect {
 
   // 新規家族&ユーザー登録API
   Future<String?> createFamilyAndUser(NewFamilyData newFamilyData) async {
-    final res = await http.post(
-      _makeUri('/register/new-family'),
-      headers: _commonHeaders,
-      body: jsonEncode({
-        'token': newFamilyData.token(),
-        'familyName': newFamilyData.familyName(),
-        'familyCode': newFamilyData.familyCode(),
-        'userName': newFamilyData.userName(),
-        // 'iconImage': await MultipartFile.fromFile(newFamilyData.iconImage().path),
-        'positionId': newFamilyData.positionId(),
-        'password': newFamilyData.password(),
-      }),
-    );
+    final request = http.MultipartRequest('POST', _makeUri('/register/new-family'));
+    request.headers.addAll(_commonHeaders);
+    if (newFamilyData.iconImage() != null) {
+      XFile xFile = XFile(newFamilyData.iconImage()!.path);
+      request.files.add(await xFile.toMultiPartFileField(
+        filename: 'user_icon',
+        fieldName: 'iconImage',
+      ));
+    }
+    final Map<String, dynamic> data = {
+      'token': newFamilyData.token(),
+      'familyName': newFamilyData.familyName(),
+      'familyCode': newFamilyData.familyCode(),
+      'userName': newFamilyData.userName(),
+      'positionId': newFamilyData.positionId().toString(),
+      'password': newFamilyData.password(),
+    };
+    request.fields.addAll(Map<String, String>.from(data));
+    final response = await request.send();
+    final res = await http.Response.fromStream(response);
     final String? token = _decodeResponse(res)['data']['accessToken'];
     return token;
   }
