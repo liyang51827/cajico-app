@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../model/form_validation.dart';
 import '../../util/form_validator.dart';
 import 'base_view_controller.dart';
+import 'dart:io';
 
 class RegisterViewController extends BaseViewController {
   RegisterViewController();
@@ -17,6 +18,7 @@ class RegisterViewController extends BaseViewController {
     password: ''.obs,
     token: ''.obs,
     deviceToken: ''.obs,
+    iconImage: Rxn<File>(),
   );
 
   FormValidation validateInputEditData({String? value, required maxLength}) =>

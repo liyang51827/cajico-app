@@ -4,10 +4,12 @@ import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../common/ui_helper.dart';
 import '../widget/cajico_drop_down.dart';
 import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
+import 'dart:io';
 
 class RegisterUserView extends StatelessWidget {
   RegisterUserView({
@@ -54,24 +56,39 @@ class RegisterUserView extends StatelessWidget {
                     const Text('ユーザー情報を入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     GestureDetector(
-                      onTap: () {},
-                      child: Stack(
-                        children: const [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: AssetImage('assets/images/default_user_icon.png'),
-                            backgroundColor: Colors.white,
-                          ),
-                          Positioned(
-                            bottom: 5,
-                            right: 5,
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: gray4,
-                              size: 24,
+                      onTap: () async {
+                        final pickedImage =
+                            await ImagePicker().pickImage(source: ImageSource.gallery);
+                        if (pickedImage != null) {
+                          familyInfo.iconImage.value = File(pickedImage.path);
+                        }
+                      },
+                      child: Obx(
+                        () => Stack(
+                          children: [
+                            familyInfo.iconImage() != null
+                                ? CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: FileImage(familyInfo.iconImage()!),
+                                    backgroundColor: Colors.white,
+                                  )
+                                : const CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage:
+                                        AssetImage('assets/images/default_user_icon.png'),
+                                    backgroundColor: Colors.white,
+                                  ),
+                            const Positioned(
+                              bottom: 5,
+                              right: 5,
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                                size: 24,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     verticalSpaceLarge,
