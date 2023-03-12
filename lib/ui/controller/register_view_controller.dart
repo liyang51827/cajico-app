@@ -50,7 +50,7 @@ class RegisterViewController extends BaseViewController {
       if (newFamilyData.type() == 'new') {
         result = await api.createFamilyAndUser(newFamilyData);
       } else if (newFamilyData.type() == 'join') {
-        result = await api.createFamilyAndUser(newFamilyData);
+        result = await api.joinFamilyAndCreateUser(newFamilyData);
       }
     });
     if (result != '') {

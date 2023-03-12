@@ -162,6 +162,32 @@ class ApiService extends GetConnect {
     return token;
   }
 
+  // 家族参加&ユーザー登録API
+  Future<String?> joinFamilyAndCreateUser(NewFamilyData newFamilyData) async {
+    final request = http.MultipartRequest('POST', _makeUri('/register/join-family'));
+    request.headers.addAll(_commonHeaders);
+    if (newFamilyData.iconImage() != null) {
+      XFile xFile = XFile(newFamilyData.iconImage()!.path);
+      request.files.add(await xFile.toMultiPartFileField(
+        filename: 'user_icon',
+        fieldName: 'iconImage',
+      ));
+    }
+    final Map<String, dynamic> data = {
+      'token': newFamilyData.token(),
+      'familyName': newFamilyData.familyName(),
+      'familyCode': newFamilyData.familyCode(),
+      'userName': newFamilyData.userName(),
+      'positionId': newFamilyData.positionId().toString(),
+      'password': newFamilyData.password(),
+    };
+    request.fields.addAll(Map<String, String>.from(data));
+    final response = await request.send();
+    final res = await http.Response.fromStream(response);
+    final String? token = _decodeResponse(res)['data']['accessToken'];
+    return token;
+  }
+
   // デバイストークン更新API
   Future<bool> registerDeviceToken({required deviceToken}) async {
     final res = await http.put(
