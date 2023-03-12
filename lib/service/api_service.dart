@@ -6,7 +6,6 @@ import 'package:cajico_app/model/reward_data.dart';
 import 'package:cajico_app/util/xfile_extension.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/login_data.dart';
 import '../model/my_page.dart';
@@ -17,7 +16,6 @@ import 'package:http/http.dart' as http;
 import '../model/notice.dart';
 import '../model/family_reward.dart';
 import '../model/reward_history.dart';
-import 'dart:io';
 
 class ApiService extends GetConnect {
   String? token;

@@ -38,8 +38,8 @@ class RegisterViewController extends BaseViewController {
 
   bool get isRegisterUserValid =>
       validateInputEditData(value: newFamilyData.userName(), maxLength: 5).isValid &&
-          validateInputPasswordData(value: newFamilyData.password(), minLength: 8, maxLength: 20)
-              .isValid;
+      validateInputPasswordData(value: newFamilyData.password(), minLength: 8, maxLength: 20)
+          .isValid;
 
   Future<void> onTapConfirmFamily() async {
     var result = false;
@@ -72,7 +72,11 @@ class RegisterViewController extends BaseViewController {
   }
 
   Future<void> onTapSelectImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 300.0,
+      maxWidth: 300.0,
+    );
     if (pickedImage != null) {
       newFamilyData.iconImage.value = File(pickedImage.path);
     }
