@@ -4,12 +4,10 @@ import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../common/ui_helper.dart';
 import '../widget/cajico_drop_down.dart';
 import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
-import 'dart:io';
 
 class RegisterUserView extends StatelessWidget {
   RegisterUserView({
@@ -56,13 +54,7 @@ class RegisterUserView extends StatelessWidget {
                     const Text('ユーザー情報を入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     GestureDetector(
-                      onTap: () async {
-                        final pickedImage =
-                            await ImagePicker().pickImage(source: ImageSource.gallery);
-                        if (pickedImage != null) {
-                          familyInfo.iconImage.value = File(pickedImage.path);
-                        }
-                      },
+                      onTap: () => controller.onTapSelectImage(),
                       child: Obx(
                         () => Stack(
                           children: [

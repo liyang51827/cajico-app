@@ -1,6 +1,7 @@
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../model/form_validation.dart';
 import '../../util/form_validator.dart';
 import 'base_view_controller.dart';
@@ -44,6 +45,13 @@ class RegisterViewController extends BaseViewController {
         () => RegisterUserView(
             type: type, token: token, familyName: familyName, familyCode: familyCode),
       );
+    }
+  }
+
+  Future<void> onTapSelectImage() async {
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      newFamilyData.iconImage.value = File(pickedImage.path);
     }
   }
 }
