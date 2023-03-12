@@ -95,13 +95,13 @@ class RegisterUserView extends StatelessWidget {
                     CajicoTextFormField(
                       label: 'お名前',
                       initValue: '',
-                      onChanged: (value) => familyInfo.familyName.value = value,
+                      onChanged: (value) => familyInfo.userName.value = value,
                       validator: (value) =>
                           controller.validateInputEditData(value: value, maxLength: 5).message,
                     ),
                     verticalSpaceMedium,
                     CajicoDropDown(
-                      onChanged: (value) {},
+                      onChanged: (value) => familyInfo.positionId.value = value!,
                       items: const [
                         DropdownMenuItem(value: 1, child: Text('旦那さん')),
                         DropdownMenuItem(value: 2, child: Text('奥さん')),
@@ -122,7 +122,7 @@ class RegisterUserView extends StatelessWidget {
                       initValue: '',
                       obscureText: true,
                       maxLines: 1,
-                      onChanged: (value) => familyInfo.familyCode.value = value,
+                      onChanged: (value) => familyInfo.password.value = value,
                       validator: (value) =>
                           controller.validateInputEditData(value: value, maxLength: 10).message,
                     ),

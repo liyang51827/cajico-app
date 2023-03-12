@@ -15,7 +15,6 @@ class RegisterViewController extends BaseViewController {
     familyCode: ''.obs,
     userName: ''.obs,
     positionId: 0.obs,
-    birthday: ''.obs,
     password: ''.obs,
     token: ''.obs,
     deviceToken: ''.obs,

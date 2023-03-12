@@ -7,7 +7,6 @@ class NewFamilyData {
     required this.familyCode,
     required this.userName,
     required this.positionId,
-    required this.birthday,
     required this.password,
     required this.deviceToken,
     required this.token,
@@ -18,7 +17,6 @@ class NewFamilyData {
   final RxString familyCode;
   final RxString userName;
   final RxInt positionId;
-  final RxString birthday;
   final RxString password;
   final RxString token;
   final RxString deviceToken;
