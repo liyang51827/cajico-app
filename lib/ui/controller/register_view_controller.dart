@@ -19,7 +19,6 @@ class RegisterViewController extends BaseViewController {
     positionId: 0.obs,
     password: ''.obs,
     token: ''.obs,
-    deviceToken: ''.obs,
     iconImage: Rxn<File>(),
   );
 

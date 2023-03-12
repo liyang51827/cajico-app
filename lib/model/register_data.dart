@@ -9,7 +9,6 @@ class NewFamilyData {
     required this.userName,
     required this.positionId,
     required this.password,
-    required this.deviceToken,
     required this.token,
     required this.iconImage,
   });
@@ -21,6 +20,5 @@ class NewFamilyData {
   final RxInt positionId;
   final RxString password;
   final RxString token;
-  final RxString deviceToken;
   final Rxn<File> iconImage;
 }

@@ -145,7 +145,6 @@ class ApiService extends GetConnect {
         'iconImage': newFamilyData.iconImage(),
         'positionId': newFamilyData.positionId(),
         'password': newFamilyData.password(),
-        'deviceToken': newFamilyData.deviceToken(),
       }),
     );
     return _checkStatusCode(res);
