@@ -40,10 +40,10 @@ class RegisterViewController extends BaseViewController {
       }
     });
     if (result) {
-      Get.to(
-        () => RegisterUserView(
-            type: type, token: token, familyName: familyName, familyCode: familyCode),
-      );
+      newFamilyData.token.value = token;
+      newFamilyData.familyName.value = familyName;
+      newFamilyData.familyCode.value = familyCode;
+      Get.to(() => RegisterUserView(type: type));
     }
   }
 

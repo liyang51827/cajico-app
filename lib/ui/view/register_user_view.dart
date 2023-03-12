@@ -10,18 +10,9 @@ import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
 class RegisterUserView extends StatelessWidget {
-  RegisterUserView({
-    super.key,
-    required this.type,
-    required this.token,
-    required this.familyName,
-    required this.familyCode,
-  });
+  RegisterUserView({super.key, required this.type});
 
   final String type;
-  final String token;
-  final String familyName;
-  final String familyCode;
   final focusNode = FocusNode();
 
   @override
@@ -54,43 +45,35 @@ class RegisterUserView extends StatelessWidget {
                     const Text('ユーザー情報を入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     GestureDetector(
-                      onTap: () => controller.onTapSelectImage(),
-                      child: Obx(
-                        () => Stack(
-                          children: [
-                            familyInfo.iconImage() != null
-                                ? CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage: FileImage(familyInfo.iconImage()!),
-                                    backgroundColor: Colors.white,
-                                  )
-                                : const CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage:
-                                        AssetImage('assets/images/default_user_icon.png'),
-                                    backgroundColor: Colors.white,
+                        onTap: () => controller.onTapSelectImage(),
+                        child: Obx(() => Stack(
+                              children: [
+                                familyInfo.iconImage() != null
+                                    ? CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage: FileImage(familyInfo.iconImage()!),
+                                        backgroundColor: Colors.white,
+                                      )
+                                    : const CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage:
+                                            AssetImage('assets/images/default_user_icon.png'),
+                                        backgroundColor: Colors.white,
+                                      ),
+                                Positioned(
+                                  bottom: 3,
+                                  right: 3,
+                                  child: Container(
+                                    width: 26,
+                                    height: 26,
+                                    decoration:
+                                        const BoxDecoration(shape: BoxShape.circle, color: gray2),
+                                    child:
+                                        const Icon(Icons.camera_alt, color: Colors.white, size: 18),
                                   ),
-                            Positioned(
-                              bottom: 3,
-                              right: 3,
-                              child: Container(
-                                width: 26,
-                                height: 26,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: gray2,
                                 ),
-                                child: const Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                              ],
+                            ))),
                     verticalSpaceLarge,
                     CajicoTextFormField(
                       label: 'お名前',
