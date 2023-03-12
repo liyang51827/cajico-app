@@ -44,19 +44,16 @@ class RegisterViewController extends BaseViewController {
   }
 
   Future<void> onTapCreateUser() async {
-    print('1');
     String? result = '';
     final prefs = await SharedPreferences.getInstance();
     await callAsyncApi(() async {
       if (newFamilyData.type() == 'new') {
-        print('2');
         result = await api.createFamilyAndUser(newFamilyData);
       } else if (newFamilyData.type() == 'join') {
         result = await api.createFamilyAndUser(newFamilyData);
       }
     });
     if (result != '') {
-      print('3');
       prefs.setString('token', result!);
       Get.to(() => const HomeView());
     }
