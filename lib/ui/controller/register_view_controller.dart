@@ -1,4 +1,5 @@
 import 'package:cajico_app/model/register_data.dart';
+import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,7 @@ class RegisterViewController extends BaseViewController {
   RegisterViewController();
 
   final newFamilyData = NewFamilyData(
+    type: ''.obs,
     familyName: ''.obs,
     familyCode: ''.obs,
     userName: ''.obs,
@@ -27,23 +29,31 @@ class RegisterViewController extends BaseViewController {
   bool get isRegisterFamilyValid =>
       validateInputEditData(value: newFamilyData.familyName(), maxLength: 5).isValid;
 
-  Future<void> onTapConfirmFamily(
-      {required type, required token, required familyName, required familyCode}) async {
+  Future<void> onTapConfirmFamily() async {
     var result = false;
     await callAsyncApi(() async {
-      if (type == 'new') {
-        result = await api.confirmNewFamily(
-            type: type, token: token, familyName: familyName, familyCode: familyCode);
-      } else if (type == 'join') {
-        result = await api.confirmJoinFamily(
-            type: type, token: token, familyName: familyName, familyCode: familyCode);
+      if (newFamilyData.type() == 'new') {
+        result = await api.confirmNewFamily(newFamilyData);
+      } else if (newFamilyData.type() == 'join') {
+        result = await api.confirmJoinFamily(newFamilyData);
       }
     });
     if (result) {
-      newFamilyData.token.value = token;
-      newFamilyData.familyName.value = familyName;
-      newFamilyData.familyCode.value = familyCode;
-      Get.to(() => RegisterUserView(type: type));
+      Get.to(() => RegisterUserView());
+    }
+  }
+
+  Future<void> onTapCreateUser() async {
+    var result = false;
+    await callAsyncApi(() async {
+      if (newFamilyData.type() == 'new') {
+        result = await api.confirmNewFamily(newFamilyData);
+      } else if (newFamilyData.type() == 'join') {
+        result = await api.confirmJoinFamily(newFamilyData);
+      }
+    });
+    if (result) {
+      Get.to(() => const HomeView());
     }
   }
 

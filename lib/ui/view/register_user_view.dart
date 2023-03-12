@@ -10,9 +10,8 @@ import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
 class RegisterUserView extends StatelessWidget {
-  RegisterUserView({super.key, required this.type});
+  RegisterUserView({super.key});
 
-  final String type;
   final focusNode = FocusNode();
 
   @override

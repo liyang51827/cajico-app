@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cajico_app/model/house_work_data.dart';
 import 'package:cajico_app/model/inquiry_data.dart';
+import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,25 +103,50 @@ class ApiService extends GetConnect {
   }
 
   // 新規家族コード認証API
-  Future<bool> confirmNewFamily(
-      {required type, required token, required familyName, required familyCode}) async {
+  Future<bool> confirmNewFamily(NewFamilyData newFamilyData) async {
     final res = await http.post(
       _makeUri('/confirm/new-family'),
       headers: _commonHeaders,
-      body: jsonEncode(
-          {'type': type, 'token': token, 'familyName': familyName, 'familyCode': familyCode}),
+      body: jsonEncode({
+        'type': newFamilyData.type(),
+        'token': newFamilyData.token(),
+        'familyName': newFamilyData.familyName(),
+        'familyCode': newFamilyData.familyCode(),
+      }),
     );
     return _checkStatusCode(res);
   }
 
   // 参加家族コード認証API
-  Future<bool> confirmJoinFamily(
-      {required type, required token, required familyName, required familyCode}) async {
+  Future<bool> confirmJoinFamily(NewFamilyData newFamilyData) async {
     final res = await http.post(
       _makeUri('/confirm/join-family'),
       headers: _commonHeaders,
-      body: jsonEncode(
-          {'type': type, 'token': token, 'familyName': familyName, 'familyCode': familyCode}),
+      body: jsonEncode({
+        'type': newFamilyData.type(),
+        'token': newFamilyData.token(),
+        'familyName': newFamilyData.familyName(),
+        'familyCode': newFamilyData.familyCode(),
+      }),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 新規家族&ユーザー登録API
+  Future<bool> createFamilyAndUser(NewFamilyData newFamilyData) async {
+    final res = await http.post(
+      _makeUri('/register/new-family'),
+      headers: _commonHeaders,
+      body: jsonEncode({
+        'token': newFamilyData.token,
+        'familyName': newFamilyData.familyName(),
+        'familyCode': newFamilyData.familyCode(),
+        'userName': newFamilyData.userName(),
+        'iconImage': newFamilyData.iconImage(),
+        'positionId': newFamilyData.positionId(),
+        'password': newFamilyData.password(),
+        'deviceToken': newFamilyData.deviceToken(),
+      }),
     );
     return _checkStatusCode(res);
   }

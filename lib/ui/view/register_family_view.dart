@@ -19,6 +19,8 @@ class RegisterFamilyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterViewController());
     final familyInfo = controller.newFamilyData;
+    familyInfo.type.value = type;
+    familyInfo.token.value = token;
 
     return Focus(
       focusNode: focusNode,
@@ -29,7 +31,7 @@ class RegisterFamilyView extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
-            title: type == 'new'
+            title: familyInfo.type() == 'new'
                 ? const Text('家族登録', style: TextStyle(color: gray2))
                 : const Text('家族に参加する', style: TextStyle(color: gray2)),
             backgroundColor: Colors.white,
@@ -44,10 +46,10 @@ class RegisterFamilyView extends StatelessWidget {
                   children: [
                     const ProgressBar(step: 2),
                     verticalSpaceLarge,
-                    if (type == 'new')
+                    if (familyInfo.type() == 'new')
                       const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください',
                           textAlign: TextAlign.center),
-                    if (type == 'join')
+                    if (familyInfo.type() == 'join')
                       const Text('家族名と\n家族コードを入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     CajicoTextFormField(
@@ -86,12 +88,7 @@ class RegisterFamilyView extends StatelessWidget {
                 label: '次へ',
                 isValid: controller.isRegisterFamilyValid,
                 onPressed: () => {
-                  controller.onTapConfirmFamily(
-                    type: type,
-                    token: token,
-                    familyName: familyInfo.familyName(),
-                    familyCode: familyInfo.familyCode(),
-                  ),
+                  controller.onTapConfirmFamily(),
                 },
               ),
             ),
