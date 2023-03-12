@@ -70,13 +70,21 @@ class RegisterUserView extends StatelessWidget {
                                         AssetImage('assets/images/default_user_icon.png'),
                                     backgroundColor: Colors.white,
                                   ),
-                            const Positioned(
-                              bottom: 5,
-                              right: 5,
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                                size: 24,
+                            Positioned(
+                              bottom: 3,
+                              right: 3,
+                              child: Container(
+                                width: 26,
+                                height: 26,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: gray2,
+                                ),
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
                               ),
                             ),
                           ],
