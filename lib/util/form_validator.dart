@@ -60,7 +60,21 @@ class FormValidator {
       return FormValidation.ngMessage();
     }
     if (int.parse(value) < minPoint || int.parse(value) > maxPoint) {
-      return FormValidation.ngRange(min: minPoint, max: maxPoint);
+      return FormValidation.ngPointRange(min: minPoint, max: maxPoint);
+    }
+    return FormValidation.ok();
+  }
+
+  static FormValidation validateRequirePasswordRange({
+    String? value,
+    required int minLength,
+    required int maxLength,
+  }) {
+    if (value == null || value.isEmpty) {
+      return FormValidation.ngMessage();
+    }
+    if (!isLength(value, minLength, maxLength)) {
+      return FormValidation.ngRange(min: minLength, max: maxLength);
     }
     return FormValidation.ok();
   }

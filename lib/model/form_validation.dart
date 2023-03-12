@@ -45,10 +45,15 @@ class FormValidation {
     return FormValidation(isValid: false, message: tmpMessage);
   }
 
-  factory FormValidation.ngRange({int? min, int? max}) {
+  factory FormValidation.ngPointRange({int? min, int? max}) {
     final formatter = NumberFormat("#,###");
     return FormValidation(
         isValid: false, message: '${formatter.format(min)}〜${formatter.format(max)}Pで入力してください');
+  }
+
+  factory FormValidation.ngRange({int? min, int? max}) {
+    return FormValidation(
+        isValid: false, message: '$min〜$max文字で入力してください');
   }
 
   factory FormValidation.ngMail() {

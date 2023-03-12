@@ -67,7 +67,7 @@ class RegisterFamilyView extends StatelessWidget {
                       maxLines: 1,
                       onChanged: (value) => familyInfo.familyCode.value = value,
                       validator: (value) =>
-                          controller.validateInputEditData(value: value, maxLength: 20).message,
+                          controller.validateInputPasswordData(value: value, minLength: 8, maxLength: 20).message,
                     ),
                     verticalSpaceSmall,
                     const Padding(

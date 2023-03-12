@@ -26,8 +26,15 @@ class RegisterViewController extends BaseViewController {
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
+  FormValidation validateInputPasswordData(
+          {String? value, required minLength, required maxLength}) =>
+      FormValidator.validateRequirePasswordRange(
+          value: value, minLength: minLength, maxLength: maxLength);
+
   bool get isRegisterFamilyValid =>
-      validateInputEditData(value: newFamilyData.familyName(), maxLength: 5).isValid;
+      validateInputEditData(value: newFamilyData.familyName(), maxLength: 5).isValid &&
+      validateInputPasswordData(value: newFamilyData.familyCode(), minLength: 8, maxLength: 20)
+          .isValid;
 
   Future<void> onTapConfirmFamily() async {
     var result = false;
