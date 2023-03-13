@@ -191,7 +191,7 @@ class RewardCategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: LinearProgressIndicator(
                 value: rating,
-                color: secondaryColor,
+                color: rating < 0.5 ? Colors.lime : rating >= 1 ? primaryColor : secondaryColor,
                 backgroundColor: Colors.white,
                 minHeight: 8,
               ),
