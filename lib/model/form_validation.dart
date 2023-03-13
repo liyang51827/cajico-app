@@ -28,6 +28,10 @@ class FormValidation {
     return FormValidation(isValid: false, message: tmpMessage);
   }
 
+  factory FormValidation.ngPassword() {
+    return FormValidation(isValid: false, message: 'パスワードが一致しません');
+  }
+
   factory FormValidation.ngDigit({int? min, int? max}) {
     var tmpMessage = '';
     if (min != null && max != null && min == max) {

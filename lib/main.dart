@@ -3,6 +3,7 @@ import 'package:cajico_app/service/push_notification_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_family_view.dart';
+import 'package:cajico_app/ui/view/reset_password_view.dart';
 import 'package:cajico_app/ui/view/top_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -68,15 +69,15 @@ class MyApp extends StatelessWidget {
           // クエリパラメーターからtypeとtokenを取得
           String? type = uri.queryParameters['type'];
           String? token = uri.queryParameters['token'];
-          if (type == 'new') {
+          if (type == 'new' || type == 'join') {
             // 新規作成画面に遷移
             return MaterialPageRoute(
               builder: (context) => RegisterFamilyView(type: type!, token: token!),
             );
-          } else if (type == 'join') {
+          } else if (type == 'reset') {
             // 参加画面に遷移
             return MaterialPageRoute(
-              builder: (context) => RegisterFamilyView(type: type!, token: token!),
+              builder: (context) => ResetPasswordView(token: token!),
             );
           }
         }

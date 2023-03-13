@@ -23,6 +23,9 @@ class RegisterViewController extends BaseViewController {
     iconImage: Rxn<File>(),
   );
 
+  final RxString password = ''.obs;
+  final RxString passwordConfirm = ''.obs;
+
   FormValidation validateInputEditData({String? value, required maxLength}) =>
       FormValidator.validateEditBasicInfo(value: value, maxLength: maxLength);
 
@@ -30,6 +33,9 @@ class RegisterViewController extends BaseViewController {
           {String? value, required minLength, required maxLength}) =>
       FormValidator.validateRequirePasswordRange(
           value: value, minLength: minLength, maxLength: maxLength);
+
+  FormValidation validateInputPasswordConfirmData({String? value}) =>
+      FormValidator.validateConfirmPasswordInfo(value: value, password: password());
 
   bool get isRegisterFamilyValid =>
       validateInputEditData(value: newFamilyData.familyName(), maxLength: 5).isValid &&
@@ -40,6 +46,10 @@ class RegisterViewController extends BaseViewController {
       validateInputEditData(value: newFamilyData.userName(), maxLength: 5).isValid &&
       validateInputPasswordData(value: newFamilyData.password(), minLength: 8, maxLength: 20)
           .isValid;
+
+  bool get isResetPasswordValid =>
+      validateInputPasswordData(value: password(), minLength: 8, maxLength: 20).isValid &&
+      validateInputPasswordConfirmData(value: passwordConfirm()).isValid;
 
   Future<void> onTapConfirmFamily() async {
     var result = false;

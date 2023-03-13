@@ -92,6 +92,19 @@ class FormValidator {
     return FormValidation.ok();
   }
 
+  static FormValidation validateConfirmPasswordInfo({
+    String? value,
+    required String password,
+  }) {
+    if (value == null || value.isEmpty) {
+      return FormValidation.ngMessage();
+    }
+    if (value != password) {
+      return FormValidation.ngPassword();
+    }
+    return FormValidation.ok();
+  }
+
   static bool _hasFullWidthString(String text) => RegExp(r'[^\x01-\x7E]+').hasMatch(text);
 
   static FormValidation validateInquiryBody(String? value) {
