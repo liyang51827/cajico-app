@@ -27,7 +27,10 @@ class EmailSendView extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
-            title: const Text('メールアドレス登録', style: TextStyle(color: gray2)),
+            title: Text(
+              type == 'reset' ? 'パスワードリセット' : 'メールアドレス登録',
+              style: const TextStyle(color: gray2),
+            ),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
@@ -36,7 +39,7 @@ class EmailSendView extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
               child: Column(
                 children: [
-                  const ProgressBar(step: 1),
+                  type != 'reset' ? const ProgressBar(step: 1) : const SizedBox(),
                   verticalSpaceLarge,
                   const Text('メールアドレスを入力してください', textAlign: TextAlign.center),
                   verticalSpaceLarge,

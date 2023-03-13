@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/email_send_view.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +39,7 @@ class LoginView extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16, left: 16, top: 40, bottom: 24),
                 child: Column(
                   children: [
-                    const Text(
-                      'メールアドレスとパスワードを\n入力してください',
-                      textAlign: TextAlign.center,
-                    ),
+                    const Text('メールアドレスとパスワードを\n入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     CajicoTextFormField(
                       label: 'メールアドレス',
@@ -65,16 +63,11 @@ class LoginView extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Text(
-                            'メールアドレス及びパスワードをお忘れの方は',
-                            style: TextStyle(fontSize: 13),
-                          ),
+                          const Text('パスワードをお忘れの方は', style: TextStyle(fontSize: 13)),
                           InkWell(
-                            child: const Text(
-                              'こちら',
-                              style: TextStyle(color: primaryColor, fontSize: 13),
-                            ),
-                            onTap: () => Get.to(() => const HomeView()),
+                            child: const Text('こちら',
+                                style: TextStyle(color: primaryColor, fontSize: 13)),
+                            onTap: () => Get.to(() => EmailSendView(type: 'reset')),
                           ),
                         ],
                       ),

@@ -32,7 +32,7 @@ class EmailSentView extends StatelessWidget {
             Text('メールが届かない場合は、入力されたメールアドレスが間違っているか、迷惑メールフォルダに入っている可能性がありますのでご確認ください。',
                 textAlign: TextAlign.center),
             verticalSpaceLarge,
-            Image(image: AssetImage('assets/images/desk_work.png'), width: 300,)
+            Image(image: AssetImage('assets/images/desk_work.png'), width: 300)
           ],
         ),
       ),
