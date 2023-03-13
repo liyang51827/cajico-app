@@ -96,45 +96,46 @@ class MyPageView extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Column(
+                    Text(
+                      '${user.userName}さん',
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    verticalSpaceMedium,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '${user.userName}さん',
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        verticalSpaceMediumLarge,
-                        CajicoCachedNetworkIconImage(
-                            imageUrl: user.iconUrl ??
-                                'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
-                            radius: 40),
-                        verticalSpaceMediumLarge,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
                           children: [
-                            _PointTitle(title: '保有ポイント', point: user.ownedPoint),
-                            horizontalSpaceLarge,
-                            _PointTitle(title: '累計ポイント', point: user.totalPoint),
+                            CajicoCachedNetworkIconImage(
+                              imageUrl: user.iconUrl ??
+                                  'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                              radius: 40,
+                            ),
                           ],
                         ),
-                        verticalSpaceLarge,
+                        horizontalSpaceLarge,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _PointTitle(title: '保有P', point: user.ownedPoint),
+                            verticalSpaceMedium,
+                            _PointTitle(title: '累計P', point: user.totalPoint),
+                          ],
+                        ),
                       ],
                     ),
+                    verticalSpaceMedium,
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const _Divider(),
-                          _MyPageMenu(menu: 'ファミリーネーム', value: '${user.familyName}家'),
-                          _MyPageMenu(menu: 'ファミリーコード', value: user.familyCode),
+                          _MyPageMenu(menu: '家族名', value: '${user.familyName}家'),
+                          _MyPageMenu(menu: '家族コード', value: user.familyCode),
                           const _Divider(),
                           _MyPageMenu(menu: '続柄', value: user.position),
                           _MyPageMenu(menu: 'メールアドレス', value: user.email),
-                          const _Divider(),
-                          _MyPageMenu(
-                              menu: '本日の獲得P', value: '${formatter.format(user.todayPoint)}P'),
-                          _MyPageMenu(
-                              menu: '累計獲得P', value: '${formatter.format(user.totalPoint)}P'),
                         ],
                       ),
                     ),
@@ -162,12 +163,9 @@ class _MyPageMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(menu, style: const TextStyle(fontSize: 13)),
+          Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
           verticalSpaceTiny,
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          )
+          Text(value)
         ],
       ),
     );
@@ -198,14 +196,14 @@ class _PointTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        verticalSpaceSmall,
+        Text(title, style: const TextStyle(fontSize: 13)),
+        horizontalSpaceSmall,
         Text(
           '${formatter.format(point)}P',
           style: const TextStyle(
-            fontSize: 30,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: primaryColor,
           ),
