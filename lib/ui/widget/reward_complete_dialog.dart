@@ -16,6 +16,7 @@ class RewardCompleteDialog extends GetView<RewardDetailViewController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RewardDetailViewController(rewardId: rewardId));
+    controller.rewardMessage.value = 'いつもありがとう！';
     return SimpleDialog(
       insetPadding: const EdgeInsets.all(0),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
