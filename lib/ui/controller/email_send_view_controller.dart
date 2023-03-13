@@ -20,7 +20,7 @@ class EmailSendViewController extends BaseViewController {
     });
     if (result) {
       email.value = '';
-      Get.to(const EmailSentView());
+      Get.to(EmailSentView(type: type));
     }
   }
 }

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../common/ui_helper.dart';
 
 class EmailSentView extends StatelessWidget {
-  const EmailSentView({super.key});
+  const EmailSentView({super.key, required this.type});
+
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -13,26 +15,29 @@ class EmailSentView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black54),
         centerTitle: true,
-        title: const Text('メールアドレス登録', style: TextStyle(color: gray2)),
+        title: Text(
+          type == 'reset' ? 'パスワード再設定' : 'メールアドレス登録',
+          style: const TextStyle(color: gray2),
+        ),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
       ),
       body: Container(
         padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
         child: Column(
-          children: const [
-            ProgressBar(step: 1),
+          children: [
+            type != 'reset' ? const ProgressBar(step: 1) : const SizedBox(),
             verticalSpaceLarge,
-            Text('メールをお送りしました',
+            const Text('メールをお送りしました',
                 style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             verticalSpaceLarge,
-            Text('入力いただいたメールアドレスに確認メールを送信しました。メール内のリンクをタップして本登録を進めてください。',
+            const Text('入力いただいたメールアドレスに確認メールを送信しました。メール内のリンクをタップして登録を進めてください。',
                 textAlign: TextAlign.center),
             verticalSpaceLarge,
-            Text('メールが届かない場合は、入力されたメールアドレスが間違っているか、迷惑メールフォルダに入っている可能性がありますのでご確認ください。',
+            const Text('メールが届かない場合は、入力されたメールアドレスが間違っているか、迷惑メールフォルダに入っている可能性がありますのでご確認ください。',
                 textAlign: TextAlign.center),
             verticalSpaceLarge,
-            Image(image: AssetImage('assets/images/desk_work.png'), width: 300)
+            const Image(image: AssetImage('assets/images/desk_work.png'), width: 300)
           ],
         ),
       ),

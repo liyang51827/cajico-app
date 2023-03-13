@@ -28,7 +28,7 @@ class EmailSendView extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
             title: Text(
-              type == 'reset' ? 'パスワードリセット' : 'メールアドレス登録',
+              type == 'reset' ? 'パスワード再設定' : 'メールアドレス登録',
               style: const TextStyle(color: gray2),
             ),
             backgroundColor: Colors.white,
