@@ -81,6 +81,18 @@ class RegisterViewController extends BaseViewController {
     }
   }
 
+  Future<void> onTapResetPassword({required token}) async {
+    String? result = '';
+    final prefs = await SharedPreferences.getInstance();
+    await callAsyncApi(() async {
+      result = await api.resetPassword(token: token, password: password());
+    });
+    if (result != '') {
+      prefs.setString('token', result!);
+      Get.to(() => const HomeView());
+    }
+  }
+
   Future<void> onTapSelectImage() async {
     final pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,

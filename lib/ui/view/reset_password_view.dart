@@ -79,7 +79,7 @@ class ResetPasswordView extends StatelessWidget {
                 label: '設定する',
                 isValid: controller.isResetPasswordValid,
                 onPressed: () => {
-                  controller.onTapConfirmFamily(),
+                  controller.onTapResetPassword(token: token),
                 },
               ),
             ),

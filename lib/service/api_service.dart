@@ -85,6 +85,17 @@ class ApiService extends GetConnect {
     return token;
   }
 
+  // パスワードリセットAPI
+  Future<String?> resetPassword({required token, required password}) async {
+    final res = await http.post(
+      _makeUri('/reset/password'),
+      headers: _commonHeaders,
+      body: jsonEncode({'token': token, 'password': password}),
+    );
+    final String? accessToken = _decodeResponse(res)['data']['accessToken'];
+    return accessToken;
+  }
+
   // ログアウトAPI
   Future<bool> logout() async {
     final res = await http.post(
