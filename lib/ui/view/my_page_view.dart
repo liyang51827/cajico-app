@@ -112,7 +112,7 @@ class MyPageView extends StatelessWidget {
                         ),
                         horizontalSpaceLarge,
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _PointTitle(title: '保有P', point: user.ownedPoint),
                             verticalSpaceMedium,
@@ -194,6 +194,7 @@ class _PointTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: const TextStyle(fontSize: 13)),
         horizontalSpaceSmall,
