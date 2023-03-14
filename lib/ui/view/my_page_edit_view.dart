@@ -6,6 +6,7 @@ import '../common/ui_helper.dart';
 import '../controller/my_page_edit_view_controller.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/cajico_drop_down.dart';
+import '../widget/loading_stack.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -51,90 +52,92 @@ class MyPageEditView extends StatelessWidget {
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                verticalSpaceLarge,
-                GestureDetector(
-                    onTap: () => controller.onTapSelectImage(),
-                    child: Obx(() => Stack(
-                          children: [
-                            myPageInfo.iconImage() != null
-                                ? CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage: FileImage(myPageInfo.iconImage()!),
-                                    backgroundColor: Colors.white,
-                                  )
-                                : iconUrl != null
-                                    ? CajicoCachedNetworkIconImage(imageUrl: iconUrl!, radius: 40)
-                                    : const CircleAvatar(
-                                        radius: 40,
-                                        backgroundImage:
-                                            AssetImage('assets/images/default_user_icon.png'),
-                                        backgroundColor: Colors.white,
-                                      ),
-                            Positioned(
-                              bottom: 3,
-                              right: 3,
-                              child: Container(
-                                width: 26,
-                                height: 26,
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle, color: gray2),
-                                child: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+          body: GetLoadingStack<MyPageEditViewController>(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  verticalSpaceLarge,
+                  GestureDetector(
+                      onTap: () => controller.onTapSelectImage(),
+                      child: Obx(() => Stack(
+                            children: [
+                              myPageInfo.iconImage() != null
+                                  ? CircleAvatar(
+                                      radius: 40,
+                                      backgroundImage: FileImage(myPageInfo.iconImage()!),
+                                      backgroundColor: Colors.white,
+                                    )
+                                  : iconUrl != null
+                                      ? CajicoCachedNetworkIconImage(imageUrl: iconUrl!, radius: 40)
+                                      : const CircleAvatar(
+                                          radius: 40,
+                                          backgroundImage:
+                                              AssetImage('assets/images/default_user_icon.png'),
+                                          backgroundColor: Colors.white,
+                                        ),
+                              Positioned(
+                                bottom: 3,
+                                right: 3,
+                                child: Container(
+                                  width: 26,
+                                  height: 26,
+                                  decoration:
+                                      const BoxDecoration(shape: BoxShape.circle, color: gray2),
+                                  child: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                                ),
                               ),
-                            ),
-                          ],
-                        ))),
-                verticalSpaceLarge,
-                CajicoTextFormField(
-                  initValue: initFamilyName,
-                  label: '家族名',
-                  maxLines: 1,
-                  onChanged: (value) => myPageInfo.familyName.value = value,
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 5).message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initFamilyCode,
-                  obscureText: true,
-                  maxLines: 1,
-                  label: '家族コード',
-                  onChanged: (value) => myPageInfo.familyCode.value = value,
-                  validator: (value) => controller
-                      .validateInputPasswordData(value: value, minLength: 8, maxLength: 20)
-                      .message,
-                ),
-                verticalSpaceMedium,
-                CajicoTextFormField(
-                  initValue: initUserName,
-                  label: '名前',
-                  maxLines: 1,
-                  onChanged: (value) => myPageInfo.userName.value = value,
-                  validator: (value) =>
-                      controller.validateInputEditData(value: value, maxLength: 5).message,
-                ),
-                verticalSpaceMedium,
-                CajicoDropDown(
-                  onChanged: (value) => myPageInfo.positionId.value = value!,
-                  items: const [
-                    DropdownMenuItem(value: 1, child: Text('旦那さん')),
-                    DropdownMenuItem(value: 2, child: Text('奥さん')),
-                    DropdownMenuItem(value: 3, child: Text('息子さん')),
-                    DropdownMenuItem(value: 4, child: Text('娘さん')),
-                    DropdownMenuItem(value: 5, child: Text('おじいちゃん')),
-                    DropdownMenuItem(value: 6, child: Text('おばあちゃん')),
-                    DropdownMenuItem(value: 7, child: Text('おじさん')),
-                    DropdownMenuItem(value: 8, child: Text('おばさん')),
-                    DropdownMenuItem(value: 9, child: Text('彼氏さん')),
-                    DropdownMenuItem(value: 10, child: Text('彼女さん')),
-                  ],
-                  labelText: '家族での立場',
-                  initialValue: initPosition,
-                ),
-              ],
+                            ],
+                          ))),
+                  verticalSpaceLarge,
+                  CajicoTextFormField(
+                    initValue: initFamilyName,
+                    label: '家族名',
+                    maxLines: 1,
+                    onChanged: (value) => myPageInfo.familyName.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 5).message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initFamilyCode,
+                    obscureText: true,
+                    maxLines: 1,
+                    label: '家族コード',
+                    onChanged: (value) => myPageInfo.familyCode.value = value,
+                    validator: (value) => controller
+                        .validateInputPasswordData(value: value, minLength: 8, maxLength: 20)
+                        .message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoTextFormField(
+                    initValue: initUserName,
+                    label: '名前',
+                    maxLines: 1,
+                    onChanged: (value) => myPageInfo.userName.value = value,
+                    validator: (value) =>
+                        controller.validateInputEditData(value: value, maxLength: 5).message,
+                  ),
+                  verticalSpaceMedium,
+                  CajicoDropDown(
+                    onChanged: (value) => myPageInfo.positionId.value = value!,
+                    items: const [
+                      DropdownMenuItem(value: 1, child: Text('旦那さん')),
+                      DropdownMenuItem(value: 2, child: Text('奥さん')),
+                      DropdownMenuItem(value: 3, child: Text('息子さん')),
+                      DropdownMenuItem(value: 4, child: Text('娘さん')),
+                      DropdownMenuItem(value: 5, child: Text('おじいちゃん')),
+                      DropdownMenuItem(value: 6, child: Text('おばあちゃん')),
+                      DropdownMenuItem(value: 7, child: Text('おじさん')),
+                      DropdownMenuItem(value: 8, child: Text('おばさん')),
+                      DropdownMenuItem(value: 9, child: Text('彼氏さん')),
+                      DropdownMenuItem(value: 10, child: Text('彼女さん')),
+                    ],
+                    labelText: '家族での立場',
+                    initialValue: initPosition,
+                  ),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: Padding(
@@ -153,6 +156,7 @@ class MyPageEditView extends StatelessWidget {
                     NormalDialog(
                       message: '変更しますか？',
                       onPressed: () async {
+                        Get.back();
                         await controller.onTapUpdateMyPage();
                       },
                     ),

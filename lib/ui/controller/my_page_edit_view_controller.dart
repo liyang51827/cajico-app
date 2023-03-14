@@ -58,7 +58,6 @@ class MyPageEditViewController extends BaseViewController {
           message: '更新されました',
           onPressed: () {
             Get.back();
-            Get.back();
             controller.fetchData();
           }
         ),
