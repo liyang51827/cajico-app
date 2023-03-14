@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/my_page_edit_view_controller.dart';
 import '../widget/cajico_cashed_network_image.dart';
+import '../widget/cajico_drop_down.dart';
 
 class MyPageEditView extends StatelessWidget {
   MyPageEditView({
@@ -33,6 +34,7 @@ class MyPageEditView extends StatelessWidget {
     myPageInfo.familyCode.value = initFamilyCode;
     myPageInfo.userName.value = initUserName;
     myPageInfo.positionId.value = initPosition;
+    myPageInfo.iconImage.value = null;
 
     return Focus(
       focusNode: focusNode,
@@ -112,6 +114,24 @@ class MyPageEditView extends StatelessWidget {
                   // controller
                   //     .validateInputEditData(value: value, maxLength: 10)
                   //     .message,
+                ),
+                verticalSpaceMedium,
+                CajicoDropDown(
+                  onChanged: (value) => myPageInfo.positionId.value = value!,
+                  items: const [
+                    DropdownMenuItem(value: 1, child: Text('旦那さん')),
+                    DropdownMenuItem(value: 2, child: Text('奥さん')),
+                    DropdownMenuItem(value: 3, child: Text('息子さん')),
+                    DropdownMenuItem(value: 4, child: Text('娘さん')),
+                    DropdownMenuItem(value: 5, child: Text('おじいちゃん')),
+                    DropdownMenuItem(value: 6, child: Text('おばあちゃん')),
+                    DropdownMenuItem(value: 7, child: Text('おじさん')),
+                    DropdownMenuItem(value: 8, child: Text('おばさん')),
+                    DropdownMenuItem(value: 9, child: Text('彼氏さん')),
+                    DropdownMenuItem(value: 10, child: Text('彼女さん')),
+                  ],
+                  labelText: '家族での立場',
+                  initialValue: initPosition,
                 ),
               ],
             ),
