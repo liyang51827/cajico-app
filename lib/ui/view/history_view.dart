@@ -309,7 +309,10 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                           Text(time, style: const TextStyle(fontSize: 16)),
                           Text(
                             "${point}P",
-                            style: const TextStyle(fontSize: 20, color: primaryColor),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: point <= 25 ? lowColor : point <= 50 ? middleColor : point <= 75 ? secondaryColor : point <= 100 ? primaryColor : highestColor,
+                            ),
                           )
                         ],
                       ),
