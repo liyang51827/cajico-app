@@ -44,7 +44,7 @@ class MyPageView extends StatelessWidget {
                       iconUrl: user.iconUrl ??
                           'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
                       email: user.email,
-                      initPosition: user.position,
+                      initPosition: user.positionId,
                     ),
                     fullscreenDialog: true,
                   ),
@@ -131,7 +131,7 @@ class MyPageView extends StatelessWidget {
                           _MyPageMenu(menu: '家族名', value: '${user.familyName}家'),
                           _MyPageMenu(menu: '家族コード', value: user.familyCode),
                           const _Divider(),
-                          _MyPageMenu(menu: '続柄', value: user.position),
+                          _MyPageMenu(menu: '続柄', value: user.positionName),
                           _MyPageMenu(menu: 'メールアドレス', value: user.email),
                         ],
                       ),

@@ -4,7 +4,8 @@ class MyPage {
     required this.familyCode,
     required this.email,
     required this.userName,
-    required this.position,
+    required this.positionId,
+    required this.positionName,
     required this.iconUrl,
     required this.todayPoint,
     required this.totalPoint,
@@ -15,7 +16,8 @@ class MyPage {
   final String familyCode;
   final String email;
   final String userName;
-  final String position;
+  final int positionId;
+  final String positionName;
   final String? iconUrl;
   final int todayPoint;
   final int totalPoint;
@@ -27,7 +29,8 @@ class MyPage {
       familyCode: json['familyCode'],
       email: json['email'],
       userName: json['userName'],
-      position: json['position'],
+      positionId: json['positionId'],
+      positionName: json['positionName'],
       iconUrl: json['iconUrl'],
       todayPoint: json['todayPoint'],
       totalPoint: json['totalPoint'],

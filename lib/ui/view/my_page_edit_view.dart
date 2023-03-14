@@ -20,7 +20,7 @@ class MyPageEditView extends StatelessWidget {
   final String initFamilyCode;
   final String initUserName;
   final String iconUrl;
-  final String initPosition;
+  final int initPosition;
   final String email;
   final focusNode = FocusNode();
 
@@ -31,7 +31,7 @@ class MyPageEditView extends StatelessWidget {
     myPageInfo.familyName.value = initFamilyName;
     myPageInfo.familyCode.value = initFamilyCode;
     myPageInfo.userName.value = initUserName;
-    myPageInfo.position.value = initPosition;
+    myPageInfo.positionId.value = initPosition;
 
     return Focus(
       focusNode: focusNode,
@@ -52,6 +52,36 @@ class MyPageEditView extends StatelessWidget {
               children: [
                 verticalSpaceLarge,
                 verticalSpaceMedium,
+                GestureDetector(
+                    onTap: () => controller.onTapSelectImage(),
+                    child: Obx(() => Stack(
+                      children: [
+                        myPageInfo.iconImage() != null
+                            ? CircleAvatar(
+                          radius: 40,
+                          backgroundImage: FileImage(myPageInfo.iconImage()!),
+                          backgroundColor: Colors.white,
+                        )
+                            : const CircleAvatar(
+                          radius: 40,
+                          backgroundImage:
+                          AssetImage('assets/images/default_user_icon.png'),
+                          backgroundColor: Colors.white,
+                        ),
+                        Positioned(
+                          bottom: 3,
+                          right: 3,
+                          child: Container(
+                            width: 26,
+                            height: 26,
+                            decoration:
+                            const BoxDecoration(shape: BoxShape.circle, color: gray2),
+                            child:
+                            const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                          ),
+                        ),
+                      ],
+                    ))),
                 CajicoTextFormField(
                   initValue: initFamilyName,
                   label: '家族名',
