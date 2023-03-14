@@ -24,7 +24,7 @@ class HouseWorkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 90,
+      height: 80,
       child: ElevatedButton(
         onPressed: () {
           Get.dialog(
