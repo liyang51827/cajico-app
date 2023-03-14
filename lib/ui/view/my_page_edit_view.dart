@@ -92,31 +92,32 @@ class MyPageEditView extends StatelessWidget {
                 CajicoTextFormField(
                   initValue: initFamilyName,
                   label: '家族名',
+                  maxLines: 1,
                   onChanged: (value) => myPageInfo.familyName.value = value,
-                  // validator: (value) =>
-                  // controller
-                  //     .validateInputEditData(value: value, maxLength: 10)
-                  //     .message,
+                  validator: (value) =>
+                      controller.validateInputEditData(value: value, maxLength: 5).message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
                   initValue: initFamilyCode,
+                  obscureText: true,
+                  maxLines: 1,
                   label: '家族コード',
                   onChanged: (value) => myPageInfo.familyCode.value = value,
-                  // validator: (value) =>
-                  // controller
-                  //     .validateInputEditData(value: value, maxLength: 10)
-                  //     .message,
+                  validator: (value) => controller
+                      .validateInputPasswordData(value: value, minLength: 8, maxLength: 20)
+                      .message,
                 ),
                 verticalSpaceMedium,
                 CajicoTextFormField(
                   initValue: initUserName,
                   label: '名前',
+                  maxLines: 1,
                   onChanged: (value) => myPageInfo.userName.value = value,
-                  // validator: (value) =>
-                  // controller
-                  //     .validateInputEditData(value: value, maxLength: 10)
-                  //     .message,
+                  validator: (value) =>
+                  controller
+                      .validateInputEditData(value: value, maxLength: 5)
+                      .message,
                 ),
                 verticalSpaceMedium,
                 CajicoDropDown(

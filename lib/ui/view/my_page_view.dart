@@ -128,7 +128,7 @@ class MyPageView extends StatelessWidget {
                         _MyPageMenu(menu: '家族名', value: '${user.familyName}家', icon: LineIcons.home),
                         _MyPageMenu(menu: '家族コード', value: user.familyCode, icon: LineIcons.key),
                         const _Divider(),
-                        _MyPageMenu(menu: '続柄', value: user.positionName, icon: LineIcons.users),
+                        _MyPageMenu(menu: '家族での立場', value: user.positionName, icon: LineIcons.users),
                         _MyPageMenu(menu: 'メールアドレス', value: user.email, icon: LineIcons.envelope),
                       ],
                     ),
