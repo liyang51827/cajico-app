@@ -6,6 +6,9 @@ import '../common/ui_helper.dart';
 import '../controller/my_page_edit_view_controller.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/cajico_drop_down.dart';
+import '../widget/normal_completed_dialog.dart';
+import '../widget/normal_dialog.dart';
+import '../widget/primary_button.dart';
 
 class MyPageEditView extends StatelessWidget {
   MyPageEditView({
@@ -136,41 +139,30 @@ class MyPageEditView extends StatelessWidget {
               ],
             ),
           ),
-          // bottomNavigationBar: Padding(
-          //   padding: const EdgeInsets.all(16),
-          //   child: Obx(
-          //         () =>
-          //         PrimaryButton(
-          //           label: '変更する',
-          //           isValid: controller.isUpdateButtonValid &&
-          //               (myPageInfo.rewardName() != initRewardName ||
-          //                   myPageInfo.point() != initPoint ||
-          //                   myPageInfo.memo() != initMemo),
-          //           onPressed: () {
-          //             Get.dialog(
-          //               NormalDialog(
-          //                 message: '更新しますか？',
-          //                 onPressed: () async {
-          //                   await controller.onTapUpdate();
-          //                   Get.back();
-          //                   Get.dialog(
-          //                     NormalCompletedDialog(
-          //                       message: '更新されました',
-          //                       onPressed: () {
-          //                         Get.back();
-          //                         homeController.onTapGetUnreadCount();
-          //                         baseController.onTapBottomNavigation(1);
-          //                         rewardIndexController.fetchData();
-          //                       },
-          //                     ),
-          //                   );
-          //                 },
-          //               ),
-          //             );
-          //           },
-          //         ),
-          //   ),
-          // ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(16),
+            child: PrimaryButton(
+              label: '変更する',
+              isValid: false,
+              onPressed: () {
+                Get.dialog(
+                  NormalDialog(
+                    message: '変更しますか？',
+                    onPressed: () async {
+                      await controller.onTapSelectImage();
+                      Get.back();
+                      Get.dialog(
+                        NormalCompletedDialog(
+                          message: '更新されました',
+                          onPressed: () => Get.back(),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
