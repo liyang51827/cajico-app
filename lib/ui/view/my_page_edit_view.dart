@@ -146,7 +146,8 @@ class MyPageEditView extends StatelessWidget {
                     (myPageInfo.familyName() != initFamilyName ||
                         myPageInfo.familyCode() != initFamilyCode ||
                         myPageInfo.userName() != initUserName ||
-                        myPageInfo.positionId() != initPosition),
+                        myPageInfo.positionId() != initPosition ||
+                        myPageInfo.iconImage() != null),
                 onPressed: () {
                   Get.dialog(
                     NormalDialog(

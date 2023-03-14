@@ -7,6 +7,8 @@ import '../widget/normal_completed_dialog.dart';
 import 'base_view_controller.dart';
 import 'dart:io';
 
+import 'my_page_view_controller.dart';
+
 class MyPageEditViewController extends BaseViewController {
   MyPageEditViewController();
 
@@ -44,6 +46,7 @@ class MyPageEditViewController extends BaseViewController {
   }
 
   Future<void> onTapUpdateMyPage() async {
+    final controller = Get.put(MyPageViewController());
     var result = false;
     await callAsyncApi(() async {
       result = await api.updateMyPage(myPageData);
@@ -53,7 +56,11 @@ class MyPageEditViewController extends BaseViewController {
       Get.dialog(
         NormalCompletedDialog(
           message: '更新されました',
-          onPressed: () => Get.back(),
+          onPressed: () {
+            Get.back();
+            Get.back();
+            controller.fetchData();
+          }
         ),
       );
     }
