@@ -28,18 +28,12 @@ class MyPageView extends StatelessWidget {
           PopupMenuButton(
             offset: const Offset(0, 50),
             onSelected: (result) {
-              if (result == 3) {
-                Get.dialog(NormalDialog(
-                    message: 'ログアウトしますか？',
-                    onPressed: () {
-                      controller.onTapLogout();
-                    }));
-              } else if (result == 1 && user != null) {
+              if (result == 1) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => MyPageEditView(
-                      initFamilyName: user.familyName,
+                      initFamilyName: user!.familyName,
                       initFamilyCode: user.familyCode,
                       initUserName: user.userName,
                       iconUrl: user.iconUrl,
@@ -49,6 +43,12 @@ class MyPageView extends StatelessWidget {
                     fullscreenDialog: true,
                   ),
                 );
+              } else if (result == 3) {
+                Get.dialog(NormalDialog(
+                    message: 'ログアウトしますか？',
+                    onPressed: () {
+                      controller.onTapLogout();
+                    }));
               }
             },
             itemBuilder: (BuildContext context) {

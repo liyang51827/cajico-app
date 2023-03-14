@@ -6,7 +6,6 @@ import '../common/ui_helper.dart';
 import '../controller/my_page_edit_view_controller.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/cajico_drop_down.dart';
-import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
 
@@ -115,9 +114,7 @@ class MyPageEditView extends StatelessWidget {
                   maxLines: 1,
                   onChanged: (value) => myPageInfo.userName.value = value,
                   validator: (value) =>
-                  controller
-                      .validateInputEditData(value: value, maxLength: 5)
-                      .message,
+                      controller.validateInputEditData(value: value, maxLength: 5).message,
                 ),
                 verticalSpaceMedium,
                 CajicoDropDown(
@@ -144,20 +141,17 @@ class MyPageEditView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: PrimaryButton(
               label: '変更する',
-              isValid: false,
+              isValid: controller.isUpdateMyPageValid
+                  && (myPageInfo.familyName() != initFamilyName
+                      || myPageInfo.familyCode() != initFamilyCode
+                      || myPageInfo.userName() != initUserName
+                      || myPageInfo.positionId() != initPosition),
               onPressed: () {
                 Get.dialog(
                   NormalDialog(
                     message: '変更しますか？',
                     onPressed: () async {
-                      await controller.onTapSelectImage();
-                      Get.back();
-                      Get.dialog(
-                        NormalCompletedDialog(
-                          message: '更新されました',
-                          onPressed: () => Get.back(),
-                        ),
-                      );
+                      await controller.onTapUpdateMyPage();
                     },
                   ),
                 );

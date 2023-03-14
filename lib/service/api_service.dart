@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cajico_app/model/house_work_data.dart';
 import 'package:cajico_app/model/inquiry_data.dart';
+import 'package:cajico_app/model/my_page_data.dart';
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
 import 'package:cajico_app/util/xfile_extension.dart';
@@ -215,6 +216,29 @@ class ApiService extends GetConnect {
     );
     final dynamic data = _decodeResponse(res)['data'];
     return MyPage.fromJson(data);
+  }
+
+  // マイページ更新API
+  Future<bool> updateMyPage(MyPageData myPageData) async {
+    final request = http.MultipartRequest('PUT', _makeUri('/me'));
+    request.headers.addAll(await _makeAuthenticatedHeader());
+    if (myPageData.iconImage() != null) {
+      XFile xFile = XFile(myPageData.iconImage()!.path);
+      request.files.add(await xFile.toMultiPartFileField(
+        filename: 'user_icon',
+        fieldName: 'iconImage',
+      ));
+    }
+    final Map<String, dynamic> data = {
+      'familyName': myPageData.familyName(),
+      'familyCode': myPageData.familyCode(),
+      'userName': myPageData.userName(),
+      'positionId': myPageData.positionId().toString(),
+    };
+    request.fields.addAll(Map<String, String>.from(data));
+    final response = await request.send();
+    final res = await http.Response.fromStream(response);
+    return _checkStatusCode(res);
   }
 
   // 最近の家事取得API
