@@ -24,8 +24,9 @@ class MyPageView extends StatelessWidget {
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
         actions: <Widget>[
-          Obx(() {
-            final user = controller.user();
+          Obx(
+            () {
+              final user = controller.user();
               return PopupMenuButton(
                 offset: const Offset(0, 50),
                 onSelected: (result) {
@@ -133,8 +134,8 @@ class MyPageView extends StatelessWidget {
                         _MyPageMenu(menu: '家族コード', value: user.familyCode, icon: LineIcons.key),
                         const _Divider(),
                         _MyPageMenu(
-                            menu: '家族での立場', value: user.positionName, icon: LineIcons.users),
-                        _MyPageMenu(menu: 'メールアドレス', value: user.email, icon: LineIcons.envelope),
+                            menu: '続柄', value: user.positionName, icon: LineIcons.users),
+                        _MyPageMenu(menu: 'メール', value: user.email, icon: LineIcons.envelope),
                       ],
                     ),
                   ],
@@ -164,10 +165,16 @@ class _MyPageMenu extends StatelessWidget {
           Icon(icon, color: subColor),
           horizontalSpaceMediumSmall,
           SizedBox(
-            width: 100,
+            width: 80,
             child: Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
           ),
-          Text(value)
+          Expanded(
+            child: Text(
+              value,
+              maxLines: 2, // 2行に改行
+              overflow: TextOverflow.ellipsis, // テキストがオーバーフローした場合の処理
+            ),
+          )
         ],
       ),
     );
