@@ -139,23 +139,25 @@ class MyPageEditView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(16),
-            child: PrimaryButton(
-              label: '変更する',
-              isValid: controller.isUpdateMyPageValid
-                  && (myPageInfo.familyName() != initFamilyName
-                      || myPageInfo.familyCode() != initFamilyCode
-                      || myPageInfo.userName() != initUserName
-                      || myPageInfo.positionId() != initPosition),
-              onPressed: () {
-                Get.dialog(
-                  NormalDialog(
-                    message: '変更しますか？',
-                    onPressed: () async {
-                      await controller.onTapUpdateMyPage();
-                    },
-                  ),
-                );
-              },
+            child: Obx(
+              () => PrimaryButton(
+                label: '変更する',
+                isValid: controller.isUpdateMyPageValid &&
+                    (myPageInfo.familyName() != initFamilyName ||
+                        myPageInfo.familyCode() != initFamilyCode ||
+                        myPageInfo.userName() != initUserName ||
+                        myPageInfo.positionId() != initPosition),
+                onPressed: () {
+                  Get.dialog(
+                    NormalDialog(
+                      message: '変更しますか？',
+                      onPressed: () async {
+                        await controller.onTapUpdateMyPage();
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

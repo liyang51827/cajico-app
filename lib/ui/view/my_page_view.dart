@@ -16,7 +16,6 @@ class MyPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MyPageViewController());
-    final user = controller.user();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black54),
@@ -25,49 +24,53 @@ class MyPageView extends StatelessWidget {
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
         actions: <Widget>[
-          PopupMenuButton(
-            offset: const Offset(0, 50),
-            onSelected: (result) {
-              if (result == 1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => MyPageEditView(
-                      initFamilyName: user!.familyName,
-                      initFamilyCode: user.familyCode,
-                      initUserName: user.userName,
-                      iconUrl: user.iconUrl,
-                      email: user.email,
-                      initPosition: user.positionId,
+          Obx(() {
+            final user = controller.user();
+              return PopupMenuButton(
+                offset: const Offset(0, 50),
+                onSelected: (result) {
+                  if (result == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MyPageEditView(
+                          initFamilyName: user!.familyName,
+                          initFamilyCode: user.familyCode,
+                          initUserName: user.userName,
+                          iconUrl: user.iconUrl,
+                          email: user.email,
+                          initPosition: user.positionId,
+                        ),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  } else if (result == 3) {
+                    Get.dialog(NormalDialog(
+                        message: 'ログアウトしますか？',
+                        onPressed: () {
+                          controller.onTapLogout();
+                        }));
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const PopupMenuItem(
+                      value: 1,
+                      child: Text('プロフィール編集'),
                     ),
-                    fullscreenDialog: true,
-                  ),
-                );
-              } else if (result == 3) {
-                Get.dialog(NormalDialog(
-                    message: 'ログアウトしますか？',
-                    onPressed: () {
-                      controller.onTapLogout();
-                    }));
-              }
+                    const PopupMenuItem(
+                      value: 2,
+                      child: Text('通知設定'),
+                    ),
+                    const PopupMenuItem(
+                      value: 3,
+                      child: Text('ログアウト'),
+                    ),
+                  ];
+                },
+              );
             },
-            itemBuilder: (BuildContext context) {
-              return [
-                const PopupMenuItem(
-                  value: 1,
-                  child: Text('プロフィール編集'),
-                ),
-                const PopupMenuItem(
-                  value: 2,
-                  child: Text('通知設定'),
-                ),
-                const PopupMenuItem(
-                  value: 3,
-                  child: Text('ログアウト'),
-                ),
-              ];
-            },
-          )
+          ),
         ],
       ),
       body: GetLoadingStack<MyPageViewController>(
@@ -125,10 +128,12 @@ class MyPageView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const _Divider(),
-                        _MyPageMenu(menu: '家族名', value: '${user.familyName}家', icon: LineIcons.home),
+                        _MyPageMenu(
+                            menu: '家族名', value: '${user.familyName}家', icon: LineIcons.home),
                         _MyPageMenu(menu: '家族コード', value: user.familyCode, icon: LineIcons.key),
                         const _Divider(),
-                        _MyPageMenu(menu: '家族での立場', value: user.positionName, icon: LineIcons.users),
+                        _MyPageMenu(
+                            menu: '家族での立場', value: user.positionName, icon: LineIcons.users),
                         _MyPageMenu(menu: 'メールアドレス', value: user.email, icon: LineIcons.envelope),
                       ],
                     ),
