@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/email_send_view.dart';
-import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

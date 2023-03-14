@@ -1,7 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/controller/register_view_controller.dart';
 import 'package:cajico_app/ui/widget/primary_button.dart';
-import 'package:cajico_app/ui/widget/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';

@@ -4,6 +4,7 @@ import 'package:cajico_app/ui/controller/my_page_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icons.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/normal_dialog.dart';
@@ -79,12 +80,11 @@ class MyPageView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Obx(() {
               final user = controller.user();
-              final formatter = NumberFormat("#,###");
               if (user == null) {
                 return const SizedBox();
               }
               return Container(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   border: Border.all(color: gray5),
@@ -122,19 +122,16 @@ class MyPageView extends StatelessWidget {
                       ],
                     ),
                     verticalSpaceMedium,
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.75,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const _Divider(),
-                          _MyPageMenu(menu: '家族名', value: '${user.familyName}家'),
-                          _MyPageMenu(menu: '家族コード', value: user.familyCode),
-                          const _Divider(),
-                          _MyPageMenu(menu: '続柄', value: user.positionName),
-                          _MyPageMenu(menu: 'メールアドレス', value: user.email),
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const _Divider(),
+                        _MyPageMenu(menu: '家族名', value: '${user.familyName}家', icon: LineIcons.home),
+                        _MyPageMenu(menu: '家族コード', value: user.familyCode, icon: LineIcons.key),
+                        const _Divider(),
+                        _MyPageMenu(menu: '続柄', value: user.positionName, icon: LineIcons.users),
+                        _MyPageMenu(menu: 'メールアドレス', value: user.email, icon: LineIcons.envelope),
+                      ],
                     ),
                   ],
                 ),
@@ -148,20 +145,24 @@ class MyPageView extends StatelessWidget {
 }
 
 class _MyPageMenu extends StatelessWidget {
-  const _MyPageMenu({required this.menu, required this.value});
+  const _MyPageMenu({required this.menu, required this.value, required this.icon});
 
   final String menu;
   final String value;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-          verticalSpaceTiny,
+          Icon(icon, color: subColor),
+          horizontalSpaceMediumSmall,
+          SizedBox(
+            width: 100,
+            child: Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+          ),
           Text(value)
         ],
       ),
