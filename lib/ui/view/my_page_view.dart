@@ -27,16 +27,13 @@ class MyPageView extends StatelessWidget {
           PopupMenuButton(
             offset: const Offset(0, 50),
             onSelected: (result) {
-              if (result == 2) {
-                Get.dialog(
-                  NormalDialog(
+              if (result == 3) {
+                Get.dialog(NormalDialog(
                     message: 'ログアウトしますか？',
                     onPressed: () {
                       controller.onTapLogout();
-                    },
-                  ),
-                );
-              } else if (result == 0 && user != null) {
+                    }));
+              } else if (result == 1 && user != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -57,15 +54,15 @@ class MyPageView extends StatelessWidget {
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem(
-                  value: 0,
+                  value: 1,
                   child: Text('プロフィール編集'),
                 ),
                 const PopupMenuItem(
-                  value: 1,
+                  value: 2,
                   child: Text('通知設定'),
                 ),
                 const PopupMenuItem(
-                  value: 2,
+                  value: 3,
                   child: Text('ログアウト'),
                 ),
               ];
