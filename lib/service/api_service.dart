@@ -220,7 +220,7 @@ class ApiService extends GetConnect {
 
   // マイページ更新API
   Future<bool> updateMyPage(MyPageData myPageData) async {
-    final request = http.MultipartRequest('PUT', _makeUri('/me'));
+    final request = http.MultipartRequest('POST', _makeUri('/me'));
     request.headers.addAll(await _makeAuthenticatedHeader());
     if (myPageData.iconImage() != null) {
       XFile xFile = XFile(myPageData.iconImage()!.path);
