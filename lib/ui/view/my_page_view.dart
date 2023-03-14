@@ -42,8 +42,7 @@ class MyPageView extends StatelessWidget {
                       initFamilyName: user.familyName,
                       initFamilyCode: user.familyCode,
                       initUserName: user.userName,
-                      iconUrl: user.iconUrl ??
-                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                      iconUrl: user.iconUrl,
                       email: user.email,
                       initPosition: user.positionId,
                     ),

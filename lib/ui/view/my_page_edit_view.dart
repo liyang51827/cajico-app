@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/ui_helper.dart';
 import '../controller/my_page_edit_view_controller.dart';
+import '../widget/cajico_cashed_network_image.dart';
 
 class MyPageEditView extends StatelessWidget {
   MyPageEditView({
@@ -19,7 +20,7 @@ class MyPageEditView extends StatelessWidget {
   final String initFamilyName;
   final String initFamilyCode;
   final String initUserName;
-  final String iconUrl;
+  final String? iconUrl;
   final int initPosition;
   final String email;
   final focusNode = FocusNode();
@@ -51,37 +52,38 @@ class MyPageEditView extends StatelessWidget {
             child: Column(
               children: [
                 verticalSpaceLarge,
-                verticalSpaceMedium,
                 GestureDetector(
                     onTap: () => controller.onTapSelectImage(),
                     child: Obx(() => Stack(
-                      children: [
-                        myPageInfo.iconImage() != null
-                            ? CircleAvatar(
-                          radius: 40,
-                          backgroundImage: FileImage(myPageInfo.iconImage()!),
-                          backgroundColor: Colors.white,
-                        )
-                            : const CircleAvatar(
-                          radius: 40,
-                          backgroundImage:
-                          AssetImage('assets/images/default_user_icon.png'),
-                          backgroundColor: Colors.white,
-                        ),
-                        Positioned(
-                          bottom: 3,
-                          right: 3,
-                          child: Container(
-                            width: 26,
-                            height: 26,
-                            decoration:
-                            const BoxDecoration(shape: BoxShape.circle, color: gray2),
-                            child:
-                            const Icon(Icons.camera_alt, color: Colors.white, size: 18),
-                          ),
-                        ),
-                      ],
-                    ))),
+                          children: [
+                            myPageInfo.iconImage() != null
+                                ? CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: FileImage(myPageInfo.iconImage()!),
+                                    backgroundColor: Colors.white,
+                                  )
+                                : iconUrl != null
+                                    ? CajicoCachedNetworkIconImage(imageUrl: iconUrl!, radius: 40)
+                                    : const CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage:
+                                            AssetImage('assets/images/default_user_icon.png'),
+                                        backgroundColor: Colors.white,
+                                      ),
+                            Positioned(
+                              bottom: 3,
+                              right: 3,
+                              child: Container(
+                                width: 26,
+                                height: 26,
+                                decoration:
+                                    const BoxDecoration(shape: BoxShape.circle, color: gray2),
+                                child: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                              ),
+                            ),
+                          ],
+                        ))),
+                verticalSpaceLarge,
                 CajicoTextFormField(
                   initValue: initFamilyName,
                   label: '家族名',
