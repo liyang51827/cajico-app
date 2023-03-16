@@ -75,7 +75,7 @@ class HouseWorkCard extends StatelessWidget {
                           point.toString(),
                           style: TextStyle(
                             fontSize: 22,
-                            color: point <= 25 ? lowColor : point <= 50 ? middleColor : point <= 75 ? secondaryColor : point <= 100 ? primaryColor : highestColor,
+                            color: point < 25 ? lowColor : point < 50 ? middleColor : point < 75 ? secondaryColor : point < 100 ? primaryColor : highestColor,
                           ),
                         ),
                         const Text(" ポイント", style: TextStyle(fontSize: 16)),
