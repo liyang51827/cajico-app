@@ -41,6 +41,7 @@ class MyPageView extends StatelessWidget {
                           iconUrl: user.iconUrl,
                           email: user.email,
                           initPosition: user.positionId,
+                          isOnlyMe: user.isOnlyMe,
                         ),
                         fullscreenDialog: true,
                       ),

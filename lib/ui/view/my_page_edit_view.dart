@@ -19,6 +19,7 @@ class MyPageEditView extends StatelessWidget {
     required this.iconUrl,
     required this.initPosition,
     required this.email,
+    required this.isOnlyMe,
   });
 
   final String initFamilyName;
@@ -27,6 +28,7 @@ class MyPageEditView extends StatelessWidget {
   final String? iconUrl;
   final int initPosition;
   final String email;
+  final bool isOnlyMe;
   final focusNode = FocusNode();
 
   @override
@@ -51,6 +53,26 @@ class MyPageEditView extends StatelessWidget {
             title: const Text('マイページの編集', style: TextStyle(color: gray2)),
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
+            actions: [
+              PopupMenuButton(
+                offset: const Offset(0, 50),
+                onSelected: (result) {
+                  if (result == 1 && isOnlyMe) {
+
+                  } else if (result == 1 && !isOnlyMe) {
+
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const PopupMenuItem(
+                      value: 1,
+                      child: Text('退会する'),
+                    ),
+                  ];
+                },
+              )
+            ],
           ),
           body: GetLoadingStack<MyPageEditViewController>(
             child: SingleChildScrollView(
@@ -84,7 +106,8 @@ class MyPageEditView extends StatelessWidget {
                                   height: 26,
                                   decoration:
                                       const BoxDecoration(shape: BoxShape.circle, color: gray2),
-                                  child: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                                  child:
+                                      const Icon(Icons.camera_alt, color: Colors.white, size: 18),
                                 ),
                               ),
                             ],

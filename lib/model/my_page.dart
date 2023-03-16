@@ -10,6 +10,7 @@ class MyPage {
     required this.todayPoint,
     required this.totalPoint,
     required this.ownedPoint,
+    required this.isOnlyMe,
   });
 
   final String familyName;
@@ -22,6 +23,7 @@ class MyPage {
   final int todayPoint;
   final int totalPoint;
   final int ownedPoint;
+  final bool isOnlyMe;
 
   static MyPage fromJson(Map<String, dynamic> json) {
     return MyPage(
@@ -35,6 +37,7 @@ class MyPage {
       todayPoint: json['todayPoint'],
       totalPoint: json['totalPoint'],
       ownedPoint: json['ownedPoint'],
+      isOnlyMe: json['isOnlyMe'],
     );
   }
 }
