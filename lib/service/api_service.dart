@@ -241,6 +241,24 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // 退会API（ユーザーのみ）
+  Future<bool> deleteUser() async {
+    final res = await http.delete(
+      _makeUri('/me/delete'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 退会API（家族ごと）
+  Future<bool> deleteFamily() async {
+    final res = await http.delete(
+      _makeUri('/me/delete-all'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 最近の家事取得API
   Future<List<HouseWork>> getRecentHouseWorksList() async {
     final res = await http.get(

@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/form_validation.dart';
 import '../../model/my_page_data.dart';
 import '../../util/form_validator.dart';
+import '../view/top_view.dart';
 import '../widget/normal_completed_dialog.dart';
 import 'base_view_controller.dart';
 import 'dart:io';
@@ -60,6 +62,30 @@ class MyPageEditViewController extends BaseViewController {
             Get.back();
             controller.fetchData();
           }
+        ),
+      );
+    }
+  }
+
+  Future<void> onTapDelete({required isOnlyMe}) async {
+    var result = false;
+    final prefs = await SharedPreferences.getInstance();
+    await callAsyncApi(() async {
+      if (isOnlyMe) {
+        result = await api.deleteFamily();
+      } else {
+        result = await api.deleteUser();
+      }
+    });
+    if (result) {
+      Get.back();
+      Get.dialog(
+        NormalCompletedDialog(
+            message: '退会しました',
+            onPressed: () {
+              prefs.remove('token');
+              Get.to(() => const TopView());
+            }
         ),
       );
     }

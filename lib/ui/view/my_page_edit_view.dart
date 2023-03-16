@@ -57,10 +57,12 @@ class MyPageEditView extends StatelessWidget {
               PopupMenuButton(
                 offset: const Offset(0, 50),
                 onSelected: (result) {
-                  if (result == 1 && isOnlyMe) {
-
-                  } else if (result == 1 && !isOnlyMe) {
-
+                  if (result == 1) {
+                    Get.dialog(NormalDialog(
+                        message: '退会してもよいですか？\n退会すると全てのデータが削除されます',
+                        onPressed: () {
+                          controller.onTapDelete(isOnlyMe: isOnlyMe);
+                        }));
                   }
                 },
                 itemBuilder: (BuildContext context) {
