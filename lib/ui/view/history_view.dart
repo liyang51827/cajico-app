@@ -122,7 +122,7 @@ class HistoryView extends StatelessWidget {
                               },
                               groupSeparatorBuilder: (date) {
                                 return Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
                                   child: Text(date, style: const TextStyle(color: gray3)),
                                 );
                               },
@@ -201,8 +201,8 @@ class _PointSummaries extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
+    return Padding(
+      padding: const EdgeInsets.only(top: 24, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -232,7 +232,7 @@ class _PointSummary extends StatelessWidget {
         horizontalSpaceSmall,
         Text(
           '${formatter.format(point)}P',
-          style: const TextStyle(fontSize: 30, color: primaryColor),
+          style: const TextStyle(fontSize: 30, color: subColor),
         ),
       ],
     );

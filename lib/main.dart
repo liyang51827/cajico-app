@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     PushNotificationService().initialize();
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CAJICO',
       // home: isLogin ? const HomeView() : const TopView(),
       localizationsDelegates: const [

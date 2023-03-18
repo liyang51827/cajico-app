@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 const primaryColor = Color(0xFFF28E04);
 const secondaryColor = Color(0xFFFDC52F);
-const lowColor = Colors.lightBlueAccent;
+const lowColor = Color(0xFF8CC3EF);
 const middleColor = Colors.lime;
-const highestColor = Colors.red;
+const highestColor = Color(0xFFEF4242);
 const subColor = Colors.brown;
 const errorColor = Color(0xFFD32F2F);
 const gray1 = Color(0xFF333333);

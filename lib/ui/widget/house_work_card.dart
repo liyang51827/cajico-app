@@ -75,7 +75,15 @@ class HouseWorkCard extends StatelessWidget {
                           point.toString(),
                           style: TextStyle(
                             fontSize: 22,
-                            color: point < 25 ? lowColor : point < 50 ? middleColor : point < 75 ? secondaryColor : point < 100 ? primaryColor : highestColor,
+                            color: point < 25
+                                ? lowColor
+                                : point < 50
+                                    ? middleColor
+                                    : point < 75
+                                        ? secondaryColor
+                                        : point < 100
+                                            ? primaryColor
+                                            : highestColor,
                           ),
                         ),
                         const Text(" ポイント", style: TextStyle(fontSize: 16)),
@@ -114,7 +122,11 @@ class _HouseWorkCompleteDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
+              Text(point.toString(),
+                  style: TextStyle(
+                    color: point < 25 ? lowColor : point < 50 ? middleColor : point < 75 ? secondaryColor : point < 100 ? primaryColor : highestColor,
+                    fontSize: 24,
+                  )),
               const Text(' ポイント', style: TextStyle(fontSize: 16))
             ],
           ),

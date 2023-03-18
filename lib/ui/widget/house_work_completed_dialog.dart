@@ -24,7 +24,11 @@ class HouseWorkCompletedDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(point.toString(), style: const TextStyle(color: primaryColor, fontSize: 24)),
+              Text(point.toString(),
+                  style: TextStyle(
+                    color: point < 25 ? lowColor : point < 50 ? middleColor : point < 75 ? secondaryColor : point < 100 ? primaryColor : highestColor,
+                    fontSize: 24,
+                  )),
               const Text(' ポイント獲得しました', style: TextStyle(fontSize: 16))
             ],
           ),
