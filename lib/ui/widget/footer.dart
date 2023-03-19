@@ -12,7 +12,7 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BaseViewController());
     return SizedBox(
-      height: 60,
+      height: 100,
       child: Obx(
         () => BottomNavigationBar(
           onTap: controller.onTapBottomNavigation,

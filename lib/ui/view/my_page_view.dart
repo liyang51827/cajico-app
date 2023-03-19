@@ -60,10 +60,10 @@ class MyPageView extends StatelessWidget {
                       value: 1,
                       child: Text('プロフィール編集'),
                     ),
-                    const PopupMenuItem(
-                      value: 2,
-                      child: Text('通知設定'),
-                    ),
+                    // const PopupMenuItem(
+                    //   value: 2,
+                    //   child: Text('通知設定'),
+                    // ),
                     const PopupMenuItem(
                       value: 3,
                       child: Text('ログアウト'),

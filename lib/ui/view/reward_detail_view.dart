@@ -54,7 +54,7 @@ class RewardDetailView extends StatelessWidget {
         child: Scaffold(
           backgroundColor: gray7,
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(200.0),
+            preferredSize: const Size.fromHeight(160.0),
             child: AppBar(
               iconTheme: const IconThemeData(color: gray2),
               elevation: 0.0,
