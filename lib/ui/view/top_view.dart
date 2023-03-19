@@ -32,69 +32,72 @@ class _CarouselWithIndicatorState extends State<TopView> {
       backgroundColor: Colors.white,
       body: SizedBox(
         height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CarouselSlider(
-              items: const [
-                _CarouselCard(
-                  title: 'CAJICO',
-                  subtitle: '日々の「当たり前」を「ありがとう」に\nカジコで家事にやりがいを',
-                  imageUrl: 'assets/images/introduction_1.png',
-                ),
-                _CarouselCard(
-                  title: '家事ポイント',
-                  subtitle: '家事をクリアしてポイントをゲット！\n家族で家事が「見える化」されます',
-                  imageUrl: 'assets/images/introduction_2.png',
-                ),
-                _CarouselCard(
-                  title: '家事履歴',
-                  subtitle: 'これまでの家事は\n一覧でかんたんチェック！',
-                  imageUrl: 'assets/images/introduction_4.png',
-                ),
-                _CarouselCard(
-                  title: 'ごほうび',
-                  subtitle: 'たまったポイントを使って\n家族にねぎらってもらおう！',
-                  imageUrl: 'assets/images/introduction_3.png',
-                ),
-              ],
-              carouselController: _controller,
-              options: CarouselOptions(
-                  aspectRatio: 0.85,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  }),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: imgList.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () => _controller.animateToPage(entry.key),
-                  child: Container(
-                    width: 8.0,
-                    height: 6.0,
-                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              verticalSpaceLarge,
+              CarouselSlider(
+                items: const [
+                  _CarouselCard(
+                    title: 'CAJICO',
+                    subtitle: '日々の「当たり前」を「ありがとう」に\nカジコで家事にやりがいを',
+                    imageUrl: 'assets/images/introduction_1.png',
                   ),
-                );
-              }).toList(),
-            ),
-            const _AuthSection(),
-          ],
+                  _CarouselCard(
+                    title: '家事ポイント',
+                    subtitle: '家事をクリアしてポイントをゲット！\n家族で家事が「見える化」されます',
+                    imageUrl: 'assets/images/introduction_2.png',
+                  ),
+                  _CarouselCard(
+                    title: '家事履歴',
+                    subtitle: 'これまでの家事は\n一覧でかんたんチェック！',
+                    imageUrl: 'assets/images/introduction_4.png',
+                  ),
+                  _CarouselCard(
+                    title: 'ごほうび',
+                    subtitle: 'たまったポイントを使って\n家族にねぎらってもらおう！',
+                    imageUrl: 'assets/images/introduction_3.png',
+                  ),
+                ],
+                carouselController: _controller,
+                options: CarouselOptions(
+                    aspectRatio: 0.85,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    }),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: imgList.asMap().entries.map((entry) {
+                  return GestureDetector(
+                    onTap: () => _controller.animateToPage(entry.key),
+                    child: Container(
+                      width: 8.0,
+                      height: 6.0,
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: (Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black)
+                              .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const _AuthSection(),
+            ],
+          ),
         ),
       ),
     );
