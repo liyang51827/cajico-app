@@ -37,6 +37,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               verticalSpaceLarge,
+              verticalSpaceLarge,
               CarouselSlider(
                 items: const [
                   _CarouselCard(
