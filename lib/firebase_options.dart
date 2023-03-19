@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -58,5 +55,15 @@ class DefaultFirebaseOptions {
     messagingSenderId: '546299062145',
     projectId: 'cajico-prd',
     storageBucket: 'cajico-prd.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBudN3c9MpYwDRWPGUCaK_61uszMBAQsss',
+    appId: '1:546299062145:ios:3f3db49ffe6aa7033aaa80',
+    messagingSenderId: '546299062145',
+    projectId: 'cajico-prd',
+    storageBucket: 'cajico-prd.appspot.com',
+    iosClientId: '546299062145-4h8doocd4586lmh2lp8cmh96npr14vac.apps.googleusercontent.com',
+    iosBundleId: 'com.herokuapp.cajico',
   );
 }

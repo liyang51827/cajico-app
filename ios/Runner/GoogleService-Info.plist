@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>546299062145-4999v4mka151mt1n5danvgc82j2p5h65.apps.googleusercontent.com</string>
+	<string>546299062145-4h8doocd4586lmh2lp8cmh96npr14vac.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.546299062145-4999v4mka151mt1n5danvgc82j2p5h65</string>
+	<string>com.googleusercontent.apps.546299062145-4h8doocd4586lmh2lp8cmh96npr14vac</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBudN3c9MpYwDRWPGUCaK_61uszMBAQsss</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.cajicoApp</string>
+	<string>com.herokuapp.cajico</string>
 	<key>PROJECT_ID</key>
 	<string>cajico-prd</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:546299062145:ios:c61197b927e149363aaa80</string>
+	<string>1:546299062145:ios:3f3db49ffe6aa7033aaa80</string>
 </dict>
 </plist>
