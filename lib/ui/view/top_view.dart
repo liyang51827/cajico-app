@@ -32,6 +32,7 @@ class _CarouselWithIndicatorState extends State<TopView> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
       body: SizedBox(

@@ -20,14 +20,11 @@ class MyPageViewController extends BaseViewController {
   }
 
   Future<void> onTapLogout() async {
-    var result = false;
     final prefs = await SharedPreferences.getInstance();
     await callAsyncApi(() async {
-      result = await api.logout();
+      await api.logout();
     });
-    if (result) {
-      prefs.remove('token');
-      Get.to(() => const TopView());
-    }
+    prefs.remove('token');
+    Get.to(() => const TopView());
   }
 }
