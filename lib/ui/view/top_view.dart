@@ -29,6 +29,10 @@ class _CarouselWithIndicatorState extends State<TopView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+      ),
       backgroundColor: Colors.white,
       body: SizedBox(
         height: double.infinity,
@@ -36,8 +40,6 @@ class _CarouselWithIndicatorState extends State<TopView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              verticalSpaceLarge,
-              verticalSpaceLarge,
               CarouselSlider(
                 items: const [
                   _CarouselCard(
