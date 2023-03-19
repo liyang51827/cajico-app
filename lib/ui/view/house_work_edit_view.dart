@@ -86,8 +86,8 @@ class HouseWorkEditView extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Container(
-            height: 160,
-            padding: const EdgeInsets.all(16),
+            height: 200,
+            padding: const EdgeInsets.all(24),
             child: Obx(
               () => Column(
                 children: [

@@ -77,7 +77,7 @@ class LoginView extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            padding: const EdgeInsets.all(24),
             child: Obx(() => PrimaryButton(
                 label: 'ログイン',
                 isValid: controller.isLoginButtonValid,

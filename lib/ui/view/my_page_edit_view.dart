@@ -166,7 +166,7 @@ class MyPageEditView extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(24),
             child: Obx(
               () => PrimaryButton(
                 label: '変更する',
