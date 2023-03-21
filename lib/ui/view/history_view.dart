@@ -77,7 +77,7 @@ class HistoryView extends StatelessWidget {
                                   groupSeparatorBuilder: (date) {
                                     return Container(
                                         padding:
-                                            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                            const EdgeInsets.symmetric(horizontal: 16),
                                         child: Text(date, style: const TextStyle(color: gray3)));
                                   },
                                 ),
