@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 import 'firebase_options.dart';
 import 'model/app_config.dart';
@@ -29,10 +31,36 @@ void main() => run(
 Future<void> run(AppConfig config) async {
   Get.lazyPut(ApiService.new);
   WidgetsFlutterBinding.ensureInitialized();
+  initUniLinks();
   await Firebase.initializeApp(options: config.firebaseOptions);
   final prefs = await SharedPreferences.getInstance();
   bool isLogin = prefs.getString('token') != null;
   runApp(MyApp(isLogin: isLogin));
+}
+
+Future<void> initUniLinks() async {
+  try {
+    final initialUri = await getInitialUri();
+    _handleLink(initialUri);
+  } on PlatformException {}
+
+  uriLinkStream.listen((Uri? uri) {
+    _handleLink(uri);
+  });
+}
+
+void _handleLink(Uri? uri) {
+  if (uri != null && uri.host == 'cajico.herokuapp.com' && uri.path == '/verify') {
+    final type = uri.queryParameters['type'];
+    final token = uri.queryParameters['token'];
+    if (type == 'new' || type == 'join') {
+      // 新規画面に遷移する
+      Get.to(RegisterFamilyView(type: type!, token: token!));
+    } else if (type == 'reset') {
+      // 再設定画面に遷移する
+      Get.to(ResetPasswordView(token: token!));
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
