@@ -52,6 +52,9 @@ class ApiService extends GetConnect {
     } else if (statusCode == 422) {
       final body = json.decode(response.body);
       throw ApiException(body['errorMessage'] ?? 'エラーが発生しました');
+    } else if (statusCode == 500) {
+      final body = json.decode(response.body);
+      throw ApiException(body['errorMessage'] ?? 'エラーが発生しました');
     } else {
       throw ApiException('エラーが発生しました');
     }
