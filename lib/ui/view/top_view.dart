@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
+import '../controller/email_send_view_controller.dart';
 
 final List<String> imgList = [
   'assets/images/introduction_1.png',
@@ -25,6 +26,7 @@ class TopView extends StatefulWidget {
 class _CarouselWithIndicatorState extends State<TopView> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+  final controller = Get.put(EmailSendViewController());
 
   @override
   Widget build(BuildContext context) {
