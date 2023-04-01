@@ -16,6 +16,7 @@ class RewardView extends GetView<RewardViewController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.replace(RewardViewController());
     return Obx(() {
       final controller = Get.put(RewardViewController());
 

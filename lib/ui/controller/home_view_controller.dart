@@ -48,9 +48,13 @@ class HomeViewController extends BaseViewController {
   }
 
   Future<void> completeApi({required int houseWorkId}) async {
+    var result = false;
     await callAsyncApi(() async {
-      await api.postCompleteHouseWork(houseWorkId: houseWorkId);
+      result = await api.postCompleteHouseWork(houseWorkId: houseWorkId);
     });
+    if (result) {
+      fetchData();
+    }
   }
 
   Future<void> onTapRead() async {

@@ -19,6 +19,7 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.replace(HistoryViewController());
     return Obx(() {
       final controller = Get.put(HistoryViewController());
       final totalPointHistory = controller.totalPointHistory();
