@@ -8,6 +8,8 @@ class NotificationViewController extends BaseViewController {
 
   final paginate = Rxn<PaginationMeta>();
   final RxList<Notice> notices = <Notice>[].obs;
+  final adminPaginate = Rxn<PaginationMeta>();
+  final RxList<AdminNotice> adminNotices = <AdminNotice>[].obs;
 
   @override
   void onInit() {
@@ -20,6 +22,9 @@ class NotificationViewController extends BaseViewController {
       final noticeApi = await api.getNoticesList();
       paginate.value = noticeApi.meta;
       notices.value = noticeApi.data;
+      final adminNoticeApi = await api.getAdminNoticesList();
+      adminPaginate.value = adminNoticeApi.meta;
+      adminNotices.value = adminNoticeApi.data;
     });
   }
 
@@ -30,6 +35,16 @@ class NotificationViewController extends BaseViewController {
       nextNotices.value = nextNoticeApi.data;
       notices.value = [...notices(), ...nextNotices()];
       paginate.value = nextNoticeApi.meta;
+    });
+  }
+
+  Future<void> onTapNextPageAdmin({required int page}) async {
+    await callAsyncApi(() async {
+      final nextAdminNoticeApi = await api.getAdminNoticesList(page: page);
+      final RxList<AdminNotice> nextAdminNotices = <AdminNotice>[].obs;
+      nextAdminNotices.value = nextAdminNoticeApi.data;
+      adminNotices.value = [...adminNotices(), ...nextAdminNotices()];
+      adminPaginate.value = nextAdminNoticeApi.meta;
     });
   }
 }

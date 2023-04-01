@@ -363,6 +363,41 @@ class ApiService extends GetConnect {
     return count;
   }
 
+  // 運営お知らせ一覧API
+  Future<PaginationResponse<List<AdminNotice>>> getAdminNoticesList({int page = 1}) async {
+    final res = await http.get(
+      _makeUri('/adminNotices', queryParams: {
+        'page': page.toString(),
+      }),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    final dynamic meta = _decodeResponse(res)['meta'];
+    return PaginationResponse(
+      data: data.map((json) => AdminNotice.fromJson(json)).toList(),
+      meta: PaginationMeta.fromJson(meta),
+    );
+  }
+
+  // 運営お知らせ既読API
+  Future<bool> readAdminNotice({required int noticeId}) async {
+    final res = await http.put(
+      _makeUri('/adminNotices/$noticeId/read'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 運営お知らせ未読数取得API
+  Future<int> getAdminNotificationUnreadCount() async {
+    final res = await http.get(
+      _makeUri('/AdminNotice/unread-count'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final int count = _decodeResponse(res)['data']['unreadCount'];
+    return count;
+  }
+
   // ごほうび一覧API
   Future<List<FamilyReward>> getFamilyRewardList() async {
     final res = await http.get(
