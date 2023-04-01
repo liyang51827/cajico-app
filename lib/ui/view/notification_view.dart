@@ -15,6 +15,7 @@ class NotificationView extends StatelessWidget {
     return Obx(() {
       final controller = Get.put(NotificationViewController());
       final paginate = controller.paginate();
+      final unreadCount = controller.adminUnreadCount();
 
       return DefaultTabController(
         initialIndex: 0,
@@ -27,17 +28,37 @@ class NotificationView extends StatelessWidget {
             title: const Text('お知らせ', style: TextStyle(color: gray2)),
             backgroundColor: Colors.white,
             titleTextStyle: const TextStyle(fontSize: 22),
-            bottom: const PreferredSize(
-              preferredSize: Size.fromHeight(50),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(50),
               child: TabBar(
                 labelColor: primaryColor,
                 unselectedLabelColor: gray4,
                 indicatorColor: primaryColor,
                 indicatorWeight: 4,
-                labelStyle: TextStyle(fontSize: 16),
+                labelStyle: const TextStyle(fontSize: 16),
                 tabs: <Widget>[
-                  Tab(child: Text('行動記録')),
-                  Tab(child: Text('運営')),
+                  const Tab(child: Text('行動記録')),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('運営'),
+                        unreadCount > 0 ? horizontalSpaceTiny : const SizedBox(),
+                        unreadCount > 0
+                            ? Container(
+                                width: 20,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle, color: secondaryColor),
+                                child: const Text(
+                                  '1',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              )
+                            : const SizedBox()
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -77,30 +98,32 @@ class NotificationView extends StatelessWidget {
                   onRefresh: controller.fetchData,
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: Column(
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.adminNotices().length,
-                          itemBuilder: (context, index) {
-                            final item = controller.adminNotices.elementAt(index);
-                            return _AdminNotificationDetail(
-                              id: item.id,
-                              date: item.date,
-                              title: item.title,
-                              message: item.message,
-                              isRead: item.isRead,
-                            );
-                          },
-                        ),
-                        paginate != null && paginate.hasNextPage()
-                            ? NextPageButton(
-                                onPressed: () =>
-                                    controller.onTapNextPage(page: paginate.getNextPage()),
-                                label: '次の10件を表示')
-                            : const SizedBox(),
-                      ],
+                    child: Obx(
+                      () => Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.adminNotices().length,
+                            itemBuilder: (context, index) {
+                              final item = controller.adminNotices.elementAt(index);
+                              return _AdminNotificationDetail(
+                                id: item.id,
+                                date: item.date,
+                                title: item.title,
+                                message: item.message,
+                                isRead: item.isRead,
+                              );
+                            },
+                          ),
+                          paginate != null && paginate.hasNextPage()
+                              ? NextPageButton(
+                                  onPressed: () =>
+                                      controller.onTapNextPage(page: paginate.getNextPage()),
+                                  label: '次の10件を表示')
+                              : const SizedBox(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -181,6 +204,7 @@ class _AdminNotificationDetail extends StatelessWidget {
     return InkWell(
       onTap: () {
         controller.onTapReadAdminNotice(noticeId: id);
+        controller.fetchData();
         Get.to(() => AdminNoticeDetailView(date: date, title: title, message: message));
       },
       child: Container(
