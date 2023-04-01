@@ -1,4 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/admin_notice_detail.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/next_page_button.dart';
 import 'package:flutter/material.dart';
@@ -176,42 +177,56 @@ class _AdminNotificationDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.black12, //枠線の色
-              width: 1, //枠線の太さ
+    final controller = Get.put(NotificationViewController());
+    return InkWell(
+      onTap: () {
+        controller.onTapReadAdminNotice(noticeId: id);
+        Get.to(() => AdminNoticeDetailView(date: date, title: title, message: message));
+      },
+      child: Container(
+        height: 90,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.black12, //枠線の色
+                width: 1, //枠線の太さ
+              ),
             ),
-          ),
-          color: Colors.white),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(date, style: const TextStyle(fontSize: 12)),
-          verticalSpaceTiny,
-          isRead
-              ? Text(title, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16))
-              : Text(title, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          verticalSpaceTiny,
-          SizedBox(
-            width: double.infinity,
-            child: isRead
-                ? Text(
-                    message,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13),
-                  )
+            color: Colors.white),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(date, style: const TextStyle(fontSize: 12)),
+            verticalSpaceTiny,
+            isRead
+                ? Text(title, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16))
                 : Text(
-                    message,
+                    title,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-          )
-        ],
+            verticalSpaceTiny,
+            SizedBox(
+              width: double.infinity,
+              child: isRead
+                  ? Text(
+                      message,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 13),
+                    )
+                  : Text(
+                      message,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    ),
+            )
+          ],
+        ),
       ),
     );
   }

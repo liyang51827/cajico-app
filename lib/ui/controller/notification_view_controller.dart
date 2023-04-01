@@ -10,11 +10,13 @@ class NotificationViewController extends BaseViewController {
   final RxList<Notice> notices = <Notice>[].obs;
   final adminPaginate = Rxn<PaginationMeta>();
   final RxList<AdminNotice> adminNotices = <AdminNotice>[].obs;
+  final adminUnreadCount = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     fetchData();
+    onTapGetAdminNoticeUnreadCount();
   }
 
   Future<void> fetchData() async {
@@ -45,6 +47,19 @@ class NotificationViewController extends BaseViewController {
       nextAdminNotices.value = nextAdminNoticeApi.data;
       adminNotices.value = [...adminNotices(), ...nextAdminNotices()];
       adminPaginate.value = nextAdminNoticeApi.meta;
+    });
+  }
+
+  Future<void> onTapReadAdminNotice({required int noticeId}) async {
+    await callAsyncApi(() async {
+      await api.readAdminNotice(noticeId: noticeId);
+      adminUnreadCount.value -= 1;
+    });
+  }
+
+  Future<void> onTapGetAdminNoticeUnreadCount() async {
+    await callAsyncApi(() async {
+      adminUnreadCount.value = await api.getAdminNotificationUnreadCount();
     });
   }
 }
