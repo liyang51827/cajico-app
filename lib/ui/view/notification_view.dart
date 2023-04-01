@@ -15,6 +15,7 @@ class NotificationView extends StatelessWidget {
     return Obx(() {
       final controller = Get.put(NotificationViewController());
       final paginate = controller.paginate();
+      final adminPaginate = controller.adminPaginate();
       final unreadCount = controller.adminUnreadCount();
 
       return DefaultTabController(
@@ -116,10 +117,10 @@ class NotificationView extends StatelessWidget {
                               );
                             },
                           ),
-                          paginate != null && paginate.hasNextPage()
+                          adminPaginate != null && adminPaginate.hasNextPage()
                               ? NextPageButton(
                                   onPressed: () =>
-                                      controller.onTapNextPage(page: paginate.getNextPage()),
+                                      controller.onTapNextPage(page: adminPaginate.getNextPage()),
                                   label: '次の10件を表示')
                               : const SizedBox(),
                         ],
