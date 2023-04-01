@@ -391,7 +391,7 @@ class ApiService extends GetConnect {
   // 運営お知らせ未読数取得API
   Future<int> getAdminNotificationUnreadCount() async {
     final res = await http.get(
-      _makeUri('/AdminNotice/unread-count'),
+      _makeUri('/adminNotice/unread-count'),
       headers: await _makeAuthenticatedHeader(),
     );
     final int count = _decodeResponse(res)['data']['unreadCount'];

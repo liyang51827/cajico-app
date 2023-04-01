@@ -21,12 +21,18 @@ class NotificationViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      final noticeApi = await api.getNoticesList();
-      paginate.value = noticeApi.meta;
-      notices.value = noticeApi.data;
-      final adminNoticeApi = await api.getAdminNoticesList();
-      adminPaginate.value = adminNoticeApi.meta;
-      adminNotices.value = adminNoticeApi.data;
+      await Future.wait([
+        () async {
+          final noticeApi = await api.getNoticesList();
+          paginate.value = noticeApi.meta;
+          notices.value = noticeApi.data;
+        }(),
+        () async {
+          final adminNoticeApi = await api.getAdminNoticesList();
+          adminPaginate.value = adminNoticeApi.meta;
+          adminNotices.value = adminNoticeApi.data;
+        }(),
+      ]);
     });
   }
 
