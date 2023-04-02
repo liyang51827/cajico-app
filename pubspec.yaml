@@ -36,7 +36,7 @@ dependencies:
   uni_links: ^0.5.1
   path_provider: ^2.0.13
   http_parser: ^4.0.2
-  syncfusion_flutter_calendar: ^21.1.37
+  syncfusion_flutter_calendar: ^19.2.62
 
 dev_dependencies:
   flutter_test:

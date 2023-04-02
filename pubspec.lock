@@ -739,21 +739,21 @@ packages:
       name: syncfusion_flutter_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "21.1.37"
+    version: "19.4.56"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "21.1.37"
+    version: "19.4.56"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "21.1.37"
+    version: "19.4.56"
   synchronized:
     dependency: transitive
     description:
@@ -781,7 +781,7 @@ packages:
       name: timezone
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.1"
+    version: "0.8.0"
   tutorial_coach_mark:
     dependency: "direct main"
     description:

@@ -4,6 +4,7 @@ import '../widget/background.dart';
 import '../widget/footer.dart';
 import '../widget/header.dart';
 import '../widget/home_drawer.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
@@ -11,7 +12,7 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: gray7,
+      backgroundColor: Colors.white,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(55),
         child: Header(
@@ -20,13 +21,15 @@ class ScheduleView extends StatelessWidget {
         ),
       ),
       drawer: const HomeDrawer(),
-      body: Background(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            child: Column(
-              children: const [],
+      body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Container(
+          height: MediaQuery.of(context).size.height - 113,
+          child: SfCalendar(
+            view: CalendarView.day,
+            timeSlotViewSettings: const TimeSlotViewSettings(
+              timeIntervalHeight: 80,
+              timeFormat: 'HH:mm',
             ),
           ),
         ),
