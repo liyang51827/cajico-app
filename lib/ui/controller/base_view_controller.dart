@@ -26,6 +26,9 @@ class BaseViewController extends GetxController {
       Get.to(() => const RewardView());
     } else if (index == 2) {
       tabIndex.value = 2;
+      Get.to(() => const RewardView());
+    } else if (index == 3) {
+      tabIndex.value = 3;
       Get.to(() => const HistoryView());
     }
   }
