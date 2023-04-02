@@ -24,7 +24,7 @@ class Footer extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(LineIcons.calendar),
             activeIcon: Icon(CupertinoIcons.calendar),
-            label: 'カレンダー',
+            label: 'スケジュール',
           ),
           BottomNavigationBarItem(
             icon: Icon(LineIcons.gift),
@@ -40,10 +40,10 @@ class Footer extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         iconSize: 25,
-        unselectedFontSize: 12,
+        unselectedFontSize: 11,
         unselectedItemColor: subColor,
         selectedIconTheme: const IconThemeData(size: 31),
-        selectedFontSize: 12,
+        selectedFontSize: 11,
         selectedItemColor: primaryColor,
       ),
     );
