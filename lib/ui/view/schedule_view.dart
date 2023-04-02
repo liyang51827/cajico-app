@@ -24,7 +24,7 @@ class ScheduleView extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
-          height: MediaQuery.of(context).size.height - 113,
+          height: MediaQuery.of(context).size.height - 143,
           child: SfCalendar(
             view: CalendarView.day,
             timeSlotViewSettings: const TimeSlotViewSettings(
