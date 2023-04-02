@@ -1,20 +1,12 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import '../widget/background.dart';
+import '../widget/footer.dart';
 import '../widget/header.dart';
+import '../widget/home_drawer.dart';
 
-class AdminNoticeDetailView extends StatelessWidget {
-  const AdminNoticeDetailView({
-    super.key,
-    required this.date,
-    required this.title,
-    required this.message,
-  });
-
-  final String date;
-  final String title;
-  final String message;
+class ScheduleView extends StatelessWidget {
+  const ScheduleView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,39 +15,23 @@ class AdminNoticeDetailView extends StatelessWidget {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(55),
         child: Header(
-          imageUrl: 'assets/images/logo.png',
+          imageUrl: 'assets/images/logo_schedule.png',
           title: 'スケジュール',
         ),
       ),
+      drawer: const HomeDrawer(),
       body: Background(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
             child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(fontSize: 22),
-                  ),
-                ),
-                verticalSpaceMediumSmall,
-                Container(
-                    width: double.infinity,
-                    child: Text(
-                      date,
-                      textAlign: TextAlign.right,
-                    )),
-                verticalSpaceMediumSmall,
-                Text(message)
-              ],
+              children: const [],
             ),
           ),
         ),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }
