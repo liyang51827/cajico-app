@@ -34,8 +34,7 @@ class HouseWorkEditIndexView extends StatelessWidget {
         onPressed: () => Get.to(
           HouseWorkCreateView(categoryId: houseWorkCategoryId, categoryName: categoryName),
         ),
-        backgroundColor: primaryColor,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
