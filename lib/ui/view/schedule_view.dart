@@ -42,24 +42,25 @@ class ScheduleView extends StatelessWidget {
                 String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: Text(selectedAppointment.subject),
-                    content: SizedBox(
-                      height: 200,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('開始：$formattedStartTime', style: TextStyle(color: gray3),),
-                          Text('終了：$formattedStartTime', style: TextStyle(color: gray3)),
-                          Text('ステータス：未完了', style: TextStyle(color: gray3)),
-                          Text('完了者：かつのり', style: TextStyle(color: gray3)),
-                          Text('ポイント：80P', style: TextStyle(color: gray3)),
-                          verticalSpaceMedium,
-                          const PrimarySmallButton(text: '完了')
-                        ],
-                      ),
+                  builder: (BuildContext context) => SimpleDialog(
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                    title: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(selectedAppointment.subject),
+                        verticalSpaceMedium,
+                        _DialogText(text: '$formattedStartTime〜$formattedStartTime'),
+                        _DialogText(text: 'ステータス：未完了'),
+                        _DialogText(text: '完了者：かつのり'),
+                        _DialogText(text: 'ポイント：80P'),
+                      ],
                     ),
+                    children: [
+                      SimpleDialogOption(
+                        child: const PrimarySmallButton(text: '完了'),
+                      ),
+                    ],
                   ),
                 );
               }
@@ -112,5 +113,16 @@ _DataSource _getCalendarDataSource() {
 class _DataSource extends CalendarDataSource {
   _DataSource(List<Appointment> source) {
     appointments = source;
+  }
+}
+
+class _DialogText extends StatelessWidget {
+  const _DialogText({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: const TextStyle(color: gray3, fontSize: 15));
   }
 }
