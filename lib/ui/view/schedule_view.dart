@@ -1,13 +1,10 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/view/schedule_detail_view.dart';
 import 'package:flutter/material.dart';
 import '../widget/footer.dart';
 import '../widget/header.dart';
 import '../widget/home_drawer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:intl/intl.dart';
-
-import '../widget/primary_small_button.dart';
 
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
@@ -38,29 +35,12 @@ class ScheduleView extends StatelessWidget {
             dataSource: _getCalendarDataSource(),
             onTap: (CalendarTapDetails details) {
               if (details.appointments != null) {
-                Appointment selectedAppointment = details.appointments![0];
-                String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => SimpleDialog(
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                    title: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(selectedAppointment.subject),
-                        verticalSpaceMedium,
-                        _DialogText(text: '$formattedStartTime〜$formattedStartTime'),
-                        _DialogText(text: 'ステータス：未完了'),
-                        _DialogText(text: '完了者：かつのり'),
-                        _DialogText(text: 'ポイント：80P'),
-                      ],
-                    ),
-                    children: [
-                      SimpleDialogOption(
-                        child: const PrimarySmallButton(text: '完了'),
-                      ),
-                    ],
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        ScheduleDetailView(selectedAppointment: details.appointments![0]),
+                    fullscreenDialog: true,
                   ),
                 );
               }
@@ -113,16 +93,5 @@ _DataSource _getCalendarDataSource() {
 class _DataSource extends CalendarDataSource {
   _DataSource(List<Appointment> source) {
     appointments = source;
-  }
-}
-
-class _DialogText extends StatelessWidget {
-  const _DialogText({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text, style: const TextStyle(color: gray3, fontSize: 15));
   }
 }
