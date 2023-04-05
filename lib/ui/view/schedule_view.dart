@@ -1,9 +1,13 @@
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import '../widget/footer.dart';
 import '../widget/header.dart';
 import '../widget/home_drawer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:intl/intl.dart';
+
+import '../widget/primary_small_button.dart';
 
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
@@ -32,6 +36,34 @@ class ScheduleView extends StatelessWidget {
               timeFormat: 'HH:mm',
             ),
             dataSource: _getCalendarDataSource(),
+            onTap: (CalendarTapDetails details) {
+              if (details.appointments != null) {
+                Appointment selectedAppointment = details.appointments![0];
+                String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text(selectedAppointment.subject),
+                    content: SizedBox(
+                      height: 200,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('開始：$formattedStartTime', style: TextStyle(color: gray3),),
+                          Text('終了：$formattedStartTime', style: TextStyle(color: gray3)),
+                          Text('ステータス：未完了', style: TextStyle(color: gray3)),
+                          Text('完了者：かつのり', style: TextStyle(color: gray3)),
+                          Text('ポイント：80P', style: TextStyle(color: gray3)),
+                          verticalSpaceMedium,
+                          const PrimarySmallButton(text: '完了')
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+            },
           ),
         ),
       ),
