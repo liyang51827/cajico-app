@@ -23,16 +23,17 @@ class ScheduleDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black54),
         centerTitle: true,
-        title: const Text('詳細', style: TextStyle(color: gray2)),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
+        elevation: 0.0,
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
