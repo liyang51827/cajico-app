@@ -27,7 +27,7 @@ class ScheduleAppointment {
       startTime: DateTime.parse(json['startTime']),
       endTime: DateTime.parse(json['endTime']),
       subject: json['subject'],
-      color: Color(int.parse(json['color'].replaceAll('#', '0xff'))),
+      color: Color(int.parse(json['color'].replaceAll('#', '0x'))),
       status: json['status'],
       userName: json['userName'],
       point: json['point'],

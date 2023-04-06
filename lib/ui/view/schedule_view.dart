@@ -8,6 +8,8 @@ import '../widget/header.dart';
 import '../widget/home_drawer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../widget/loading_stack.dart';
+
 class ScheduleView extends StatelessWidget {
   const ScheduleView({super.key});
 
@@ -24,51 +26,53 @@ class ScheduleView extends StatelessWidget {
         ),
       ),
       drawer: const HomeDrawer(),
-      body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height - 143,
-          child: Obx(() {
-            return SfCalendar(
-              view: CalendarView.day,
-              headerDateFormat: 'yyyy年M月',
-              timeSlotViewSettings: const TimeSlotViewSettings(
-                timeIntervalHeight: 100,
-                timeFormat: 'HH:mm',
-              ),
-              dataSource: _DataSource(controller.appoints()),
-              appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: details.appointments.first.color,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      details.appointments.first.subject!,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
+      body: GetLoadingStack<ScheduleViewController>(
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - 143,
+            child: Obx(() {
+              return SfCalendar(
+                view: CalendarView.day,
+                headerDateFormat: 'yyyy年M月',
+                timeSlotViewSettings: const TimeSlotViewSettings(
+                  timeIntervalHeight: 100,
+                  timeFormat: 'HH:mm',
+                ),
+                dataSource: _DataSource(controller.appoints()),
+                appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: details.appointments.first.color,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        details.appointments.first.subject!,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-              onTap: (CalendarTapDetails details) {
-                if (details.appointments != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          ScheduleDetailView(selectedAppointment: details.appointments![0]),
-                      fullscreenDialog: true,
-                    ),
                   );
-                }
-              },
-            );
-          }),
+                },
+                onTap: (CalendarTapDetails details) {
+                  if (details.appointments != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            ScheduleDetailView(selectedAppointment: details.appointments![0]),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  }
+                },
+              );
+            }),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
