@@ -30,20 +30,33 @@ class ScheduleDetailView extends StatelessWidget {
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
         elevation: 0.0,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.edit, size: 24),
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(selectedAppointment.subject),
+            Text(
+              selectedAppointment.subject,
+              style: const TextStyle(fontSize: 20),
+            ),
             verticalSpaceMedium,
-            _DetailText(text: '$formattedStartTime〜$formattedStartTime'),
-            _DetailText(text: 'ステータス：未完了'),
-            _DetailText(text: '完了者：かつのり'),
-            _DetailText(text: 'ポイント：80P'),
+            _Menu(
+                menu: '時間',
+                value: '$formattedStartTime〜$formattedStartTime',
+                icon: LineIcons.clock),
+            _Menu(menu: 'ステータス', value: '未完了', icon: LineIcons.checkSquare),
+            _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user),
+            _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins),
           ],
         ),
       ),
@@ -51,13 +64,34 @@ class ScheduleDetailView extends StatelessWidget {
   }
 }
 
-class _DetailText extends StatelessWidget {
-  const _DetailText({required this.text});
+class _Menu extends StatelessWidget {
+  const _Menu({required this.menu, required this.value, required this.icon});
 
-  final String text;
+  final String menu;
+  final String value;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: const TextStyle(color: gray3, fontSize: 15));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Icon(icon, color: subColor),
+          horizontalSpaceMediumSmall,
+          SizedBox(
+            width: 80,
+            child: Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              maxLines: 2, // 2行に改行
+              overflow: TextOverflow.ellipsis, // テキストがオーバーフローした場合の処理
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
