@@ -29,10 +29,28 @@ class ScheduleView extends StatelessWidget {
             view: CalendarView.day,
             headerDateFormat: 'yyyy年M月',
             timeSlotViewSettings: const TimeSlotViewSettings(
-              timeIntervalHeight: 80,
+              timeIntervalHeight: 100,
               timeFormat: 'HH:mm',
             ),
             dataSource: _getCalendarDataSource(),
+            appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: details.appointments.first.color,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    details.appointments.first.subject!,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              );
+            },
             onTap: (CalendarTapDetails details) {
               if (details.appointments != null) {
                 Navigator.push(

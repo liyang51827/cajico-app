@@ -22,6 +22,7 @@ class ScheduleDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
     String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
     String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
     return Scaffold(
@@ -53,12 +54,15 @@ class ScheduleDetailView extends StatelessWidget {
             ),
             verticalSpaceMedium,
             _Menu(
-                menu: '時間',
-                value: '$formattedStartTime〜$formattedEndTime',
-                icon: LineIcons.clock),
-            _Menu(menu: 'ステータス', value: '未完了', icon: LineIcons.checkSquare),
-            _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user),
-            _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins),
+              menu: '時間',
+              value: '$formattedDate $formattedStartTime〜$formattedEndTime',
+              icon: LineIcons.clock,
+              isPadding: false,
+            ),
+            _Menu(value: '毎週水曜日繰り返し', isPadding: true),
+            _Menu(menu: '状況', value: '未完了', icon: LineIcons.checkSquare, isPadding: true),
+            _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
+            _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
           ],
         ),
       ),
@@ -71,23 +75,25 @@ class ScheduleDetailView extends StatelessWidget {
 }
 
 class _Menu extends StatelessWidget {
-  const _Menu({required this.menu, required this.value, required this.icon});
+  const _Menu({this.menu, required this.value, this.icon, required this.isPadding});
 
-  final String menu;
+  final String? menu;
   final String value;
-  final IconData icon;
+  final IconData? icon;
+  final bool isPadding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: isPadding ? const EdgeInsets.only(bottom: 16) : EdgeInsets.zero,
       child: Row(
         children: [
-          Icon(icon, color: subColor),
+          icon != null ? Icon(icon, color: subColor) : Icon(icon, color: Colors.white),
           horizontalSpaceMediumSmall,
           SizedBox(
-            width: 80,
-            child: Text(menu, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+            width: 70,
+            child:
+                Text(menu ?? '', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
           ),
           Expanded(
             child: Text(
