@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import '../model/notice.dart';
 import '../model/family_reward.dart';
 import '../model/reward_history.dart';
+import '../model/schedule_appointment_data.dart';
 
 class ApiService extends GetConnect {
   String? token;
@@ -502,6 +503,64 @@ class ApiService extends GetConnect {
       body: jsonEncode({'title': inquiryData.title(), 'body': inquiryData.body()}),
     );
     return _checkStatusCode(res);
+  }
+
+  // その日のスケジュール取得API
+  Future<List<ScheduleAppointment>> getScheduleAppointmentList() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final data = [
+      {
+        'startTime': '2023-04-06 10:00:00',
+        'endTime': '2023-04-06 10:30:00',
+        'subject': '朝食作り',
+        'color': '#f28e04',
+        'isCompleted': false,
+        'userName': 'かつのり',
+        'point': 80,
+        'repeatRule': '毎週水曜日繰り返し',
+      },
+      {
+        'startTime': '2023-04-06 11:00:00',
+        'endTime': '2023-04-06 11:15:00',
+        'subject': '朝食作り',
+        'color': '#f28e04',
+        'isCompleted': false,
+        'userName': 'かつのり',
+        'point': 80,
+        'repeatRule': '毎週水曜日繰り返し',
+      },
+      {
+        'startTime': '2023-04-06 12:00:00',
+        'endTime': '2023-04-06 12:45:00',
+        'subject': '朝食作り',
+        'color': '#f28e04',
+        'isCompleted': true,
+        'userName': 'かつのり',
+        'point': 80,
+        'repeatRule': '毎週水曜日繰り返し',
+      },
+      {
+        'startTime': '2023-04-06 13:00:00',
+        'endTime': '2023-04-06 13:15:00',
+        'subject': '朝食作り',
+        'color': '#f28e04',
+        'isCompleted': false,
+        'userName': 'かつのり',
+        'point': 80,
+        'repeatRule': '毎週水曜日繰り返し',
+      },
+      {
+        'startTime': '2023-04-06 14:00:00',
+        'endTime': '2023-04-06 14:30:00',
+        'subject': '朝食作り',
+        'color': '#f28e04',
+        'isCompleted': true,
+        'userName': 'かつのり',
+        'point': 80,
+        'repeatRule': '毎週水曜日繰り返し',
+      },
+    ];
+    return data.map((json) => ScheduleAppointment.fromJson(json)).toList();
   }
 }
 
