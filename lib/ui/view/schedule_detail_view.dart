@@ -23,6 +23,7 @@ class ScheduleDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
+    String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -53,7 +54,7 @@ class ScheduleDetailView extends StatelessWidget {
             verticalSpaceMedium,
             _Menu(
                 menu: '時間',
-                value: '$formattedStartTime〜$formattedStartTime',
+                value: '$formattedStartTime〜$formattedEndTime',
                 icon: LineIcons.clock),
             _Menu(menu: 'ステータス', value: '未完了', icon: LineIcons.checkSquare),
             _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user),
