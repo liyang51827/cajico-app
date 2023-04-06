@@ -9,6 +9,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/normal_dialog.dart';
+import '../widget/primary_button.dart';
 import 'my_page_edit_view.dart';
 
 class ScheduleDetailView extends StatelessWidget {
@@ -59,6 +60,10 @@ class ScheduleDetailView extends StatelessWidget {
             _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins),
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(24),
+        child: PrimaryButton(label: '完了する', onPressed: () {}),
       ),
     );
   }
