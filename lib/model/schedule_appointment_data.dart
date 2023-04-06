@@ -7,7 +7,7 @@ class ScheduleAppointment {
     required this.endTime,
     required this.subject,
     required this.color,
-    required this.isCompleted,
+    required this.status,
     required this.userName,
     required this.point,
     this.repeatRule,
@@ -17,7 +17,7 @@ class ScheduleAppointment {
   final DateTime endTime;
   final String subject;
   final Color color;
-  final bool isCompleted;
+  final String status;
   final String userName;
   final int point;
   final String? repeatRule;
@@ -28,7 +28,7 @@ class ScheduleAppointment {
       endTime: DateTime.parse(json['endTime']),
       subject: json['subject'],
       color: Color(int.parse(json['color'].replaceAll('#', '0xff'))),
-      isCompleted: json['isCompleted'] as bool,
+      status: json['status'],
       userName: json['userName'],
       point: json['point'],
       repeatRule: json['repeatRule'],

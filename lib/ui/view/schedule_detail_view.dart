@@ -59,10 +59,10 @@ class ScheduleDetailView extends StatelessWidget {
               icon: LineIcons.clock,
               isPadding: false,
             ),
-            _Menu(value: '毎週水曜日繰り返し', isPadding: true),
-            _Menu(menu: '状況', value: '未完了', icon: LineIcons.checkSquare, isPadding: true),
-            _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
-            _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
+            _Menu(value: selectedAppointment.recurrenceRule, isPadding: true),
+            _Menu(menu: '状況', value: selectedAppointment.location, icon: LineIcons.checkSquare, isPadding: true),
+            _Menu(menu: '完了者', value: selectedAppointment.notes, icon: LineIcons.user, isPadding: true),
+            _Menu(menu: 'ポイント', value: '${selectedAppointment.recurrenceId}P', icon: LineIcons.coins, isPadding: true),
           ],
         ),
       ),
@@ -78,7 +78,7 @@ class _Menu extends StatelessWidget {
   const _Menu({this.menu, required this.value, this.icon, required this.isPadding});
 
   final String? menu;
-  final String value;
+  final String? value;
   final IconData? icon;
   final bool isPadding;
 
@@ -97,7 +97,7 @@ class _Menu extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              value,
+              value ?? '',
               maxLines: 2, // 2行に改行
               overflow: TextOverflow.ellipsis, // テキストがオーバーフローした場合の処理
             ),

@@ -85,12 +85,18 @@ class _DataSource extends CalendarDataSource {
     // Appointment型のリストを直接セットする
     appointments = <Appointment>[];
     for (var scheduleAppointment in source) {
-      appointments?.add(Appointment(
-        startTime: scheduleAppointment.startTime,
-        endTime: scheduleAppointment.endTime,
-        subject: scheduleAppointment.subject,
-        color: scheduleAppointment.color,
-      ));
+      appointments?.add(
+        Appointment(
+          startTime: scheduleAppointment.startTime,
+          endTime: scheduleAppointment.endTime,
+          subject: scheduleAppointment.subject,
+          color: scheduleAppointment.color,
+          notes: scheduleAppointment.userName,
+          location: scheduleAppointment.status,
+          recurrenceId: scheduleAppointment.point,
+          recurrenceRule: scheduleAppointment.repeatRule,
+        ),
+      );
     }
   }
 }
