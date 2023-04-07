@@ -16,7 +16,7 @@ class ScheduleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ScheduleViewController());
+    Get.replace(ScheduleViewController());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(
@@ -33,6 +33,7 @@ class ScheduleView extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).size.height - 143,
             child: Obx(() {
+              final controller = Get.put(ScheduleViewController());
               return SfCalendar(
                 view: CalendarView.day,
                 headerDateFormat: 'yyyy年M月',
