@@ -42,26 +42,7 @@ class ScheduleView extends StatelessWidget {
                 ),
                 dataSource: _DataSource(controller.appoints()),
                 appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
-                          ? details.appointments.first.color
-                          : details.appointments.first.color.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        details.appointments.first.subject!,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
-                              ? Colors.white
-                              : gray3,
-                        ),
-                      ),
-                    ),
-                  );
+                  return _CalendarAppointmentDetail(details: details);
                 },
                 onTap: (CalendarTapDetails details) {
                   if (details.appointments != null) {
@@ -107,5 +88,58 @@ class _DataSource extends CalendarDataSource {
         ),
       );
     }
+  }
+}
+
+class _CalendarAppointmentDetail extends StatelessWidget {
+  const _CalendarAppointmentDetail({required this.details});
+
+  final CalendarAppointmentDetails details;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
+            ? details.appointments.first.color
+            : details.appointments.first.location == '未完了'
+                ? Colors.white
+                : details.appointments.first.color.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(5),
+        border: DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
+                details.appointments.first.location == '未完了'
+            ? Border.all(color: details.appointments.first.color, width: 2.0)
+            : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          children: [
+            DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
+                    details.appointments.first.location == '未完了'
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Icon(
+                      Icons.warning,
+                      color: details.appointments.first.color,
+                      size: 16,
+                    ),
+                  )
+                : const SizedBox(),
+            Text(
+              details.appointments.first.subject!,
+              style: TextStyle(
+                fontSize: 13,
+                color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
+                    ? Colors.white
+                    : details.appointments.first.location == '未完了'
+                        ? details.appointments.first.color
+                        : gray3,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

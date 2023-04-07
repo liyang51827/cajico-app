@@ -524,7 +524,7 @@ class ApiService extends GetConnect {
         'endTime': '2023-04-07 11:15:00',
         'subject': '朝食作り２',
         'color': '#ff3B9C3D',
-        'status': '完了２',
+        'status': '未完了',
         'userName': 'かつのり２',
         'point': 20,
         'repeatRule': '毎週水曜日繰り返し２',
