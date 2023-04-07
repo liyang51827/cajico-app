@@ -9,6 +9,7 @@ import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/notification_view_controller.dart';
 import '../widget/background.dart';
 import '../widget/header.dart';
 
@@ -28,8 +29,13 @@ class HomeView extends GetView<HomeViewController> {
           actions: [
             Obx(() {
               final controller = Get.put(HomeViewController());
+              final notificationController = Get.put(NotificationViewController());
               final int unreadCount = controller.unreadCount();
-              return NotificationAction(unreadCount: unreadCount);
+              final int adminNoticeUnreadCount = notificationController.adminUnreadCount();
+              return NotificationAction(
+                unreadCount: unreadCount,
+                adminNoticeUnreadCount: adminNoticeUnreadCount,
+              );
             }),
           ],
         ),

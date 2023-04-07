@@ -16,7 +16,6 @@ class NotificationViewController extends BaseViewController {
   void onInit() {
     super.onInit();
     fetchData();
-    onTapGetAdminNoticeUnreadCount();
   }
 
   Future<void> fetchData() async {
@@ -31,6 +30,9 @@ class NotificationViewController extends BaseViewController {
           final adminNoticeApi = await api.getAdminNoticesList();
           adminPaginate.value = adminNoticeApi.meta;
           adminNotices.value = adminNoticeApi.data;
+        }(),
+        () async {
+          adminUnreadCount.value = await api.getAdminNotificationUnreadCount();
         }(),
       ]);
     });
@@ -60,12 +62,6 @@ class NotificationViewController extends BaseViewController {
     await callAsyncApi(() async {
       await api.readAdminNotice(noticeId: noticeId);
       adminUnreadCount.value -= 1;
-    });
-  }
-
-  Future<void> onTapGetAdminNoticeUnreadCount() async {
-    await callAsyncApi(() async {
-      adminUnreadCount.value = await api.getAdminNotificationUnreadCount();
     });
   }
 }

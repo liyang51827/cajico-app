@@ -7,14 +7,15 @@ import '../controller/home_view_controller.dart';
 import '../view/notification_view.dart';
 
 class NotificationAction extends StatelessWidget {
-  const NotificationAction({super.key, required this.unreadCount});
+  const NotificationAction({super.key, required this.unreadCount, required this.adminNoticeUnreadCount});
 
   final int unreadCount;
+  final int adminNoticeUnreadCount;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewController());
-    if(unreadCount != 0) {
+    if(unreadCount > 0 || adminNoticeUnreadCount > 0) {
       return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: IconButton(
