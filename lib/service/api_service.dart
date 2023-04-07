@@ -510,11 +510,11 @@ class ApiService extends GetConnect {
     await Future.delayed(const Duration(seconds: 1));
     final data = [
       {
-        'startTime': '2023-04-07 10:00:00',
-        'endTime': '2023-04-07 10:30:00',
+        'startTime': '2023-04-07 09:00:00',
+        'endTime': '2023-04-07 09:30:00',
         'subject': '朝食作り１',
         'color': '#ffF03329',
-        'status': '完了１',
+        'status': '未完了',
         'userName': 'かつのり１',
         'point': 10,
         'repeatRule': '毎週水曜日繰り返し１',

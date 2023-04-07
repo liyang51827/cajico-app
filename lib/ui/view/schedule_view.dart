@@ -1,4 +1,5 @@
 import 'package:cajico_app/model/schedule_appointment_data.dart';
+import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/schedule_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,16 +44,20 @@ class ScheduleView extends StatelessWidget {
                 appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: details.appointments.first.color,
+                      color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
+                          ? details.appointments.first.color
+                          : details.appointments.first.color.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         details.appointments.first.subject!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
-                          color: Colors.white,
+                          color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
+                              ? Colors.white
+                              : gray3,
                         ),
                       ),
                     ),
