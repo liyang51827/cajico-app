@@ -24,7 +24,7 @@ class Footer extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(LineIcons.calendar),
             activeIcon: Icon(CupertinoIcons.calendar),
-            label: 'スケジュール',
+            label: '予定',
           ),
           BottomNavigationBarItem(
             icon: Icon(LineIcons.gift),

@@ -505,7 +505,7 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
-  // その日のスケジュール取得API
+  // その日の予定取得API
   Future<List<ScheduleAppointment>> getScheduleAppointmentList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = [

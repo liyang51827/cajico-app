@@ -23,7 +23,7 @@ class ScheduleView extends StatelessWidget {
         preferredSize: Size.fromHeight(55),
         child: Header(
           imageUrl: 'assets/images/logo_schedule.png',
-          title: 'スケジュール',
+          title: '予定',
         ),
       ),
       drawer: const HomeDrawer(),
