@@ -100,16 +100,10 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
+        color: details.appointments.first.location == '未完了'
             ? details.appointments.first.color
-            : details.appointments.first.location == '未完了'
-                ? Colors.white
-                : details.appointments.first.color.withOpacity(0.5),
+            : details.appointments.first.color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(5),
-        border: DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
-                details.appointments.first.location == '未完了'
-            ? Border.all(color: details.appointments.first.color, width: 2.0)
-            : null,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -117,11 +111,11 @@ class _CalendarAppointmentDetail extends StatelessWidget {
           children: [
             DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
                     details.appointments.first.location == '未完了'
-                ? Padding(
-                    padding: const EdgeInsets.only(right: 4),
+                ? const Padding(
+                    padding: EdgeInsets.only(right: 4),
                     child: Icon(
                       Icons.warning,
-                      color: details.appointments.first.color,
+                      color: Colors.white,
                       size: 16,
                     ),
                   )
@@ -130,11 +124,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
               details.appointments.first.subject!,
               style: TextStyle(
                 fontSize: 13,
-                color: DateTime.now().compareTo(details.appointments.first.endTime) < 0
-                    ? Colors.white
-                    : details.appointments.first.location == '未完了'
-                        ? details.appointments.first.color
-                        : gray3,
+                color: details.appointments.first.location == '未完了' ? Colors.white : gray3,
               ),
             ),
           ],
