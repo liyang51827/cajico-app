@@ -57,6 +57,9 @@ class ScheduleView extends StatelessWidget {
                     );
                   }
                 },
+                onViewChanged: (ViewChangedDetails details) {
+                  controller.fetchData();
+                },
               );
             }),
           ),
