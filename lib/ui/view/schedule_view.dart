@@ -112,6 +112,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
                     details.appointments.first.location == '未完了'
@@ -127,7 +128,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
             Text(
               details.appointments.first.subject!,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 11,
                 color: details.appointments.first.location == '未完了' ? Colors.white : gray3,
               ),
             ),
