@@ -507,64 +507,13 @@ class ApiService extends GetConnect {
 
   // その日の予定取得API
   Future<List<ScheduleAppointmentSummary>> getScheduleAppointmentList() async {
-    await Future.delayed(const Duration(seconds: 1));
-    final data = [
-      {
-        'id': 1,
-        'startTime': '2023-04-09 09:00:00',
-        'endTime': '2023-04-09 09:30:00',
-        'subject': '朝食作り１',
-        'color': '#FFD32F2F',
-        'status': '未完了',
-        'userName': 'かつのり１',
-        'point': 10,
-        'repeatRule': '毎週水曜日繰り返し１',
-      },
-      {
-        'id': 1,
-        'startTime': '2023-04-09 11:00:00',
-        'endTime': '2023-04-09 11:15:00',
-        'subject': '朝食作り２',
-        'color': '#ff3B9C3D',
-        'status': '未完了',
-        'userName': 'かつのり２',
-        'point': 20,
-        'repeatRule': '毎週水曜日繰り返し２',
-      },
-      {
-        'id': 1,
-        'startTime': '2023-04-09 12:00:00',
-        'endTime': '2023-04-09 12:45:00',
-        'subject': '朝食作り３',
-        'color': '#FF795548',
-        'status': '完了３',
-        'userName': 'かつのり３',
-        'point': 30,
-        'repeatRule': '毎週水曜日繰り返し３',
-      },
-      {
-        'id': 1,
-        'startTime': '2023-04-09 13:00:00',
-        'endTime': '2023-04-09 13:15:00',
-        'subject': '朝食作り４',
-        'color': '#FF9C27B0',
-        'status': '完了',
-        'userName': 'かつのり４',
-        'point': 40,
-        'repeatRule': '毎週水曜日繰り返し４',
-      },
-      {
-        'id': 1,
-        'startTime': '2023-04-09 14:00:00',
-        'endTime': '2023-04-09 14:30:00',
-        'subject': '朝食作り５',
-        'color': '#fff28e04',
-        'status': '未完了',
-        'userName': 'かつのり５',
-        'point': 50,
-        'repeatRule': '毎週水曜日繰り返し５',
-      },
-    ];
+    final res = await http.get(
+      _makeUri('/schedules', queryParams: {
+        'date': '2023-04-10',
+      }),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => ScheduleAppointmentSummary.fromJson(json)).toList();
   }
 }
