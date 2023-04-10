@@ -9,12 +9,14 @@ class TimePickerForm extends StatelessWidget {
     required this.initialTime,
     super.key,
     this.hintText,
+    this.labelText,
     this.onChange,
     this.fontSize = 16,
   });
 
   final TimeOfDay initialTime;
   final String? hintText;
+  final String? labelText;
   final FormFieldSetter<TimeOfDay>? onChange;
   final TextEditingController _controller = TextEditingController();
   final double fontSize;
@@ -29,6 +31,7 @@ class TimePickerForm extends StatelessWidget {
           style: TextStyle(fontSize: fontSize),
           decoration: defaultInputDecoration(
             hintText: hintText,
+            labelText: labelText,
             suffixIcon: const Icon(Icons.watch_later_outlined),
           ),
         ),

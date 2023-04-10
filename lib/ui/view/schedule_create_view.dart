@@ -43,7 +43,7 @@ class ScheduleCreateView extends StatelessWidget {
                   children: [
                     verticalSpaceLarge,
                     DatePickerForm(
-                      hintText: '日付',
+                      labelText: '日付',
                       initialDate: DateTime(today.year, today.month, today.day),
                       firstDate: DateTime(today.year - 1, today.month, today.day),
                       lastDate: DateTime(today.year + 1, today.month, today.day),
@@ -51,13 +51,13 @@ class ScheduleCreateView extends StatelessWidget {
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
-                      hintText: '開始時間',
+                      labelText: '開始時間',
                       onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
                       initialTime: TimeOfDay.fromDateTime(today),
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
-                      hintText: '終了時間',
+                      labelText: '終了時間',
                       onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
                       initialTime: TimeOfDay.fromDateTime(today),
                     ),

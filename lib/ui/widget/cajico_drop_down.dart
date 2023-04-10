@@ -25,11 +25,7 @@ class CajicoDropDown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DropdownButtonFormField<T>(
-        icon: const Icon(
-          Icons.keyboard_arrow_down,
-          color: Colors.grey,
-          size: 24,
-        ),
+        icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 24),
         items: items,
         onChanged: onChanged,
         decoration: defaultInputDecoration(labelText: labelText, hintText: hintText),

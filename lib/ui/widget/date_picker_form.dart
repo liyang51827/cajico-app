@@ -11,6 +11,7 @@ class DatePickerForm extends StatelessWidget {
     required this.lastDate,
     super.key,
     this.hintText,
+    this.labelText,
     this.onChange,
     this.showInitialDate = false,
     this.dateFormat = 'yyyy年M月d日',
@@ -22,6 +23,7 @@ class DatePickerForm extends StatelessWidget {
   final DateTime lastDate;
 
   final String? hintText;
+  final String? labelText;
 
   final bool showInitialDate;
   final String dateFormat;
@@ -44,6 +46,7 @@ class DatePickerForm extends StatelessWidget {
           style: TextStyle(fontSize: fontSize),
           decoration: defaultInputDecoration(
             hintText: hintText,
+            labelText: labelText,
             suffixIcon: const Icon(Icons.calendar_today_outlined),
           ),
         ),
