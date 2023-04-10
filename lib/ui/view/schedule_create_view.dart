@@ -51,7 +51,7 @@ class ScheduleCreateView extends StatelessWidget {
                       firstDate: DateTime(today.year - 1, today.month, today.day),
                       lastDate: DateTime(today.year + 1, today.month, today.day),
                       onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
-                      initialDate: DateTime(selectedDate!.year, selectedDate!.month, selectedDate!.day),
+                      initialDate: selectedDate!,
                       showInitialDate: true,
                     ),
                     verticalSpaceMedium,
