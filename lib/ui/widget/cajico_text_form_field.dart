@@ -19,6 +19,7 @@ class CajicoTextFormField extends StatelessWidget {
     this.focusedBorderColor = Colors.orange,
     this.onChanged,
     this.obscureText = false,
+    this.onTap,
   });
 
   final String label;
@@ -35,6 +36,7 @@ class CajicoTextFormField extends StatelessWidget {
   final Color focusedBorderColor;
   final bool? filled;
   final bool obscureText;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class CajicoTextFormField extends StatelessWidget {
       ),
       onChanged: onChanged,
       validator: validator,
+      onTap: onTap,
     );
   }
 }

@@ -2,10 +2,11 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
-import '../controller/house_work_edit_view_controller.dart';
 import '../controller/schedule_view_controller.dart';
 import '../widget/cajico_drop_down.dart';
+import '../widget/date_picker_form.dart';
 import '../widget/primary_button.dart';
 
 class ScheduleCreateView extends StatelessWidget {
@@ -15,8 +16,10 @@ class ScheduleCreateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final today = DateTime.now();
     final controller = Get.put(ScheduleViewController());
     final scheduleInfo = controller.scheduleCreateData;
+    DateFormat outputFormat = DateFormat('yyyy-MM-dd');
 
     return Focus(
       focusNode: focusNode,
@@ -31,13 +34,20 @@ class ScheduleCreateView extends StatelessWidget {
             backgroundColor: secondaryColor,
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
-          body: GetLoadingStack<HouseWorkEditViewController>(
+          body: GetLoadingStack<ScheduleViewController>(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Obx(
                 () => Column(
                   children: [
                     verticalSpaceLarge,
+                    DatePickerForm(
+                      hintText: '日付',
+                      initialDate: DateTime(today.year, today.month, today.day),
+                      firstDate: DateTime(today.year - 1, today.month, today.day),
+                      lastDate: DateTime(today.year + 1, today.month, today.day),
+                      onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
+                    ),
                     verticalSpaceMedium,
                     CajicoDropDown(
                       onChanged: (value) => scheduleInfo.repeatRule.value = value!,
@@ -69,6 +79,14 @@ class ScheduleCreateView extends StatelessWidget {
                                 labelText: '間隔',
                               )
                             : const SizedBox(),
+                    verticalSpaceMedium,
+                    scheduleInfo.repeatRule() != 999 ? DatePickerForm(
+                      hintText: '繰り返し終了日',
+                      initialDate: DateTime(today.year, today.month, today.day),
+                      firstDate: DateTime(today.year, today.month, today.day),
+                      lastDate: DateTime(today.year + 1, today.month, today.day),
+                      onChange: (value) => scheduleInfo.repeatEndDate.value = outputFormat.format(value!),
+                    ) : const SizedBox(),
                   ],
                 ),
               ),
@@ -76,11 +94,9 @@ class ScheduleCreateView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(24),
-            child: Obx(
-              () => PrimaryButton(
-                label: '登録する',
-                onPressed: () {},
-              ),
+            child: PrimaryButton(
+              label: '登録する',
+              onPressed: () {},
             ),
           ),
         ),

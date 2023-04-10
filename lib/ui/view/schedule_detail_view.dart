@@ -1,16 +1,10 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
-import 'package:cajico_app/ui/controller/my_page_view_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../widget/cajico_cashed_network_image.dart';
-import '../widget/loading_stack.dart';
-import '../widget/normal_dialog.dart';
 import '../widget/primary_button.dart';
-import 'my_page_edit_view.dart';
 
 class ScheduleDetailView extends StatelessWidget {
   const ScheduleDetailView({
@@ -59,10 +53,10 @@ class ScheduleDetailView extends StatelessWidget {
               icon: LineIcons.clock,
               isPadding: false,
             ),
-            _Menu(value: '毎日', isPadding: true),
+            const _Menu(value: '毎日', isPadding: true),
             _Menu(menu: '状況', value: selectedAppointment.location, icon: LineIcons.checkSquare, isPadding: true),
-            _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
-            _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
+            const _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
+            const _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
           ],
         ),
       ),
