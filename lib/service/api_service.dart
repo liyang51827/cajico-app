@@ -506,11 +506,10 @@ class ApiService extends GetConnect {
   }
 
   // その日の予定取得API
-  Future<List<ScheduleAppointmentSummary>> getScheduleAppointmentList() async {
+  Future<List<ScheduleAppointmentSummary>> getScheduleAppointmentList(
+      {required String date}) async {
     final res = await http.get(
-      _makeUri('/schedules', queryParams: {
-        'date': '2023-04-10',
-      }),
+      _makeUri('/schedules', queryParams: {'date': date}),
       headers: await _makeAuthenticatedHeader(),
     );
     final List<dynamic> data = _decodeResponse(res)['data'];

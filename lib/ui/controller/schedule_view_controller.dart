@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../model/schedule_appointment_data.dart';
 import 'base_view_controller.dart';
 
 class ScheduleViewController extends BaseViewController {
   final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
+  DateFormat outputFormat = DateFormat('yyyy-MM-dd');
 
   @override
   void onInit() {
@@ -13,7 +15,16 @@ class ScheduleViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      appoints.value = await api.getScheduleAppointmentList();
+      DateTime now = DateTime.now();
+      String date = outputFormat.format(now);
+      appoints.value = await api.getScheduleAppointmentList(date: date);
+    });
+  }
+
+  Future<void> onViewChangedGetSchedule({required DateTime? dateTime}) async {
+    await callAsyncApi(() async {
+      String date = outputFormat.format(dateTime!);
+      appoints.value = await api.getScheduleAppointmentList(date: date);
     });
   }
 }

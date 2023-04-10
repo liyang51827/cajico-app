@@ -34,8 +34,10 @@ class ScheduleView extends StatelessWidget {
             height: MediaQuery.of(context).size.height - 143,
             child: Obx(() {
               final controller = Get.put(ScheduleViewController());
+              final calendarController = CalendarController();
               return SfCalendar(
                 view: CalendarView.day,
+                controller: calendarController,
                 headerDateFormat: 'yyyy年M月',
                 timeSlotViewSettings: const TimeSlotViewSettings(
                   timeIntervalHeight: 100,
@@ -58,7 +60,7 @@ class ScheduleView extends StatelessWidget {
                   }
                 },
                 onViewChanged: (ViewChangedDetails details) {
-                  controller.fetchData();
+                  controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
                 },
               );
             }),
