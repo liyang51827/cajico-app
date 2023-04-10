@@ -3,7 +3,7 @@ import '../../model/schedule_appointment_data.dart';
 import 'base_view_controller.dart';
 
 class ScheduleViewController extends BaseViewController {
-  final RxList<ScheduleAppointment> appoints = <ScheduleAppointment>[].obs;
+  final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
 
   @override
   void onInit() {

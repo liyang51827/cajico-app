@@ -75,20 +75,18 @@ class ScheduleView extends StatelessWidget {
 }
 
 class _DataSource extends CalendarDataSource {
-  _DataSource(List<ScheduleAppointment> source) {
+  _DataSource(List<ScheduleAppointmentSummary> source) {
     // Appointment型のリストを直接セットする
     appointments = <Appointment>[];
-    for (var scheduleAppointment in source) {
+    for (var scheduleAppointmentSummary in source) {
       appointments?.add(
         Appointment(
-          startTime: scheduleAppointment.startTime,
-          endTime: scheduleAppointment.endTime,
-          subject: scheduleAppointment.subject,
-          color: scheduleAppointment.color,
-          notes: scheduleAppointment.userName,
-          location: scheduleAppointment.status,
-          recurrenceId: scheduleAppointment.point,
-          recurrenceRule: scheduleAppointment.repeatRule,
+          id: scheduleAppointmentSummary.scheduleId,
+          startTime: scheduleAppointmentSummary.startTime,
+          endTime: scheduleAppointmentSummary.endTime,
+          subject: scheduleAppointmentSummary.subject,
+          color: scheduleAppointmentSummary.color,
+          location: scheduleAppointmentSummary.status,
         ),
       );
     }

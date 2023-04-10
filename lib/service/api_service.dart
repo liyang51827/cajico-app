@@ -506,12 +506,13 @@ class ApiService extends GetConnect {
   }
 
   // その日の予定取得API
-  Future<List<ScheduleAppointment>> getScheduleAppointmentList() async {
+  Future<List<ScheduleAppointmentSummary>> getScheduleAppointmentList() async {
     await Future.delayed(const Duration(seconds: 1));
     final data = [
       {
-        'startTime': '2023-04-07 09:00:00',
-        'endTime': '2023-04-07 09:30:00',
+        'id': 1,
+        'startTime': '2023-04-09 09:00:00',
+        'endTime': '2023-04-09 09:30:00',
         'subject': '朝食作り１',
         'color': '#FFD32F2F',
         'status': '未完了',
@@ -520,8 +521,9 @@ class ApiService extends GetConnect {
         'repeatRule': '毎週水曜日繰り返し１',
       },
       {
-        'startTime': '2023-04-07 11:00:00',
-        'endTime': '2023-04-07 11:15:00',
+        'id': 1,
+        'startTime': '2023-04-09 11:00:00',
+        'endTime': '2023-04-09 11:15:00',
         'subject': '朝食作り２',
         'color': '#ff3B9C3D',
         'status': '未完了',
@@ -530,8 +532,9 @@ class ApiService extends GetConnect {
         'repeatRule': '毎週水曜日繰り返し２',
       },
       {
-        'startTime': '2023-04-07 12:00:00',
-        'endTime': '2023-04-07 12:45:00',
+        'id': 1,
+        'startTime': '2023-04-09 12:00:00',
+        'endTime': '2023-04-09 12:45:00',
         'subject': '朝食作り３',
         'color': '#FF795548',
         'status': '完了３',
@@ -540,8 +543,9 @@ class ApiService extends GetConnect {
         'repeatRule': '毎週水曜日繰り返し３',
       },
       {
-        'startTime': '2023-04-07 13:00:00',
-        'endTime': '2023-04-07 13:15:00',
+        'id': 1,
+        'startTime': '2023-04-09 13:00:00',
+        'endTime': '2023-04-09 13:15:00',
         'subject': '朝食作り４',
         'color': '#FF9C27B0',
         'status': '完了',
@@ -550,8 +554,9 @@ class ApiService extends GetConnect {
         'repeatRule': '毎週水曜日繰り返し４',
       },
       {
-        'startTime': '2023-04-07 14:00:00',
-        'endTime': '2023-04-07 14:30:00',
+        'id': 1,
+        'startTime': '2023-04-09 14:00:00',
+        'endTime': '2023-04-09 14:30:00',
         'subject': '朝食作り５',
         'color': '#fff28e04',
         'status': '未完了',
@@ -560,7 +565,7 @@ class ApiService extends GetConnect {
         'repeatRule': '毎週水曜日繰り返し５',
       },
     ];
-    return data.map((json) => ScheduleAppointment.fromJson(json)).toList();
+    return data.map((json) => ScheduleAppointmentSummary.fromJson(json)).toList();
   }
 }
 
