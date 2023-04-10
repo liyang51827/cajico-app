@@ -44,22 +44,25 @@ class ScheduleCreateView extends StatelessWidget {
                     verticalSpaceLarge,
                     DatePickerForm(
                       labelText: '日付',
-                      initialDate: DateTime(today.year, today.month, today.day),
                       firstDate: DateTime(today.year - 1, today.month, today.day),
                       lastDate: DateTime(today.year + 1, today.month, today.day),
                       onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
+                      initialDate: DateTime(today.year, today.month, today.day),
+                      showInitialDate: true,
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
                       labelText: '開始時間',
                       onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
                       initialTime: TimeOfDay.fromDateTime(today),
+                      showInitialDate: true,
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
                       labelText: '終了時間',
                       onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
-                      initialTime: TimeOfDay.fromDateTime(today),
+                      initialTime: TimeOfDay.fromDateTime(today.add(const Duration(minutes: 10))),
+                      showInitialDate: true,
                     ),
                     verticalSpaceMedium,
                     CajicoDropDown(

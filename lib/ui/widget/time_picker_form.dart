@@ -11,6 +11,7 @@ class TimePickerForm extends StatelessWidget {
     this.hintText,
     this.labelText,
     this.onChange,
+    this.showInitialDate = false,
     this.fontSize = 16,
   });
 
@@ -20,9 +21,13 @@ class TimePickerForm extends StatelessWidget {
   final FormFieldSetter<TimeOfDay>? onChange;
   final TextEditingController _controller = TextEditingController();
   final double fontSize;
+  final bool showInitialDate;
 
   @override
   Widget build(BuildContext context) {
+    if (showInitialDate) {
+      applyDateText(initialTime);
+    }
     return GestureDetector(
       onTap: () => _selectDate(),
       child: AbsorbPointer(
