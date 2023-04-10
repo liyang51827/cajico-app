@@ -11,9 +11,13 @@ import '../widget/time_picker_form.dart';
 import '../widget/primary_button.dart';
 
 class ScheduleCreateView extends StatelessWidget {
-  ScheduleCreateView({super.key});
+  ScheduleCreateView({
+    super.key,
+    required this.selectedDate,
+  });
 
   final focusNode = FocusNode();
+  final DateTime? selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +51,22 @@ class ScheduleCreateView extends StatelessWidget {
                       firstDate: DateTime(today.year - 1, today.month, today.day),
                       lastDate: DateTime(today.year + 1, today.month, today.day),
                       onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
-                      initialDate: DateTime(today.year, today.month, today.day),
+                      initialDate: DateTime(selectedDate!.year, selectedDate!.month, selectedDate!.day),
                       showInitialDate: true,
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
                       labelText: '開始時間',
-                      onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
+                      onChange: (value) => scheduleInfo.date.value =
+                          DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
                       initialTime: TimeOfDay.fromDateTime(today),
                       showInitialDate: true,
                     ),
                     verticalSpaceMedium,
                     TimePickerForm(
                       labelText: '終了時間',
-                      onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
+                      onChange: (value) => scheduleInfo.date.value =
+                          DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
                       initialTime: TimeOfDay.fromDateTime(today.add(const Duration(minutes: 10))),
                       showInitialDate: true,
                     ),
@@ -96,13 +102,16 @@ class ScheduleCreateView extends StatelessWidget {
                               )
                             : const SizedBox(),
                     verticalSpaceMedium,
-                    scheduleInfo.repeatRule() != 999 ? DatePickerForm(
-                      hintText: '繰り返し終了日',
-                      initialDate: DateTime(today.year, today.month, today.day),
-                      firstDate: DateTime(today.year, today.month, today.day),
-                      lastDate: DateTime(today.year + 1, today.month, today.day),
-                      onChange: (value) => scheduleInfo.repeatEndDate.value = outputFormat.format(value!),
-                    ) : const SizedBox(),
+                    scheduleInfo.repeatRule() != 999
+                        ? DatePickerForm(
+                            hintText: '繰り返し終了日',
+                            initialDate: DateTime(today.year, today.month, today.day),
+                            firstDate: DateTime(today.year, today.month, today.day),
+                            lastDate: DateTime(today.year + 1, today.month, today.day),
+                            onChange: (value) =>
+                                scheduleInfo.repeatEndDate.value = outputFormat.format(value!),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

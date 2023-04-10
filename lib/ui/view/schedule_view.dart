@@ -18,6 +18,7 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleViewController());
+    final calendarController = CalendarController();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(
@@ -35,7 +36,6 @@ class ScheduleView extends StatelessWidget {
             height: MediaQuery.of(context).size.height - 143,
             child: Obx(() {
               final controller = Get.put(ScheduleViewController());
-              final calendarController = CalendarController();
               return SfCalendar(
                 view: CalendarView.day,
                 controller: calendarController,
@@ -69,7 +69,7 @@ class ScheduleView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => ScheduleCreateView()),
+        onPressed: () => Get.to(() => ScheduleCreateView(selectedDate: calendarController.displayDate,)),
         child: const Icon(Icons.add, color: Colors.white),
       ),
       bottomNavigationBar: const Footer(),
