@@ -1,5 +1,6 @@
 import 'package:cajico_app/model/schedule_appointment_data.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
+import 'package:cajico_app/ui/view/schedule_create_view.dart';
 import 'package:cajico_app/ui/view/schedule_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,7 +69,7 @@ class ScheduleView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Get.to(() => ScheduleCreateView()),
         child: const Icon(Icons.add, color: Colors.white),
       ),
       bottomNavigationBar: const Footer(),

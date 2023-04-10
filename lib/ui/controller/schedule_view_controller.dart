@@ -1,11 +1,23 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/schedule_appointment_data.dart';
+import '../../model/schedule_data.dart';
 import 'base_view_controller.dart';
 
 class ScheduleViewController extends BaseViewController {
   final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
+
+  final scheduleCreateData = ScheduleCreateData(
+    date: ''.obs,
+    houseWorkId: 0.obs,
+    startTime: ''.obs,
+    endTime: ''.obs,
+    colorCode: ''.obs,
+    repeatRule: 999.obs,
+    repeatInterval: 999.obs,
+    repeatEndDate: ''.obs,
+  );
 
   @override
   void onInit() {
