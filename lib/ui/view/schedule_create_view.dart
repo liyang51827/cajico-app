@@ -7,6 +7,7 @@ import '../common/ui_helper.dart';
 import '../controller/schedule_view_controller.dart';
 import '../widget/cajico_drop_down.dart';
 import '../widget/date_picker_form.dart';
+import '../widget/time_picker_form.dart';
 import '../widget/primary_button.dart';
 
 class ScheduleCreateView extends StatelessWidget {
@@ -47,6 +48,18 @@ class ScheduleCreateView extends StatelessWidget {
                       firstDate: DateTime(today.year - 1, today.month, today.day),
                       lastDate: DateTime(today.year + 1, today.month, today.day),
                       onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
+                    ),
+                    verticalSpaceMedium,
+                    TimePickerForm(
+                      hintText: '開始時間',
+                      onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
+                      initialTime: TimeOfDay.fromDateTime(today),
+                    ),
+                    verticalSpaceMedium,
+                    TimePickerForm(
+                      hintText: '終了時間',
+                      onChange: (value) => scheduleInfo.date.value = DateFormat.Hm().format(DateTime(2023, 4, 10, value!.hour, value.minute)),
+                      initialTime: TimeOfDay.fromDateTime(today),
                     ),
                     verticalSpaceMedium,
                     CajicoDropDown(
