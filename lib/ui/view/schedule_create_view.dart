@@ -1,6 +1,7 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
@@ -24,6 +25,7 @@ class ScheduleCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now();
+    Get.replace(ScheduleViewController());
     final controller = Get.put(ScheduleViewController());
     final scheduleInfo = controller.scheduleCreateData;
     DateFormat outputFormat = DateFormat('yyyy-MM-dd');
@@ -105,6 +107,23 @@ class ScheduleCreateView extends StatelessWidget {
               ),
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => Get.dialog(
+              AlertDialog(
+                  title: const Text('カラーを選択してください',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: gray2,
+                      )),
+                  content: BlockPicker(
+                    pickerColor: primaryColor,
+                    onColorChanged: (Color value) => scheduleInfo.colorCode.value =
+                        '#${value.value.toRadixString(16).toUpperCase().padLeft(8, '0')}',
+                    itemBuilder: _customItemBuilder,
+                  )),
+            ),
+            child: const Icon(Icons.palette, color: Colors.white),
+          ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(24),
             child: PrimaryButton(
@@ -116,4 +135,28 @@ class ScheduleCreateView extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _customItemBuilder(
+    Color color, bool isCurrentColor, void Function() changeColor) {
+  return Container(
+    margin: const EdgeInsets.all(7),
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      color: color,
+    ),
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: changeColor,
+        borderRadius: BorderRadius.circular(50),
+        child: AnimatedOpacity(
+          duration: const Duration(milliseconds: 210),
+          opacity: isCurrentColor ? 1 : 0,
+          child: Icon(Icons.done,
+              color: useWhiteForeground(color) ? Colors.white : Colors.black),
+        ),
+      ),
+    ),
+  );
 }
