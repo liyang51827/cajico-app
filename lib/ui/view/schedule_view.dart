@@ -103,16 +103,16 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
         color: details.appointments.first.location == '未完了'
             ? details.appointments.first.color
             : details.appointments.first.color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
                     details.appointments.first.location == '未完了'
