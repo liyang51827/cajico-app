@@ -94,17 +94,36 @@ class ScheduleCreateView extends StatelessWidget {
                         labelText: '繰り返し',
                       ),
                       verticalSpaceMedium,
-                      scheduleInfo.repeatRule() != 999
+                      scheduleInfo.repeatRule() == 0
                           ? CajicoDropDown(
                               onChanged: (value) => scheduleInfo.repeatInterval.value = value!,
                               items: const [
-                                DropdownMenuItem(value: 1, child: Text('1')),
-                                DropdownMenuItem(value: 2, child: Text('2')),
-                                DropdownMenuItem(value: 3, child: Text('3')),
+                                DropdownMenuItem(value: 1, child: Text('1日ごと')),
+                                DropdownMenuItem(value: 2, child: Text('2日ごと')),
+                                DropdownMenuItem(value: 3, child: Text('3日ごと')),
                               ],
                               labelText: '間隔',
                             )
-                          : const SizedBox(),
+                          : scheduleInfo.repeatRule() == 1
+                              ? CajicoDropDown(
+                                  onChanged: (value) => scheduleInfo.repeatInterval.value = value!,
+                                  items: const [
+                                    DropdownMenuItem(value: 1, child: Text('1週ごと')),
+                                    DropdownMenuItem(value: 2, child: Text('2週ごと')),
+                                    DropdownMenuItem(value: 3, child: Text('3週ごと')),
+                                  ],
+                                  labelText: '間隔',
+                                )
+                              : scheduleInfo.repeatRule() == 2
+                                  ? CajicoDropDown(
+                                      onChanged: (value) =>
+                                          scheduleInfo.repeatInterval.value = value!,
+                                      items: const [
+                                        DropdownMenuItem(value: 1, child: Text('毎月')),
+                                      ],
+                                      labelText: '間隔',
+                                    )
+                                  : const SizedBox(),
                       verticalSpaceMedium,
                       scheduleInfo.repeatRule() != 999
                           ? DatePickerForm(
