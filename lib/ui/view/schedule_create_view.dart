@@ -47,6 +47,12 @@ class ScheduleCreateView extends StatelessWidget {
                   child: Column(
                     children: [
                       verticalSpaceLarge,
+                      CajicoDropDown(
+                        onChanged: (value) => scheduleInfo.repeatInterval.value = value!,
+                        items: _getHouseWorkDropdownMenuItemList(controller.houseWorks()),
+                        labelText: '家事',
+                      ),
+                      verticalSpaceMedium,
                       DatePickerForm(
                         labelText: '日付',
                         firstDate: DateTime(today.year - 1, today.month, today.day),
@@ -192,4 +198,15 @@ Widget _customItemBuilder(Color color, bool isCurrentColor, void Function() chan
       ),
     ),
   );
+}
+
+List<DropdownMenuItem<int>> _getHouseWorkDropdownMenuItemList(houseWorkList) {
+  var dropdownList = <DropdownMenuItem<int>>[];
+  if (houseWorkList != null && houseWorkList.length > 0) {
+    for (var houseWork in houseWorkList) {
+      dropdownList.add(DropdownMenuItem<int>(
+          value: houseWork.id, child: Text(houseWork.name)));
+    }
+  }
+  return dropdownList.toList();
 }
