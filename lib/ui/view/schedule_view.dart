@@ -42,7 +42,7 @@ class ScheduleView extends StatelessWidget {
                 controller: calendarController,
                 headerDateFormat: 'yyyy年M月',
                 timeSlotViewSettings: const TimeSlotViewSettings(
-                  timeIntervalHeight: 100,
+                  timeIntervalHeight: 70,
                   timeFormat: 'HH:mm',
                 ),
                 dataSource: _DataSource(controller.appoints()),
