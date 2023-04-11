@@ -15,7 +15,7 @@ class ScheduleViewController extends BaseViewController {
     endTime: ''.obs,
     colorCode: '#FFF28E04'.obs,
     repeatRule: 999.obs,
-    repeatInterval: 999.obs,
+    repeatInterval: 0.obs,
     repeatEndDate: ''.obs,
   );
 
