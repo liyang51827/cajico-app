@@ -48,7 +48,7 @@ class ScheduleCreateView extends StatelessWidget {
                     children: [
                       verticalSpaceLarge,
                       CajicoDropDown(
-                        onChanged: (value) => scheduleInfo.repeatInterval.value = value!,
+                        onChanged: (value) => scheduleInfo.houseWorkId.value = value!,
                         items: _getHouseWorkDropdownMenuItemList(controller.houseWorks()),
                         labelText: '家事',
                       ),
@@ -168,7 +168,7 @@ class ScheduleCreateView extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 child: PrimaryButton(
                   label: '登録する',
-                  onPressed: () {},
+                  onPressed: () => controller.onTapCreateDialog(),
                   color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
                 ),
               ),

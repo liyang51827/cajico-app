@@ -4,6 +4,7 @@ import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:cajico_app/model/my_page_data.dart';
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
+import 'package:cajico_app/model/schedule_data.dart';
 import 'package:cajico_app/util/xfile_extension.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -525,6 +526,28 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => ScheduleAppointmentSummary.fromJson(json)).toList();
+  }
+
+  // 予定登録API
+  Future<bool> createSchedule(ScheduleCreateData scheduleCreateData) async {
+    final res = await http.post(
+      _makeUri('/schedules'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({
+        'date': scheduleCreateData.date(),
+        'houseWorkId': scheduleCreateData.houseWorkId(),
+        'startTime': scheduleCreateData.startTime(),
+        'endTime': scheduleCreateData.endTime(),
+        'colorCode': scheduleCreateData.colorCode(),
+        'repeatRule':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatRule() : null,
+        'repeatInterval':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatInterval() : null,
+        'repeatEndDate':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatEndDate() : null,
+      }),
+    );
+    return _checkStatusCode(res);
   }
 }
 

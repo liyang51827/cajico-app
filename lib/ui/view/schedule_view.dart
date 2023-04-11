@@ -18,6 +18,7 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleViewController());
+    Get.put(ScheduleViewController());
     final calendarController = CalendarController();
     return Scaffold(
       backgroundColor: Colors.white,

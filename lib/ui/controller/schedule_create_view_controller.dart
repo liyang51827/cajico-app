@@ -1,7 +1,10 @@
+import 'package:cajico_app/ui/controller/schedule_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/masters.dart';
 import '../../model/schedule_data.dart';
+import '../widget/normal_completed_dialog.dart';
+import '../widget/normal_dialog.dart';
 import 'base_view_controller.dart';
 
 class ScheduleCreateViewController extends BaseViewController {
@@ -35,5 +38,33 @@ class ScheduleCreateViewController extends BaseViewController {
     await callAsyncApi(() async {
       houseWorks.value = await api.getAllHouseWorksList();
     });
+  }
+
+  Future<void> onTapCreateDialog() async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    Get.dialog(
+      NormalDialog(
+        message: '登録しますか？',
+        onPressed: () async {
+          Get.back();
+          await callAsyncApi(() async {
+            result = await api.createSchedule(scheduleCreateData);
+          });
+          if (result) {
+            Get.dialog(
+              NormalCompletedDialog(
+                message: '登録されました',
+                onPressed: () {
+                  Get.back();
+                  Get.back();
+                  scheduleController.fetchData();
+                },
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 }
