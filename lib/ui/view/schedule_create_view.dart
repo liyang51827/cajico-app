@@ -5,7 +5,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
-import '../controller/schedule_view_controller.dart';
+import '../controller/schedule_create_view_controller.dart';
 import '../widget/cajico_drop_down.dart';
 import '../widget/date_picker_form.dart';
 import '../widget/time_picker_form.dart';
@@ -23,13 +23,10 @@ class ScheduleCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now();
-    Get.replace(ScheduleViewController());
-    final controller = Get.put(ScheduleViewController());
-    final scheduleInfo = controller.scheduleCreateData;
     DateFormat outputFormat = DateFormat('yyyy-MM-dd');
-    scheduleInfo.date.value = outputFormat.format(selectedDate!);
-    scheduleInfo.startTime.value = DateFormat.Hm().format(today);
-    scheduleInfo.endTime.value = DateFormat.Hm().format(today.add(const Duration(minutes: 10)));
+    Get.replace(ScheduleCreateViewController(date: selectedDate));
+    final controller = Get.put(ScheduleCreateViewController(date: selectedDate));
+    final scheduleInfo = controller.scheduleCreateData;
 
     return Focus(
       focusNode: focusNode,
@@ -44,7 +41,7 @@ class ScheduleCreateView extends StatelessWidget {
                 backgroundColor: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
                 titleTextStyle: const TextStyle(fontSize: 22),
               ),
-              body: GetLoadingStack<ScheduleViewController>(
+              body: GetLoadingStack<ScheduleCreateViewController>(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
                   child: Column(
