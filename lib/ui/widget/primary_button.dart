@@ -11,6 +11,7 @@ class PrimaryButton extends StatelessWidget {
     this.height = buttonHeight,
     this.isValid = true,
     this.onPressed,
+    this.color = primaryColor,
   });
 
   final String label;
@@ -18,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
   final double height;
   final VoidCallback? onPressed;
   final bool isValid;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
+          backgroundColor: color,
           foregroundColor: Colors.white,
           shape: const StadiumBorder(),
           elevation: 0,

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/schedule_appointment_data.dart';
@@ -14,7 +13,7 @@ class ScheduleViewController extends BaseViewController {
     houseWorkId: 0.obs,
     startTime: ''.obs,
     endTime: ''.obs,
-    colorCode: ''.obs,
+    colorCode: '#FFF28E04'.obs,
     repeatRule: 999.obs,
     repeatInterval: 999.obs,
     repeatEndDate: ''.obs,

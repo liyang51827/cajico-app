@@ -37,10 +37,10 @@ class ScheduleCreateView extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black54),
+            iconTheme: const IconThemeData(color: Colors.white),
             centerTitle: true,
-            title: const Text('予定の登録', style: TextStyle(color: gray2)),
-            backgroundColor: secondaryColor,
+            title: const Text('予定の登録', style: TextStyle(color: Colors.white)),
+            backgroundColor: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
             titleTextStyle: const TextStyle(fontSize: 22),
           ),
           body: GetLoadingStack<ScheduleViewController>(
@@ -107,29 +107,35 @@ class ScheduleCreateView extends StatelessWidget {
               ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => Get.dialog(
-              AlertDialog(
-                  title: const Text('カラーを選択してください',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: gray2,
+          floatingActionButton: Obx(() => FloatingActionButton(
+                onPressed: () => Get.dialog(
+                  AlertDialog(
+                      title: const Text('カラーを選択してください',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: gray2,
+                          )),
+                      content: BlockPicker(
+                        pickerColor:
+                            Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                        onColorChanged: (Color value) {
+                          scheduleInfo.colorCode.value =
+                              '#${value.value.toRadixString(16).toUpperCase().padLeft(8, '0')}';
+                          Get.back();
+                        },
+                        itemBuilder: _customItemBuilder,
                       )),
-                  content: BlockPicker(
-                    pickerColor: primaryColor,
-                    onColorChanged: (Color value) => scheduleInfo.colorCode.value =
-                        '#${value.value.toRadixString(16).toUpperCase().padLeft(8, '0')}',
-                    itemBuilder: _customItemBuilder,
-                  )),
-            ),
-            child: const Icon(Icons.palette, color: Colors.white),
-          ),
+                ),
+                backgroundColor: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                child: const Icon(Icons.palette, color: Colors.white),
+              )),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(24),
-            child: PrimaryButton(
-              label: '登録する',
-              onPressed: () {},
-            ),
+            child: Obx(() => PrimaryButton(
+                  label: '登録する',
+                  onPressed: () {},
+                  color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                )),
           ),
         ),
       ),
@@ -137,8 +143,7 @@ class ScheduleCreateView extends StatelessWidget {
   }
 }
 
-Widget _customItemBuilder(
-    Color color, bool isCurrentColor, void Function() changeColor) {
+Widget _customItemBuilder(Color color, bool isCurrentColor, void Function() changeColor) {
   return Container(
     margin: const EdgeInsets.all(7),
     decoration: BoxDecoration(
@@ -153,8 +158,7 @@ Widget _customItemBuilder(
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 210),
           opacity: isCurrentColor ? 1 : 0,
-          child: Icon(Icons.done,
-              color: useWhiteForeground(color) ? Colors.white : Colors.black),
+          child: Icon(Icons.done, color: useWhiteForeground(color) ? Colors.white : Colors.black),
         ),
       ),
     ),
