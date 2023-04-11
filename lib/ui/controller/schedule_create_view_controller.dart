@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../model/masters.dart';
 import '../../model/schedule_data.dart';
 import 'base_view_controller.dart';
 
@@ -8,6 +9,7 @@ class ScheduleCreateViewController extends BaseViewController {
   final DateTime? date;
   final today = DateTime.now();
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
+  final RxList<Master> houseWorks = <Master>[].obs;
 
   final scheduleCreateData = ScheduleCreateData(
     date: ''.obs,
@@ -27,10 +29,11 @@ class ScheduleCreateViewController extends BaseViewController {
   }
 
   Future<void> fetchData() async {
+    scheduleCreateData.date.value = outputFormat.format(date!);
+    scheduleCreateData.startTime.value = DateFormat.Hm().format(today);
+    scheduleCreateData.endTime.value = DateFormat.Hm().format(today.add(const Duration(minutes: 10)));
     await callAsyncApi(() async {
-      scheduleCreateData.date.value = outputFormat.format(date!);
-      scheduleCreateData.startTime.value = DateFormat.Hm().format(today);
-      scheduleCreateData.endTime.value = DateFormat.Hm().format(today.add(const Duration(minutes: 10)));
+      houseWorks.value = await api.getAllHouseWorksList();
     });
   }
 }

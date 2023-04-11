@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/login_data.dart';
+import '../model/masters.dart';
 import '../model/my_page.dart';
 import '../model/pagination_response.dart';
 import '../model/point_history.dart';
@@ -282,6 +283,16 @@ class ApiService extends GetConnect {
     );
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => HouseWork.fromJson(json)).toList();
+  }
+
+  // 家族の家事全取得API
+  Future<List<Master>> getAllHouseWorksList() async {
+    final res = await http.get(
+      _makeUri('/house-works-all'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => Master.fromJson(json)).toList();
   }
 
   // 家事登録API
