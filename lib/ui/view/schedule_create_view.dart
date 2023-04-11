@@ -61,8 +61,12 @@ class ScheduleCreateView extends StatelessWidget {
                       verticalSpaceMedium,
                       TimePickerForm(
                         labelText: '開始時間',
-                        onChange: (value) => scheduleInfo.startTime.value = DateFormat.Hm()
-                            .format(DateTime(2023, 4, 10, value!.hour, value.minute)),
+                        onChange: (value) {
+                          scheduleInfo.startTime.value = DateFormat.Hm()
+                              .format(DateTime(2023, 4, 10, value!.hour, value.minute));
+                          scheduleInfo.endTime.value = DateFormat.Hm()
+                              .format(DateTime(2023, 4, 10, value.hour, value.minute + 10));
+                        },
                         initialTime: TimeOfDay(
                             hour: int.parse(scheduleInfo.startTime().split(':')[0]),
                             minute: int.parse(scheduleInfo.startTime().split(':')[1])),
