@@ -12,6 +12,8 @@ class CajicoDropDown<T> extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.validator,
+    this.filled = false,
+    this.focusedBorderColor = Colors.orange,
   });
 
   final String? hintText;
@@ -20,13 +22,35 @@ class CajicoDropDown<T> extends StatelessWidget {
   final ValueChanged<T?>? onChanged;
   final T? initialValue;
   final FormFieldValidator<T?>? validator;
+  final Color focusedBorderColor;
+  final bool? filled;
 
   @override
   Widget build(BuildContext context) => DropdownButtonFormField<T>(
         icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 24),
         items: items,
         onChanged: onChanged,
-        decoration: defaultInputDecoration(labelText: labelText, hintText: hintText),
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintText: hintText,
+          filled: filled,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: gray4),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: focusedBorderColor),
+          ),
+          errorBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: errorColor),
+          ),
+          focusedErrorBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: errorColor),
+          ),
+        ),
         isExpanded: true,
         value: initialValue,
         validator: validator,

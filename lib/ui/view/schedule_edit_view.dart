@@ -52,17 +52,18 @@ class ScheduleEditView extends StatelessWidget {
                     children: [
                       verticalSpaceLarge,
                       CajicoDropDown(
-                        onChanged: (value) => scheduleInfo.houseWorkId.value = value!,
+                        onChanged: null,
                         items: _getHouseWorkDropdownMenuItemList(controller.houseWorks()),
                         labelText: '家事',
                         validator: (value) =>
                             controller.validateRequiredDropDown(value: value).message,
                         initialValue: scheduleInfo.houseWorkId(),
+                        filled: true,
                       ),
                       verticalSpaceMedium,
                       DatePickerForm(
                         labelText: '日付',
-                        firstDate: DateTime(today.year - 1, today.month, today.day),
+                        firstDate: DateTime.parse(scheduleInfo.date()),
                         lastDate: DateTime(today.year + 1, today.month, today.day),
                         onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
                         initialDate: DateTime.parse(scheduleInfo.date()),
@@ -145,7 +146,10 @@ class ScheduleEditView extends StatelessWidget {
                       scheduleInfo.repeatRule() != 999
                           ? DatePickerForm(
                               labelText: '繰り返し終了日',
-                              initialDate: DateTime(today.year, today.month, today.day),
+                              initialDate: scheduleInfo.repeatEndDate() != ''
+                                  ? DateTime.parse(scheduleInfo.repeatEndDate())
+                                  : DateTime(today.year, today.month, today.day),
+                              showInitialDate: scheduleInfo.repeatEndDate() != '',
                               firstDate: DateTime(today.year, today.month, today.day),
                               lastDate: DateTime(today.year + 1, today.month, today.day),
                               onChange: (value) =>
@@ -181,7 +185,7 @@ class ScheduleEditView extends StatelessWidget {
               bottomNavigationBar: Padding(
                 padding: const EdgeInsets.all(24),
                 child: PrimaryButton(
-                  label: '登録する',
+                  label: '更新する',
                   onPressed: () {},
                   color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
                   isValid: controller.isCreateScheduleValid,
