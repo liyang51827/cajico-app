@@ -51,6 +51,8 @@ class ScheduleCreateView extends StatelessWidget {
                         onChanged: (value) => scheduleInfo.houseWorkId.value = value!,
                         items: _getHouseWorkDropdownMenuItemList(controller.houseWorks()),
                         labelText: '家事',
+                        validator: (value) =>
+                            controller.validateRequiredDropDown(value: value).message,
                       ),
                       verticalSpaceMedium,
                       DatePickerForm(
@@ -63,18 +65,17 @@ class ScheduleCreateView extends StatelessWidget {
                       ),
                       verticalSpaceMedium,
                       TimePickerForm(
-                        labelText: '開始時間',
-                        onChange: (value) {
-                          scheduleInfo.startTime.value = DateFormat.Hm()
-                              .format(DateTime(2023, 4, 10, value!.hour, value.minute));
-                          scheduleInfo.endTime.value = DateFormat.Hm()
-                              .format(DateTime(2023, 4, 10, value.hour, value.minute + 10));
-                        },
-                        initialTime: TimeOfDay(
-                            hour: int.parse(scheduleInfo.startTime().split(':')[0]),
-                            minute: int.parse(scheduleInfo.startTime().split(':')[1])),
-                        showInitialDate: true,
-                      ),
+                          labelText: '開始時間',
+                          onChange: (value) {
+                            scheduleInfo.startTime.value = DateFormat.Hm()
+                                .format(DateTime(2023, 4, 10, value!.hour, value.minute));
+                            scheduleInfo.endTime.value = DateFormat.Hm()
+                                .format(DateTime(2023, 4, 10, value.hour, value.minute + 10));
+                          },
+                          initialTime: TimeOfDay(
+                              hour: int.parse(scheduleInfo.startTime().split(':')[0]),
+                              minute: int.parse(scheduleInfo.startTime().split(':')[1])),
+                          showInitialDate: true),
                       verticalSpaceMedium,
                       TimePickerForm(
                         labelText: '終了時間',
@@ -84,6 +85,10 @@ class ScheduleCreateView extends StatelessWidget {
                             hour: int.parse(scheduleInfo.endTime().split(':')[0]),
                             minute: int.parse(scheduleInfo.endTime().split(':')[1])),
                         showInitialDate: true,
+                        validator: (value) => controller
+                            .validateTimeAfterStartTime(
+                                value: value, startTime: scheduleInfo.startTime())
+                            .message,
                       ),
                       verticalSpaceMedium,
                       CajicoDropDown(
@@ -170,6 +175,7 @@ class ScheduleCreateView extends StatelessWidget {
                   label: '登録する',
                   onPressed: () => controller.onTapCreateDialog(),
                   color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                  isValid: controller.isCreateScheduleValid,
                 ),
               ),
             )),
@@ -204,8 +210,7 @@ List<DropdownMenuItem<int>> _getHouseWorkDropdownMenuItemList(houseWorkList) {
   var dropdownList = <DropdownMenuItem<int>>[];
   if (houseWorkList != null && houseWorkList.length > 0) {
     for (var houseWork in houseWorkList) {
-      dropdownList.add(DropdownMenuItem<int>(
-          value: houseWork.id, child: Text(houseWork.name)));
+      dropdownList.add(DropdownMenuItem<int>(value: houseWork.id, child: Text(houseWork.name)));
     }
   }
   return dropdownList.toList();

@@ -13,6 +13,7 @@ class TimePickerForm extends StatelessWidget {
     this.onChange,
     this.showInitialDate = false,
     this.fontSize = 16,
+    this.validator,
   });
 
   final TimeOfDay initialTime;
@@ -22,6 +23,7 @@ class TimePickerForm extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
   final double fontSize;
   final bool showInitialDate;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,8 @@ class TimePickerForm extends StatelessWidget {
             labelText: labelText,
             suffixIcon: const Icon(Icons.watch_later_outlined),
           ),
+          validator: validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
         ),
       ),
     );
@@ -69,6 +73,7 @@ class TimePickerForm extends StatelessWidget {
 
     if (picked != null) {
       onChange?.call(picked);
+      validator?.call(DateFormat.Hm().format(DateTime(2023, 4, 10, picked.hour, picked.minute)));
       applyDateText(picked);
     }
   }

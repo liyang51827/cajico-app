@@ -11,17 +11,15 @@ class CajicoDropDown<T> extends StatelessWidget {
     this.labelText,
     this.onChanged,
     this.initialValue,
+    this.validator,
   });
 
   final String? hintText;
-
   final String? labelText;
-
   final List<DropdownMenuItem<T>> items;
-
   final ValueChanged<T?>? onChanged;
-
   final T? initialValue;
+  final FormFieldValidator<T?>? validator;
 
   @override
   Widget build(BuildContext context) => DropdownButtonFormField<T>(
@@ -31,6 +29,7 @@ class CajicoDropDown<T> extends StatelessWidget {
         decoration: defaultInputDecoration(labelText: labelText, hintText: hintText),
         isExpanded: true,
         value: initialValue,
+        validator: validator,
       );
 }
 

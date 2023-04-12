@@ -1,8 +1,11 @@
 import 'package:cajico_app/ui/controller/schedule_view_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../model/form_validation.dart';
 import '../../model/masters.dart';
 import '../../model/schedule_data.dart';
+import '../../util/form_validator.dart';
 import '../widget/normal_completed_dialog.dart';
 import '../widget/normal_dialog.dart';
 import 'base_view_controller.dart';
@@ -39,6 +42,15 @@ class ScheduleCreateViewController extends BaseViewController {
       houseWorks.value = await api.getAllHouseWorksList();
     });
   }
+
+  FormValidation validateRequiredDropDown({int? value}) =>
+      FormValidator.validateRequiredDropDown(value: value);
+
+  FormValidation validateTimeAfterStartTime({String? value, required String? startTime}) =>
+      FormValidator.validateTimeAfterStartTime(endTime: value, startTime: startTime);
+
+  bool get isCreateScheduleValid =>
+      validateRequiredDropDown(value: scheduleCreateData.houseWorkId()).isValid;
 
   Future<void> onTapCreateDialog() async {
     final scheduleController = Get.put(ScheduleViewController());
