@@ -52,6 +52,7 @@ class PrimaryOutlineButton extends StatelessWidget {
     this.height = buttonHeight,
     this.isValid = true,
     this.onPressed,
+    this.color = primaryColor,
   });
 
   final String label;
@@ -59,6 +60,7 @@ class PrimaryOutlineButton extends StatelessWidget {
   final double height;
   final VoidCallback? onPressed;
   final bool isValid;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +70,9 @@ class PrimaryOutlineButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.white,
-          foregroundColor: primaryColor,
+          foregroundColor: color,
           shape: const StadiumBorder(),
-          side: const BorderSide(color: primaryColor),
+          side: BorderSide(color: color),
           elevation: 0,
         ),
         onPressed: onPressed,

@@ -45,7 +45,7 @@ class ScheduleEditViewController extends BaseViewController {
     scheduleEditData.colorCode.value =
         '#${appointment.color.value.toRadixString(16).toUpperCase().padLeft(8, '0')}';
     scheduleEditData.repeatRule.value = appointment.repeatRule ?? 999;
-    scheduleEditData.repeatInterval.value = appointment.repeatInterval ?? 0;
+    scheduleEditData.repeatInterval.value = appointment.repeatInterval ?? 1;
     scheduleEditData.repeatEndDate.value =
         appointment.repeatEndDate != null ? outputFormat.format(appointment.repeatEndDate!) : '';
     await callAsyncApi(() async {
@@ -65,7 +65,7 @@ class ScheduleEditViewController extends BaseViewController {
               value: scheduleEditData.endTime(), startTime: scheduleEditData.startTime())
           .isValid;
 
-  Future<void> onTapUpdateDialog({required type}) async {
+  Future<void> onTapUpdateSchedule({required type}) async {
     final scheduleController = Get.put(ScheduleViewController());
     var result = false;
     Get.back();
@@ -76,6 +76,28 @@ class ScheduleEditViewController extends BaseViewController {
       Get.dialog(
         NormalCompletedDialog(
           message: '更新されました',
+          onPressed: () {
+            Get.back();
+            Get.back();
+            Get.back();
+            scheduleController.onViewChangedGetSchedule(dateTime: date);
+          },
+        ),
+      );
+    }
+  }
+
+  Future<void> onTapDeleteSchedule({required type}) async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    Get.back();
+    await callAsyncApi(() async {
+      result = await api.deleteSchedule(scheduleEditData, type: type);
+    });
+    if (result) {
+      Get.dialog(
+        NormalCompletedDialog(
+          message: '削除されました',
           onPressed: () {
             Get.back();
             Get.back();

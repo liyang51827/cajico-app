@@ -8,8 +8,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../common/ui_helper.dart';
 import '../controller/schedule_edit_view_controller.dart';
+import '../controller/schedule_view_controller.dart';
 import '../widget/cajico_drop_down.dart';
 import '../widget/date_picker_form.dart';
+import '../widget/normal_dialog.dart';
 import '../widget/time_picker_form.dart';
 import '../widget/primary_button.dart';
 
@@ -32,6 +34,7 @@ class ScheduleEditView extends StatelessWidget {
     final controller =
         Get.put(ScheduleEditViewController(date: selectedDate, appointment: appointment));
     final scheduleInfo = controller.scheduleEditData;
+    Get.put(ScheduleViewController());
 
     return Focus(
       focusNode: focusNode,
@@ -183,21 +186,55 @@ class ScheduleEditView extends StatelessWidget {
                 backgroundColor: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
                 child: const Icon(Icons.palette, color: Colors.white),
               ),
-              bottomNavigationBar: Padding(
+              bottomNavigationBar: Container(
+                height: 180,
                 padding: const EdgeInsets.all(24),
-                child: PrimaryButton(
-                  label: '更新する',
-                  onPressed: () {
-                    if (appointment.repeatRule != null) {
-                      Get.dialog(RepeatScheduleDialog(
-                        onPressedNormal: () => controller.onTapUpdateDialog(type: 'normal'),
-                        onPressedOnly: () => controller.onTapUpdateDialog(type: 'only'),
-                        onPressedAfter: () => controller.onTapUpdateDialog(type: 'after'),
-                      ));
-                    }
-                  },
-                  color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
-                  isValid: controller.isCreateScheduleValid,
+                child: Column(
+                  children: [
+                    PrimaryButton(
+                      label: '更新する',
+                      onPressed: () {
+                        if (appointment.repeatRule != null) {
+                          Get.dialog(RepeatScheduleDialog(
+                            onPressedNormal: () => controller.onTapUpdateSchedule(type: 'normal'),
+                            onPressedOnly: () => controller.onTapUpdateSchedule(type: 'only'),
+                            onPressedAfter: () => controller.onTapUpdateSchedule(type: 'after'),
+                          ));
+                        } else {
+                          Get.dialog(
+                            NormalDialog(
+                              message: '更新しますか？',
+                              onPressed: () => controller.onTapUpdateSchedule(type: 'normal'),
+                            ),
+                          );
+                        }
+                      },
+                      color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                      isValid: controller.isCreateScheduleValid,
+                    ),
+                    verticalSpaceMedium,
+                    PrimaryOutlineButton(
+                      label: '削除する',
+                      onPressed: () {
+                        if (appointment.repeatRule != null) {
+                          Get.dialog(RepeatScheduleDialog(
+                            onPressedNormal: () => controller.onTapDeleteSchedule(type: 'normal'),
+                            onPressedOnly: () => controller.onTapDeleteSchedule(type: 'only'),
+                            onPressedAfter: () => controller.onTapDeleteSchedule(type: 'after'),
+                          ));
+                        } else {
+                          Get.dialog(
+                            NormalDialog(
+                              message: '削除しますか？',
+                              onPressed: () => controller.onTapDeleteSchedule(type: 'normal'),
+                            ),
+                          );
+                        }
+                      },
+                      color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
+                      isValid: controller.isCreateScheduleValid,
+                    ),
+                  ],
                 ),
               ),
             )),

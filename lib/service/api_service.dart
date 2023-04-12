@@ -590,6 +590,17 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // 予定削除API
+  Future<bool> deleteSchedule(ScheduleEditData scheduleEditData, {required String type}) async {
+    final int id = scheduleEditData.scheduleId();
+    final res = await http.delete(
+      _makeUri('/schedules/$id'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'type': type, 'date': scheduleEditData.date()}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 予定完了API
   Future<bool> completeSchedule({required int scheduleId, required String date}) async {
     final res = await http.put(
