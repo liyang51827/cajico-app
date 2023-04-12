@@ -54,8 +54,10 @@ class ScheduleView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>
-                            ScheduleDetailView(selectedAppointment: details.appointments![0]),
+                        builder: (_) => ScheduleDetailView(
+                          scheduleId: details.appointments![0].id,
+                          date: calendarController.displayDate,
+                        ),
                         fullscreenDialog: true,
                       ),
                     );
@@ -70,7 +72,9 @@ class ScheduleView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => ScheduleCreateView(selectedDate: calendarController.displayDate,)),
+        onPressed: () => Get.to(() => ScheduleCreateView(
+              selectedDate: calendarController.displayDate,
+            )),
         child: const Icon(Icons.add, color: Colors.white),
       ),
       bottomNavigationBar: const Footer(),

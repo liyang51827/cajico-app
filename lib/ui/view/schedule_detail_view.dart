@@ -3,22 +3,23 @@ import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../widget/primary_button.dart';
 
 class ScheduleDetailView extends StatelessWidget {
   const ScheduleDetailView({
     super.key,
-    required this.selectedAppointment,
+    required this.scheduleId,
+    required this.date,
   });
 
-  final Appointment selectedAppointment;
+  final int scheduleId;
+  final DateTime? date;
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
-    String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
-    String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
+    // String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
+    // String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
+    // String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,18 +44,18 @@ class ScheduleDetailView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              selectedAppointment.subject,
+              'test',
               style: const TextStyle(fontSize: 20),
             ),
             verticalSpaceMedium,
             _Menu(
               menu: '時間',
-              value: '$formattedDate $formattedStartTime〜$formattedEndTime',
+              value: 'test',
               icon: LineIcons.clock,
               isPadding: false,
             ),
             const _Menu(value: '毎日', isPadding: true),
-            _Menu(menu: '状況', value: selectedAppointment.location, icon: LineIcons.checkSquare, isPadding: true),
+            _Menu(menu: '状況', value: 'test', icon: LineIcons.checkSquare, isPadding: true),
             const _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
             const _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
           ],

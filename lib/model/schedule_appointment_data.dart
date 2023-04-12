@@ -28,3 +28,53 @@ class ScheduleAppointmentSummary {
     );
   }
 }
+
+class ScheduleAppointment {
+  ScheduleAppointment({
+    required this.scheduleId,
+    required this.houseWorkId,
+    required this.houseWorkName,
+    required this.startTime,
+    required this.endTime,
+    required this.color,
+    required this.status,
+    this.completedUser,
+    required this.point,
+    this.repeatRule,
+    this.repeatInterval,
+    this.repeatEndDate,
+    this.displayRepeatRule,
+  });
+
+  final int scheduleId;
+  final int houseWorkId;
+  final String houseWorkName;
+  final DateTime startTime;
+  final DateTime endTime;
+  final Color color;
+  final String status;
+  final String? completedUser;
+  final int point;
+  final int? repeatRule;
+  final int? repeatInterval;
+  final String? repeatEndDate;
+  final String? displayRepeatRule;
+
+  static ScheduleAppointment fromJson(Map<String, dynamic> json) {
+    return ScheduleAppointment(
+      scheduleId: json['id'],
+      houseWorkId: json['houseWork']['id'],
+      houseWorkName: json['houseWork']['name'],
+      startTime: DateTime.parse(json['startTime']),
+      endTime: DateTime.parse(json['endTime']),
+      color: Color(int.parse(json['color'].replaceAll('#', '0x'))),
+      status: json['status'],
+      completedUser: json['completedUser'],
+      point: json['point'],
+      repeatRule: json['repeatRule'],
+      repeatInterval: json['repeatInterval'],
+      repeatEndDate: json['repeatEndDate'],
+      displayRepeatRule: json['displayRepeatRule'],
+    );
+  }
+}

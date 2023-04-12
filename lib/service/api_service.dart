@@ -528,6 +528,19 @@ class ApiService extends GetConnect {
     return data.map((json) => ScheduleAppointmentSummary.fromJson(json)).toList();
   }
 
+  // 予定詳細取得API
+  Future<ScheduleAppointment> getAppointment({
+    required int scheduleId,
+    required String date,
+  }) async {
+    final res = await http.get(
+      _makeUri('/schedules/$scheduleId'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final dynamic data = _decodeResponse(res)['data'];
+    return ScheduleAppointment.fromJson(data);
+  }
+
   // 予定登録API
   Future<bool> createSchedule(ScheduleCreateData scheduleCreateData) async {
     final res = await http.post(
