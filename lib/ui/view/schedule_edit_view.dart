@@ -1,6 +1,7 @@
 import 'package:cajico_app/model/schedule_appointment_data.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
+import 'package:cajico_app/ui/widget/schedule_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
@@ -186,7 +187,15 @@ class ScheduleEditView extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 child: PrimaryButton(
                   label: '更新する',
-                  onPressed: () {},
+                  onPressed: () {
+                    if (appointment.repeatRule != null) {
+                      Get.dialog(RepeatScheduleDialog(
+                        onPressedNormal: () => controller.onTapUpdateDialog(type: 'normal'),
+                        onPressedOnly: () => controller.onTapUpdateDialog(type: 'only'),
+                        onPressedAfter: () => controller.onTapUpdateDialog(type: 'after'),
+                      ));
+                    }
+                  },
                   color: Color(int.parse(scheduleInfo.colorCode().replaceAll('#', '0x'))),
                   isValid: controller.isCreateScheduleValid,
                 ),

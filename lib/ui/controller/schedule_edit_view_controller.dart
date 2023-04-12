@@ -1,10 +1,12 @@
 import 'package:cajico_app/model/schedule_appointment_data.dart';
+import 'package:cajico_app/ui/controller/schedule_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/form_validation.dart';
 import '../../model/masters.dart';
 import '../../model/schedule_data.dart';
 import '../../util/form_validator.dart';
+import '../widget/normal_completed_dialog.dart';
 import 'base_view_controller.dart';
 
 class ScheduleEditViewController extends BaseViewController {
@@ -62,4 +64,26 @@ class ScheduleEditViewController extends BaseViewController {
       validateTimeAfterStartTime(
               value: scheduleEditData.endTime(), startTime: scheduleEditData.startTime())
           .isValid;
+
+  Future<void> onTapUpdateDialog({required type}) async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    Get.back();
+    await callAsyncApi(() async {
+      result = await api.updateSchedule(scheduleEditData, type: type);
+    });
+    if (result) {
+      Get.dialog(
+        NormalCompletedDialog(
+          message: '更新されました',
+          onPressed: () {
+            Get.back();
+            Get.back();
+            Get.back();
+            scheduleController.onViewChangedGetSchedule(dateTime: date);
+          },
+        ),
+      );
+    }
+  }
 }
