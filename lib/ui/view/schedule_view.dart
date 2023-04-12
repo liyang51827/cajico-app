@@ -18,15 +18,24 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleViewController());
-    Get.put(ScheduleViewController());
+    final controller = Get.put(ScheduleViewController());
     final calendarController = CalendarController();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(55),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(55),
         child: Header(
           imageUrl: 'assets/images/logo_schedule.png',
           title: '予定',
+          actions: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: IconButton(
+                  onPressed: () =>
+                      controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate),
+                  icon: const Icon(Icons.sync, size: 30),
+                )),
+          ],
         ),
       ),
       drawer: const HomeDrawer(),
