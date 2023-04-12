@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/schedule_appointment_data.dart';
 import '../widget/house_work_dialog.dart';
+import '../widget/normal_completed_dialog.dart';
+import '../widget/normal_dialog.dart';
 import 'base_view_controller.dart';
 
 class ScheduleDetailViewController extends BaseViewController {
@@ -34,6 +36,34 @@ class ScheduleDetailViewController extends BaseViewController {
         onPressed: () {
           Get.back();
           completeApi();
+        },
+      ),
+    );
+  }
+
+  Future<void> onTapCancelDialog() async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    Get.dialog(
+      NormalDialog(
+        message: '完了をキャンセルしますか？',
+        onPressed: () async {
+          Get.back();
+          await callAsyncApi(() async {
+            result = await api.cancelSchedule(scheduleId: scheduleId, date: outputFormat.format(date!));
+          });
+          if (result) {
+            Get.dialog(
+              NormalCompletedDialog(
+                message: 'キャンセルしました',
+                onPressed: () {
+                  Get.back();
+                  Get.back();
+                  scheduleController.fetchData();
+                },
+              ),
+            );
+          }
         },
       ),
     );

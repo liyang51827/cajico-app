@@ -563,10 +563,19 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
-  // 予定登録API
+  // 予定完了API
   Future<bool> completeSchedule({required int scheduleId, required String date}) async {
     final res = await http.put(
       _makeUri('/schedules/$scheduleId/complete', queryParams: {'date': date}),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 予定キャンセルAPI
+  Future<bool> cancelSchedule({required int scheduleId, required String date}) async {
+    final res = await http.put(
+      _makeUri('/schedules/$scheduleId/cancel', queryParams: {'date': date}),
       headers: await _makeAuthenticatedHeader(),
     );
     return _checkStatusCode(res);

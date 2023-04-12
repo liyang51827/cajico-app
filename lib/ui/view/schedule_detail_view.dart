@@ -90,14 +90,18 @@ class ScheduleDetailView extends StatelessWidget {
                 : const SizedBox(),
           ),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: appoint != null ? Container(
           padding: const EdgeInsets.all(24),
-          child: PrimaryButton(
+          child: appoint.status != '完了' ? PrimaryButton(
             label: '完了する',
             onPressed: () => controller.onTapCompleteDialog(),
-            color: appoint != null ? appoint.color : Colors.white,
+            color: appoint.color,
+          ) : PrimaryButton(
+            label: '完了をキャンセルする',
+            onPressed: () => controller.onTapCancelDialog(),
+            color: appoint.color,
           ),
-        ),
+        ) : const SizedBox(),
       );
     });
   }
