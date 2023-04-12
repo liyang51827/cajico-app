@@ -109,7 +109,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 16),
+      margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: details.appointments.first.location == '未完了'
             ? details.appointments.first.color
@@ -131,11 +131,14 @@ class _CalendarAppointmentDetail extends StatelessWidget {
                     ),
                   )
                 : const SizedBox(),
-            Text(
-              details.appointments.first.subject!,
-              style: TextStyle(
-                fontSize: 11,
-                color: details.appointments.first.location == '未完了' ? Colors.white : gray3,
+            Expanded(
+              child: Text(
+                details.appointments.first.subject!,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: details.appointments.first.location == '未完了' ? Colors.white : gray3,
+                ),
               ),
             ),
           ],

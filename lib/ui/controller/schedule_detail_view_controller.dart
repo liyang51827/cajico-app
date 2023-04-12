@@ -1,10 +1,13 @@
+import 'package:cajico_app/ui/controller/schedule_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/schedule_appointment_data.dart';
+import '../widget/house_work_dialog.dart';
 import 'base_view_controller.dart';
 
 class ScheduleDetailViewController extends BaseViewController {
   ScheduleDetailViewController({required this.scheduleId, required this.date});
+
   final int scheduleId;
   final DateTime? date;
   final appoint = Rxn<ScheduleAppointment>();
@@ -21,5 +24,17 @@ class ScheduleDetailViewController extends BaseViewController {
       String day = outputFormat.format(date!);
       appoint.value = await api.getAppointment(scheduleId: scheduleId, date: day);
     });
+  }
+
+  Future<void> onTapCompleteDialog() async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    Get.dialog(
+      HouseWorkCompleteDialog(
+        houseWorkName: appoint()!.houseWorkName,
+        point: appoint()!.point,
+        onPressed: (){},
+      ),
+    );
   }
 }

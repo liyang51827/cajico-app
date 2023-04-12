@@ -1,6 +1,6 @@
 import 'package:cajico_app/model/house_works.dart';
 import 'package:get/get.dart';
-import '../widget/house_work_completed_dialog.dart';
+import '../widget/house_work_dialog.dart';
 import 'base_view_controller.dart';
 
 class HouseWorkViewController extends BaseViewController {

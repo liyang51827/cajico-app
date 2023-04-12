@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../view/top_view.dart';
-import '../widget/house_work_completed_dialog.dart';
+import '../widget/house_work_dialog.dart';
 import 'base_view_controller.dart';
 
 class HomeViewController extends BaseViewController {
