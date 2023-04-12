@@ -1,6 +1,7 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
 import 'package:cajico_app/ui/controller/schedule_detail_view_controller.dart';
+import 'package:cajico_app/ui/view/schedule_edit_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,8 @@ class ScheduleDetailView extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Get.to(() => ScheduleEditView(selectedDate: date!, appointment: appoint!)),
                   icon: const Icon(Icons.edit, size: 24, color: Colors.white),
                 ))
           ],
@@ -63,10 +65,15 @@ class ScheduleDetailView extends StatelessWidget {
                         isPadding: false,
                       ),
                       appoint.displayRepeatRule != null
-                          ? _Menu(value: appoint.displayRepeatRule, isPadding: appoint.repeatEndDate != null ? false : true)
+                          ? _Menu(
+                              value: appoint.displayRepeatRule,
+                              isPadding: appoint.repeatEndDate != null ? false : true)
                           : verticalSpaceMedium,
                       appoint.repeatEndDate != null
-                          ? _Menu(value: '${DateFormat('yyyy年M月d日', 'ja_JP').format(appoint.repeatEndDate!)}まで', isPadding: true)
+                          ? _Menu(
+                              value:
+                                  '${DateFormat('yyyy年M月d日', 'ja_JP').format(appoint.repeatEndDate!)}まで',
+                              isPadding: true)
                           : SizedBox(),
                       _Menu(
                           menu: '状況',
@@ -90,18 +97,22 @@ class ScheduleDetailView extends StatelessWidget {
                 : const SizedBox(),
           ),
         ),
-        bottomNavigationBar: appoint != null ? Container(
-          padding: const EdgeInsets.all(24),
-          child: appoint.status != '完了' ? PrimaryButton(
-            label: '完了する',
-            onPressed: () => controller.onTapCompleteDialog(),
-            color: appoint.color,
-          ) : PrimaryButton(
-            label: '完了をキャンセルする',
-            onPressed: () => controller.onTapCancelDialog(),
-            color: appoint.color,
-          ),
-        ) : const SizedBox(),
+        bottomNavigationBar: appoint != null
+            ? Container(
+                padding: const EdgeInsets.all(24),
+                child: appoint.status != '完了'
+                    ? PrimaryButton(
+                        label: '完了する',
+                        onPressed: () => controller.onTapCompleteDialog(),
+                        color: appoint.color,
+                      )
+                    : PrimaryButton(
+                        label: '完了をキャンセルする',
+                        onPressed: () => controller.onTapCancelDialog(),
+                        color: appoint.color,
+                      ),
+              )
+            : const SizedBox(),
       );
     });
   }
