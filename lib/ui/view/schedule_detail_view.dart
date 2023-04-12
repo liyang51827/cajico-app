@@ -38,11 +38,7 @@ class ScheduleDetailView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(
-                    Icons.edit,
-                    size: 24,
-                    color: Colors.white,
-                  ),
+                  icon: const Icon(Icons.edit, size: 24, color: Colors.white),
                 ))
           ],
         ),
@@ -58,7 +54,7 @@ class ScheduleDetailView extends StatelessWidget {
                         appoint.houseWorkName,
                         style: const TextStyle(fontSize: 20),
                       ),
-                      verticalSpaceMedium,
+                      verticalSpaceLarge,
                       _Menu(
                         menu: '時間',
                         value:
@@ -67,11 +63,11 @@ class ScheduleDetailView extends StatelessWidget {
                         isPadding: false,
                       ),
                       appoint.displayRepeatRule != null
-                          ? _Menu(value: appoint.displayRepeatRule, isPadding: true)
+                          ? _Menu(value: appoint.displayRepeatRule, isPadding: appoint.repeatEndDate != null ? false : true)
                           : verticalSpaceMedium,
                       appoint.repeatEndDate != null
-                          ? _Menu(value: appoint.repeatEndDate, isPadding: true)
-                          : const SizedBox(),
+                          ? _Menu(value: '${DateFormat('yyyy年M月d日', 'ja_JP').format(appoint.repeatEndDate!)}まで', isPadding: true)
+                          : SizedBox(),
                       _Menu(
                           menu: '状況',
                           value: appoint.status,

@@ -57,7 +57,7 @@ class ScheduleAppointment {
   final int point;
   final int? repeatRule;
   final int? repeatInterval;
-  final String? repeatEndDate;
+  final DateTime? repeatEndDate;
   final String? displayRepeatRule;
 
   static ScheduleAppointment fromJson(Map<String, dynamic> json) {
@@ -73,7 +73,7 @@ class ScheduleAppointment {
       point: json['houseWork']['point'],
       repeatRule: json['repeatRule'],
       repeatInterval: json['repeatInterval'],
-      repeatEndDate: json['repeatEndDate'],
+      repeatEndDate: json['repeatEndDate'] != null ? DateTime.parse(json['repeatEndDate']) : null,
       displayRepeatRule: json['displayRepeatRule'],
     );
   }
