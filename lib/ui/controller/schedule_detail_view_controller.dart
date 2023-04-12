@@ -27,14 +27,34 @@ class ScheduleDetailViewController extends BaseViewController {
   }
 
   Future<void> onTapCompleteDialog() async {
-    final scheduleController = Get.put(ScheduleViewController());
-    var result = false;
     Get.dialog(
       HouseWorkCompleteDialog(
         houseWorkName: appoint()!.houseWorkName,
         point: appoint()!.point,
-        onPressed: (){},
+        onPressed: () {
+          Get.back();
+          completeApi();
+        },
       ),
     );
+  }
+
+  Future<void> completeApi() async {
+    final scheduleController = Get.put(ScheduleViewController());
+    var result = false;
+    await callAsyncApi(() async {
+      result = await api.completeSchedule(scheduleId: scheduleId, date: outputFormat.format(date!));
+    });
+    if (result) {
+      fetchData();
+      Get.dialog(HouseWorkCompletedDialog(
+        point: appoint()!.point,
+        onPressed: () {
+          Get.back();
+          Get.back();
+          scheduleController.fetchData();
+        },
+      ));
+    }
   }
 }

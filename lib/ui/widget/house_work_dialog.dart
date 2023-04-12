@@ -60,9 +60,11 @@ class HouseWorkCompletedDialog extends StatelessWidget {
   const HouseWorkCompletedDialog({
     super.key,
     required this.point,
+    required this.onPressed,
   });
 
   final int point;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +93,7 @@ class HouseWorkCompletedDialog extends StatelessWidget {
         Container(
             padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
             child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                  Get.to(() => const HomeView());
-                },
+                onPressed: onPressed,
                 child: const PrimarySmallButton(text: '戻る'))),
       ],
     );

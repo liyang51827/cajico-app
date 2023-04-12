@@ -94,7 +94,7 @@ class ScheduleDetailView extends StatelessWidget {
           padding: const EdgeInsets.all(24),
           child: PrimaryButton(
             label: '完了する',
-            onPressed: () {},
+            onPressed: () => controller.onTapCompleteDialog(),
             color: appoint != null ? appoint.color : Colors.white,
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:cajico_app/model/house_works.dart';
 import 'package:get/get.dart';
+import '../view/home_view.dart';
 import '../widget/house_work_dialog.dart';
 import 'base_view_controller.dart';
 
@@ -24,7 +25,13 @@ class HouseWorkViewController extends BaseViewController {
   Future<void> onTapCompleteDialog({required int houseWorkId, required int point}) async {
     Get.back();
     await completeApi(houseWorkId: houseWorkId);
-    Get.dialog(HouseWorkCompletedDialog(point: point));
+    Get.dialog(HouseWorkCompletedDialog(
+      point: point,
+      onPressed: () {
+        Get.back();
+        Get.to(() => const HomeView());
+      },
+    ));
   }
 
   Future<void> completeApi({required int houseWorkId}) async {
