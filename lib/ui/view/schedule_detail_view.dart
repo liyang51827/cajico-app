@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
+import '../widget/loading_stack.dart';
 import '../widget/primary_button.dart';
 
 class ScheduleDetailView extends StatelessWidget {
@@ -20,56 +21,67 @@ class ScheduleDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
-    final controller = Get.put(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
     // String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
     // String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
     // String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black54),
-        centerTitle: true,
+    return Obx(() {
+      final controller = Get.put(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
+      final appoint = controller.appoint();
+
+      return Scaffold(
         backgroundColor: Colors.white,
-        titleTextStyle: const TextStyle(fontSize: 22),
-        elevation: 0.0,
-        actions: [
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.edit, size: 24),
-              ))
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'test',
-              style: const TextStyle(fontSize: 20),
-            ),
-            verticalSpaceMedium,
-            _Menu(
-              menu: '時間',
-              value: 'test',
-              icon: LineIcons.clock,
-              isPadding: false,
-            ),
-            const _Menu(value: '毎日', isPadding: true),
-            _Menu(menu: '状況', value: 'test', icon: LineIcons.checkSquare, isPadding: true),
-            const _Menu(menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
-            const _Menu(menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.black54),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          titleTextStyle: const TextStyle(fontSize: 22),
+          elevation: 0.0,
+          actions: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.edit, size: 24),
+                ))
           ],
         ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(24),
-        child: PrimaryButton(label: '完了する', onPressed: () {}),
-      ),
-    );
+        body: GetLoadingStack<ScheduleDetailViewController>(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: appoint != null
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        appoint.houseWorkName,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      verticalSpaceMedium,
+                      _Menu(
+                        menu: '時間',
+                        value: 'test',
+                        icon: LineIcons.clock,
+                        isPadding: false,
+                      ),
+                      const _Menu(value: '毎日', isPadding: true),
+                      _Menu(
+                          menu: '状況', value: 'test', icon: LineIcons.checkSquare, isPadding: true),
+                      const _Menu(
+                          menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
+                      const _Menu(
+                          menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
+                    ],
+                  )
+                : const SizedBox(),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.all(24),
+          child: PrimaryButton(label: '完了する', onPressed: () {}),
+        ),
+      );
+    });
   }
 }
 
