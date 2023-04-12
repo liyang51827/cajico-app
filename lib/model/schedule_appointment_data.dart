@@ -70,7 +70,7 @@ class ScheduleAppointment {
       color: Color(int.parse(json['color'].replaceAll('#', '0x'))),
       status: json['status'],
       completedUser: json['completedUser'],
-      point: json['point'],
+      point: json['houseWork']['point'],
       repeatRule: json['repeatRule'],
       repeatInterval: json['repeatInterval'],
       repeatEndDate: json['repeatEndDate'],

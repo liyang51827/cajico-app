@@ -1,6 +1,8 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/controller/schedule_detail_view_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import '../widget/primary_button.dart';
@@ -17,6 +19,8 @@ class ScheduleDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.replace(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
+    final controller = Get.put(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
     // String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
     // String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
     // String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);

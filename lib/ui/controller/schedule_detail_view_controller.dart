@@ -6,7 +6,7 @@ import 'base_view_controller.dart';
 class ScheduleDetailViewController extends BaseViewController {
   ScheduleDetailViewController({required this.scheduleId, required this.date});
   final int scheduleId;
-  final DateTime date;
+  final DateTime? date;
   final appoint = Rxn<ScheduleAppointment>();
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
 
@@ -18,7 +18,7 @@ class ScheduleDetailViewController extends BaseViewController {
 
   Future<void> fetchData() async {
     await callAsyncApi(() async {
-      String day = outputFormat.format(date);
+      String day = outputFormat.format(date!);
       appoint.value = await api.getAppointment(scheduleId: scheduleId, date: day);
     });
   }

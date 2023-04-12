@@ -534,7 +534,7 @@ class ApiService extends GetConnect {
     required String date,
   }) async {
     final res = await http.get(
-      _makeUri('/schedules/$scheduleId'),
+      _makeUri('/schedules/$scheduleId', queryParams: {'date': date}),
       headers: await _makeAuthenticatedHeader(),
     );
     final dynamic data = _decodeResponse(res)['data'];
