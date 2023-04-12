@@ -21,9 +21,6 @@ class ScheduleDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
-    // String formattedDate = DateFormat('M月d日(E)', 'ja_JP').format(selectedAppointment.startTime);
-    // String formattedStartTime = DateFormat.Hm().format(selectedAppointment.startTime);
-    // String formattedEndTime = DateFormat.Hm().format(selectedAppointment.endTime);
     return Obx(() {
       final controller = Get.put(ScheduleDetailViewController(scheduleId: scheduleId, date: date));
       final appoint = controller.appoint();
@@ -31,9 +28,9 @@ class ScheduleDetailView extends StatelessWidget {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black54),
+          iconTheme: const IconThemeData(color: Colors.white),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: appoint != null ? appoint.color : Colors.white,
           titleTextStyle: const TextStyle(fontSize: 22),
           elevation: 0.0,
           actions: [
@@ -41,14 +38,18 @@ class ScheduleDetailView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.edit, size: 24),
+                  icon: const Icon(
+                    Icons.edit,
+                    size: 24,
+                    color: Colors.white,
+                  ),
                 ))
           ],
         ),
         body: GetLoadingStack<ScheduleDetailViewController>(
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.all(24),
             child: appoint != null
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,17 +61,34 @@ class ScheduleDetailView extends StatelessWidget {
                       verticalSpaceMedium,
                       _Menu(
                         menu: '時間',
-                        value: 'test',
+                        value:
+                            '${DateFormat('M月d日(E)', 'ja_JP').format(appoint.startTime)}${DateFormat.Hm().format(appoint.startTime)}~${DateFormat.Hm().format(appoint.endTime)}',
                         icon: LineIcons.clock,
                         isPadding: false,
                       ),
-                      const _Menu(value: '毎日', isPadding: true),
+                      appoint.displayRepeatRule != null
+                          ? _Menu(value: appoint.displayRepeatRule, isPadding: true)
+                          : verticalSpaceMedium,
+                      appoint.repeatEndDate != null
+                          ? _Menu(value: appoint.repeatEndDate, isPadding: true)
+                          : const SizedBox(),
                       _Menu(
-                          menu: '状況', value: 'test', icon: LineIcons.checkSquare, isPadding: true),
-                      const _Menu(
-                          menu: '完了者', value: 'かつのり', icon: LineIcons.user, isPadding: true),
-                      const _Menu(
-                          menu: 'ポイント', value: '80P', icon: LineIcons.coins, isPadding: true),
+                          menu: '状況',
+                          value: appoint.status,
+                          icon: LineIcons.checkSquare,
+                          isPadding: true),
+                      appoint.completedUser != null
+                          ? _Menu(
+                              menu: '完了者',
+                              value: appoint.completedUser,
+                              icon: LineIcons.user,
+                              isPadding: true)
+                          : const SizedBox(),
+                      _Menu(
+                          menu: 'ポイント',
+                          value: '${appoint.point}P',
+                          icon: LineIcons.coins,
+                          isPadding: true),
                     ],
                   )
                 : const SizedBox(),
@@ -78,7 +96,11 @@ class ScheduleDetailView extends StatelessWidget {
         ),
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(24),
-          child: PrimaryButton(label: '完了する', onPressed: () {}),
+          child: PrimaryButton(
+            label: '完了する',
+            onPressed: () {},
+            color: appoint != null ? appoint.color : Colors.white,
+          ),
         ),
       );
     });
