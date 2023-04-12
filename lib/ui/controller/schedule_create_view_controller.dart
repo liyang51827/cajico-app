@@ -12,6 +12,7 @@ import 'base_view_controller.dart';
 
 class ScheduleCreateViewController extends BaseViewController {
   ScheduleCreateViewController({required this.date});
+
   final DateTime? date;
   final today = DateTime.now();
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
@@ -37,7 +38,8 @@ class ScheduleCreateViewController extends BaseViewController {
   Future<void> fetchData() async {
     scheduleCreateData.date.value = outputFormat.format(date!);
     scheduleCreateData.startTime.value = DateFormat.Hm().format(today);
-    scheduleCreateData.endTime.value = DateFormat.Hm().format(today.add(const Duration(minutes: 10)));
+    scheduleCreateData.endTime.value =
+        DateFormat.Hm().format(today.add(const Duration(minutes: 10)));
     await callAsyncApi(() async {
       houseWorks.value = await api.getAllHouseWorksList();
     });
@@ -50,7 +52,8 @@ class ScheduleCreateViewController extends BaseViewController {
       FormValidator.validateTimeAfterStartTime(endTime: value, startTime: startTime);
 
   bool get isCreateScheduleValid =>
-      validateRequiredDropDown(value: scheduleCreateData.houseWorkId()).isValid;
+      validateRequiredDropDown(value: scheduleCreateData.houseWorkId()).isValid &&
+      validateTimeAfterStartTime(value: scheduleCreateData.endTime(), startTime: scheduleCreateData.startTime()).isValid;
 
   Future<void> onTapCreateDialog() async {
     final scheduleController = Get.put(ScheduleViewController());
