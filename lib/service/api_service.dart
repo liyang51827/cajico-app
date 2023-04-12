@@ -4,11 +4,13 @@ import 'package:cajico_app/model/inquiry_data.dart';
 import 'package:cajico_app/model/my_page_data.dart';
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
+import 'package:cajico_app/model/schedule_data.dart';
 import 'package:cajico_app/util/xfile_extension.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/login_data.dart';
+import '../model/masters.dart';
 import '../model/my_page.dart';
 import '../model/pagination_response.dart';
 import '../model/point_history.dart';
@@ -17,6 +19,7 @@ import 'package:http/http.dart' as http;
 import '../model/notice.dart';
 import '../model/family_reward.dart';
 import '../model/reward_history.dart';
+import '../model/schedule_appointment_data.dart';
 
 class ApiService extends GetConnect {
   String? token;
@@ -283,6 +286,16 @@ class ApiService extends GetConnect {
     return data.map((json) => HouseWork.fromJson(json)).toList();
   }
 
+  // 家族の家事全取得API
+  Future<List<Master>> getAllHouseWorksList() async {
+    final res = await http.get(
+      _makeUri('/house-works-all'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => Master.fromJson(json)).toList();
+  }
+
   // 家事登録API
   Future<bool> createHouseWork(HouseWorkCreateData houseWorkCreateData) async {
     final res = await http.post(
@@ -500,6 +513,108 @@ class ApiService extends GetConnect {
       _makeUri('/inquiry'),
       headers: await _makeAuthenticatedHeader(),
       body: jsonEncode({'title': inquiryData.title(), 'body': inquiryData.body()}),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // その日の予定取得API
+  Future<List<ScheduleAppointmentSummary>> getScheduleAppointmentList(
+      {required String date}) async {
+    final res = await http.get(
+      _makeUri('/schedules', queryParams: {'date': date}),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => ScheduleAppointmentSummary.fromJson(json)).toList();
+  }
+
+  // 予定詳細取得API
+  Future<ScheduleAppointment> getAppointment({
+    required int scheduleId,
+    required String date,
+  }) async {
+    final res = await http.get(
+      _makeUri('/schedules/$scheduleId', queryParams: {'date': date}),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final dynamic data = _decodeResponse(res)['data'];
+    return ScheduleAppointment.fromJson(data);
+  }
+
+  // 予定登録API
+  Future<bool> createSchedule(ScheduleCreateData scheduleCreateData) async {
+    final res = await http.post(
+      _makeUri('/schedules'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({
+        'date': scheduleCreateData.date(),
+        'houseWorkId': scheduleCreateData.houseWorkId(),
+        'startTime': scheduleCreateData.startTime(),
+        'endTime': scheduleCreateData.endTime(),
+        'colorCode': scheduleCreateData.colorCode(),
+        'repeatRule':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatRule() : null,
+        'repeatInterval':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatInterval() : null,
+        'repeatEndDate':
+            scheduleCreateData.repeatRule() != 999 ? scheduleCreateData.repeatEndDate() : null,
+      }),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 予定更新API
+  Future<bool> updateSchedule(ScheduleEditData scheduleEditData, {required String type}) async {
+    final int id = scheduleEditData.scheduleId();
+    final res = await http.put(
+      _makeUri('/schedules/$id'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({
+        'type': type,
+        'date': scheduleEditData.date(),
+        'houseWorkId': scheduleEditData.houseWorkId(),
+        'startTime': scheduleEditData.startTime(),
+        'endTime': scheduleEditData.endTime(),
+        'colorCode': scheduleEditData.colorCode(),
+        'repeatRule': scheduleEditData.repeatRule() != 999 && type != 'only'
+            ? scheduleEditData.repeatRule()
+            : null,
+        'repeatInterval': scheduleEditData.repeatRule() != 999 && type != 'only'
+            ? scheduleEditData.repeatInterval()
+            : null,
+        'repeatEndDate': scheduleEditData.repeatRule() != 999 && type != 'only'
+            ? scheduleEditData.repeatEndDate()
+            : null,
+      }),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 予定削除API
+  Future<bool> deleteSchedule(ScheduleEditData scheduleEditData, {required String type}) async {
+    final int id = scheduleEditData.scheduleId();
+    final res = await http.delete(
+      _makeUri('/schedules/$id'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'type': type, 'date': scheduleEditData.date()}),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 予定完了API
+  Future<bool> completeSchedule({required int scheduleId, required String date}) async {
+    final res = await http.put(
+      _makeUri('/schedules/$scheduleId/complete', queryParams: {'date': date}),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    return _checkStatusCode(res);
+  }
+
+  // 予定キャンセルAPI
+  Future<bool> cancelSchedule({required int scheduleId, required String date}) async {
+    final res = await http.put(
+      _makeUri('/schedules/$scheduleId/cancel', queryParams: {'date': date}),
+      headers: await _makeAuthenticatedHeader(),
     );
     return _checkStatusCode(res);
   }

@@ -32,6 +32,14 @@ class FormValidation {
     return FormValidation(isValid: false, message: 'パスワードが一致しません');
   }
 
+  factory FormValidation.ngDropDown() {
+    return FormValidation(isValid: false, message: '選択してください');
+  }
+
+  factory FormValidation.ngAfterTime() {
+    return FormValidation(isValid: false, message: '開始時間より後の時間を選択してください');
+  }
+
   factory FormValidation.ngDigit({int? min, int? max}) {
     var tmpMessage = '';
     if (min != null && max != null && min == max) {

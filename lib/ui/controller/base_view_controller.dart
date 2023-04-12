@@ -10,6 +10,7 @@ import '../../model/app_flavor.dart';
 import '../../model/loading_state.dart';
 import '../../service/api_service.dart';
 import '../view/reward_view.dart';
+import '../view/schedule_view.dart';
 import '../widget/common_dialog.dart';
 
 class BaseViewController extends GetxController {
@@ -23,9 +24,12 @@ class BaseViewController extends GetxController {
       Get.to(() => const HomeView());
     } else if (index == 1) {
       tabIndex.value = 1;
-      Get.to(() => const RewardView());
+      Get.to(() => const ScheduleView());
     } else if (index == 2) {
       tabIndex.value = 2;
+      Get.to(() => const RewardView());
+    } else if (index == 3) {
+      tabIndex.value = 3;
       Get.to(() => const HistoryView());
     }
   }

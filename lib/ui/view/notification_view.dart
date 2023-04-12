@@ -1,5 +1,5 @@
 import 'package:cajico_app/ui/common/app_color.dart';
-import 'package:cajico_app/ui/view/admin_notice_detail.dart';
+import 'package:cajico_app/ui/view/admin_notice_detail_view.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/next_page_button.dart';
 import 'package:flutter/material.dart';

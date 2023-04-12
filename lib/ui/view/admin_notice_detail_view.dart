@@ -33,7 +33,7 @@ class AdminNoticeDetailView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     title,
@@ -42,7 +42,7 @@ class AdminNoticeDetailView extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceMediumSmall,
-                Container(
+                SizedBox(
                     width: double.infinity,
                     child: Text(
                       date,
