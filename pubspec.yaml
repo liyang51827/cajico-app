@@ -38,6 +38,7 @@ dependencies:
   http_parser: ^4.0.2
   syncfusion_flutter_calendar: ^19.2.62
   flutter_colorpicker: ^1.0.3
+  flutter_overboard: ^3.1.1
 
 dev_dependencies:
   flutter_test:

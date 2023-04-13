@@ -5,6 +5,7 @@ import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_family_view.dart';
 import 'package:cajico_app/ui/view/reset_password_view.dart';
 import 'package:cajico_app/ui/view/top_view.dart';
+import 'package:cajico_app/ui/view/tutorial_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -75,7 +76,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CAJICO',
-      // home: isLogin ? const HomeView() : const TopView(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
         }
         // ナビゲーションに失敗した場合はホーム画面に遷移
         return MaterialPageRoute(
-            builder: (context) => isLogin ? const HomeView() : const TopView());
+            builder: (context) => isLogin ? const HomeView() : TutorialView());
       },
     );
   }
