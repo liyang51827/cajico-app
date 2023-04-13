@@ -305,6 +305,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.13"
+  flutter_overboard:
+    dependency: "direct main"
+    description:
+      name: flutter_overboard
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
