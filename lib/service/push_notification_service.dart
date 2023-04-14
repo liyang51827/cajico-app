@@ -11,23 +11,23 @@ class PushNotificationService {
     await _fcm.requestPermission();
 
     // 通知を受信した場合の処理
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      showDialog(
-        context: Get.overlayContext!,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(message.notification?.title ?? ''),
-            content: Text(message.notification?.body ?? ''),
-            actions: [
-              TextButton(
-                onPressed: () => Get.back(),
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    });
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   showDialog(
+    //     context: Get.overlayContext!,
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: Text(message.notification?.title ?? ''),
+    //         content: Text(message.notification?.body ?? ''),
+    //         actions: [
+    //           TextButton(
+    //             onPressed: () => Get.back(),
+    //             child: const Text('OK'),
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
+    // });
 
     // アプリがバックグラウンドで実行中の場合、通知をタップしてアプリを起動した場合の処理
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
