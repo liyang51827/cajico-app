@@ -114,7 +114,7 @@ class RegisterUserView extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 4),
                       child: Text(
-                        '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
+                        '※家族パスワードは8文字以上20文字以下の半角英数字でご入力ください。',
                         style: TextStyle(color: gray4, fontSize: 13),
                       ),
                     ),

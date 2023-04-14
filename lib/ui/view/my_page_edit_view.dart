@@ -128,7 +128,7 @@ class MyPageEditView extends StatelessWidget {
                     initValue: initFamilyCode,
                     obscureText: true,
                     maxLines: 1,
-                    label: '家族コード',
+                    label: '家族パスワード',
                     onChanged: (value) => myPageInfo.familyCode.value = value,
                     validator: (value) => controller
                         .validateInputPasswordData(value: value, minLength: 8, maxLength: 20)

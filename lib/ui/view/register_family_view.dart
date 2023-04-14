@@ -47,13 +47,13 @@ class RegisterFamilyView extends StatelessWidget {
                     const ProgressBar(step: 2),
                     verticalSpaceLarge,
                     if (familyInfo.type() == 'new')
-                      const Text('家族の名前と\n他の方が家族に参加するための\n家族コードを設定してください',
+                      const Text('家族の名前と\n他の方が家族に参加するための\n家族パスワードを設定してください',
                           textAlign: TextAlign.center),
                     if (familyInfo.type() == 'join')
-                      const Text('家族名と\n家族コードを入力してください', textAlign: TextAlign.center),
+                      const Text('家族名と\n家族パスワードを入力してください', textAlign: TextAlign.center),
                     verticalSpaceLarge,
                     CajicoTextFormField(
-                      label: '家族名',
+                      label: '家族名（名字）',
                       initValue: '',
                       maxLines: 1,
                       onChanged: (value) => familyInfo.familyName.value = value,
@@ -62,7 +62,7 @@ class RegisterFamilyView extends StatelessWidget {
                     ),
                     verticalSpaceMedium,
                     CajicoTextFormField(
-                      label: '家族コード',
+                      label: '家族パスワード',
                       initValue: '',
                       obscureText: true,
                       maxLines: 1,
@@ -74,7 +74,7 @@ class RegisterFamilyView extends StatelessWidget {
                     const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4),
                         child: Text(
-                          '※家族コードは8文字以上20文字以下の半角英数字でご入力ください。',
+                          '※家族パスワードは8文字以上20文字以下の半角英数字でご入力ください。',
                           style: TextStyle(color: gray4, fontSize: 13),
                         )),
                   ],
