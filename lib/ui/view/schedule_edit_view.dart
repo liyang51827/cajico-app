@@ -67,7 +67,7 @@ class ScheduleEditView extends StatelessWidget {
                       verticalSpaceMedium,
                       DatePickerForm(
                         labelText: '日付',
-                        firstDate: DateTime.parse(scheduleInfo.date()),
+                        firstDate: DateTime(today.year - 1, today.month, today.day),
                         lastDate: DateTime(today.year + 1, today.month, today.day),
                         onChange: (value) => scheduleInfo.date.value = outputFormat.format(value!),
                         initialDate: DateTime.parse(scheduleInfo.date()),
