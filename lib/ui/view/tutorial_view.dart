@@ -36,7 +36,7 @@ class TutorialView extends StatelessWidget {
           body: '家事・育児は家族みんなで。\n日々の家事に感謝するための家事共有アプリです。',
         ),
         doAnimateChild: true,
-        color: primaryColor),
+        color: secondaryColor),
     PageModel.withChild(
         child: const _CustomPageModel(
           imageAssetPath: 'assets/images/tutorial2.png',
@@ -117,7 +117,7 @@ class _CustomPageModel extends StatelessWidget {
         child: Column(
           children: [
             Image(image: AssetImage(imageAssetPath)),
-            verticalSpaceMedium,
+            verticalSpaceLarge,
             Text(
               title,
               style: const TextStyle(
@@ -127,7 +127,7 @@ class _CustomPageModel extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            verticalSpaceMedium,
+            verticalSpaceLarge,
             Text(
               body,
               style: const TextStyle(
