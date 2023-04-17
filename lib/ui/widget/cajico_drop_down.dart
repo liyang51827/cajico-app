@@ -1,8 +1,6 @@
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:flutter/material.dart';
 
-import '../common/ui_helper.dart';
-
 class CajicoDropDown<T> extends StatelessWidget {
   const CajicoDropDown({
     super.key,

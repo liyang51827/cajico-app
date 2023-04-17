@@ -1,6 +1,5 @@
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PushNotificationService {

@@ -9,6 +9,7 @@ import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../controller/notification_view_controller.dart';
 import '../widget/background.dart';
 import '../widget/header.dart';
@@ -52,6 +53,8 @@ class HomeView extends GetView<HomeViewController> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
+                    verticalSpaceMedium,
+                    const _SummeryCard(),
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       alignment: Alignment.centerLeft,
@@ -134,6 +137,70 @@ class _CategoryCards extends StatelessWidget {
                 categoryName: 'その他育児',
                 imageUrl: 'assets/images/other_child_care.png',
                 houseWorkCategoryId: 9),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SummeryCard extends StatelessWidget {
+  const _SummeryCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: gray5, //色
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(1, 1),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: const [
+            _PointSummary(title: "今日", point: 400),
+            _PointSummary(title: "保有", point: 5000),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PointSummary extends StatelessWidget {
+  const _PointSummary({
+    required this.title,
+    required this.point,
+  });
+
+  final String title;
+  final int point;
+
+  @override
+  Widget build(BuildContext context) {
+    final formatter = NumberFormat("#,###");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const Text('前日 +100P', style: TextStyle(fontSize: 12)),
+        Row(
+          children: [
+            Text(title, style: const TextStyle(fontSize: 16)),
+            horizontalSpaceSmall,
+            Text(
+              '${formatter.format(point)}P',
+              style: const TextStyle(fontSize: 30, color: subColor),
+            ),
           ],
         ),
       ],

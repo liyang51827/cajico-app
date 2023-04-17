@@ -4,7 +4,6 @@ import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_family_view.dart';
 import 'package:cajico_app/ui/view/reset_password_view.dart';
-import 'package:cajico_app/ui/view/top_view.dart';
 import 'package:cajico_app/ui/view/tutorial_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
