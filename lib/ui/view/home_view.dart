@@ -152,14 +152,14 @@ class _SummeryCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
         boxShadow: const [
           BoxShadow(
             color: gray5, //色
             spreadRadius: 1,
             blurRadius: 1,
-            offset: Offset(1, 1),
+            offset: Offset(0, 1),
           ),
         ],
       ),
@@ -168,8 +168,8 @@ class _SummeryCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: const [
-            _PointSummary(title: "今日", point: 400),
-            _PointSummary(title: "保有", point: 5000),
+            _PointSummary(title: "今日", point: 400, diffPoint: -400),
+            _PointSummary(title: "保有", point: 5000, diffPoint: 800),
           ],
         ),
       ),
@@ -181,10 +181,12 @@ class _PointSummary extends StatelessWidget {
   const _PointSummary({
     required this.title,
     required this.point,
+    required this.diffPoint,
   });
 
   final String title;
   final int point;
+  final int diffPoint;
 
   @override
   Widget build(BuildContext context) {
@@ -194,14 +196,18 @@ class _PointSummary extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('前日比', style: TextStyle(fontSize: 10)),
+            const Text('前日比', style: TextStyle(fontSize: 11)),
             horizontalSpaceTiny,
-            point > 0
-                ? Text('+${formatter.format(point)}P', style: const TextStyle(fontSize: 12, color: Colors.blue))
-                : point < 0
-                    ? Text('-${formatter.format(point)}P', style: const TextStyle(fontSize: 12, color: errorColor))
-                    : const Text('-', style: TextStyle(fontSize: 12)),
-            const Icon(Icons.north_east, size: 12, color: Colors.blue),
+            diffPoint == 0
+                ? const Text('-', style: TextStyle(fontSize: 12))
+                : Text('${formatter.format(diffPoint)}P',
+                    style:
+                        TextStyle(fontSize: 12, color: diffPoint > 0 ? Colors.blue : errorColor)),
+            diffPoint > 0
+                ? const Icon(Icons.north_east, size: 12, color: Colors.blue)
+                : diffPoint < 0
+                    ? const Icon(Icons.south_east, size: 12, color: errorColor)
+                    : const SizedBox(),
           ],
         ),
         Row(
@@ -210,7 +216,7 @@ class _PointSummary extends StatelessWidget {
             horizontalSpaceSmall,
             Text(
               '${formatter.format(point)}P',
-              style: const TextStyle(fontSize: 24, color: gray2),
+              style: const TextStyle(fontSize: 24, color: subColor),
             ),
           ],
         ),
