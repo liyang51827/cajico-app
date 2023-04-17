@@ -7,6 +7,7 @@ import 'package:cajico_app/ui/widget/home_drawer.dart';
 import 'package:cajico_app/ui/widget/house_work_card.dart';
 import 'package:cajico_app/ui/widget/loading_stack.dart';
 import 'package:cajico_app/ui/widget/notification.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -211,37 +212,39 @@ class _PointSummary extends StatelessWidget {
       children: [
         Row(
           children: [
+            Text(title, style: const TextStyle(fontSize: 13)),
+            horizontalSpaceSmall,
+            Text(
+              '${formatter.format(point)}P',
+              style: const TextStyle(fontSize: 24, color: gray2),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
             Text(
               '前日比',
               style: TextStyle(
                 fontSize: 11,
-                color: diffPoint == 0 ? gray3 : (diffPoint > 0 ? Colors.blue[700] : errorColor),
+                color: diffPoint == 0 ? gray3 : (diffPoint > 0 ? upColor : errorColor),
               ),
             ),
             horizontalSpaceTiny,
             diffPoint == 0
                 ? const Text('-', style: TextStyle(fontSize: 12))
                 : Text(
-                    '${formatter.format(diffPoint)}P',
-                    style: TextStyle(
-                        fontSize: 12, color: diffPoint > 0 ? Colors.blue[700] : errorColor),
-                  ),
+              '${formatter.format(diffPoint)}P',
+              style: TextStyle(
+                  fontSize: 12, color: diffPoint > 0 ? upColor : errorColor),
+            ),
+            horizontalSpaceTiny,
             diffPoint == 0
                 ? const SizedBox()
                 : Icon(
-                    Icons.north_east,
-                    size: 12,
-                    color: diffPoint > 0 ? Colors.blue[700] : errorColor,
-                  ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(title, style: const TextStyle(fontSize: 16)),
-            horizontalSpaceSmall,
-            Text(
-              '${formatter.format(point)}P',
-              style: const TextStyle(fontSize: 24, color: gray2),
+              diffPoint > 0 ? CupertinoIcons.arrow_up_right_circle_fill : CupertinoIcons.arrow_down_right_circle_fill,
+              size: 16,
+              color: diffPoint > 0 ? upColor : errorColor,
             ),
           ],
         ),
