@@ -192,14 +192,25 @@ class _PointSummary extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Text('前日 +100P', style: TextStyle(fontSize: 12)),
+        Row(
+          children: [
+            Text('前日比', style: TextStyle(fontSize: 10)),
+            horizontalSpaceTiny,
+            point > 0
+                ? Text('+${formatter.format(point)}P', style: const TextStyle(fontSize: 12, color: Colors.blue))
+                : point < 0
+                    ? Text('-${formatter.format(point)}P', style: const TextStyle(fontSize: 12, color: errorColor))
+                    : const Text('-', style: TextStyle(fontSize: 12)),
+            const Icon(Icons.north_east, size: 12, color: Colors.blue),
+          ],
+        ),
         Row(
           children: [
             Text(title, style: const TextStyle(fontSize: 16)),
             horizontalSpaceSmall,
             Text(
               '${formatter.format(point)}P',
-              style: const TextStyle(fontSize: 30, color: subColor),
+              style: const TextStyle(fontSize: 24, color: gray2),
             ),
           ],
         ),
