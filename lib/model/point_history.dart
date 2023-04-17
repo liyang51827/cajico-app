@@ -96,3 +96,26 @@ class TotalPointHistory {
     );
   }
 }
+
+class PointSummery {
+  PointSummery({
+    required this.todayPoint,
+    required this.todayDiffPoint,
+    required this.ownedPoint,
+    required this.ownedDiffPoint,
+  });
+
+  final int todayPoint;
+  final int todayDiffPoint;
+  final int ownedPoint;
+  final int ownedDiffPoint;
+
+  static PointSummery fromJson(Map<String, dynamic> json) {
+    return PointSummery(
+      todayPoint: json['todayPoint'],
+      todayDiffPoint: json['todayDiffPoint'],
+      ownedPoint: json['ownedPoint'],
+      ownedDiffPoint: json['ownedDiffPoint'],
+    );
+  }
+}

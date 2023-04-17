@@ -74,7 +74,7 @@ class ScheduleDetailView extends StatelessWidget {
                               value:
                                   '${DateFormat('yyyy年M月d日', 'ja_JP').format(appoint.repeatEndDate!)}まで',
                               isPadding: true)
-                          : SizedBox(),
+                          : const SizedBox(),
                       _Menu(
                           menu: '状況',
                           value: appoint.status,
