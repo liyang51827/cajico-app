@@ -19,6 +19,7 @@ class HomeView extends GetView<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.replace(HomeViewController());
     final controller = Get.put(HomeViewController());
     return Scaffold(
       backgroundColor: gray7,
@@ -171,7 +172,7 @@ class _SummeryCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -210,18 +211,28 @@ class _PointSummary extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text('前日比', style: TextStyle(fontSize: 11)),
+            Text(
+              '前日比',
+              style: TextStyle(
+                fontSize: 11,
+                color: diffPoint == 0 ? gray3 : (diffPoint > 0 ? Colors.blue[700] : errorColor),
+              ),
+            ),
             horizontalSpaceTiny,
             diffPoint == 0
                 ? const Text('-', style: TextStyle(fontSize: 12))
-                : Text('${formatter.format(diffPoint)}P',
-                    style:
-                        TextStyle(fontSize: 12, color: diffPoint > 0 ? Colors.blue : errorColor)),
-            diffPoint > 0
-                ? const Icon(Icons.north_east, size: 12, color: Colors.blue)
-                : diffPoint < 0
-                    ? const Icon(Icons.south_east, size: 12, color: errorColor)
-                    : const SizedBox(),
+                : Text(
+                    '${formatter.format(diffPoint)}P',
+                    style: TextStyle(
+                        fontSize: 12, color: diffPoint > 0 ? Colors.blue[700] : errorColor),
+                  ),
+            diffPoint == 0
+                ? const SizedBox()
+                : Icon(
+                    Icons.north_east,
+                    size: 12,
+                    color: diffPoint > 0 ? Colors.blue[700] : errorColor,
+                  ),
           ],
         ),
         Row(

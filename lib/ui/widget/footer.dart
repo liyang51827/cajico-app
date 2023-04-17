@@ -41,10 +41,10 @@ class Footer extends StatelessWidget {
         backgroundColor: Colors.white,
         iconSize: 25,
         unselectedFontSize: 11,
-        unselectedItemColor: subColor,
+        unselectedItemColor: gray4,
         selectedIconTheme: const IconThemeData(size: 31),
         selectedFontSize: 11,
-        selectedItemColor: primaryColor,
+        selectedItemColor: subColor,
       ),
     );
   }
