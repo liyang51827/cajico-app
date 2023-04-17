@@ -498,6 +498,16 @@ class ApiService extends GetConnect {
     return TotalPointHistory.fromJson(data);
   }
 
+  // 家族全体の家事履歴API
+  Future<PointSummery> getMyPointSummery() async {
+    final res = await http.get(
+      _makeUri('/me/point-summery'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final dynamic data = _decodeResponse(res)['data'];
+    return PointSummery.fromJson(data);
+  }
+
   // 家事履歴削除API
   Future<bool> deletePointHistory({required int pointHistoryId}) async {
     final res = await http.delete(

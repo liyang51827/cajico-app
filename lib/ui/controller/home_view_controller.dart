@@ -1,4 +1,5 @@
 import 'package:cajico_app/model/house_works.dart';
+import 'package:cajico_app/model/point_history.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,7 @@ class HomeViewController extends BaseViewController {
   final RxList<HouseWork> houseWorks = <HouseWork>[].obs;
   final unreadCount = 0.obs;
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+  final pointSummery = Rxn<PointSummery>();
 
   @override
   void onInit() {
@@ -29,6 +31,9 @@ class HomeViewController extends BaseViewController {
           }(),
           () async {
             unreadCount.value = await api.getNotificationUnreadCount();
+          }(),
+          () async {
+            pointSummery.value = await api.getMyPointSummery();
           }(),
           () async {
             if (token != null) {

@@ -19,7 +19,6 @@ class HomeView extends GetView<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.replace(HomeViewController());
     final controller = Get.put(HomeViewController());
     return Scaffold(
       backgroundColor: gray7,
@@ -150,31 +149,45 @@ class _SummeryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            color: gray5, //色
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            _PointSummary(title: "今日", point: 400, diffPoint: -400),
-            _PointSummary(title: "保有", point: 5000, diffPoint: 800),
+    return Obx(() {
+      final controller = Get.put(HomeViewController());
+      final pointSummery = controller.pointSummery();
+      if (pointSummery == null) {
+        return const SizedBox();
+      }
+
+      return Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: gray5, //色
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(0, 1),
+            ),
           ],
         ),
-      ),
-    );
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _PointSummary(
+                  title: "今日",
+                  point: pointSummery.todayPoint,
+                  diffPoint: pointSummery.todayDiffPoint),
+              _PointSummary(
+                  title: "保有",
+                  point: pointSummery.ownedPoint,
+                  diffPoint: pointSummery.ownedDiffPoint),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -217,7 +230,7 @@ class _PointSummary extends StatelessWidget {
             horizontalSpaceSmall,
             Text(
               '${formatter.format(point)}P',
-              style: const TextStyle(fontSize: 24, color: subColor),
+              style: const TextStyle(fontSize: 24, color: gray2),
             ),
           ],
         ),
