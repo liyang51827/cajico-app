@@ -122,6 +122,16 @@ class ApiService extends GetConnect {
     return _checkStatusCode(res);
   }
 
+  // 招待メール送信API
+  Future<bool> sendInvitationEmail({required email, required type}) async {
+    final res = await http.post(
+      _makeUri('/invite-user'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'email': email, 'type': type}),
+    );
+    return _checkStatusCode(res);
+  }
+
   // 新規家族コード認証API
   Future<bool> confirmNewFamily(NewFamilyData newFamilyData) async {
     final res = await http.post(

@@ -28,7 +28,7 @@ class EmailSendView extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black54),
             centerTitle: true,
             title: Text(
-              type == 'reset' ? 'パスワード再設定' : 'メールアドレス登録',
+              type == 'reset' ? 'パスワード再設定' : (type == 'invite' ? '家族を招待する' : 'メールアドレス登録'),
               style: const TextStyle(color: gray2),
             ),
             backgroundColor: Colors.white,
@@ -39,7 +39,9 @@ class EmailSendView extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 24),
               child: Column(
                 children: [
-                  type != 'reset' ? const ProgressBar(step: 1) : const SizedBox(),
+                  type == 'reset' || type == 'invite'
+                      ? const SizedBox()
+                      : const ProgressBar(step: 1),
                   verticalSpaceLarge,
                   const Text('メールアドレスを入力してください', textAlign: TextAlign.center),
                   verticalSpaceLarge,
@@ -49,6 +51,13 @@ class EmailSendView extends StatelessWidget {
                     onChanged: (value) => controller.email.value = value,
                     validator: (value) => controller.validateInputEmailData(value).message,
                   ),
+                  type == 'invite' ? verticalSpaceSmall : const SizedBox(),
+                  type == 'invite'
+                      ? const Text(
+                          '※入力されたメールアドレス宛に家族への招待メールが送信されます。',
+                          style: TextStyle(fontSize: 12),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

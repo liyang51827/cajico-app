@@ -1,3 +1,5 @@
+import 'package:cajico_app/ui/common/ui_helper.dart';
+import 'package:cajico_app/ui/view/email_send_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -39,6 +41,20 @@ class HomeDrawer extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          ListTile(
+            leading: const Icon(
+              LineIcons.userPlus,
+              color: subColor,
+            ),
+            title: Row(
+              children: const [
+                Text('家族を招待する'),
+                horizontalSpaceSmall,
+                Text('New!', style: TextStyle(color: primaryColor),),
+              ],
+            ),
+            onTap: () => Get.to(() => EmailSendView(type: 'invite')),
           ),
           ListTile(
             leading: const Icon(
