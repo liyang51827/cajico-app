@@ -14,6 +14,7 @@ class RegisterViewController extends BaseViewController {
 
   final newFamilyData = NewFamilyData(
     type: ''.obs,
+    familyId: ''.obs,
     familyName: ''.obs,
     familyCode: ''.obs,
     userName: ''.obs,
@@ -73,6 +74,14 @@ class RegisterViewController extends BaseViewController {
         result = await api.createFamilyAndUser(newFamilyData);
       } else if (newFamilyData.type() == 'join') {
         result = await api.joinFamilyAndCreateUser(newFamilyData);
+      } else if (newFamilyData.type() == 'invite') {
+        print(newFamilyData.type());
+        print(newFamilyData.familyId());
+        print(newFamilyData.token());
+        print(newFamilyData.userName());
+        print(newFamilyData.positionId());
+        print(newFamilyData.password());
+        result = await api.joinFamilyAndCreateUserByInvitation(newFamilyData);
       }
     });
     if (result != '') {

@@ -4,6 +4,7 @@ import 'dart:io';
 class NewFamilyData {
   NewFamilyData({
     required this.type,
+    required this.familyId,
     required this.familyName,
     required this.familyCode,
     required this.userName,
@@ -14,6 +15,7 @@ class NewFamilyData {
   });
 
   final RxString type;
+  final RxString familyId;
   final RxString familyName;
   final RxString familyCode;
   final RxString userName;

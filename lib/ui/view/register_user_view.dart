@@ -10,14 +10,21 @@ import '../widget/cajico_text_form_field.dart';
 import '../widget/loading_stack.dart';
 
 class RegisterUserView extends StatelessWidget {
-  RegisterUserView({super.key});
+  RegisterUserView({super.key, this.familyId, this.token});
 
   final focusNode = FocusNode();
+  final String? familyId;
+  final String? token;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterViewController());
     final familyInfo = controller.newFamilyData;
+    if (familyId != null && token != null) {
+      familyInfo.familyId.value = familyId!;
+      familyInfo.type.value = 'invite';
+      familyInfo.token.value = token!;
+    }
 
     return Focus(
       focusNode: focusNode,
@@ -126,7 +133,7 @@ class RegisterUserView extends StatelessWidget {
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(24),
             child: Obx(() => PrimaryButton(
-                label: '次へ',
+                label: '登録する',
                 onPressed: () => controller.onTapCreateUser(),
                 isValid: controller.isRegisterUserValid && familyInfo.positionId() != 0)),
           ),

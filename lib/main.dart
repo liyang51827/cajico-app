@@ -3,6 +3,7 @@ import 'package:cajico_app/service/push_notification_service.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/view/home_view.dart';
 import 'package:cajico_app/ui/view/register_family_view.dart';
+import 'package:cajico_app/ui/view/register_user_view.dart';
 import 'package:cajico_app/ui/view/reset_password_view.dart';
 import 'package:cajico_app/ui/view/tutorial_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -59,6 +60,10 @@ void _handleLink(Uri? uri) {
     } else if (type == 'reset') {
       // 再設定画面に遷移する
       Get.to(ResetPasswordView(token: token!));
+    } else if (type == 'invite') {
+      String? familyId = uri.queryParameters['familyId'];
+      // 再設定画面に遷移する
+      Get.to(RegisterUserView(familyId: familyId, token: token));
     }
   }
 }
@@ -106,6 +111,12 @@ class MyApp extends StatelessWidget {
             // 参加画面に遷移
             return MaterialPageRoute(
               builder: (context) => ResetPasswordView(token: token!),
+            );
+          } else if (type == 'invite') {
+            String? familyId = uri.queryParameters['familyId'];
+            // 参加画面に遷移
+            return MaterialPageRoute(
+              builder: (context) => RegisterUserView(familyId: familyId, token: token),
             );
           }
         }
