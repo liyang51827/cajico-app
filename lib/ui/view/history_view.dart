@@ -353,9 +353,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                     children: [
                       CachedNetworkImage(
                         imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/thinking.png',
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(color: primaryColor),
-                        ),
                         imageBuilder: (context, imageProvider) {
                           return CircleAvatar(radius: 8, backgroundImage: imageProvider);
                         },
@@ -376,9 +373,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                     children: [
                       CachedNetworkImage(
                         imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/love.png',
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(color: primaryColor),
-                        ),
                         imageBuilder: (context, imageProvider) {
                           return CircleAvatar(radius: 8, backgroundImage: imageProvider);
                         },
