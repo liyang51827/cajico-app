@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/ui/common/app_color.dart';
 import 'package:cajico_app/ui/widget/footer.dart';
 import 'package:cajico_app/ui/widget/header.dart';
@@ -41,108 +42,104 @@ class HistoryView extends StatelessWidget {
                 ),
               )),
           drawer: const HomeDrawer(),
-          body: Background(
-            child: GetLoadingStack<HistoryViewController>(
-              child: TabBarView(
-                children: [
+          body: GetLoadingStack<HistoryViewController>(
+            child: TabBarView(
+              children: [
+                RefreshIndicator(
+                  color: primaryColor,
+                  onRefresh: controller.fetchData,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: totalPointHistory != null
+                        ? Column(
+                            children: [
+                              _PointSummaries(
+                                  todayPoint: totalPointHistory.todayPoint,
+                                  totalPoint: totalPointHistory.totalPoint),
+                              GroupedListView<Point, String>(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                elements: controller.totalPointHistories(),
+                                groupBy: (element) => element.date,
+                                sort: false,
+                                itemBuilder: (context, element) {
+                                  return _HouseWorkDetail(
+                                    pointHistoryId: element.pointHistoryId,
+                                    categoryImageUrl: element.houseWorkCategoryImageUrl,
+                                    categoryName: element.houseWorkCategoryName,
+                                    houseWorkName: element.houseWorkName,
+                                    userIconImageUrl: element.iconUrl ??
+                                        'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                                    time: element.time,
+                                    point: element.point,
+                                    isMe: element.isMe,
+                                  );
+                                },
+                                groupSeparatorBuilder: (date) {
+                                  return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(date, style: const TextStyle(color: gray3)));
+                                },
+                              ),
+                              totalCurrentPage < totalPointHistory.lastPage
+                                  ? NextPageButton(
+                                      onPressed: () =>
+                                          controller.onTapNextTotalPage(page: totalCurrentPage))
+                                  : const SizedBox(),
+                            ],
+                          )
+                        : const SizedBox(),
+                  ),
+                ),
+                for (var item in controller.pointHistories()) ...{
                   RefreshIndicator(
                     color: primaryColor,
                     onRefresh: controller.fetchData,
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      child: totalPointHistory != null
-                          ? Column(
-                              children: [
-                                _PointSummaries(
-                                    todayPoint: totalPointHistory.todayPoint,
-                                    totalPoint: totalPointHistory.totalPoint),
-                                GroupedListView<Point, String>(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  elements: controller.totalPointHistories(),
-                                  groupBy: (element) => element.date,
-                                  sort: false,
-                                  itemBuilder: (context, element) {
-                                    return _HouseWorkDetail(
-                                      pointHistoryId: element.pointHistoryId,
-                                      categoryImageUrl: element.houseWorkCategoryImageUrl,
-                                      categoryName: element.houseWorkCategoryName,
-                                      houseWorkName: element.houseWorkName,
-                                      userIconImageUrl: element.iconUrl ??
-                                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
-                                      time: element.time,
-                                      point: element.point,
-                                      isMe: element.isMe,
-                                    );
-                                  },
-                                  groupSeparatorBuilder: (date) {
-                                    return Container(
-                                        padding:
-                                            const EdgeInsets.symmetric(horizontal: 16),
-                                        child: Text(date, style: const TextStyle(color: gray3)));
-                                  },
-                                ),
-                                totalCurrentPage < totalPointHistory.lastPage
-                                    ? NextPageButton(
-                                        onPressed: () =>
-                                            controller.onTapNextTotalPage(page: totalCurrentPage))
-                                    : const SizedBox(),
-                              ],
-                            )
-                          : const SizedBox(),
-                    ),
-                  ),
-                  for (var item in controller.pointHistories()) ...{
-                    RefreshIndicator(
-                      color: primaryColor,
-                      onRefresh: controller.fetchData,
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                          children: [
-                            _PointSummaries(
-                                todayPoint: item.todayPoint, totalPoint: item.totalPoint),
-                            GroupedListView<Point, String>(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              elements: item.points,
-                              groupBy: (element) => element.date,
-                              sort: false,
-                              itemBuilder: (context, element) {
-                                return _HouseWorkDetail(
-                                  pointHistoryId: element.pointHistoryId,
-                                  categoryImageUrl: element.houseWorkCategoryImageUrl,
-                                  categoryName: element.houseWorkCategoryName,
-                                  houseWorkName: element.houseWorkName,
-                                  userIconImageUrl: element.iconUrl ??
-                                      'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
-                                  time: element.time,
-                                  point: element.point,
-                                  isMe: element.isMe,
-                                );
-                              },
-                              groupSeparatorBuilder: (date) {
-                                return Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                                  child: Text(date, style: const TextStyle(color: gray3)),
-                                );
-                              },
-                            ),
-                            item.currentPage < item.lastPage
-                                ? NextPageButton(
-                                    onPressed: () => controller.onTapNextPage(
-                                      userId: item.userId,
-                                      page: item.currentPage,
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          ],
-                        ),
+                      child: Column(
+                        children: [
+                          _PointSummaries(todayPoint: item.todayPoint, totalPoint: item.totalPoint),
+                          GroupedListView<Point, String>(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            elements: item.points,
+                            groupBy: (element) => element.date,
+                            sort: false,
+                            itemBuilder: (context, element) {
+                              return _HouseWorkDetail(
+                                pointHistoryId: element.pointHistoryId,
+                                categoryImageUrl: element.houseWorkCategoryImageUrl,
+                                categoryName: element.houseWorkCategoryName,
+                                houseWorkName: element.houseWorkName,
+                                userIconImageUrl: element.iconUrl ??
+                                    'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                                time: element.time,
+                                point: element.point,
+                                isMe: element.isMe,
+                              );
+                            },
+                            groupSeparatorBuilder: (date) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(date, style: const TextStyle(color: gray3)),
+                              );
+                            },
+                          ),
+                          item.currentPage < item.lastPage
+                              ? NextPageButton(
+                                  onPressed: () => controller.onTapNextPage(
+                                    userId: item.userId,
+                                    page: item.currentPage,
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ],
                       ),
                     ),
-                  }
-                ],
-              ),
+                  ),
+                }
+              ],
             ),
           ),
           bottomNavigationBar: const Footer(),
@@ -265,7 +262,6 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
   Widget build(BuildContext context) {
     final controller = Get.put(HistoryViewController());
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
           onTap: () => controller.onTapDeleteDialog(
@@ -312,13 +308,98 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                             "${point}P",
                             style: TextStyle(
                               fontSize: 20,
-                              color: point < 25 ? lowColor : point < 50 ? middleColor : point < 75 ? secondaryColor : point < 100 ? primaryColor : highestColor,
+                              color: point < 25
+                                  ? lowColor
+                                  : point < 50
+                                      ? middleColor
+                                      : point < 75
+                                          ? secondaryColor
+                                          : point < 100
+                                              ? primaryColor
+                                              : highestColor,
                             ),
                           )
                         ],
                       ),
                     ),
                   ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 16, left: 85),
+          child: Container(
+            padding: EdgeInsets.only(bottom: 8),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.black12, //枠線の色
+                  width: 1, //枠線の太さ
+                ),
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: selectedColor,
+                    border: Border.all(color: lowColor, width: 1, style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/thinking.png',
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        ),
+                        imageBuilder: (context, imageProvider) {
+                          return CircleAvatar(radius: 8, backgroundImage: imageProvider);
+                        },
+                      ),
+                      horizontalSpaceTiny,
+                      Text('1')
+                    ],
+                  ),
+                ),
+                horizontalSpaceTiny,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: gray6,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/love.png',
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        ),
+                        imageBuilder: (context, imageProvider) {
+                          return CircleAvatar(radius: 8, backgroundImage: imageProvider);
+                        },
+                      ),
+                      horizontalSpaceTiny,
+                      Text('1')
+                    ],
+                  ),
+                ),
+                horizontalSpaceTiny,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: gray6,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Icon(
+                    Icons.add_reaction_outlined,
+                    color: gray4,
+                    size: 18,
+                  ),
                 ),
               ],
             ),
