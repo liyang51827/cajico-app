@@ -261,145 +261,133 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HistoryViewController());
-    return Column(
-      children: [
-        InkWell(
-          onTap: () => controller.onTapDeleteDialog(
-            isMe: isMe,
-            houseWorkName: houseWorkName,
-            categoryName: categoryName,
-            pointHistoryId: pointHistoryId,
-          ),
-          child: Container(
-            height: 60,
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CajicoCachedNetworkImage(imageUrl: categoryImageUrl),
-                    horizontalSpaceSmall,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(categoryName, style: const TextStyle(fontSize: 12)),
-                        verticalSpaceTiny,
-                        Text(
-                          houseWorkName,
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
-                    horizontalSpaceSmall,
-                    SizedBox(
-                      width: 50,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+    return InkWell(
+      onTap: () => controller.onTapDeleteDialog(
+        isMe: isMe,
+        houseWorkName: houseWorkName,
+        categoryName: categoryName,
+        pointHistoryId: pointHistoryId,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: Row(
+          children: [
+            SizedBox(width: 60, child: CajicoCachedNetworkImage(imageUrl: categoryImageUrl)),
+            horizontalSpaceSmall,
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(time, style: const TextStyle(fontSize: 16)),
+                          Text(categoryName, style: const TextStyle(fontSize: 12)),
+                          verticalSpaceTiny,
                           Text(
-                            "${point}P",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: point < 25
-                                  ? lowColor
-                                  : point < 50
-                                      ? middleColor
-                                      : point < 75
-                                          ? secondaryColor
-                                          : point < 100
-                                              ? primaryColor
-                                              : highestColor,
-                            ),
+                            houseWorkName,
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16, left: 85),
-          child: Container(
-            padding: EdgeInsets.only(bottom: 8),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.black12, //枠線の色
-                  width: 1, //枠線の太さ
-                ),
+                      Row(
+                        children: [
+                          CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
+                          horizontalSpaceSmall,
+                          SizedBox(
+                            width: 50,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(time, style: const TextStyle(fontSize: 16)),
+                                Text(
+                                  "${point}P",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: point < 25
+                                        ? lowColor
+                                        : point < 50
+                                        ? middleColor
+                                        : point < 75
+                                        ? secondaryColor
+                                        : point < 100
+                                        ? primaryColor
+                                        : highestColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  verticalSpaceTiny,
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: selectedColor,
+                          border: Border.all(color: lowColor, width: 1, style: BorderStyle.solid),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/thinking.png',
+                              imageBuilder: (context, imageProvider) {
+                                return CircleAvatar(radius: 8, backgroundImage: imageProvider);
+                              },
+                            ),
+                            horizontalSpaceTiny,
+                            Text('1')
+                          ],
+                        ),
+                      ),
+                      horizontalSpaceTiny,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: gray6,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/love.png',
+                              imageBuilder: (context, imageProvider) {
+                                return CircleAvatar(radius: 8, backgroundImage: imageProvider);
+                              },
+                            ),
+                            horizontalSpaceTiny,
+                            Text('1')
+                          ],
+                        ),
+                      ),
+                      horizontalSpaceTiny,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: gray6,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Icon(
+                          Icons.add_reaction_outlined,
+                          color: gray4,
+                          size: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: gray4),
+                ],
               ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: selectedColor,
-                    border: Border.all(color: lowColor, width: 1, style: BorderStyle.solid),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/thinking.png',
-                        imageBuilder: (context, imageProvider) {
-                          return CircleAvatar(radius: 8, backgroundImage: imageProvider);
-                        },
-                      ),
-                      horizontalSpaceTiny,
-                      Text('1')
-                    ],
-                  ),
-                ),
-                horizontalSpaceTiny,
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: gray6,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: 'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/love.png',
-                        imageBuilder: (context, imageProvider) {
-                          return CircleAvatar(radius: 8, backgroundImage: imageProvider);
-                        },
-                      ),
-                      horizontalSpaceTiny,
-                      Text('1')
-                    ],
-                  ),
-                ),
-                horizontalSpaceTiny,
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: gray6,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Icon(
-                    Icons.add_reaction_outlined,
-                    color: gray4,
-                    size: 18,
-                  ),
-                ),
-              ],
-            ),
-          ),
+            )
+          ],
         ),
-      ],
+      ),
     );
   }
 }
