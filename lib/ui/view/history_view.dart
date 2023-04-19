@@ -10,7 +10,6 @@ import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
 import 'package:intl/intl.dart';
-import '../widget/background.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/next_page_button.dart';
@@ -273,7 +272,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
         child: Row(
           children: [
             SizedBox(width: 60, child: CajicoCachedNetworkImage(imageUrl: categoryImageUrl)),
-            horizontalSpaceSmall,
+            horizontalSpaceTiny,
             Expanded(
               child: Column(
                 children: [
@@ -292,32 +291,30 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                         ],
                       ),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
-                          horizontalSpaceSmall,
-                          SizedBox(
-                            width: 50,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(time, style: const TextStyle(fontSize: 16)),
-                                Text(
-                                  "${point}P",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: point < 25
-                                        ? lowColor
-                                        : point < 50
-                                        ? middleColor
-                                        : point < 75
-                                        ? secondaryColor
-                                        : point < 100
-                                        ? primaryColor
-                                        : highestColor,
-                                  ),
-                                )
-                              ],
-                            ),
+                          horizontalSpaceTiny,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(time, style: const TextStyle(fontSize: 16)),
+                              Text(
+                                "${point}P",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: point < 25
+                                      ? lowColor
+                                      : point < 50
+                                      ? middleColor
+                                      : point < 75
+                                      ? secondaryColor
+                                      : point < 100
+                                      ? primaryColor
+                                      : highestColor,
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -327,7 +324,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
                         decoration: BoxDecoration(
                           color: selectedColor,
                           border: Border.all(color: lowColor, width: 1, style: BorderStyle.solid),
@@ -348,7 +345,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                       ),
                       horizontalSpaceTiny,
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
                         decoration: BoxDecoration(
                           color: gray6,
                           borderRadius: BorderRadius.circular(20),
@@ -368,20 +365,21 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                       ),
                       horizontalSpaceTiny,
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
                         decoration: BoxDecoration(
                           color: gray6,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Icon(
                           Icons.add_reaction_outlined,
-                          color: gray4,
+                          color: gray3,
                           size: 18,
                         ),
                       ),
                     ],
                   ),
-                  const Divider(color: gray4),
+                  verticalSpaceSmall,
+                  const Divider(color: gray4, height: 1),
                 ],
               ),
             )
