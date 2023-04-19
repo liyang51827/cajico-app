@@ -9,6 +9,7 @@ import 'package:grouped_list/grouped_list.dart';
 import '../../model/point_history.dart';
 import '../common/ui_helper.dart';
 import '../controller/history_view_controller.dart';
+import '../widget/background.dart';
 import '../widget/cajico_cashed_network_image.dart';
 import '../widget/loading_stack.dart';
 import '../widget/next_page_button.dart';
@@ -33,49 +34,51 @@ class HistoryView extends StatelessWidget {
               title: '家事履歴',
             )),
         drawer: const HomeDrawer(),
-        body: GetLoadingStack<HistoryViewController>(
-          child: RefreshIndicator(
-            color: primaryColor,
-            onRefresh: controller.fetchData,
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: totalPointHistory != null
-                  ? Column(
-                      children: [
-                        verticalSpaceMediumLarge,
-                        GroupedListView<Point, String>(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          elements: controller.totalPointHistories(),
-                          groupBy: (element) => element.date,
-                          sort: false,
-                          itemBuilder: (context, element) {
-                            return _HouseWorkDetail(
-                              pointHistoryId: element.pointHistoryId,
-                              categoryImageUrl: element.houseWorkCategoryImageUrl,
-                              categoryName: element.houseWorkCategoryName,
-                              houseWorkName: element.houseWorkName,
-                              userIconImageUrl: element.iconUrl ??
-                                  'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
-                              time: element.time,
-                              point: element.point,
-                              isMe: element.isMe,
-                            );
-                          },
-                          groupSeparatorBuilder: (date) {
-                            return Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(date, style: const TextStyle(color: gray2)));
-                          },
-                        ),
-                        totalCurrentPage < totalPointHistory.lastPage
-                            ? NextPageButton(
-                                onPressed: () =>
-                                    controller.onTapNextTotalPage(page: totalCurrentPage))
-                            : const SizedBox(),
-                      ],
-                    )
-                  : const SizedBox(),
+        body: Background(
+          child: GetLoadingStack<HistoryViewController>(
+            child: RefreshIndicator(
+              color: primaryColor,
+              onRefresh: controller.fetchData,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: totalPointHistory != null
+                    ? Column(
+                        children: [
+                          verticalSpaceMediumLarge,
+                          GroupedListView<Point, String>(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            elements: controller.totalPointHistories(),
+                            groupBy: (element) => element.date,
+                            sort: false,
+                            itemBuilder: (context, element) {
+                              return _HouseWorkDetail(
+                                pointHistoryId: element.pointHistoryId,
+                                categoryImageUrl: element.houseWorkCategoryImageUrl,
+                                categoryName: element.houseWorkCategoryName,
+                                houseWorkName: element.houseWorkName,
+                                userIconImageUrl: element.iconUrl ??
+                                    'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
+                                time: element.time,
+                                point: element.point,
+                                isMe: element.isMe,
+                              );
+                            },
+                            groupSeparatorBuilder: (date) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(date, style: const TextStyle(color: gray2)));
+                            },
+                          ),
+                          totalCurrentPage < totalPointHistory.lastPage
+                              ? NextPageButton(
+                                  onPressed: () =>
+                                      controller.onTapNextTotalPage(page: totalCurrentPage))
+                              : const SizedBox(),
+                        ],
+                      )
+                    : const SizedBox(),
+              ),
             ),
           ),
         ),
