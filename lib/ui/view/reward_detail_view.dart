@@ -60,48 +60,41 @@ class RewardDetailView extends StatelessWidget {
               elevation: 0.0,
               flexibleSpace: Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+                  image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.fitWidth),
+                ),
               ),
-              actions: <Widget>[
-                PopupMenuButton(
-                  offset: const Offset(0, 50),
-                  onSelected: (result) {
-                    if (!result) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => RewardEditView(
-                            minPoint: minPoint,
-                            maxPoint: maxPoint,
-                            rewardId: rewardId,
-                            rank: rank,
-                            initPoint: point,
-                            initRewardName: rewardName,
-                            initMemo: text,
-                          ),
-                          fullscreenDialog: true,
-                        ),
-                      );
-                    } else {
-                      Get.dialog(
-                        NormalCompletedDialog(
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: IconButton(
+                    onPressed: () {
+                      if (!isRequesting) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => RewardEditView(
+                                    minPoint: minPoint,
+                                    maxPoint: maxPoint,
+                                    rewardId: rewardId,
+                                    rank: rank,
+                                    initPoint: point,
+                                    initRewardName: rewardName,
+                                    initMemo: text,
+                                  ),
+                              fullscreenDialog: true),
+                        );
+                      } else {
+                        Get.dialog(NormalCompletedDialog(
                           message: 'ねぎらい待ちのごほうびは\n編集できません',
                           onPressed: () {
                             Get.back();
                             homeController.onTapGetUnreadCount();
                           },
-                        ),
-                      );
-                    }
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      PopupMenuItem(
-                        value: isRequesting,
-                        child: const Text('編集する'),
-                      ),
-                    ];
-                  },
+                        ));
+                      }
+                    },
+                    icon: const Icon(Icons.edit, size: 24),
+                  ),
                 )
               ],
               bottom: const ColoredTabBar(
@@ -147,12 +140,12 @@ class RewardDetailView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final item = controller.rewardHistories.elementAt(index);
                                   return _RewardHistoryDetail(
-                                      rewardName: item.rewardName,
-                                      date: item.createdAt,
-                                      userImageUrl: item.iconUrl ??
-                                          'https://cazico-public.s3.ap-northeast-1.amazonaws.com/user_icon/icon_1.png',
-                                      message: item.message ?? '',
-                                      point: item.point);
+                                    rewardName: item.rewardName,
+                                    date: item.createdAt,
+                                    userImageUrl: item.iconUrl ?? '',
+                                    message: item.message ?? '',
+                                    point: item.point,
+                                  );
                                 },
                               ),
                             ],
@@ -292,12 +285,10 @@ class _RewardButton extends GetView<RewardDetailViewController> {
             ),
           );
         } else {
-          Get.dialog(
-              RewardCompleteDialog(
-                rewardId: rewardId,
-                rewardName: rewardName,
-              )
-          );
+          Get.dialog(RewardCompleteDialog(
+            rewardId: rewardId,
+            rewardName: rewardName,
+          ));
         }
       },
     );
@@ -338,10 +329,7 @@ class _RewardHistoryDetail extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                rewardName,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
+              Text(rewardName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               Text(date)
             ],
           ),

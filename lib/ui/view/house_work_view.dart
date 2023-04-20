@@ -28,12 +28,11 @@ class HouseWorkView extends StatelessWidget {
         title: Text(categoryName, style: const TextStyle(color: gray2)),
         backgroundColor: Colors.white,
         titleTextStyle: const TextStyle(fontSize: 22),
-        actions: <Widget>[
-          PopupMenuButton(
-            offset: const Offset(0, 50),
-            onSelected: (result) {
-              if (result == true) {
-                Navigator.push(
+        actions: [
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: IconButton(
+                onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => HouseWorkEditIndexView(
@@ -42,18 +41,9 @@ class HouseWorkView extends StatelessWidget {
                     ),
                     fullscreenDialog: true,
                   ),
-                );
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                const PopupMenuItem(
-                  value: true,
-                  child: Text('編集する'),
                 ),
-              ];
-            },
-          )
+                icon: const Icon(Icons.edit, size: 24),
+              ))
         ],
       ),
       body: Background(
