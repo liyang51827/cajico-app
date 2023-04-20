@@ -139,7 +139,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                     ],
                   ),
                   verticalSpaceTiny,
-                  _ReactionInfo(stampReactions: stampReactions),
+                  _ReactionInfo(stampReactions: stampReactions, pointHistoryId: pointHistoryId),
                   verticalSpaceSmall,
                   const Divider(color: gray4, height: 1),
                 ],
@@ -215,9 +215,10 @@ class _PointOtherInfo extends GetView<HistoryViewController> {
 }
 
 class _ReactionInfo extends GetView<HistoryViewController> {
-  const _ReactionInfo({required this.stampReactions});
+  const _ReactionInfo({required this.stampReactions, required this.pointHistoryId});
 
   final List<StampReaction> stampReactions;
+  final int pointHistoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -233,7 +234,7 @@ class _ReactionInfo extends GetView<HistoryViewController> {
             ),
             horizontalSpaceTiny,
           },
-          const _AddReaction(),
+          _AddReaction(pointHistoryId: pointHistoryId),
         ],
       ),
     );
@@ -273,23 +274,18 @@ class _StampReaction extends GetView<HistoryViewController> {
 }
 
 class _AddReaction extends GetView<HistoryViewController> {
-  const _AddReaction();
+  const _AddReaction({required this.pointHistoryId});
+
+  final int pointHistoryId;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => controller.onTapStampDialog(),
+      onTap: () => controller.onTapStampDialog(pointHistoryId: pointHistoryId),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-        decoration: BoxDecoration(
-          color: gray6,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: const Icon(
-          Icons.add_reaction_outlined,
-          color: gray3,
-          size: 18,
-        ),
+        decoration: BoxDecoration(color: gray6, borderRadius: BorderRadius.circular(20)),
+        child: const Icon(Icons.add_reaction_outlined, color: gray3, size: 18),
       ),
     );
   }

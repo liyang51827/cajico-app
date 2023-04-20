@@ -674,6 +674,16 @@ class ApiService extends GetConnect {
     final List<dynamic> data = _decodeResponse(res)['data'];
     return data.map((json) => Stamp.fromJson(json)).toList();
   }
+
+  // 家事リアクションAPI
+  Future<bool> reactHouseWork({required int pointHistoryId, required String type, required stampId}) async {
+    final res = await http.post(
+      _makeUri('/point-histories/$pointHistoryId/reaction'),
+      headers: await _makeAuthenticatedHeader(),
+      body: jsonEncode({'type': type, 'stampId': stampId}),
+    );
+    return _checkStatusCode(res);
+  }
 }
 
 class ApiException implements Exception {

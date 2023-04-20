@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/model/point_history.dart';
-import 'package:cajico_app/ui/common/ui_helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/stamp.dart';
@@ -90,7 +88,7 @@ class HistoryViewController extends BaseViewController {
     });
   }
 
-  Future<void> onTapStampDialog() async {
+  Future<void> onTapStampDialog({required pointHistoryId}) async {
     Get.dialog(SimpleDialog(
       title: Container(
         padding: const EdgeInsets.only(bottom: 20),
@@ -99,14 +97,33 @@ class HistoryViewController extends BaseViewController {
           runSpacing: 16,
           children: [
             for (var stamp in stamps()) ...{
-              SizedBox(
-                width: 40,
-                child: CachedNetworkImage(imageUrl: stamp.stampUrl),
-              ),
+              InkWell(
+                onTap: () {
+                  reactionApi(
+                    pointHistoryId: pointHistoryId,
+                    type: 'add',
+                    stampId: stamp.stampId,
+                  );
+                  Get.back();
+                },
+                child: SizedBox(width: 40, child: CachedNetworkImage(imageUrl: stamp.stampUrl)),
+              )
             },
           ],
         ),
       ),
     ));
+  }
+
+  Future<void> reactionApi(
+      {required int pointHistoryId, required String type, required int stampId}) async {
+    var result = false;
+    await callAsyncApi(() async {
+      result =
+          await api.reactHouseWork(pointHistoryId: pointHistoryId, type: type, stampId: stampId);
+    });
+    if (result) {
+      fetchData();
+    }
   }
 }
