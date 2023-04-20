@@ -49,10 +49,10 @@ class NotificationView extends StatelessWidget {
                                   width: 20,
                                   decoration: const BoxDecoration(
                                       shape: BoxShape.circle, color: secondaryColor),
-                                  child: const Text(
-                                    '1',
+                                  child: Text(
+                                    unreadCount.toString(),
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                 )
                               : const SizedBox()
