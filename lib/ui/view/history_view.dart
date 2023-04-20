@@ -225,12 +225,15 @@ class _ReactionInfo extends GetView<HistoryViewController> {
     return SizedBox(
       width: double.infinity,
       child: Wrap(
+        runSpacing: 2,
         children: [
           for (var stamp in stampReactions) ...{
             _StampReaction(
               reactionCount: stamp.reactionCount,
               isSelected: stamp.isSelected,
               stampUrl: stamp.stampUrl,
+              pointHistoryId: pointHistoryId,
+              stampId: stamp.stampId,
             ),
             horizontalSpaceTiny,
           },
@@ -246,28 +249,41 @@ class _StampReaction extends GetView<HistoryViewController> {
     required this.stampUrl,
     required this.reactionCount,
     required this.isSelected,
+    required this.pointHistoryId,
+    required this.stampId,
   });
 
   final int reactionCount;
   final String stampUrl;
   final bool isSelected;
+  final int pointHistoryId;
+  final int stampId;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-      decoration: BoxDecoration(
-        color: isSelected ? selectedColor : gray6,
-        border: isSelected ? Border.all(color: lowColor, width: 1, style: BorderStyle.solid) : null,
-        borderRadius: BorderRadius.circular(20),
+    final controller = Get.put(HistoryViewController());
+    return InkWell(
+      onTap: () => controller.reactionApi(
+        pointHistoryId: pointHistoryId,
+        type: isSelected ? 'remove' : 'add',
+        stampId: stampId,
       ),
-      child: Row(
-        children: [
-          SizedBox(width: 16, child: CachedNetworkImage(imageUrl: stampUrl)),
-          horizontalSpaceTiny,
-          Text(reactionCount.toString())
-        ],
+      child: Container(
+        width: 40,
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+        decoration: BoxDecoration(
+          color: isSelected ? selectedColor : gray6,
+          border:
+              isSelected ? Border.all(color: lowColor, width: 1, style: BorderStyle.solid) : null,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            SizedBox(width: 16, child: CachedNetworkImage(imageUrl: stampUrl)),
+            horizontalSpaceTiny,
+            Text(reactionCount.toString())
+          ],
+        ),
       ),
     );
   }
