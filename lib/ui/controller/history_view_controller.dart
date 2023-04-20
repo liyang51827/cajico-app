@@ -1,19 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cajico_app/model/point_history.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/stamp.dart';
 import '../widget/house_work_history_delete_dialog.dart';
 import '../widget/normal_completed_dialog.dart';
 import 'base_view_controller.dart';
 import 'home_view_controller.dart';
 
 class HistoryViewController extends BaseViewController {
-  final RxList<PointHistory> pointHistories = <PointHistory>[].obs;
-
   // 全体家事履歴関連の変数
   final totalPointHistory = Rxn<TotalPointHistory>();
   final totalNextPointHistory = Rxn<TotalPointHistory>();
   final RxList<Point> totalPointHistories = <Point>[].obs;
   final RxList<Point> totalNextPointHistories = <Point>[].obs;
   final totalCurrentPage = 1.obs;
+  final RxList<Stamp> stamps = <Stamp>[].obs;
 
   @override
   void onInit() {
@@ -25,13 +27,13 @@ class HistoryViewController extends BaseViewController {
     await callAsyncApi(() async {
       await Future.wait([
         () async {
-          pointHistories.value = await api.getPointHistoryList();
-        }(),
-        () async {
           totalPointHistory.value = await api.getTotalPointHistory();
           totalPointHistories.value = totalPointHistory()?.points ?? [];
           totalNextPointHistories.value = [];
           totalCurrentPage.value = 1;
+        }(),
+        () async {
+          stamps.value = await api.getStampList();
         }(),
       ]);
     });
@@ -77,18 +79,6 @@ class HistoryViewController extends BaseViewController {
     }
   }
 
-  Future<void> onTapNextPage({required int page, required int userId}) async {
-    await callAsyncApi(() async {
-      final nextPointHistories = await api.getUserPointHistoryList(userId: userId, page: page + 1);
-      pointHistories.firstWhere((element) => element.userId == userId).points = [
-        ...pointHistories.firstWhere((element) => element.userId == userId).points,
-        ...nextPointHistories
-      ];
-      pointHistories.firstWhere((element) => element.userId == userId).currentPage = page + 1;
-      pointHistories.value = [...pointHistories];
-    });
-  }
-
   Future<void> onTapNextTotalPage({required int page}) async {
     await callAsyncApi(() async {
       totalNextPointHistory.value = await api.getTotalPointHistory(page: page + 1);
@@ -96,5 +86,44 @@ class HistoryViewController extends BaseViewController {
       totalPointHistories.value = [...totalPointHistories(), ...totalNextPointHistories()];
       totalCurrentPage.value = totalNextPointHistory()?.currentPage ?? 1;
     });
+  }
+
+  Future<void> onTapStampDialog({required pointHistoryId}) async {
+    Get.dialog(SimpleDialog(
+      title: Container(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            for (var stamp in stamps()) ...{
+              InkWell(
+                onTap: () {
+                  reactionApi(
+                    pointHistoryId: pointHistoryId,
+                    type: 'add',
+                    stampId: stamp.stampId,
+                  );
+                  Get.back();
+                },
+                child: SizedBox(width: 40, child: CachedNetworkImage(imageUrl: stamp.stampUrl)),
+              )
+            },
+          ],
+        ),
+      ),
+    ));
+  }
+
+  Future<void> reactionApi(
+      {required int pointHistoryId, required String type, required int stampId}) async {
+    var result = false;
+    await callAsyncApi(() async {
+      result =
+          await api.reactHouseWork(pointHistoryId: pointHistoryId, type: type, stampId: stampId);
+    });
+    if (result) {
+      fetchData();
+    }
   }
 }
