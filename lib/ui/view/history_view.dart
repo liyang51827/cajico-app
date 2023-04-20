@@ -175,18 +175,21 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                     ],
                   ),
                   verticalSpaceTiny,
-                  Row(
-                    children: [
-                      for (var stamp in stampReactions) ...{
-                        _StampReaction(
-                          reactionCount: stamp.reactionCount,
-                          isSelected: stamp.isSelected,
-                          stampUrl: stamp.stampUrl,
-                        ),
-                        horizontalSpaceTiny,
-                      },
-                      const _AddReaction(),
-                    ],
+                  SizedBox(
+                    width: double.infinity,
+                    child: Wrap(
+                      children: [
+                        for (var stamp in stampReactions) ...{
+                          _StampReaction(
+                            reactionCount: stamp.reactionCount,
+                            isSelected: stamp.isSelected,
+                            stampUrl: stamp.stampUrl,
+                          ),
+                          horizontalSpaceTiny,
+                        },
+                        const _AddReaction(),
+                      ],
+                    ),
                   ),
                   verticalSpaceSmall,
                   const Divider(color: gray4, height: 1),
@@ -214,6 +217,7 @@ class _StampReaction extends GetView<HistoryViewController> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 40,
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
       decoration: BoxDecoration(
         color: isSelected ? selectedColor : gray6,
