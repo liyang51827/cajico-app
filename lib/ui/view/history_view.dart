@@ -189,16 +189,8 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                           ),
                           child: Row(
                             children: [
-                              CachedNetworkImage(
-                                imageUrl: stamp.stampUrl,
-                                imageBuilder: (context, imageProvider) {
-                                  return CircleAvatar(
-                                    radius: 8,
-                                    backgroundImage: imageProvider,
-                                    backgroundColor: Colors.white.withOpacity(0),
-                                  );
-                                },
-                              ),
+                              SizedBox(
+                                  width: 16, child: CachedNetworkImage(imageUrl: stamp.stampUrl)),
                               horizontalSpaceTiny,
                               Text(stamp.reactionCount.toString())
                             ],
@@ -206,16 +198,19 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                         ),
                         horizontalSpaceTiny,
                       },
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: gray6,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(
-                          Icons.add_reaction_outlined,
-                          color: gray3,
-                          size: 18,
+                      InkWell(
+                        onTap: () => controller.onTapStampDialog(),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: gray6,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Icon(
+                            Icons.add_reaction_outlined,
+                            color: gray3,
+                            size: 18,
+                          ),
                         ),
                       ),
                     ],

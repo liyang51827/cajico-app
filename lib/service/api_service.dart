@@ -5,6 +5,7 @@ import 'package:cajico_app/model/my_page_data.dart';
 import 'package:cajico_app/model/register_data.dart';
 import 'package:cajico_app/model/reward_data.dart';
 import 'package:cajico_app/model/schedule_data.dart';
+import 'package:cajico_app/model/stamp.dart';
 import 'package:cajico_app/util/xfile_extension.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -662,6 +663,16 @@ class ApiService extends GetConnect {
       headers: await _makeAuthenticatedHeader(),
     );
     return _checkStatusCode(res);
+  }
+
+  // スタンプ一覧取得API
+  Future<List<Stamp>> getStampList() async {
+    final res = await http.get(
+      _makeUri('/stamps/all'),
+      headers: await _makeAuthenticatedHeader(),
+    );
+    final List<dynamic> data = _decodeResponse(res)['data'];
+    return data.map((json) => Stamp.fromJson(json)).toList();
   }
 }
 
