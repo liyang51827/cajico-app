@@ -62,6 +62,7 @@ class HistoryView extends StatelessWidget {
                                 time: element.time,
                                 point: element.point,
                                 isMe: element.isMe,
+                                stampReactions: element.stampReactions,
                               );
                             },
                             groupSeparatorBuilder: (date) {
@@ -89,16 +90,16 @@ class HistoryView extends StatelessWidget {
 }
 
 class _HouseWorkDetail extends GetView<HistoryViewController> {
-  const _HouseWorkDetail({
-    required this.pointHistoryId,
-    required this.categoryImageUrl,
-    required this.categoryName,
-    required this.houseWorkName,
-    required this.userIconImageUrl,
-    required this.time,
-    required this.point,
-    required this.isMe,
-  });
+  const _HouseWorkDetail(
+      {required this.pointHistoryId,
+      required this.categoryImageUrl,
+      required this.categoryName,
+      required this.houseWorkName,
+      required this.userIconImageUrl,
+      required this.time,
+      required this.point,
+      required this.isMe,
+      required this.stampReactions});
 
   final int pointHistoryId;
   final String categoryImageUrl;
@@ -108,6 +109,7 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
   final String time;
   final int point;
   final bool isMe;
+  final List<StampReaction> stampReactions;
 
   @override
   Widget build(BuildContext context) {
@@ -175,49 +177,35 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                   verticalSpaceTiny,
                   Row(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: selectedColor,
-                          border: Border.all(color: lowColor, width: 1, style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(20),
+                      for (var stamp in stampReactions) ...{
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: stamp.isSelected ? selectedColor : gray6,
+                            border: stamp.isSelected
+                                ? Border.all(color: lowColor, width: 1, style: BorderStyle.solid)
+                                : null,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: stamp.stampUrl,
+                                imageBuilder: (context, imageProvider) {
+                                  return CircleAvatar(
+                                    radius: 8,
+                                    backgroundImage: imageProvider,
+                                    backgroundColor: Colors.white.withOpacity(0),
+                                  );
+                                },
+                              ),
+                              horizontalSpaceTiny,
+                              Text(stamp.reactionCount.toString())
+                            ],
+                          ),
                         ),
-                        child: Row(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl:
-                                  'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/thinking.png',
-                              imageBuilder: (context, imageProvider) {
-                                return CircleAvatar(radius: 8, backgroundImage: imageProvider);
-                              },
-                            ),
-                            horizontalSpaceTiny,
-                            Text('1')
-                          ],
-                        ),
-                      ),
-                      horizontalSpaceTiny,
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: gray6,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl:
-                                  'https://cazico-public.s3.ap-northeast-1.amazonaws.com/emoji/love.png',
-                              imageBuilder: (context, imageProvider) {
-                                return CircleAvatar(radius: 8, backgroundImage: imageProvider);
-                              },
-                            ),
-                            horizontalSpaceTiny,
-                            Text('1')
-                          ],
-                        ),
-                      ),
-                      horizontalSpaceTiny,
+                        horizontalSpaceTiny,
+                      },
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
                         decoration: BoxDecoration(

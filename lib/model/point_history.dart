@@ -44,6 +44,7 @@ class Point {
     required this.time,
     required this.point,
     required this.isMe,
+    required this.stampReactions,
   });
 
   final int pointHistoryId;
@@ -55,6 +56,7 @@ class Point {
   final String time;
   final int point;
   final bool isMe;
+  final List<StampReaction> stampReactions;
 
   static Point fromJson(Map<String, dynamic> json) {
     return Point(
@@ -67,6 +69,7 @@ class Point {
       time: json['time'],
       point: json['point'],
       isMe: json['isMe'],
+      stampReactions: (json['stampReactions'] as List).map((data) => StampReaction.fromJson(data)).toList(),
     );
   }
 }
@@ -116,6 +119,32 @@ class PointSummery {
       todayDiffPoint: json['todayDiffPoint'],
       ownedPoint: json['ownedPoint'],
       ownedDiffPoint: json['ownedDiffPoint'],
+    );
+  }
+}
+
+class StampReaction {
+  StampReaction({
+    required this.stampId,
+    required this.stampName,
+    required this.stampUrl,
+    required this.reactionCount,
+    required this.isSelected,
+  });
+
+  final int stampId;
+  final String stampName;
+  final String stampUrl;
+  final int reactionCount;
+  final bool isSelected;
+
+  static StampReaction fromJson(Map<String, dynamic> json) {
+    return StampReaction(
+      stampId: json['stampId'],
+      stampName: json['stampName'],
+      stampUrl: json['url'],
+      reactionCount: json['count'],
+      isSelected: json['isSelected'],
     );
   }
 }
