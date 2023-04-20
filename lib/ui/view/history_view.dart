@@ -90,16 +90,17 @@ class HistoryView extends StatelessWidget {
 }
 
 class _HouseWorkDetail extends GetView<HistoryViewController> {
-  const _HouseWorkDetail(
-      {required this.pointHistoryId,
-      required this.categoryImageUrl,
-      required this.categoryName,
-      required this.houseWorkName,
-      required this.userIconImageUrl,
-      required this.time,
-      required this.point,
-      required this.isMe,
-      required this.stampReactions});
+  const _HouseWorkDetail({
+    required this.pointHistoryId,
+    required this.categoryImageUrl,
+    required this.categoryName,
+    required this.houseWorkName,
+    required this.userIconImageUrl,
+    required this.time,
+    required this.point,
+    required this.isMe,
+    required this.stampReactions,
+  });
 
   final int pointHistoryId;
   final String categoryImageUrl;
@@ -133,64 +134,12 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(categoryName, style: const TextStyle(fontSize: 12)),
-                          verticalSpaceTiny,
-                          Text(
-                            houseWorkName,
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
-                          horizontalSpaceTiny,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(time, style: const TextStyle(fontSize: 16)),
-                              Text(
-                                "${point}P",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: point < 25
-                                      ? lowColor
-                                      : point < 50
-                                          ? middleColor
-                                          : point < 75
-                                              ? secondaryColor
-                                              : point < 100
-                                                  ? primaryColor
-                                                  : highestColor,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                      _HouseWorkInfo(houseWorkName: houseWorkName, categoryName: categoryName),
+                      _PointOtherInfo(time: time, point: point, userIconImageUrl: userIconImageUrl),
                     ],
                   ),
                   verticalSpaceTiny,
-                  SizedBox(
-                    width: double.infinity,
-                    child: Wrap(
-                      children: [
-                        for (var stamp in stampReactions) ...{
-                          _StampReaction(
-                            reactionCount: stamp.reactionCount,
-                            isSelected: stamp.isSelected,
-                            stampUrl: stamp.stampUrl,
-                          ),
-                          horizontalSpaceTiny,
-                        },
-                        const _AddReaction(),
-                      ],
-                    ),
-                  ),
+                  _ReactionInfo(stampReactions: stampReactions),
                   verticalSpaceSmall,
                   const Divider(color: gray4, height: 1),
                 ],
@@ -198,6 +147,94 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _HouseWorkInfo extends GetView<HistoryViewController> {
+  const _HouseWorkInfo({required this.houseWorkName, required this.categoryName});
+
+  final String categoryName;
+  final String houseWorkName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(categoryName, style: const TextStyle(fontSize: 12)),
+        verticalSpaceTiny,
+        Text(
+          houseWorkName,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        )
+      ],
+    );
+  }
+}
+
+class _PointOtherInfo extends GetView<HistoryViewController> {
+  const _PointOtherInfo({required this.point, required this.time, required this.userIconImageUrl});
+
+  final String userIconImageUrl;
+  final String time;
+  final int point;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        CajicoCachedNetworkIconImage(imageUrl: userIconImageUrl, radius: 15),
+        horizontalSpaceTiny,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(time, style: const TextStyle(fontSize: 16)),
+            Text(
+              "${point}P",
+              style: TextStyle(
+                fontSize: 20,
+                color: point < 25
+                    ? lowColor
+                    : point < 50
+                        ? middleColor
+                        : point < 75
+                            ? secondaryColor
+                            : point < 100
+                                ? primaryColor
+                                : highestColor,
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _ReactionInfo extends GetView<HistoryViewController> {
+  const _ReactionInfo({required this.stampReactions});
+
+  final List<StampReaction> stampReactions;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        children: [
+          for (var stamp in stampReactions) ...{
+            _StampReaction(
+              reactionCount: stamp.reactionCount,
+              isSelected: stamp.isSelected,
+              stampUrl: stamp.stampUrl,
+            ),
+            horizontalSpaceTiny,
+          },
+          const _AddReaction(),
+        ],
       ),
     );
   }
