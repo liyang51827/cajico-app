@@ -178,41 +178,14 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
                   Row(
                     children: [
                       for (var stamp in stampReactions) ...{
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: stamp.isSelected ? selectedColor : gray6,
-                            border: stamp.isSelected
-                                ? Border.all(color: lowColor, width: 1, style: BorderStyle.solid)
-                                : null,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                  width: 16, child: CachedNetworkImage(imageUrl: stamp.stampUrl)),
-                              horizontalSpaceTiny,
-                              Text(stamp.reactionCount.toString())
-                            ],
-                          ),
+                        _StampReaction(
+                          reactionCount: stamp.reactionCount,
+                          isSelected: stamp.isSelected,
+                          stampUrl: stamp.stampUrl,
                         ),
                         horizontalSpaceTiny,
                       },
-                      InkWell(
-                        onTap: () => controller.onTapStampDialog(),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: gray6,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Icon(
-                            Icons.add_reaction_outlined,
-                            color: gray3,
-                            size: 18,
-                          ),
-                        ),
-                      ),
+                      const _AddReaction(),
                     ],
                   ),
                   verticalSpaceSmall,
@@ -221,6 +194,60 @@ class _HouseWorkDetail extends GetView<HistoryViewController> {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StampReaction extends GetView<HistoryViewController> {
+  const _StampReaction({
+    required this.stampUrl,
+    required this.reactionCount,
+    required this.isSelected,
+  });
+
+  final int reactionCount;
+  final String stampUrl;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+      decoration: BoxDecoration(
+        color: isSelected ? selectedColor : gray6,
+        border: isSelected ? Border.all(color: lowColor, width: 1, style: BorderStyle.solid) : null,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          SizedBox(width: 16, child: CachedNetworkImage(imageUrl: stampUrl)),
+          horizontalSpaceTiny,
+          Text(reactionCount.toString())
+        ],
+      ),
+    );
+  }
+}
+
+class _AddReaction extends GetView<HistoryViewController> {
+  const _AddReaction();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => controller.onTapStampDialog(),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+        decoration: BoxDecoration(
+          color: gray6,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Icon(
+          Icons.add_reaction_outlined,
+          color: gray3,
+          size: 18,
         ),
       ),
     );
