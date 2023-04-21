@@ -43,7 +43,7 @@ class ScheduleView extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height - 143,
+            height: MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
             child: Obx(() {
               final controller = Get.put(ScheduleViewController());
               return SfCalendar(
