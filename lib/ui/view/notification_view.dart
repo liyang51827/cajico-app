@@ -13,6 +13,7 @@ class NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.replace(NotificationViewController());
     return Obx(() {
       final controller = Get.put(NotificationViewController());
       final paginate = controller.paginate();
