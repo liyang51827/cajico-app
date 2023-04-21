@@ -245,11 +245,13 @@ class _AdminNotificationDetail extends StatelessWidget {
                       message,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 13),
+                      maxLines: 1,
                     )
                   : Text(
                       message,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      maxLines: 1,
                     ),
             )
           ],
