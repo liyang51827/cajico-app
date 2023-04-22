@@ -51,7 +51,7 @@ class ScheduleView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => ScheduleCreateView(
-              selectedDate: calendarController.displayDate,
+              selectedDate: controller.selectedDateTime() ?? calendarController.displayDate,
             )),
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -93,6 +93,8 @@ class _Calendar extends StatelessWidget {
                   fullscreenDialog: true,
                 ),
               );
+            } else {
+              controller.selectedDateTime.value = details.date!;
             }
           },
           onViewChanged: (ViewChangedDetails details) {
