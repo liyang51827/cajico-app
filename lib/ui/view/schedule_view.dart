@@ -95,7 +95,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: EdgeInsets.symmetric(horizontal: type == 0 ? 8 : 1),
         child: Row(
           children: [
             DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
@@ -109,7 +109,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
             Expanded(
               child: Text(
                 details.appointments.first.subject!,
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.clip,
                 style: TextStyle(
                   fontSize: 11,
                   color: details.appointments.first.location == '未完了' ? Colors.white : gray3,
@@ -135,10 +135,8 @@ class _Calendar extends StatelessWidget {
           firstDayOfWeek: 1,
           controller: calendarController,
           headerDateFormat: 'yyyy年M月',
-          timeSlotViewSettings: const TimeSlotViewSettings(
-            timeIntervalHeight: 40,
-            timeFormat: 'H:mm',
-          ),
+          timeSlotViewSettings:
+              const TimeSlotViewSettings(timeIntervalHeight: 40, timeFormat: 'H:mm'),
           dataSource: _DataSource(controller.appoints()),
           appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
             return _CalendarAppointmentDetail(details: details, type: controller.calendarType());

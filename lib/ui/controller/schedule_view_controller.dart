@@ -5,7 +5,7 @@ import 'base_view_controller.dart';
 
 class ScheduleViewController extends BaseViewController {
   final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
-  final RxInt calendarType = 0.obs;
+  final RxInt calendarType = 1.obs;
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
 
   @override
