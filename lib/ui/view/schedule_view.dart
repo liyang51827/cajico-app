@@ -18,55 +18,45 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleViewController());
-    return Obx(() {
-      final controller = Get.put(ScheduleViewController());
-      final calendarController = CalendarController();
-      return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(55),
-          child: Header(
-            imageUrl: 'assets/images/logo_schedule.png',
-            title: '予定',
-            actions: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: IconButton(
-                    onPressed: () => controller.onTapChangedCalendar(),
-                    icon: controller.calendarType() == 0
-                        ? const Icon(Icons.calendar_view_week_sharp, size: 30)
-                        : const Icon(Icons.calendar_view_day, size: 30),
-                  )),
-              Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: IconButton(
-                    onPressed: () => controller.onViewChangedGetSchedule(
-                        dateTime: calendarController.displayDate),
-                    icon: const Icon(Icons.sync, size: 30),
-                  )),
-            ],
+    final controller = Get.put(ScheduleViewController());
+    final calendarController = CalendarController();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(55),
+        child: Header(
+          imageUrl: 'assets/images/logo_schedule.png',
+          title: '予定',
+          actions: [
+            Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: IconButton(
+                  onPressed: () =>
+                      controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate),
+                  icon: const Icon(Icons.sync, size: 30),
+                )),
+          ],
+        ),
+      ),
+      drawer: const HomeDrawer(),
+      body: GetLoadingStack<ScheduleViewController>(
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height:
+                MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
+            child: const _Calendar(),
           ),
         ),
-        drawer: const HomeDrawer(),
-        body: GetLoadingStack<ScheduleViewController>(
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: SizedBox(
-              height:
-                  MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-              child: const _Calendar(),
-            ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => Get.to(() => ScheduleCreateView(
-                selectedDate: calendarController.displayDate,
-              )),
-          child: const Icon(Icons.add, color: Colors.white),
-        ),
-        bottomNavigationBar: const Footer(),
-      );
-    });
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(() => ScheduleCreateView(
+              selectedDate: calendarController.displayDate,
+            )),
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+      bottomNavigationBar: const Footer(),
+    );
   }
 }
 
@@ -79,6 +69,9 @@ class _Calendar extends StatelessWidget {
     final calendarController = CalendarController();
     return Obx(() => SfCalendar(
           allowedViews: [CalendarView.day, CalendarView.week],
+          allowViewNavigation: true,
+          showDatePickerButton: true,
+          view: controller.calendarType() == 0 ? CalendarView.day : CalendarView.week,
           firstDayOfWeek: 1,
           controller: calendarController,
           headerDateFormat: 'yyyy年M月',
@@ -103,6 +96,11 @@ class _Calendar extends StatelessWidget {
             }
           },
           onViewChanged: (ViewChangedDetails details) {
+            if (calendarController.view == CalendarView.day) {
+              controller.onViewChangedCalenderType(type: 0);
+            } else if (calendarController.view == CalendarView.week) {
+              controller.onViewChangedCalenderType(type: 1);
+            }
             controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
           },
         ));

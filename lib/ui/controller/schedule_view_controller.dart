@@ -35,6 +35,10 @@ class ScheduleViewController extends BaseViewController {
     });
   }
 
+  Future<void> onViewChangedCalenderType({required int type}) async {
+    calendarType.value = type;
+  }
+
   Future<void> onTapChangedCalendar() async {
     final prefs = await SharedPreferences.getInstance();
     if (calendarType() == 0) {
