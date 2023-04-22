@@ -6,7 +6,7 @@ import 'base_view_controller.dart';
 
 class ScheduleViewController extends BaseViewController {
   final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
-  final RxInt calendarType = 0.obs;
+  final RxInt calendarType = 1.obs;
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
 
   @override
@@ -18,20 +18,16 @@ class ScheduleViewController extends BaseViewController {
   Future<void> fetchData() async {
     await callAsyncApi(() async {
       DateTime now = DateTime.now();
-      String date = outputFormat.format(now);
-      appoints.value = await api.getScheduleAppointmentList(date: date);
+      String weekStartDate = outputFormat.format(now.subtract(Duration(days: now.weekday - 1)));
+      appoints.value = await api.getWeeklyScheduleAppointmentList(date: weekStartDate);
     });
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.getInt('calendarType') == null) {
-      prefs.setInt('calendarType', 0);
-    }
-    calendarType.value = prefs.getInt('calendarType')!;
   }
 
   Future<void> onViewChangedGetSchedule({required DateTime? dateTime}) async {
     await callAsyncApi(() async {
-      String date = outputFormat.format(dateTime ?? DateTime.now());
-      appoints.value = await api.getWeeklyScheduleAppointmentList(date: date);
+      DateTime date = dateTime ?? DateTime.now();
+      String weekStartDate = outputFormat.format(date.subtract(Duration(days: date.weekday - 1)));
+      appoints.value = await api.getWeeklyScheduleAppointmentList(date: weekStartDate);
     });
   }
 
