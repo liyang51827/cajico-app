@@ -45,7 +45,7 @@ class ScheduleView extends StatelessWidget {
           child: SizedBox(
             height:
                 MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: const _DailyCalendar(),
+            child: const _WeeklyCalendar(),
           ),
         ),
       ),
@@ -60,8 +60,8 @@ class ScheduleView extends StatelessWidget {
   }
 }
 
-class _DailyDataSource extends CalendarDataSource {
-  _DailyDataSource(List<ScheduleAppointmentSummary> source) {
+class _DataSource extends CalendarDataSource {
+  _DataSource(List<ScheduleAppointmentSummary> source) {
     // Appointment型のリストを直接セットする
     appointments = <Appointment>[];
     for (var scheduleAppointmentSummary in source) {
@@ -79,12 +79,6 @@ class _DailyDataSource extends CalendarDataSource {
   }
 }
 
-class _WeeklyDataSource extends CalendarDataSource {
-  _WeeklyDataSource(List<Appointment> source) {
-    appointments = source;
-  }
-}
-
 class _CalendarAppointmentDetail extends StatelessWidget {
   const _CalendarAppointmentDetail({required this.details});
 
@@ -93,7 +87,6 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: details.appointments.first.location == '未完了'
             ? details.appointments.first.color
@@ -108,11 +101,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
                     details.appointments.first.location == '未完了'
                 ? const Padding(
                     padding: EdgeInsets.only(right: 4),
-                    child: Icon(
-                      Icons.warning,
-                      color: Colors.white,
-                      size: 16,
-                    ),
+                    child: Icon(Icons.warning, color: Colors.white, size: 16),
                   )
                 : const SizedBox(),
             Expanded(
@@ -147,7 +136,7 @@ class _DailyCalendar extends StatelessWidget {
             timeIntervalHeight: 40,
             timeFormat: 'H:mm',
           ),
-          dataSource: _DailyDataSource(controller.appoints()),
+          dataSource: _DataSource(controller.appoints()),
           appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
             return _CalendarAppointmentDetail(details: details);
           },
@@ -179,7 +168,7 @@ class _WeeklyCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ScheduleViewController());
     final calendarController = CalendarController();
-    return SfCalendar(
+    return Obx(() => SfCalendar(
       view: CalendarView.week,
       firstDayOfWeek: 1,
       controller: calendarController,
@@ -188,7 +177,7 @@ class _WeeklyCalendar extends StatelessWidget {
         timeIntervalHeight: 40,
         timeFormat: 'H:mm',
       ),
-      dataSource: _WeeklyDataSource(controller.appointments),
+      dataSource: _DataSource(controller.appoints()),
       appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
         return _CalendarAppointmentDetail(details: details);
       },
@@ -209,6 +198,6 @@ class _WeeklyCalendar extends StatelessWidget {
       onViewChanged: (ViewChangedDetails details) {
         controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
       },
-    );
+    ));
   }
 }

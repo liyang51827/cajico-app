@@ -8,7 +8,15 @@ import 'base_view_controller.dart';
 class ScheduleViewController extends BaseViewController {
   final RxList<ScheduleAppointmentSummary> appoints = <ScheduleAppointmentSummary>[].obs;
   DateFormat outputFormat = DateFormat('yyyy-MM-dd');
-  final List<Appointment> appointments = <Appointment>[];
+  final List<Appointment> appointments = [
+    Appointment(
+      startTime: DateTime.now().add(Duration(hours: 2)),
+      endTime: DateTime.now().add(Duration(hours: 3)),
+      subject: 'Meeting',
+      color: Colors.blue,
+      isAllDay: false,
+    )
+  ];
 
   @override
   void onInit() {
@@ -22,21 +30,6 @@ class ScheduleViewController extends BaseViewController {
       String date = outputFormat.format(now);
       appoints.value = await api.getScheduleAppointmentList(date: date);
     });
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(Duration(hours: 2)),
-      endTime: DateTime.now().add(Duration(hours: 3)),
-      subject: 'Meeting',
-      color: Colors.blue,
-      isAllDay: false,
-    ));
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 1)),
-      endTime: DateTime.now().add(Duration(days: 1, hours: 1)),
-      subject: 'Training',
-      color: Colors.green,
-      isAllDay: true,
-    ));
-    print(appointments);
   }
 
   Future<void> onViewChangedGetSchedule({required DateTime? dateTime}) async {
