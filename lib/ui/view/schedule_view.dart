@@ -45,7 +45,7 @@ class ScheduleView extends StatelessWidget {
           child: SizedBox(
             height:
                 MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: const _WeeklyCalendar(),
+            child: const _DailyCalendar(),
           ),
         ),
       ),
@@ -60,8 +60,8 @@ class ScheduleView extends StatelessWidget {
   }
 }
 
-class _DataSource extends CalendarDataSource {
-  _DataSource(List<ScheduleAppointmentSummary> source) {
+class _DailyDataSource extends CalendarDataSource {
+  _DailyDataSource(List<ScheduleAppointmentSummary> source) {
     // Appointment型のリストを直接セットする
     appointments = <Appointment>[];
     for (var scheduleAppointmentSummary in source) {
@@ -76,6 +76,12 @@ class _DataSource extends CalendarDataSource {
         ),
       );
     }
+  }
+}
+
+class _WeeklyDataSource extends CalendarDataSource {
+  _WeeklyDataSource(List<Appointment> source) {
+    appointments = source;
   }
 }
 
@@ -139,9 +145,9 @@ class _DailyCalendar extends StatelessWidget {
           headerDateFormat: 'yyyy年M月',
           timeSlotViewSettings: const TimeSlotViewSettings(
             timeIntervalHeight: 40,
-            timeFormat: 'HH:mm',
+            timeFormat: 'H:mm',
           ),
-          dataSource: _DataSource(controller.appoints()),
+          dataSource: _DailyDataSource(controller.appoints()),
           appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
             return _CalendarAppointmentDetail(details: details);
           },
@@ -175,13 +181,14 @@ class _WeeklyCalendar extends StatelessWidget {
     final calendarController = CalendarController();
     return SfCalendar(
       view: CalendarView.week,
+      firstDayOfWeek: 1,
       controller: calendarController,
       headerDateFormat: 'yyyy年M月',
       timeSlotViewSettings: const TimeSlotViewSettings(
         timeIntervalHeight: 40,
-        timeFormat: 'HH:mm',
+        timeFormat: 'H:mm',
       ),
-      dataSource: _DataSource(controller.appoints()),
+      dataSource: _WeeklyDataSource(controller.appointments),
       appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
         return _CalendarAppointmentDetail(details: details);
       },
