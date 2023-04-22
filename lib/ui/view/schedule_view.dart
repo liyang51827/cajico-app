@@ -68,7 +68,7 @@ class _Calendar extends StatelessWidget {
     final controller = Get.put(ScheduleViewController());
     final calendarController = CalendarController();
     return Obx(() => SfCalendar(
-          allowedViews: [CalendarView.day, CalendarView.week],
+          allowedViews: const [CalendarView.day, CalendarView.week],
           allowViewNavigation: true,
           showDatePickerButton: true,
           view: controller.calendarType() == 0 ? CalendarView.day : CalendarView.week,

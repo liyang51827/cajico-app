@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/schedule_appointment_data.dart';
 import 'base_view_controller.dart';
 
@@ -33,15 +32,5 @@ class ScheduleViewController extends BaseViewController {
 
   Future<void> onViewChangedCalenderType({required int type}) async {
     calendarType.value = type;
-  }
-
-  Future<void> onTapChangedCalendar() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (calendarType() == 0) {
-      prefs.setInt('calendarType', 1);
-    } else if (calendarType() == 1) {
-      prefs.setInt('calendarType', 0);
-    }
-    fetchData();
   }
 }
