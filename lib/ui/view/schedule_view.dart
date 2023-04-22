@@ -18,64 +18,94 @@ class ScheduleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.replace(ScheduleViewController());
-    final controller = Get.put(ScheduleViewController());
-    final calendarController = CalendarController();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(55),
-        child: Header(
-          imageUrl: 'assets/images/logo_schedule.png',
-          title: '予定',
-          actions: [
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: IconButton(
-                  onPressed: () =>
-                      controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate),
-                  icon: const Icon(Icons.sync, size: 30),
-                )),
-          ],
-        ),
-      ),
-      drawer: const HomeDrawer(),
-      body: GetLoadingStack<ScheduleViewController>(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: SizedBox(
-            height:
-                MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: const _Calendar(),
+    return Obx(() {
+      final controller = Get.put(ScheduleViewController());
+      final calendarController = CalendarController();
+      return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(55),
+          child: Header(
+            imageUrl: 'assets/images/logo_schedule.png',
+            title: '予定',
+            actions: [
+              Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: IconButton(
+                    onPressed: () => controller.onTapChangedCalendar(),
+                    icon: controller.calendarType() == 0
+                        ? const Icon(Icons.calendar_view_week_sharp, size: 30)
+                        : const Icon(Icons.calendar_view_day, size: 30),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: IconButton(
+                    onPressed: () => controller.onViewChangedGetSchedule(
+                        dateTime: calendarController.displayDate),
+                    icon: const Icon(Icons.sync, size: 30),
+                  )),
+            ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => ScheduleCreateView(
-              selectedDate: calendarController.displayDate,
-            )),
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
-      bottomNavigationBar: const Footer(),
-    );
+        drawer: const HomeDrawer(),
+        body: GetLoadingStack<ScheduleViewController>(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height:
+                  MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
+              child: const _Calendar(),
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Get.to(() => ScheduleCreateView(
+                selectedDate: calendarController.displayDate,
+              )),
+          child: const Icon(Icons.add, color: Colors.white),
+        ),
+        bottomNavigationBar: const Footer(),
+      );
+    });
   }
 }
 
-class _DataSource extends CalendarDataSource {
-  _DataSource(List<ScheduleAppointmentSummary> source) {
-    // Appointment型のリストを直接セットする
-    appointments = <Appointment>[];
-    for (var scheduleAppointmentSummary in source) {
-      appointments?.add(
-        Appointment(
-          id: scheduleAppointmentSummary.scheduleId,
-          startTime: scheduleAppointmentSummary.startTime,
-          endTime: scheduleAppointmentSummary.endTime,
-          subject: scheduleAppointmentSummary.subject,
-          color: scheduleAppointmentSummary.color,
-          location: scheduleAppointmentSummary.status,
-        ),
-      );
-    }
+class _Calendar extends StatelessWidget {
+  const _Calendar();
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(ScheduleViewController());
+    final calendarController = CalendarController();
+    return Obx(() => SfCalendar(
+          allowedViews: [CalendarView.day, CalendarView.week],
+          firstDayOfWeek: 1,
+          controller: calendarController,
+          headerDateFormat: 'yyyy年M月',
+          timeSlotViewSettings:
+              const TimeSlotViewSettings(timeIntervalHeight: 40, timeFormat: 'H:mm'),
+          dataSource: _DataSource(controller.appoints()),
+          appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+            return _CalendarAppointmentDetail(details: details, type: controller.calendarType());
+          },
+          onTap: (CalendarTapDetails details) {
+            if (details.appointments != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ScheduleDetailView(
+                    scheduleId: details.appointments![0].id,
+                    date: calendarController.displayDate,
+                  ),
+                  fullscreenDialog: true,
+                ),
+              );
+            }
+          },
+          onViewChanged: (ViewChangedDetails details) {
+            controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
+          },
+        ));
   }
 }
 
@@ -123,41 +153,21 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   }
 }
 
-class _Calendar extends StatelessWidget {
-  const _Calendar();
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(ScheduleViewController());
-    final calendarController = CalendarController();
-    return Obx(() => SfCalendar(
-          view: controller.calendarType() == 0 ? CalendarView.day : CalendarView.week,
-          firstDayOfWeek: 1,
-          controller: calendarController,
-          headerDateFormat: 'yyyy年M月',
-          timeSlotViewSettings:
-              const TimeSlotViewSettings(timeIntervalHeight: 40, timeFormat: 'H:mm'),
-          dataSource: _DataSource(controller.appoints()),
-          appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-            return _CalendarAppointmentDetail(details: details, type: controller.calendarType());
-          },
-          onTap: (CalendarTapDetails details) {
-            if (details.appointments != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ScheduleDetailView(
-                    scheduleId: details.appointments![0].id,
-                    date: calendarController.displayDate,
-                  ),
-                  fullscreenDialog: true,
-                ),
-              );
-            }
-          },
-          onViewChanged: (ViewChangedDetails details) {
-            controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
-          },
-        ));
+class _DataSource extends CalendarDataSource {
+  _DataSource(List<ScheduleAppointmentSummary> source) {
+    // Appointment型のリストを直接セットする
+    appointments = <Appointment>[];
+    for (var scheduleAppointmentSummary in source) {
+      appointments?.add(
+        Appointment(
+          id: scheduleAppointmentSummary.scheduleId,
+          startTime: scheduleAppointmentSummary.startTime,
+          endTime: scheduleAppointmentSummary.endTime,
+          subject: scheduleAppointmentSummary.subject,
+          color: scheduleAppointmentSummary.color,
+          location: scheduleAppointmentSummary.status,
+        ),
+      );
+    }
   }
 }
