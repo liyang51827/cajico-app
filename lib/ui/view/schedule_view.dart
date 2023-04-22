@@ -93,7 +93,7 @@ class _CalendarAppointmentDetail extends StatelessWidget {
             : details.appointments.first.color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Container(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           children: [
