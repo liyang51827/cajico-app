@@ -88,7 +88,7 @@ class _Calendar extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (_) => ScheduleDetailView(
                     scheduleId: details.appointments![0].id,
-                    date: calendarController.displayDate,
+                    date: details.appointments![0].startTime,
                   ),
                   fullscreenDialog: true,
                 ),
