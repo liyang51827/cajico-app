@@ -45,7 +45,7 @@ class ScheduleView extends StatelessWidget {
           child: SizedBox(
             height:
                 MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: const _WeeklyCalendar(),
+            child: const _Calendar(),
           ),
         ),
       ),
@@ -80,9 +80,10 @@ class _DataSource extends CalendarDataSource {
 }
 
 class _CalendarAppointmentDetail extends StatelessWidget {
-  const _CalendarAppointmentDetail({required this.details});
+  const _CalendarAppointmentDetail({required this.details, required this.type});
 
   final CalendarAppointmentDetails details;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,8 @@ class _CalendarAppointmentDetail extends StatelessWidget {
         child: Row(
           children: [
             DateTime.now().compareTo(details.appointments.first.endTime) >= 0 &&
-                    details.appointments.first.location == '未完了'
+                    details.appointments.first.location == '未完了' &&
+                    type == 0
                 ? const Padding(
                     padding: EdgeInsets.only(right: 4),
                     child: Icon(Icons.warning, color: Colors.white, size: 16),
@@ -121,15 +123,16 @@ class _CalendarAppointmentDetail extends StatelessWidget {
   }
 }
 
-class _DailyCalendar extends StatelessWidget {
-  const _DailyCalendar();
+class _Calendar extends StatelessWidget {
+  const _Calendar();
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ScheduleViewController());
     final calendarController = CalendarController();
     return Obx(() => SfCalendar(
-          view: CalendarView.day,
+          view: controller.calendarType() == 0 ? CalendarView.day : CalendarView.week,
+          firstDayOfWeek: 1,
           controller: calendarController,
           headerDateFormat: 'yyyy年M月',
           timeSlotViewSettings: const TimeSlotViewSettings(
@@ -138,7 +141,7 @@ class _DailyCalendar extends StatelessWidget {
           ),
           dataSource: _DataSource(controller.appoints()),
           appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-            return _CalendarAppointmentDetail(details: details);
+            return _CalendarAppointmentDetail(details: details, type: controller.calendarType());
           },
           onTap: (CalendarTapDetails details) {
             if (details.appointments != null) {
@@ -158,46 +161,5 @@ class _DailyCalendar extends StatelessWidget {
             controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
           },
         ));
-  }
-}
-
-class _WeeklyCalendar extends StatelessWidget {
-  const _WeeklyCalendar();
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(ScheduleViewController());
-    final calendarController = CalendarController();
-    return Obx(() => SfCalendar(
-      view: CalendarView.week,
-      firstDayOfWeek: 1,
-      controller: calendarController,
-      headerDateFormat: 'yyyy年M月',
-      timeSlotViewSettings: const TimeSlotViewSettings(
-        timeIntervalHeight: 40,
-        timeFormat: 'H:mm',
-      ),
-      dataSource: _DataSource(controller.appoints()),
-      appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-        return _CalendarAppointmentDetail(details: details);
-      },
-      onTap: (CalendarTapDetails details) {
-        if (details.appointments != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => ScheduleDetailView(
-                scheduleId: details.appointments![0].id,
-                date: calendarController.displayDate,
-              ),
-              fullscreenDialog: true,
-            ),
-          );
-        }
-      },
-      onViewChanged: (ViewChangedDetails details) {
-        controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
-      },
-    ));
   }
 }
