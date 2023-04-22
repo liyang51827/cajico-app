@@ -43,40 +43,9 @@ class ScheduleView extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: Obx(() {
-              final controller = Get.put(ScheduleViewController());
-              return SfCalendar(
-                view: CalendarView.day,
-                controller: calendarController,
-                headerDateFormat: 'yyyy年M月',
-                timeSlotViewSettings: const TimeSlotViewSettings(
-                  timeIntervalHeight: 40,
-                  timeFormat: 'HH:mm',
-                ),
-                dataSource: _DataSource(controller.appoints()),
-                appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
-                  return _CalendarAppointmentDetail(details: details);
-                },
-                onTap: (CalendarTapDetails details) {
-                  if (details.appointments != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ScheduleDetailView(
-                          scheduleId: details.appointments![0].id,
-                          date: calendarController.displayDate,
-                        ),
-                        fullscreenDialog: true,
-                      ),
-                    );
-                  }
-                },
-                onViewChanged: (ViewChangedDetails details) {
-                  controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
-                },
-              );
-            }),
+            height:
+                MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
+            child: const _WeeklyCalendar(),
           ),
         ),
       ),
@@ -153,6 +122,86 @@ class _CalendarAppointmentDetail extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _DailyCalendar extends StatelessWidget {
+  const _DailyCalendar();
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(ScheduleViewController());
+    final calendarController = CalendarController();
+    return Obx(() => SfCalendar(
+          view: CalendarView.day,
+          controller: calendarController,
+          headerDateFormat: 'yyyy年M月',
+          timeSlotViewSettings: const TimeSlotViewSettings(
+            timeIntervalHeight: 40,
+            timeFormat: 'HH:mm',
+          ),
+          dataSource: _DataSource(controller.appoints()),
+          appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+            return _CalendarAppointmentDetail(details: details);
+          },
+          onTap: (CalendarTapDetails details) {
+            if (details.appointments != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ScheduleDetailView(
+                    scheduleId: details.appointments![0].id,
+                    date: calendarController.displayDate,
+                  ),
+                  fullscreenDialog: true,
+                ),
+              );
+            }
+          },
+          onViewChanged: (ViewChangedDetails details) {
+            controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
+          },
+        ));
+  }
+}
+
+class _WeeklyCalendar extends StatelessWidget {
+  const _WeeklyCalendar();
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(ScheduleViewController());
+    final calendarController = CalendarController();
+    return SfCalendar(
+      view: CalendarView.week,
+      controller: calendarController,
+      headerDateFormat: 'yyyy年M月',
+      timeSlotViewSettings: const TimeSlotViewSettings(
+        timeIntervalHeight: 40,
+        timeFormat: 'HH:mm',
+      ),
+      dataSource: _DataSource(controller.appoints()),
+      appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details) {
+        return _CalendarAppointmentDetail(details: details);
+      },
+      onTap: (CalendarTapDetails details) {
+        if (details.appointments != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ScheduleDetailView(
+                scheduleId: details.appointments![0].id,
+                date: calendarController.displayDate,
+              ),
+              fullscreenDialog: true,
+            ),
+          );
+        }
+      },
+      onViewChanged: (ViewChangedDetails details) {
+        controller.onViewChangedGetSchedule(dateTime: calendarController.displayDate);
+      },
     );
   }
 }
