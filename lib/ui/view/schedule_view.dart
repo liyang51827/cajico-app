@@ -45,7 +45,7 @@ class ScheduleView extends StatelessWidget {
           child: SizedBox(
             height:
                 MediaQuery.of(context).size.height - kToolbarHeight - kBottomNavigationBarHeight,
-            child: const _Calendar(),
+            child: _Calendar(calendarController: calendarController),
           ),
         ),
       ),
@@ -61,12 +61,12 @@ class ScheduleView extends StatelessWidget {
 }
 
 class _Calendar extends StatelessWidget {
-  const _Calendar();
+  const _Calendar({required this.calendarController});
+  final calendarController;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ScheduleViewController());
-    final calendarController = CalendarController();
     return Obx(() => SfCalendar(
           allowedViews: const [CalendarView.day, CalendarView.week],
           allowViewNavigation: true,
